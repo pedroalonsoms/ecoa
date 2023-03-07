@@ -23,3 +23,5 @@ Team **2**
 - **Frontend** - Adrián Alejandro Ramírez Cruz A00830640
 
 # References & Credits
+
+- [MiduDev](https://www.youtube.com/@midudev)

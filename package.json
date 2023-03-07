@@ -1,0 +1,17 @@
+{
+  "name": "ecoa",
+  "version": "1.0.0",
+  "description": "A major redesign of the traditional Tec's primary satisfaction survey: ECOA",
+  "main": "schema.js",
+  "workspaces": [
+    "server",
+    "web"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace=web",
+    "start": "npm run start --workspace=server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
