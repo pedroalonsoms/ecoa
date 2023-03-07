@@ -25,3 +25,5 @@ Team **2**
 # References & Credits
 
 - [MiduDev](https://www.youtube.com/@midudev)
+- [W3Schools](https://www.w3schools.com/)
+- [MySQLTutorial](https://www.mysqltutorial.org/)
