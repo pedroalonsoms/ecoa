@@ -6,7 +6,7 @@ CREATE TABLE evaluable_kind (
 
     PRIMARY KEY(id)
     -- enum {TEACHER, DIRECTOR, STUDENT, MENTOR, COURSE, FACILITIES}
-    -- TODO: what happens if a director is also a teacher?
+    -- TODO: what happens if a director is also a teacher in real life?
     -- TODO: are we going to handle MENTOR cases?
 );
 
@@ -37,7 +37,7 @@ CREATE TABLE user (
 --- Courses
 
 CREATE TABLE course (
-    id INT AUTO_INCREMENT NOT NULL,
+    id INT NOT NULL,
     name VARCHAR(256) NOT NULL,
 
     PRIMARY KEY (id),
