@@ -10,7 +10,16 @@ CREATE TABLE GlobalKind (
     -- [TEACHER, FACILITIES, COURSE, BLOCK, ENTRY_DIRECTOR, CAREER_DIRECTOR, MENTOR, TEC_WEEK]
 
     PRIMARY KEY (id)
-)
+);
+
+CREATE TABLE Campus (
+    id INT NOT NULL,
+    name CHAR(3) NOT NULL,
+    -- [MTY, SIN, HGO]
+
+    PRIMARY KEY (id)
+    FOREIGN KEY (id) REFERENCES GlobalId (id)
+);
 
 CREATE TABLE User (
     id INT NOT NULL,
@@ -29,18 +38,22 @@ CREATE TABLE Student (
     mentorId INT NOT NULL,
     entryDirectorId INT,
     careerDirectorId INT,
+    campusId INT NOT NULL,
 
     PRIMARY KEY (id),
-    FOREIGN KEY (id) REFERENCES User (id)
+    FOREIGN KEY (id) REFERENCES User (id),
+    FOREIGN KEY (campusId) REFERENCES Campus (id)
 );
 
 CREATE TABLE Employee (
     id INT NOT NULL,
     kind INT NOT NULL,
+    campusId INT NOT NULL,
 
     PRIMARY KEY (id),
     FOREIGN KEY (id) REFERENCES User (id),
-    FOREIGN KEY (kind) REFERENCES GlobalKind (id)
+    FOREIGN KEY (kind) REFERENCES GlobalKind (id),
+    FOREIGN KEY (campusId) REFERENCES Campus (id)
 );
 
 CREATE TABLE Course (
@@ -51,7 +64,7 @@ CREATE TABLE Course (
     PRIMARY KEY (id),
     FOREIGN KEY (id) REFERENCES GlobalId (id),
     FOREIGN KEY (kind) REFERENCES GlobalKind (id)
-)
+);
 
 CREATE TABLE Group (
     id INT AUTO_INCREMENT NOT NULL,
@@ -110,9 +123,10 @@ CREATE TABLE TempAnswer (
 
 );
 
+-- TODO: campus para las materias
 -- TODO: periodos
 -- TODO: campus
 -- TODO: prizes
--- TODO: temp answer
+-- TODO: temp answer, localstorage or server-side?
 -- TODO: integrity and constraints on User and other tables 
 -- TODO: create a bunch of dummy data for demo purposes
