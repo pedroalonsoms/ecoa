@@ -1,92 +1,118 @@
---- Abstract tables
-
-CREATE TABLE EvaluableKind (
+CREATE TABLE GlobalId (
     id INT AUTO_INCREMENT NOT NULL,
-    name VARCHAR(64) NOT NULL,
 
-    PRIMARY KEY(id)
-    -- enum {TEACHER, DIRECTOR, STUDENT, MENTOR, COURSE, FACILITIES}
-    -- TODO: what happens if a director is also a teacher in real life?
-    -- TODO: are we going to handle MENTOR cases?
-    -- TODO: unnecesary table?
+    PRIMARY KEY (id)
 );
 
-CREATE TABLE Evaluable (
+CREATE TABLE GlobalKind (
     id INT AUTO_INCREMENT NOT NULL,
-    evaluableKindId INT NOT NULL,
-    
-    PRIMARY KEY(id),
-    FOREIGN KEY(evaluableKindId) REFERENCES EvaluableKind(id) ON DELETE CASCADE
-    -- TODO: do we even need another table to handle ENUMS and referential integrity?
-);
+    name VARCHAR(64),
+    -- [TEACHER, FACILITIES, COURSE, BLOCK, ENTRY_DIRECTOR, CAREER_DIRECTOR, MENTOR, TEC_WEEK]
 
---- People
+    PRIMARY KEY (id)
+)
 
 CREATE TABLE User (
     id INT NOT NULL,
-    registration CHAR(9) UNIQUE NOT NULL,
-    fullName VARCHAR(64) NOT NULL,
     email VARCHAR(64) NOT NULL,
-    password VARCHAR(64) NOT NULL,
-    completedAt DATETIME,
+    password VARCHAR(32) NOT NULL,
+    registration CHAR(9) NOT NULL,
+    fullName VARCHAR(64) NOT NULL,
 
     PRIMARY KEY (id),
-    FOREIGN KEY (id) REFERENCES Evaluable(id) ON DELETE CASCADE
-    -- TODO: handle referential integrity where I could assign "FACILITIES" to a user
+    FOREIGN KEY (id) REFERENCES GlobalId (id)
 );
 
---- Courses
+CREATE TABLE Student (
+    id INT NOT NULL,
+    completedAt DATETIME,
+    mentorId INT NOT NULL,
+    entryDirectorId INT,
+    careerDirectorId INT,
+
+    PRIMARY KEY (id),
+    FOREIGN KEY (id) REFERENCES User (id)
+);
+
+CREATE TABLE Employee (
+    id INT NOT NULL,
+    kind INT NOT NULL,
+
+    PRIMARY KEY (id),
+    FOREIGN KEY (id) REFERENCES User (id),
+    FOREIGN KEY (kind) REFERENCES GlobalKind (id)
+);
 
 CREATE TABLE Course (
     id INT NOT NULL,
-    name VARCHAR(256) NOT NULL,
+    name VARCHAR(64) NOT NULL,
+    kind INT NOT NULL,
 
     PRIMARY KEY (id),
-    FOREIGN KEY (id) REFERENCES Evaluable(id) ON DELETE CASCADE
+    FOREIGN KEY (id) REFERENCES GlobalId (id),
+    FOREIGN KEY (kind) REFERENCES GlobalKind (id)
+)
+
+CREATE TABLE Group (
+    id INT AUTO_INCREMENT NOT NULL,
+    courseId INT NOT NULL,
+    CRN INT NOT NULL,
+    code INT NOT NULL,
+
+    PRIMARY KEY (id),
+    FOREIGN KEY (courseId) REFERENCES Course (id)
 );
 
 CREATE TABLE Enrolled (
-    courseId INT NOT NULL,
-    teacherId INT NOT NULL,
     studentId INT NOT NULL,
+    groupId INT NOT NULL,
 
-    PRIMARY KEY (courseId, teacherId, studentId),
-    FOREIGN KEY (courseId) REFERENCES Course(id) ON DELETE CASCADE,
-    FOREIGN KEY (teacherId) REFERENCES User(id) ON DELETE CASCADE,
-    FOREIGN KEY (studentId) REFERENCES User(id) ON DELETE CASCADE
-    -- TODO: handle referential integrity where student_id and teacher_id must be indeed "STUDENT" and "TEACHER"
-    -- TODO: handle ON DELETE CASCADE edge cases
+    PRIMARY KEY (studentId, groupId),
+    FOREIGN KEY (studentId) REFERENCES Student (id),
+    FOREIGN KEY (groupId) REFERENCES Group (id),
 );
 
---- Survey
+CREATE TABLE Teaches (
+    employeeId INT NOT NULL,
+    groupId INT NOT NULL,
+
+    PRIMARY KEY (employeeId, groupId),
+    FOREIGN KEY (employeeId) REFERENCES Employee (id),
+    FOREIGN KEY (groupId) REFERENCES Group (id),
+);
 
 CREATE TABLE Question (
     id INT AUTO_INCREMENT NOT NULL,
-    evaluableKindId INT NOT NULL,
     name VARCHAR(256) NOT NULL,
+    kind INT NOT NULL,
 
     PRIMARY KEY (id),
-    FOREIGN KEY (evaluableKindId) REFERENCES EvaluableKind(id) ON DELETE CASCADE
-    -- TODO: change to CHAR(3)? F01, F02, etc
+    FOREIGN KEY (kind) REFERENCES GlobalKind (id)
 );
 
 CREATE TABLE Answer (
-    userId INT NOT NULL,
-    evaluableId INT NOT NULL,
+    fromId INT NOT NULL,
     questionId INT NOT NULL,
+    toId INT NOT NULL,
     score INT,
-    comment VARCHAR(2048),
+    comment VARCHAR(1024),
 
-    PRIMARY KEY (userId, questionId),
-    FOREIGN KEY (userId) REFERENCES User(id) ON DELETE CASCADE,
-    FOREIGN KEY (evaluableId) REFERENCES Evaluable(id) ON DELETE CASCADE,
-    FOREIGN KEY (questionId) REFERENCES Question(id) ON DELETE CASCADE
-    -- TODO: integrity is destroyed if we add both a score and a comment
-    -- TODO: what prevents us from answering a number-question with text instead of a number?
+    FOREIGN KEY (fromId) REFERENCES Student (id),
+    FOREIGN KEY (questionId) REFERENCES Question (id),
+    FOREIGN KEY (toId) REFERENCES GlobalId (id)
 );
 
--- Sample Data
+CREATE TABLE Prize (
+
+);
+
+CREATE TABLE TempAnswer (
+
+);
+
+-- TODO: periodos
+-- TODO: campus
+-- TODO: prizes
+-- TODO: temp answer
+-- TODO: integrity and constraints on User and other tables 
 -- TODO: create a bunch of dummy data for demo purposes
--- TODO: implement prizes table
--- TODO: implement mentorea table
--- TODO: implement dirige table
