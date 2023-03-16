@@ -3,13 +3,6 @@ const PORT = 8080;
 import express from "express";
 import studentsRouter from "./routers/students-router.js";
 import loginRouter from "./routers/login-router.js";
-import mysql from "mysql2/promise";
-
-const pool = mysql.createPool({
-  host: "127.0.0.1",
-  user: "root",
-  database: "ecoa",
-});
 
 const app = express();
 app.use(express.json());
