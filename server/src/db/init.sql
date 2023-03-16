@@ -123,6 +123,14 @@ CREATE TABLE TempAnswer (
 
 );
 
+-- INSERTING DATA AS EXAMPLES
+INSERT INTO GlobalId (name) VALUES();
+INSERT INTO GlobalKind (id,name) VALUES (),("TEACHER", "FACILITIES", "COURSE", "BLOCK", "ENTRY_DIRECTOR", "CAREER_DIRECTOR", "MENTOR", "TEC_WEEK");
+INSERT INTO Campus (name) VALUES ("MTY", "SIN", "HGO");
+INSERT INTO User (id,email,password,registration,fullName) VALUES (0,"a00827581@tec.mx","kerim","a00827581","Kerim Taray Malagon"), (1, "a01741437@tec.mx", "pedro", "a01741437","Pedro Alonso Moreno Salcedo")
+INSERT INTO Student (id,completedAt, mentorId, entryDirectorId,careerDirectorId, campusId)
+
+
 -- TODO: campus para las materias
 -- TODO: periodos
 -- TODO: campus
