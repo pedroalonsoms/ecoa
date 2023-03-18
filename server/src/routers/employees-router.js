@@ -1,11 +1,11 @@
 import express from "express";
-import db from "../db/db.js";
+import { pool } from "../db/connection.js";
 
 const employeesRouter = express.Router();
 
 employeesRouter.get("/employees", (req, res) => {
   const { q } = req.params;
-  const [rows, _] = db.query(
+  const [rows, _] = pool.query(
     "SELECT * FROM Employee JOIN User WHERE User.fullName LIKE ?",
     [q]
   );
@@ -14,7 +14,7 @@ employeesRouter.get("/employees", (req, res) => {
 
 employeesRouter.get("/employees/:registration", (req, res) => {
   const { registration } = req.query;
-  const [rows, _] = db.query(
+  const [rows, _] = pool.query(
     "SELECT * FROM Employee JOIN User WHERE User.registration = ?",
     [registration]
   );
@@ -27,7 +27,7 @@ employeesRouter.get("/employees/:registration", (req, res) => {
   const user = rows[0];
 
   // TODO: add authentification for API ?
-  const [rows2, _2] = db.query(
+  const [rows2, _2] = pool.query(
     "SELECT AVG(score) FROM Answer WHERE toId = ? AND score IS NOT NULL",
     [user.id]
   );

@@ -22,6 +22,21 @@ Team **2**
 - **Unity** - Felipe de Jesús González Acosta A01275536
 - **Frontend** - Adrián Alejandro Ramírez Cruz A00830640
 
+# ToDo's
+
+-- TODO: campus for courses
+-- TODO: periods
+-- TODO: campus
+-- TODO: prizes
+-- TODO: temp answer table/localstorage
+-- TODO: integrity and constraints on User and other tables
+-- TODO: create a bunch of dummy data for demo purposes
+-- TODO: integrate with github actions
+-- TODO: add railway integration
+-- TODO: create github CI
+-- TODO: transform SQL global id to unique id's
+-- TODO: make campus have their own id's
+
 # References & Credits
 
 - Chris Kolmenic MySQL [ENUM's Article](https://komlenic.com/244/8-reasons-why-mysqls-enum-data-type-is-evil/)

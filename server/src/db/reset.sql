@@ -1,3 +1,16 @@
+DROP TABLE IF EXISTS Answer;
+DROP TABLE IF EXISTS Question;
+DROP TABLE IF EXISTS Teaches;
+DROP TABLE IF EXISTS Enrolled;
+DROP TABLE IF EXISTS Classroom;
+DROP TABLE IF EXISTS Course;
+DROP TABLE IF EXISTS Employee;
+DROP TABLE IF EXISTS Student;
+DROP TABLE IF EXISTS User;
+DROP TABLE IF EXISTS Campus;
+DROP TABLE IF EXISTS GlobalKind;
+DROP TABLE IF EXISTS GlobalId;
+
 CREATE TABLE GlobalId (
     id INT AUTO_INCREMENT NOT NULL,
 
@@ -7,7 +20,6 @@ CREATE TABLE GlobalId (
 CREATE TABLE GlobalKind (
     id INT AUTO_INCREMENT NOT NULL,
     name VARCHAR(64),
-    -- [TEACHER, FACILITIES, COURSE, BLOCK, ENTRY_DIRECTOR, CAREER_DIRECTOR, MENTOR, TEC_WEEK]
 
     PRIMARY KEY (id)
 );
@@ -15,9 +27,8 @@ CREATE TABLE GlobalKind (
 CREATE TABLE Campus (
     id INT NOT NULL,
     name CHAR(3) NOT NULL,
-    -- [MTY, SIN, HGO]
 
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
     FOREIGN KEY (id) REFERENCES GlobalId (id)
 );
 
@@ -35,7 +46,7 @@ CREATE TABLE User (
 CREATE TABLE Student (
     id INT NOT NULL,
     completedAt DATETIME,
-    mentorId INT NOT NULL,
+    mentorId INT,
     entryDirectorId INT,
     careerDirectorId INT,
     campusId INT NOT NULL,
@@ -66,7 +77,7 @@ CREATE TABLE Course (
     FOREIGN KEY (kind) REFERENCES GlobalKind (id)
 );
 
-CREATE TABLE Group (
+CREATE TABLE Classroom (
     id INT AUTO_INCREMENT NOT NULL,
     courseId INT NOT NULL,
     CRN INT NOT NULL,
@@ -78,20 +89,20 @@ CREATE TABLE Group (
 
 CREATE TABLE Enrolled (
     studentId INT NOT NULL,
-    groupId INT NOT NULL,
+    classroomId INT NOT NULL,
 
-    PRIMARY KEY (studentId, groupId),
+    PRIMARY KEY (studentId, classroomId),
     FOREIGN KEY (studentId) REFERENCES Student (id),
-    FOREIGN KEY (groupId) REFERENCES Group (id),
+    FOREIGN KEY (classroomId) REFERENCES Classroom (id)
 );
 
 CREATE TABLE Teaches (
     employeeId INT NOT NULL,
-    groupId INT NOT NULL,
+    classroomId INT NOT NULL,
 
-    PRIMARY KEY (employeeId, groupId),
+    PRIMARY KEY (employeeId, classroomId),
     FOREIGN KEY (employeeId) REFERENCES Employee (id),
-    FOREIGN KEY (groupId) REFERENCES Group (id),
+    FOREIGN KEY (classroomId) REFERENCES Classroom (id)
 );
 
 CREATE TABLE Question (
@@ -115,26 +126,9 @@ CREATE TABLE Answer (
     FOREIGN KEY (toId) REFERENCES GlobalId (id)
 );
 
-CREATE TABLE Prize (
-
-);
-
-CREATE TABLE TempAnswer (
-
-);
-
--- INSERTING DATA AS EXAMPLES
-INSERT INTO GlobalId (name) VALUES();
-INSERT INTO GlobalKind (id,name) VALUES (),("TEACHER", "FACILITIES", "COURSE", "BLOCK", "ENTRY_DIRECTOR", "CAREER_DIRECTOR", "MENTOR", "TEC_WEEK");
-INSERT INTO Campus (name) VALUES ("MTY", "SIN", "HGO");
-INSERT INTO User (id,email,password,registration,fullName) VALUES (0,"a00827581@tec.mx","kerim","a00827581","Kerim Taray Malagon"), (1, "a01741437@tec.mx", "pedro", "a01741437","Pedro Alonso Moreno Salcedo")
-INSERT INTO Student (id,completedAt, mentorId, entryDirectorId,careerDirectorId, campusId)
-
-
--- TODO: campus para las materias
--- TODO: periodos
--- TODO: campus
--- TODO: prizes
--- TODO: temp answer, localstorage or server-side?
--- TODO: integrity and constraints on User and other tables 
--- TODO: create a bunch of dummy data for demo purposes
+INSERT INTO GlobalKind (name) VALUES ("TEACHER"), ("FACILITIES"), ("COURSE"), ("BLOCK"), ("ENTRY_DIRECTOR"), ("CAREER_DIRECTOR"), ("MENTOR"), ("TEC_WEEK");
+INSERT INTO GlobalId () VALUES (), (), ();
+INSERT INTO Campus (id, name) VALUES (1, "MTY"), (2, "SIN"), (3, "HGO");
+INSERT INTO GlobalId () VALUES (), ();
+INSERT INTO User (id, email, password, registration, fullName) VALUES (4,"A00827581@tec.mx", "kerim", "A00827581", "Kerim Taray Malagon"), (5, "A01741437@tec.mx", "pedro", "A01741437","Pedro Alonso Moreno Salcedo");
+INSERT INTO Student (id, completedAt, mentorId, entryDirectorId, careerDirectorId, campusId) VALUES (4, NULL, NULL, NULL, NULL, 1), (5, NULL, NULL, NULL, NULL, 1);

@@ -1,11 +1,11 @@
 import express from "express";
-import db from "../db/db.js";
+import { pool } from "../db/connection.js";
 
 const studentsRouter = express.Router();
 
 studentsRouter.get("/students", (req, res) => {
   const { q } = req.params;
-  const [rows, _] = db.query(
+  const [rows, _] = pool.query(
     "SELECT * FROM Student JOIN User WHERE User.fullName LIKE ?",
     [q]
   );
@@ -14,7 +14,7 @@ studentsRouter.get("/students", (req, res) => {
 
 studentsRouter.get("/students/:registration", (req, res) => {
   const { registration } = req.query;
-  const [rows, _] = db.query(
+  const [rows, _] = pool.query(
     "SELECT * FROM Student JOIN User WHERE User.registration = ?",
     [registration]
   );
