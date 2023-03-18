@@ -1,4 +1,4 @@
-const PORT = 8080;
+const PORT = proces.env.PORT || 8080;
 
 import express from "express";
 import studentsRouter from "./routers/students-router.js";
