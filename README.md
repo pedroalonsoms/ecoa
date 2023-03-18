@@ -24,18 +24,18 @@ Team **2**
 
 # ToDo's
 
--- TODO: campus for courses
--- TODO: periods
--- TODO: campus
--- TODO: prizes
--- TODO: temp answer table/localstorage
--- TODO: integrity and constraints on User and other tables
--- TODO: create a bunch of dummy data for demo purposes
--- TODO: integrate with github actions
--- TODO: add railway integration
--- TODO: create github CI
--- TODO: transform SQL global id to unique id's
--- TODO: make campus have their own id's
+- TODO: campus for courses
+- TODO: periods
+- TODO: campus
+- TODO: prizes
+- TODO: temp answer table/localstorage
+- TODO: integrity and constraints on User and other tables
+- TODO: create a bunch of dummy data for demo purposes
+- TODO: integrate with github actions
+- TODO: add railway integration
+- TODO: create github CI
+- TODO: transform SQL global id to unique id's
+- TODO: make campus have their own id's
 
 # References & Credits
 
