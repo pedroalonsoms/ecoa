@@ -7,6 +7,20 @@ import loginRouter from "./routers/login-router.js";
 const app = express();
 app.use(express.json());
 app.use("/", express.static("../web/dist"));
+app.use(
+  "/game",
+  express.static("../game/dist", {
+    setHeaders: (res, path, _) => {
+      if (path.includes(".gz")) {
+        res.setHeader("Content-Encoding", "gzip");
+      }
+
+      if (path.includes(".wasm")) {
+        res.setHeader("Content-Type", "application/wasm");
+      }
+    },
+  })
+);
 app.use("/api", loginRouter);
 app.use("/api", studentsRouter);
 
