@@ -19,7 +19,7 @@ CREATE TABLE GlobalId (
 
 CREATE TABLE GlobalKind (
     id INT AUTO_INCREMENT NOT NULL,
-    name VARCHAR(64),
+    kind VARCHAR(64),
 
     PRIMARY KEY (id)
 );
@@ -58,23 +58,23 @@ CREATE TABLE Student (
 
 CREATE TABLE Employee (
     id INT NOT NULL,
-    kind INT NOT NULL,
+    globalKindId INT NOT NULL,
     campusId INT NOT NULL,
 
     PRIMARY KEY (id),
     FOREIGN KEY (id) REFERENCES User (id),
-    FOREIGN KEY (kind) REFERENCES GlobalKind (id),
+    FOREIGN KEY (globalKindId) REFERENCES GlobalKind (id),
     FOREIGN KEY (campusId) REFERENCES Campus (id)
 );
 
 CREATE TABLE Course (
     id INT NOT NULL,
     name VARCHAR(64) NOT NULL,
-    kind INT NOT NULL,
+    globalKindId INT NOT NULL,
 
     PRIMARY KEY (id),
     FOREIGN KEY (id) REFERENCES GlobalId (id),
-    FOREIGN KEY (kind) REFERENCES GlobalKind (id)
+    FOREIGN KEY (globalKindId) REFERENCES GlobalKind (id)
 );
 
 CREATE TABLE Classroom (
@@ -108,10 +108,10 @@ CREATE TABLE Teaches (
 CREATE TABLE Question (
     id INT AUTO_INCREMENT NOT NULL,
     name VARCHAR(256) NOT NULL,
-    kind INT NOT NULL,
+    globalKindId INT NOT NULL,
 
     PRIMARY KEY (id),
-    FOREIGN KEY (kind) REFERENCES GlobalKind (id)
+    FOREIGN KEY (globalKindId) REFERENCES GlobalKind (id)
 );
 
 CREATE TABLE Answer (
@@ -126,7 +126,7 @@ CREATE TABLE Answer (
     FOREIGN KEY (toId) REFERENCES GlobalId (id)
 );
 
-INSERT INTO GlobalKind (name) VALUES ("TEACHER"), ("FACILITIES"), ("COURSE"), ("BLOCK"), ("ENTRY_DIRECTOR"), ("CAREER_DIRECTOR"), ("MENTOR"), ("TEC_WEEK");
+INSERT INTO GlobalKind (kind) VALUES ("TEACHER"), ("FACILITIES"), ("COURSE"), ("BLOCK"), ("ENTRY_DIRECTOR"), ("CAREER_DIRECTOR"), ("MENTOR"), ("TEC_WEEK");
 INSERT INTO GlobalId () VALUES (), (), ();
 INSERT INTO Campus (id, name) VALUES (1, "MTY"), (2, "SIN"), (3, "HGO");
 INSERT INTO GlobalId () VALUES (), ();

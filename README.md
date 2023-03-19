@@ -36,6 +36,9 @@ Team **2**
 - TODO: create github CI
 - TODO: transform SQL global id to unique id's
 - TODO: make campus have their own id's
+- TODO: add CORS protection
+- TODO: include Zod for server-side validation?
+- TODO: clean up index.js file
 
 # References & Credits
 
