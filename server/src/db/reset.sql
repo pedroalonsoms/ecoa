@@ -1,21 +1,21 @@
-DROP TABLE IF EXISTS Answer;
+DROP TABLE IF EXISTS SurveyQuestion;
+DROP TABLE IF EXISTS Survey;
+DROP TABLE IF EXISTS TmpCourseComment;
+DROP TABLE IF EXISTS TmpCourseAnswer;
+DROP TABLE IF EXISTS TmpTeacherComment;
+DROP TABLE IF EXISTS TmpTeacherAnswer;
+DROP TABLE IF EXISTS CourseComment;
+DROP TABLE IF EXISTS CourseAnswer;
+DROP TABLE IF EXISTS TeacherComment;
+DROP TABLE IF EXISTS TeacherAnswer;
 DROP TABLE IF EXISTS Question;
 DROP TABLE IF EXISTS Teaches;
 DROP TABLE IF EXISTS Enrolled;
 DROP TABLE IF EXISTS Classroom;
 DROP TABLE IF EXISTS Course;
+DROP TABLE IF EXISTS Teacher;
+DROP TABLE IF EXISTS Colaborator;
 DROP TABLE IF EXISTS Student;
-DROP TABLE IF EXISTS Campus;
-DROP TABLE IF EXISTS TeacherAnswer;
-DROP TABLE IF EXISTS TeacherComment;
-DROP TABLE IF EXISTS CourseAnswer;
-DROP TABLE IF EXISTS CourseComment;
-DROP TABLE IF EXISTS TmpTeacherAnswer;
-DROP TABLE IF EXISTS TmpTeacherComment;
-DROP TABLE IF EXISTS TmpCourseAnswer;
-DROP TABLE IF EXISTS TmpCourseComment;
-DROP TABLE IF EXISTS Survey;
-DROP TABLE IF EXISTS SurveyQuestion;
 
 CREATE TABLE Student (
     id INT AUTO_INCREMENT NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE Student (
     PRIMARY KEY (id)
 );
 
-CREATE TABLE Admin (
+CREATE TABLE Colaborator (
     id INT AUTO_INCREMENT NOT NULL,
     email VARCHAR(64) UNIQUE NOT NULL,
     pass VARCHAR(32) NOT NULL,
@@ -82,7 +82,7 @@ CREATE TABLE Teaches (
     teacherId INT NOT NULL,
 
     PRIMARY KEY (teacherId, classroomId),
-    FOREIGN KEY (teacherId) REFERENCES Employee (id),
+    FOREIGN KEY (teacherId) REFERENCES Teacher (id),
     FOREIGN KEY (classroomId) REFERENCES Classroom (id)
 );
 
@@ -141,7 +141,7 @@ CREATE TABLE TmpTeacherAnswer (
     score INT NOT NULL,
     
     PRIMARY KEY (studentId, teacherId, questionId),
-    FOREIGN KEY (studentId) REFERENCES Student (id)
+    FOREIGN KEY (studentId) REFERENCES Student (id),
     FOREIGN KEY (teacherId) REFERENCES Teacher (id),
     FOREIGN KEY (questionId) REFERENCES Question (id)
 );
@@ -153,7 +153,7 @@ CREATE TABLE TmpTeacherComment (
     comment VARCHAR(1024) NOT NULL,
     
     PRIMARY KEY (studentId, teacherId, questionId),
-    FOREIGN KEY (studentId) REFERENCES Student (id)
+    FOREIGN KEY (studentId) REFERENCES Student (id),
     FOREIGN KEY (teacherId) REFERENCES Teacher (id),
     FOREIGN KEY (questionId) REFERENCES Question (id)
 );
@@ -165,7 +165,7 @@ CREATE TABLE TmpCourseAnswer (
     score INT NOT NULL,
     
     PRIMARY KEY (studentId, courseId, questionId),
-    FOREIGN KEY (studentId) REFERENCES Student (id)
+    FOREIGN KEY (studentId) REFERENCES Student (id),
     FOREIGN KEY (courseId) REFERENCES Course (id),
     FOREIGN KEY (questionId) REFERENCES Question (id)
 );
@@ -177,7 +177,7 @@ CREATE TABLE TmpCourseComment (
     comment VARCHAR(1024),
     
     PRIMARY KEY (studentId, courseId, questionId),
-    FOREIGN KEY (studentId) REFERENCES Student (id)
+    FOREIGN KEY (studentId) REFERENCES Student (id),
     FOREIGN KEY (courseId) REFERENCES Course (id),
     FOREIGN KEY (questionId) REFERENCES Question (id)
 );
