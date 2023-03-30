@@ -16,17 +16,40 @@ loginRouter.get("/login", async (req, res) => {
   }
 
   try {
-    const [users, _] = await pool.query(
-      "SELECT * from User WHERE email = ? AND password = ?",
+    const [students] = await pool.query(
+      "SELECT id, fullName from Student WHERE email = ? AND pass = ?",
       [email, password]
     );
 
-    if (users.length < 1) {
-      res.status(404).send("User not found. Email or password are incorrect.");
+    if (students.length > 0) {
+      const user = students[0];
+      res.status(200).send({ role: "STUDENT", ...user });
       return;
     }
 
-    res.sendStatus(200);
+    const [teachers] = await pool.query(
+      "SELECT id, fullName from Teacher WHERE email = ? AND pass = ?",
+      [email, password]
+    );
+
+    if (teachers.length > 0) {
+      const user = teachers[0];
+      res.status(200).send({ role: "TEACHER", ...user });
+      return;
+    }
+
+    const [colaborators] = await pool.query(
+      "SELECT id, fullName from Colaborator WHERE email = ? AND pass = ?",
+      [email, password]
+    );
+
+    if (colaborators.length > 0) {
+      const user = colaborators[0];
+      res.status(200).send({ role: "COLABORATOR", ...user });
+      return;
+    }
+
+    res.status(404).send("User not found. Email or password are incorrect.");
   } catch (error) {
     console.error(error);
     res.status(500).send("Unknown error");

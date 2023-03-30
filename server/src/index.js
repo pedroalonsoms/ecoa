@@ -2,8 +2,6 @@ const PORT = process.env.PORT || 8080;
 
 import express from "express";
 import loginRouter from "./routers/login-router.js";
-import studentsRouter from "./routers/students-router.js";
-import employeesRouter from "./routers/employees-router.js";
 
 const app = express();
 app.use(express.json());
@@ -29,8 +27,6 @@ app.use(
   })
 );
 app.use("/api", loginRouter);
-app.use("/api", studentsRouter);
-app.use("/api", employeesRouter);
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
