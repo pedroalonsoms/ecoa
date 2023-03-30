@@ -4,92 +4,73 @@ DROP TABLE IF EXISTS Teaches;
 DROP TABLE IF EXISTS Enrolled;
 DROP TABLE IF EXISTS Classroom;
 DROP TABLE IF EXISTS Course;
-DROP TABLE IF EXISTS Employee;
 DROP TABLE IF EXISTS Student;
-DROP TABLE IF EXISTS User;
 DROP TABLE IF EXISTS Campus;
-DROP TABLE IF EXISTS GlobalKind;
-DROP TABLE IF EXISTS GlobalId;
-
-CREATE TABLE GlobalId (
-    id INT AUTO_INCREMENT NOT NULL,
-
-    PRIMARY KEY (id)
-);
-
-CREATE TABLE GlobalKind (
-    id INT AUTO_INCREMENT NOT NULL,
-    kind VARCHAR(64),
-
-    PRIMARY KEY (id)
-);
-
-CREATE TABLE Campus (
-    id INT NOT NULL,
-    name CHAR(3) NOT NULL,
-
-    PRIMARY KEY (id),
-    FOREIGN KEY (id) REFERENCES GlobalId (id)
-);
-
-CREATE TABLE User (
-    id INT NOT NULL,
-    email VARCHAR(64) NOT NULL,
-    password VARCHAR(32) NOT NULL,
-    registration CHAR(9) NOT NULL,
-    fullName VARCHAR(64) NOT NULL,
-
-    PRIMARY KEY (id),
-    FOREIGN KEY (id) REFERENCES GlobalId (id)
-);
+DROP TABLE IF EXISTS TeacherAnswer;
+DROP TABLE IF EXISTS TeacherComment;
+DROP TABLE IF EXISTS CourseAnswer;
+DROP TABLE IF EXISTS CourseComment;
+DROP TABLE IF EXISTS TmpTeacherAnswer;
+DROP TABLE IF EXISTS TmpTeacherComment;
+DROP TABLE IF EXISTS TmpCourseAnswer;
+DROP TABLE IF EXISTS TmpCourseComment;
+DROP TABLE IF EXISTS Survey;
+DROP TABLE IF EXISTS SurveyQuestion;
 
 CREATE TABLE Student (
-    id INT NOT NULL,
-    completedAt DATETIME,
-    mentorId INT,
-    entryDirectorId INT,
-    careerDirectorId INT,
-    campusId INT NOT NULL,
+    id INT AUTO_INCREMENT NOT NULL,
+    email VARCHAR(64) UNIQUE NOT NULL,
+    pass VARCHAR(32) NOT NULL,
+    registration CHAR(9) UNIQUE NOT NULL,
+    fullName VARCHAR(64) NOT NULL,
+    campusId CHAR(3) NOT NULL,
 
-    PRIMARY KEY (id),
-    FOREIGN KEY (id) REFERENCES User (id),
-    FOREIGN KEY (campusId) REFERENCES Campus (id)
+    PRIMARY KEY (id)
 );
 
-CREATE TABLE Employee (
-    id INT NOT NULL,
-    globalKindId INT NOT NULL,
-    campusId INT NOT NULL,
+CREATE TABLE Admin (
+    id INT AUTO_INCREMENT NOT NULL,
+    email VARCHAR(64) UNIQUE NOT NULL,
+    pass VARCHAR(32) NOT NULL,
+    registration CHAR(9) UNIQUE NOT NULL,
+    fullName VARCHAR(64) NOT NULL,
+    campusId CHAR(3) NOT NULL,
 
-    PRIMARY KEY (id),
-    FOREIGN KEY (id) REFERENCES User (id),
-    FOREIGN KEY (globalKindId) REFERENCES GlobalKind (id),
-    FOREIGN KEY (campusId) REFERENCES Campus (id)
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE Teacher (
+    id INT AUTO_INCREMENT NOT NULL,
+    email VARCHAR(64) UNIQUE NOT NULL,
+    pass VARCHAR(32) NOT NULL,
+    registration CHAR(9) UNIQUE NOT NULL,
+    fullName VARCHAR(64) NOT NULL,
+    campusId CHAR(3) NOT NULL,
+
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE Course (
     id INT NOT NULL,
-    name VARCHAR(64) NOT NULL,
-    globalKindId INT NOT NULL,
+    title VARCHAR(64) NOT NULL,
+    kind VARCHAR(32) NOT NULL,
 
-    PRIMARY KEY (id),
-    FOREIGN KEY (id) REFERENCES GlobalId (id),
-    FOREIGN KEY (globalKindId) REFERENCES GlobalKind (id)
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE Classroom (
     id INT AUTO_INCREMENT NOT NULL,
-    courseId INT NOT NULL,
-    CRN INT NOT NULL,
     code INT NOT NULL,
+    CRN INT NOT NULL,
+    courseId INT NOT NULL,
 
     PRIMARY KEY (id),
     FOREIGN KEY (courseId) REFERENCES Course (id)
 );
 
 CREATE TABLE Enrolled (
-    studentId INT NOT NULL,
     classroomId INT NOT NULL,
+    studentId INT NOT NULL,
 
     PRIMARY KEY (studentId, classroomId),
     FOREIGN KEY (studentId) REFERENCES Student (id),
@@ -97,38 +78,123 @@ CREATE TABLE Enrolled (
 );
 
 CREATE TABLE Teaches (
-    employeeId INT NOT NULL,
     classroomId INT NOT NULL,
+    teacherId INT NOT NULL,
 
-    PRIMARY KEY (employeeId, classroomId),
-    FOREIGN KEY (employeeId) REFERENCES Employee (id),
+    PRIMARY KEY (teacherId, classroomId),
+    FOREIGN KEY (teacherId) REFERENCES Employee (id),
     FOREIGN KEY (classroomId) REFERENCES Classroom (id)
 );
 
 CREATE TABLE Question (
     id INT AUTO_INCREMENT NOT NULL,
-    name VARCHAR(256) NOT NULL,
-    globalKindId INT NOT NULL,
+    title VARCHAR(512) NOT NULL,
+    kind VARCHAR(32) NOT NULL,
 
-    PRIMARY KEY (id),
-    FOREIGN KEY (globalKindId) REFERENCES GlobalKind (id)
+    PRIMARY KEY (id)
 );
 
-CREATE TABLE Answer (
-    fromId INT NOT NULL,
+CREATE TABLE TeacherAnswer (
+    teacherId INT NOT NULL,
     questionId INT NOT NULL,
-    toId INT NOT NULL,
-    score INT,
+    score INT NOT NULL,
+
+    PRIMARY KEY (teacherId, questionId),
+    FOREIGN KEY (teacherId) REFERENCES Teacher (id),
+    FOREIGN KEY (questionId) REFERENCES Question (id)
+);
+
+CREATE TABLE TeacherComment (
+    teacherId INT NOT NULL,
+    questionId INT NOT NULL,
+    comment VARCHAR(1024) NOT NULL,
+
+    PRIMARY KEY (teacherId, questionId),
+    FOREIGN KEY (teacherId) REFERENCES Teacher (id),
+    FOREIGN KEY (questionId) REFERENCES Question (id)
+);
+
+CREATE TABLE CourseAnswer (
+    courseId INT NOT NULL,
+    questionId INT NOT NULL,
+    score INT NOT NULL,
+
+    PRIMARY KEY (courseId, questionId),
+    FOREIGN KEY (courseId) REFERENCES Course (id),
+    FOREIGN KEY (questionId) REFERENCES Question (id)
+);
+
+CREATE TABLE CourseComment (
+    courseId INT NOT NULL,
+    questionId INT NOT NULL,
     comment VARCHAR(1024),
 
-    FOREIGN KEY (fromId) REFERENCES Student (id),
-    FOREIGN KEY (questionId) REFERENCES Question (id),
-    FOREIGN KEY (toId) REFERENCES GlobalId (id)
+    PRIMARY KEY (courseId, questionId),
+    FOREIGN KEY (courseId) REFERENCES Course (id),
+    FOREIGN KEY (questionId) REFERENCES Question (id)
 );
 
-INSERT INTO GlobalKind (kind) VALUES ("TEACHER"), ("FACILITIES"), ("COURSE"), ("BLOCK"), ("ENTRY_DIRECTOR"), ("CAREER_DIRECTOR"), ("MENTOR"), ("TEC_WEEK");
-INSERT INTO GlobalId () VALUES (), (), ();
-INSERT INTO Campus (id, name) VALUES (1, "MTY"), (2, "SIN"), (3, "HGO");
-INSERT INTO GlobalId () VALUES (), ();
-INSERT INTO User (id, email, password, registration, fullName) VALUES (4,"A00827581@tec.mx", "kerim", "A00827581", "Kerim Taray Malagon"), (5, "A01741437@tec.mx", "pedro", "A01741437","Pedro Alonso Moreno Salcedo");
-INSERT INTO Student (id, completedAt, mentorId, entryDirectorId, careerDirectorId, campusId) VALUES (4, NULL, NULL, NULL, NULL, 1), (5, NULL, NULL, NULL, NULL, 1);
+CREATE TABLE TmpTeacherAnswer (
+    studentId INT NOT NULL,
+    teacherId INT NOT NULL,
+    questionId INT NOT NULL,
+    score INT NOT NULL,
+    
+    PRIMARY KEY (studentId, teacherId, questionId),
+    FOREIGN KEY (studentId) REFERENCES Student (id)
+    FOREIGN KEY (teacherId) REFERENCES Teacher (id),
+    FOREIGN KEY (questionId) REFERENCES Question (id)
+);
+
+CREATE TABLE TmpTeacherComment (
+    studentId INT NOT NULL,
+    teacherId INT NOT NULL,
+    questionId INT NOT NULL,
+    comment VARCHAR(1024) NOT NULL,
+    
+    PRIMARY KEY (studentId, teacherId, questionId),
+    FOREIGN KEY (studentId) REFERENCES Student (id)
+    FOREIGN KEY (teacherId) REFERENCES Teacher (id),
+    FOREIGN KEY (questionId) REFERENCES Question (id)
+);
+
+CREATE TABLE TmpCourseAnswer (
+    studentId INT NOT NULL,
+    courseId INT NOT NULL,
+    questionId INT NOT NULL,
+    score INT NOT NULL,
+    
+    PRIMARY KEY (studentId, courseId, questionId),
+    FOREIGN KEY (studentId) REFERENCES Student (id)
+    FOREIGN KEY (courseId) REFERENCES Course (id),
+    FOREIGN KEY (questionId) REFERENCES Question (id)
+);
+
+CREATE TABLE TmpCourseComment (
+    studentId INT NOT NULL,
+    courseId INT NOT NULL,
+    questionId INT NOT NULL,
+    comment VARCHAR(1024),
+    
+    PRIMARY KEY (studentId, courseId, questionId),
+    FOREIGN KEY (studentId) REFERENCES Student (id)
+    FOREIGN KEY (courseId) REFERENCES Course (id),
+    FOREIGN KEY (questionId) REFERENCES Question (id)
+);
+
+CREATE TABLE Survey (
+    id INT AUTO_INCREMENT NOT NULL,
+    title VARCHAR(64) NOT NULL,
+    isActive BOOLEAN NOT NULL,
+
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE SurveyQuestion (
+    surveyId INT NOT NULL,
+    questionId INT NOT NULL,
+
+    PRIMARY KEY (surveyId, questionId),
+    FOREIGN KEY (surveyId) REFERENCES Survey (id),
+    FOREIGN KEY (questionId) REFERENCES Question (id)
+);
