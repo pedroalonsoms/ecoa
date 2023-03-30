@@ -2,6 +2,7 @@ const PORT = process.env.PORT || 8080;
 
 import express from "express";
 import loginRouter from "./routers/login-router.js";
+import questionsRouter from "./routers/questions-router.js";
 
 const app = express();
 app.use(express.json());
@@ -27,6 +28,7 @@ app.use(
   })
 );
 app.use("/api", loginRouter);
+app.use("/api", questionsRouter);
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);

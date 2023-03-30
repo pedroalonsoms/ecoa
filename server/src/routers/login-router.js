@@ -17,7 +17,7 @@ loginRouter.get("/login", async (req, res) => {
 
   try {
     const [students] = await pool.query(
-      "SELECT id, fullName from Student WHERE email = ? AND pass = ?",
+      "SELECT id, fullName FROM Student WHERE email = ? AND pass = ?",
       [email, password]
     );
 
@@ -28,7 +28,7 @@ loginRouter.get("/login", async (req, res) => {
     }
 
     const [teachers] = await pool.query(
-      "SELECT id, fullName from Teacher WHERE email = ? AND pass = ?",
+      "SELECT id, fullName FROM Teacher WHERE email = ? AND pass = ?",
       [email, password]
     );
 
@@ -39,7 +39,7 @@ loginRouter.get("/login", async (req, res) => {
     }
 
     const [colaborators] = await pool.query(
-      "SELECT id, fullName from Colaborator WHERE email = ? AND pass = ?",
+      "SELECT id, fullName FROM Colaborator WHERE email = ? AND pass = ?",
       [email, password]
     );
 
