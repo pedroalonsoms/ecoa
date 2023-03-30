@@ -1,13 +1,15 @@
-import styles from './Navbar.module.css';
+import Styles from './Navbar.module.css';
 import Links from './Links';
+
+import LoginPage from "../pages/LoginPage"
 
 const Navbar = (props) => {
     const showLinks = props.showLinks;
     return (
-        <nav>
-            <h1><a href="/">ECOA</a></h1>
+        <div className={Styles.navbar}>
+            <h1>ECOA</h1>
             {showLinks && <Links />}
-        </nav>
+        </div>
     );
 };
 

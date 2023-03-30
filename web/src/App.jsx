@@ -1,26 +1,24 @@
 import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import LoginPage from "./pages/LoginPage";
 import ProfessorPage from "./pages/ProfessorPage";
 import StudentPage from "./pages/StudentPage";
-import DirectorPageCollab from "./pages/DirectorPageCollab";
-import DirectorPageStudent from "./pages/DirectorPageStudent";
-import DirectorPageSubject from "./DirectorPageSubject";
-import DirectorPageServices from "./pages/DirectorPageServices";
-import DirectorPageQuestions from "./pages/DirectorPageQuestions";
+import CollaboratorSurveys from "./pages/CollaboratorSurveys";
+import CollaboratorQuestions from "./pages/CollaboratorQuestions";
 
 const App = () => {
     return (
-        <div className="App">
-            <LoginPage />
-            {/* <StudentPage /> */}
-            {/* <ProfessorPage /> */}
-            {/* <DirectorPageCollab /> */}
-            {/* <DirectorPageStudent /> */}
-            {/* <DirectorPageSubject /> */}
-            {/* <DirectorPageServices /> */}
-            {/* <DirectorPageQuestions /> */}
-        </div>
+        <BrowserRouter>
+            <Routes>
+                <Route index element={<LoginPage />} />
+                <Route path="/student" element={<StudentPage />} />
+                <Route path="/professor" element={<ProfessorPage />} />
+                <Route path="/collaborator/surveys" element={<CollaboratorSurveys />} />
+                <Route path="/collaborator/questions" element={<CollaboratorQuestions />} />
+            </Routes>
+        </BrowserRouter>
+
     );
 }
 

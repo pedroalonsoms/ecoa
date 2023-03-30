@@ -1,8 +1,8 @@
-import styles from './LoginForm.module.css';
+import Styles from './LoginForm.module.css';
 
 const LoginForm = () => {
     return (
-        <form>
+        <form className={Styles.form}>
             <label htmlFor="email">Email</label>
             <input type="email" id="email" name="email" />
             <label htmlFor="password">Contraseña</label>
