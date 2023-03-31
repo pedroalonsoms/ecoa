@@ -1,0 +1,14 @@
+.login {
+    display: flex;
+    flex-direction: column;
+    padding: 5vh 20vw;
+    /* align-items: center; */
+    /* justify-content: center; */
+}
+
+.heading {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}

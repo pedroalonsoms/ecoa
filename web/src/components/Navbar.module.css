@@ -1,8 +1,14 @@
-nav {
+.navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 2rem;
     height: 4rem;
     background-color: #000000;
+}
+
+h1 {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
 }

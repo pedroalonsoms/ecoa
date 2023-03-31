@@ -1,15 +1,15 @@
-import Navbar from '../components/Navbar';
-import Searchbar from '../components/Searchbar';
+// import Styles from './CollaboratorSurveys.module.css';
 
-const DirectorPageStudent = () => {
+import Navbar from '../components/Navbar';
+
+const CollaboratorSurveys = () => {
     const activeLinks = true;
     return (
         <div>
             <Navbar showLinks={activeLinks} />
-            <h2>Alumno</h2>
-            <Searchbar />
+            <h2>Encuestas</h2>
         </div>
     );
 };
 
-export default DirectorPageStudent;
+export default CollaboratorSurveys;
