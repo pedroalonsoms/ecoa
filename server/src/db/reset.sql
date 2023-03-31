@@ -185,7 +185,7 @@ CREATE TABLE TmpCourseTextAnswer (
 
 CREATE TABLE Survey (
     id INT AUTO_INCREMENT,
-    title VARCHAR(64) NOT NULL,
+    title VARCHAR(64) UNIQUE NOT NULL,
     isActive BOOLEAN NOT NULL,
 
     PRIMARY KEY (id)
