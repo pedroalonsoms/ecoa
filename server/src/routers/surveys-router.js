@@ -3,6 +3,8 @@
 // pedro
 
 // TODO: catch duplicate title names error
+// TODO: edit survey and delete survey
+// TODO: filter questions by kind
 
 import express from "express";
 import { pool } from "../db/connection.js";
@@ -66,6 +68,39 @@ surveysRouter.post("/surveys", async (req, res) => {
     }
 
     res.sendStatus(200);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Unknown error");
+  }
+});
+
+//"questions/surveys/:surveyId?section='TEACHER'&isActive=true"
+surveysRouter.get("/surveys/:surveyId", async (req, res) => {
+  const { surveyId } = req.params;
+
+  if (!surveyId) {
+    res.status(400).send("Missing required path field");
+    return;
+  }
+
+  try {
+    const [surveys] = await pool.query("SELECT * FROM Survey WHERE id = ?", [
+      parseInt(surveyId),
+    ]);
+
+    if (surveys.length < 1) {
+      res.status(400).send("Could not find survey with provided id");
+      return;
+    }
+
+    const survey = surveys[0];
+
+    const [questions] = await pool.query(
+      "SELECT Question.*, IF(surveyId IS NULL, FALSE, TRUE) AS isActive FROM Question LEFT JOIN SurveyQuestion ON Question.id = SurveyQuestion.questionId AND surveyId = ?",
+      [parseInt(surveyId)]
+    );
+
+    res.status(200).send({ ...survey, questions });
   } catch (error) {
     console.error(error);
     res.status(500).send("Unknown error");

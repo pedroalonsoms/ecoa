@@ -2,8 +2,9 @@
 
 // pedro
 
-// TODO: add question order
+// TODO: add question order (ASC-only)
 // TODO: add question on-delete cascade option
+// TODO: add filtering on `/questions` endpoint, simplify into a single re-usable function
 
 import express from "express";
 import { pool } from "../db/connection.js";
