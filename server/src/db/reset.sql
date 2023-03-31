@@ -89,7 +89,7 @@ CREATE TABLE Teaches (
 CREATE TABLE Question (
     id INT AUTO_INCREMENT,
     title VARCHAR(512) NOT NULL,
-    kind VARCHAR(32) NOT NULL,
+    section VARCHAR(32) NOT NULL,
     answerKind VARCHAR(32) NOT NULL,
 
     PRIMARY KEY (id)

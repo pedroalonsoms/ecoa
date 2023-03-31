@@ -7,7 +7,7 @@
 import express from "express";
 import { pool } from "../db/connection.js";
 
-const QUESTION_KIND = ["TEACHER", "COURSE"];
+const QUESTION_SECTION = ["TEACHER", "COURSE"];
 const ANSWER_KIND = ["NUMERIC", "TEXT"];
 
 const questionsRouter = express.Router();
@@ -24,15 +24,15 @@ questionsRouter.get("/questions", async (req, res) => {
 });
 
 questionsRouter.post("/questions", async (req, res) => {
-  const { title, kind, answerKind } = req.body;
+  const { title, section, answerKind } = req.body;
 
-  if (!title || !kind || !answerKind) {
+  if (!title || !section || !answerKind) {
     res.status(400).send("Missing required body field");
     return;
   }
 
-  if (!QUESTION_KIND.includes(kind)) {
-    res.status(400).send("Invalid question kind");
+  if (!QUESTION_SECTION.includes(section)) {
+    res.status(400).send("Invalid section");
     return;
   }
 
@@ -44,7 +44,7 @@ questionsRouter.post("/questions", async (req, res) => {
   try {
     await pool.query("INSERT INTO Question VALUES (NULL, ?, ?, ?)", [
       title,
-      kind,
+      section,
       answerKind,
     ]);
 
@@ -63,15 +63,15 @@ questionsRouter.put("/questions/:id", async (req, res) => {
     return;
   }
 
-  const { title, kind, answerKind } = req.body;
+  const { title, section, answerKind } = req.body;
 
-  if (!title || !kind || !answerKind) {
+  if (!title || !section || !answerKind) {
     res.status(400).send("Missing required body field");
     return;
   }
 
-  if (!QUESTION_KIND.includes(kind)) {
-    res.status(400).send("Invalid question kind");
+  if (!QUESTION_SECTION.includes(section)) {
+    res.status(400).send("Invalid section");
     return;
   }
 
@@ -82,8 +82,8 @@ questionsRouter.put("/questions/:id", async (req, res) => {
 
   try {
     await pool.query(
-      "UPDATE Question SET title = ?, kind = ?, answerKind = ? WHERE id = ?",
-      [title, kind, answerKind, parseInt(id)]
+      "UPDATE Question SET title = ?, section = ?, answerKind = ? WHERE id = ?",
+      [title, section, answerKind, parseInt(id)]
     );
 
     res.sendStatus(200);
