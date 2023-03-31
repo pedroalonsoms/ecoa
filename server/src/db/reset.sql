@@ -186,7 +186,7 @@ CREATE TABLE TmpCourseTextAnswer (
 CREATE TABLE Survey (
     id INT AUTO_INCREMENT,
     title VARCHAR(64) UNIQUE NOT NULL,
-    isActive BOOLEAN NOT NULL,
+    isPublished BOOLEAN NOT NULL,
 
     PRIMARY KEY (id)
 );
@@ -222,4 +222,5 @@ INSERT INTO Survey VALUES (NULL, "Mi primera encuesta", FALSE);
 INSERT INTO Survey VALUES (NULL, "Mi segunda encuesta", FALSE);
 INSERT INTO Survey VALUES (NULL, "Mi tercera encuesta", TRUE);
 
+INSERT INTO SurveyQuestion VALUES (2, 1), (2, 2);
 INSERT INTO SurveyQuestion VALUES (3, 1), (3, 2), (3, 3), (3, 4), (3, 5);
