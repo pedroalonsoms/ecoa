@@ -217,3 +217,9 @@ INSERT INTO Question VALUES (NULL, '¿Qué le comentarías a un estudiante que q
 
 INSERT INTO Question VALUES (NULL, 'Los temas, las actividades y la situación-problema durante la Materia: (A) Me permitieron aprender y desarrollarme.', 'COURSE', 'NUMERIC');
 INSERT INTO Question VALUES (NULL, 'Los temas, las actividades y la situación-problema durante la Materia: (B) Son aplicables y de valor.', 'COURSE', 'NUMERIC');
+
+INSERT INTO Survey VALUES (NULL, "Mi primera encuesta", FALSE);
+INSERT INTO Survey VALUES (NULL, "Mi segunda encuesta", FALSE);
+INSERT INTO Survey VALUES (NULL, "Mi tercera encuesta", TRUE);
+
+INSERT INTO SurveyQuestion VALUES (3, 1), (3, 2), (3, 3), (3, 4), (3, 5);
