@@ -2,10 +2,13 @@
 
 // pedro
 
-// TODO: add question type "Numeric" or "Comment"
+// TODO: add question order
 
 import express from "express";
 import { pool } from "../db/connection.js";
+
+const QUESTION_KIND = ["TEACHER", "COURSE"];
+const ANSWER_KIND = ["NUMERIC", "TEXT"];
 
 const questionsRouter = express.Router();
 
@@ -21,20 +24,29 @@ questionsRouter.get("/questions", async (req, res) => {
 });
 
 questionsRouter.post("/questions", async (req, res) => {
-  const { title, kind } = req.body;
+  const { title, kind, answerKind } = req.body;
 
-  if (!title || !kind) {
+  if (!title || !kind || !answerKind) {
     res.status(400).send("Missing required body field");
     return;
   }
 
-  if (kind !== "TEACHER" && kind !== "COURSE") {
+  if (!QUESTION_KIND.includes(kind)) {
     res.status(400).send("Invalid question kind");
     return;
   }
 
+  if (!ANSWER_KIND.includes(answerKind)) {
+    res.status(400).send("Invalid answer kind");
+    return;
+  }
+
   try {
-    await pool.query("INSERT INTO Question VALUES (NULL, ?, ?)", [title, kind]);
+    await pool.query("INSERT INTO Question VALUES (NULL, ?, ?, ?)", [
+      title,
+      kind,
+      answerKind,
+    ]);
 
     res.sendStatus(200);
   } catch (error) {
@@ -51,24 +63,28 @@ questionsRouter.put("/questions/:id", async (req, res) => {
     return;
   }
 
-  const { title, kind } = req.body;
+  const { title, kind, answerKind } = req.body;
 
-  if (!title || !kind) {
+  if (!title || !kind || !answerKind) {
     res.status(400).send("Missing required body field");
     return;
   }
 
-  if (kind !== "TEACHER" && kind !== "COURSE") {
+  if (!QUESTION_KIND.includes(kind)) {
     res.status(400).send("Invalid question kind");
     return;
   }
 
+  if (!ANSWER_KIND.includes(answerKind)) {
+    res.status(400).send("Invalid answer kind");
+    return;
+  }
+
   try {
-    await pool.query("UPDATE Question SET title = ?, kind = ? WHERE id = ?", [
-      title,
-      kind,
-      parseInt(id),
-    ]);
+    await pool.query(
+      "UPDATE Question SET title = ?, kind = ?, answerKind = ? WHERE id = ?",
+      [title, kind, answerKind, parseInt(id)]
+    );
 
     res.sendStatus(200);
   } catch (error) {

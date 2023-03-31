@@ -1,13 +1,13 @@
 DROP TABLE IF EXISTS SurveyQuestion;
 DROP TABLE IF EXISTS Survey;
-DROP TABLE IF EXISTS TmpCourseComment;
-DROP TABLE IF EXISTS TmpCourseAnswer;
-DROP TABLE IF EXISTS TmpTeacherComment;
-DROP TABLE IF EXISTS TmpTeacherAnswer;
-DROP TABLE IF EXISTS CourseComment;
-DROP TABLE IF EXISTS CourseAnswer;
-DROP TABLE IF EXISTS TeacherComment;
-DROP TABLE IF EXISTS TeacherAnswer;
+DROP TABLE IF EXISTS TmpCourseTextAnswer;
+DROP TABLE IF EXISTS TmpCourseNumericAnswer;
+DROP TABLE IF EXISTS TmpTeacherTextAnswer;
+DROP TABLE IF EXISTS TmpTeacherNumericAnswer;
+DROP TABLE IF EXISTS CourseTextAnswer;
+DROP TABLE IF EXISTS CourseNumericAnswer;
+DROP TABLE IF EXISTS TeacherTextAnswer;
+DROP TABLE IF EXISTS TeacherNumericAnswer;
 DROP TABLE IF EXISTS Question;
 DROP TABLE IF EXISTS Teaches;
 DROP TABLE IF EXISTS Enrolled;
@@ -90,11 +90,12 @@ CREATE TABLE Question (
     id INT AUTO_INCREMENT,
     title VARCHAR(512) NOT NULL,
     kind VARCHAR(32) NOT NULL,
+    answerKind VARCHAR(32) NOT NULL,
 
     PRIMARY KEY (id)
 );
 
-CREATE TABLE TeacherAnswer (
+CREATE TABLE TeacherNumericAnswer (
     teacherId INT NOT NULL,
     questionId INT NOT NULL,
     score INT NOT NULL,
@@ -104,7 +105,7 @@ CREATE TABLE TeacherAnswer (
     FOREIGN KEY (questionId) REFERENCES Question (id)
 );
 
-CREATE TABLE TeacherComment (
+CREATE TABLE TeacherTextAnswer (
     teacherId INT NOT NULL,
     questionId INT NOT NULL,
     comment VARCHAR(1024) NOT NULL,
@@ -114,7 +115,7 @@ CREATE TABLE TeacherComment (
     FOREIGN KEY (questionId) REFERENCES Question (id)
 );
 
-CREATE TABLE CourseAnswer (
+CREATE TABLE CourseNumericAnswer (
     courseId INT NOT NULL,
     questionId INT NOT NULL,
     score INT NOT NULL,
@@ -124,7 +125,7 @@ CREATE TABLE CourseAnswer (
     FOREIGN KEY (questionId) REFERENCES Question (id)
 );
 
-CREATE TABLE CourseComment (
+CREATE TABLE CourseTextAnswer (
     courseId INT NOT NULL,
     questionId INT NOT NULL,
     comment VARCHAR(1024),
@@ -134,7 +135,7 @@ CREATE TABLE CourseComment (
     FOREIGN KEY (questionId) REFERENCES Question (id)
 );
 
-CREATE TABLE TmpTeacherAnswer (
+CREATE TABLE TmpTeacherNumericAnswer (
     studentId INT NOT NULL,
     teacherId INT NOT NULL,
     questionId INT NOT NULL,
@@ -146,7 +147,7 @@ CREATE TABLE TmpTeacherAnswer (
     FOREIGN KEY (questionId) REFERENCES Question (id)
 );
 
-CREATE TABLE TmpTeacherComment (
+CREATE TABLE TmpTeacherTextAnswer (
     studentId INT NOT NULL,
     teacherId INT NOT NULL,
     questionId INT NOT NULL,
@@ -158,7 +159,7 @@ CREATE TABLE TmpTeacherComment (
     FOREIGN KEY (questionId) REFERENCES Question (id)
 );
 
-CREATE TABLE TmpCourseAnswer (
+CREATE TABLE TmpCourseNumericAnswer (
     studentId INT NOT NULL,
     courseId INT NOT NULL,
     questionId INT NOT NULL,
@@ -170,7 +171,7 @@ CREATE TABLE TmpCourseAnswer (
     FOREIGN KEY (questionId) REFERENCES Question (id)
 );
 
-CREATE TABLE TmpCourseComment (
+CREATE TABLE TmpCourseTextAnswer (
     studentId INT NOT NULL,
     courseId INT NOT NULL,
     questionId INT NOT NULL,
@@ -210,9 +211,9 @@ INSERT INTO Course VALUES (NULL, 'Construcción de software y toma de decisiones
 
 INSERT INTO Classroom VALUES (NULL, 404, 112233, 1);
 
-INSERT INTO Question VALUES (NULL, 'El profesor(a) muestra dominio y experiencia en los temas de la Materia', 'TEACHER');
-INSERT INTO Question VALUES (NULL, 'El profesor(a) me retó para dar lo mejor de mí(desarrollar nuevas habilidades, nuevos conceptos e ideas, pensar de manera diferente, etc.)', 'TEACHER');
-INSERT INTO Question VALUES (NULL, '¿Qué le comentarías a un estudiante que quisiera inscribir la Materia con este(a) profesor(a)?', 'TEACHER');
+INSERT INTO Question VALUES (NULL, 'El profesor(a) muestra dominio y experiencia en los temas de la Materia', 'TEACHER', 'NUMERIC');
+INSERT INTO Question VALUES (NULL, 'El profesor(a) me retó para dar lo mejor de mí(desarrollar nuevas habilidades, nuevos conceptos e ideas, pensar de manera diferente, etc.)', 'TEACHER', 'NUMERIC');
+INSERT INTO Question VALUES (NULL, '¿Qué le comentarías a un estudiante que quisiera inscribir la Materia con este(a) profesor(a)?', 'TEACHER', 'TEXT');
 
-INSERT INTO Question VALUES (NULL, 'Los temas, las actividades y la situación-problema durante la Materia: (A) Me permitieron aprender y desarrollarme.', 'COURSE');
-INSERT INTO Question VALUES (NULL, 'Los temas, las actividades y la situación-problema durante la Materia: (B) Son aplicables y de valor.', 'COURSE');
+INSERT INTO Question VALUES (NULL, 'Los temas, las actividades y la situación-problema durante la Materia: (A) Me permitieron aprender y desarrollarme.', 'COURSE', 'NUMERIC');
+INSERT INTO Question VALUES (NULL, 'Los temas, las actividades y la situación-problema durante la Materia: (B) Son aplicables y de valor.', 'COURSE', 'NUMERIC');
