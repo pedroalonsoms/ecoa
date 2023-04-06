@@ -5,8 +5,10 @@ import express from "express";
 import loginRouter from "./routers/login-router.js";
 import questionsRouter from "./routers/questions-router.js";
 import surveysRouter from "./routers/surveys-router.js";
+import cors from "cors";
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use("/", express.static("../web/dist"));
 app.use(
