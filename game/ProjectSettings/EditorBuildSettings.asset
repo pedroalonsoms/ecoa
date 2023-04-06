@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/template4.unity
     guid: f2894e23283c9489a85138fc16b6e118
+  - enabled: 1
+    path: Assets/Scenes/postmenu_materia.unity
+    guid: 3a90818f11f614d238e4a8c4d8457ab9
   m_configObjects: {}

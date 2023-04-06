@@ -26,6 +26,10 @@ app.use(
       if (path.includes(".wasm")) {
         res.setHeader("Content-Type", "application/wasm");
       }
+
+      if (path.includes(".br")) {
+        res.setHeader("Content-Encoding", "br");
+      }
     },
   })
 );

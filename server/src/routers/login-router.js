@@ -1,4 +1,6 @@
 // return name
+// improve API login seciurity by not using ?id="A01741437"
+// not use brotli for game compression, use gz instead
 
 // Pedro
 
