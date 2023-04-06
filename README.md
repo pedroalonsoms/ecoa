@@ -2,16 +2,6 @@
 
 A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 
-# Tech Stack
-
-- Node
-- Express
-- React
-- Vite
-- JavaScript
-- MySQL
-- C#
-
 # Development Team
 
 Team **2**
@@ -24,21 +14,13 @@ Team **2**
 
 # ToDo's
 
-- TODO: campus for courses
-- TODO: periods
-- TODO: campus
-- TODO: prizes
-- TODO: temp answer table/localstorage
-- TODO: integrity and constraints on User and other tables
-- TODO: create a bunch of dummy data for demo purposes
-- TODO: integrate with github actions
-- TODO: add railway integration
-- TODO: create github CI
-- TODO: transform SQL global id to unique id's
-- TODO: make campus have their own id's
-- TODO: add CORS protection
-- TODO: include Zod for server-side validation?
-- TODO: clean up index.js file
+- periodos
+- campuses
+- prizes
+- temp answers
+- dummy data for demo purposes
+- add CORS protection
+- include Zod
 
 # References & Credits
 
