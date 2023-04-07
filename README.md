@@ -2,24 +2,16 @@
 
 A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 
-# Development Team
-
-Team **2**
-
-- **Backend** - Pedro Alonso Moreno Salcedo A01741437
-- **Backend** - Kerim Taray Malagon A0027581
-- **Unity** - Santiago Velasquez Chang A00832788
-- **Unity** - Felipe de Jesús González Acosta A01275536
-- **Frontend** - Adrián Alejandro Ramírez Cruz A00830640
+![](demo.jpeg)
 
 # ToDo's
 
-- periodos
-- campuses
-- prizes
-- temp answers
-- dummy data for demo purposes
-- add CORS protection
+- Periods
+- Campuses
+- Prizes
+- Temp answers
+- Dummy data for demo purposes
+- Add CORS protection
 
 # References & Credits
 
@@ -34,3 +26,15 @@ Team **2**
 - StackExchange: https://stackexchange.com/
 - StackOverflow: https://stackoverflow.com/
 - MySQLTutorial: https://www.mysqltutorial.org/
+
+# Development Team
+
+Team **2**
+
+- **Backend** - Pedro Alonso Moreno Salcedo A01741437
+- **Backend** - Kerim Taray Malagon A0027581
+- **Unity** - Santiago Velasquez Chang A00832788
+- **Unity** - Felipe de Jesús González Acosta A01275536
+- **Frontend** - Adrián Alejandro Ramírez Cruz A00830640
+
+![](https://contrib.rocks/image?repo=pedroalonsoms/ecoa)
