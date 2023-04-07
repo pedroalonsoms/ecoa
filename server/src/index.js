@@ -1,12 +1,15 @@
-// hola felipe
 const PORT = process.env.PORT || 8080;
 
 import express from "express";
+import cors from "cors";
+
 import loginRouter from "./routers/login-router.js";
 import questionsRouter from "./routers/questions-router.js";
 import surveysRouter from "./routers/surveys-router.js";
 
+// TODO: future cors implementation when needing cross-domain request
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use("/", express.static("../web/dist"));
 app.use(
