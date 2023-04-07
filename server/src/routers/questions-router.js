@@ -16,7 +16,9 @@ const questionsRouter = express.Router();
 
 questionsRouter.get("/questions", async (req, res) => {
   try {
-    const [questions] = await pool.query("SELECT * from Question");
+    const [questions] = await pool.query(
+      "SELECT * FROM Question ORDER BY title ASC"
+    );
 
     res.status(200).send(questions);
   } catch (error) {
