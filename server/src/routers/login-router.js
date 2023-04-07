@@ -54,7 +54,7 @@ loginRouter.get("/login", async (req, res) => {
     res.status(404).send("User not found. Email or password are incorrect.");
   } catch (error) {
     console.error(error);
-    res.status(500).send("Unknown error");
+    res.status(400).send(error);
   }
 });
 

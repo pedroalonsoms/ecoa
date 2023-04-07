@@ -2,12 +2,12 @@
 
 // pedro
 
-// TODO: catch duplicate title names error
-// TODO: edit survey and delete survey
 // TODO: filter questions by kind
+// TODO: active survey endpoints
 
 import express from "express";
 import { pool } from "../db/connection.js";
+import { z } from "zod";
 
 const surveysRouter = express.Router();
 
@@ -17,30 +17,19 @@ surveysRouter.get("/surveys", async (req, res) => {
 
     res.status(200).send(surveys);
   } catch (error) {
-    console.error(error);
-    res.status(500).send("Unknown error");
+    res.status(400).send(error);
   }
 });
 
 surveysRouter.post("/surveys", async (req, res) => {
-  const { title, questionIds } = req.body;
-
-  if (!title || !questionIds) {
-    res.status(400).send("Missing required body field");
-    return;
-  }
-
-  if (!Array.isArray(questionIds)) {
-    res.status(400).send("questionIds must be of type array");
-    return;
-  }
-
-  if (questionIds.length < 1) {
-    res.status(400).send("questionIds array cannot be empty");
-    return;
-  }
-
   try {
+    const { title, questionIds } = z
+      .object({
+        title: z.string(),
+        questionIds: z.number().array().nonempty(),
+      })
+      .parse(req.body);
+
     await pool.query("INSERT INTO Survey VALUES (NULL, ?, FALSE)", [title]);
 
     const [surveys] = await pool.query(
@@ -48,62 +37,106 @@ surveysRouter.post("/surveys", async (req, res) => {
       [title]
     );
 
-    if (surveys.length < 1) {
-      res.status(400).send("Could not find inserted survey");
-      return;
-    }
-
-    const survey = surveys[0];
-
-    if (!survey.id) {
-      res.status(400).send("Could not retrieve survey id from inserted survey");
-      return;
-    }
+    const [survey] = z
+      .object({ id: z.number() })
+      .array()
+      .length(1)
+      .parse(surveys);
 
     for (const questionId of questionIds) {
       await pool.query("INSERT INTO SurveyQuestion VALUES (?, ?)", [
-        parseInt(survey.id),
-        parseInt(questionId),
+        survey.id,
+        questionId,
       ]);
     }
 
     res.sendStatus(200);
   } catch (error) {
-    console.error(error);
-    res.status(500).send("Unknown error");
+    res.status(400).send(error);
+  }
+});
+
+surveysRouter.put("/surveys/:surveyId", async (req, res) => {
+  try {
+    const { surveyId } = z
+      .object({ surveyId: z.string().transform((s) => parseInt(s)) })
+      .parse(req.params);
+
+    const [surveys] = await pool.query("SELECT id FROM Survey WHERE id = ?", [
+      surveyId,
+    ]);
+
+    z.object({ id: z.number() }).array().length(1).parse(surveys);
+
+    await pool.query("DELETE FROM SurveyQuestion WHERE surveyId = ?", [
+      surveyId,
+    ]);
+
+    const { title, questionIds } = z
+      .object({
+        title: z.string(),
+        questionIds: z.number().array().nonempty(),
+      })
+      .parse(req.body);
+
+    await pool.query("UPDATE Survey SET title = ? WHERE id = ?", [
+      title,
+      surveyId,
+    ]);
+
+    for (const questionId of questionIds) {
+      await pool.query("INSERT INTO SurveyQuestion VALUES (?, ?)", [
+        surveyId,
+        questionId,
+      ]);
+    }
+
+    res.sendStatus(200);
+  } catch (error) {
+    res.status(400).send(error);
   }
 });
 
 //"questions/surveys/:surveyId?section='TEACHER'&isActive=true"
 surveysRouter.get("/surveys/:surveyId", async (req, res) => {
-  const { surveyId } = req.params;
-
-  if (!surveyId) {
-    res.status(400).send("Missing required path field");
-    return;
-  }
-
   try {
-    const [surveys] = await pool.query("SELECT * FROM Survey WHERE id = ?", [
-      parseInt(surveyId),
-    ]);
+    const { surveyId } = z
+      .object({ surveyId: z.string().transform((s) => parseInt(s)) })
+      .parse(req.params);
 
-    if (surveys.length < 1) {
-      res.status(400).send("Could not find survey with provided id");
-      return;
-    }
+    const [surveys] = await pool.query(
+      "SELECT id, title FROM Survey WHERE id = ?",
+      [surveyId]
+    );
 
-    const survey = surveys[0];
+    const [survey] = z
+      .object({ id: z.number(), title: z.string() })
+      .array()
+      .length(1)
+      .parse(surveys);
 
     const [questions] = await pool.query(
       "SELECT Question.*, IF(surveyId IS NULL, FALSE, TRUE) AS isActive FROM Question LEFT JOIN SurveyQuestion ON Question.id = SurveyQuestion.questionId AND surveyId = ?",
-      [parseInt(surveyId)]
+      [surveyId]
     );
 
     res.status(200).send({ ...survey, questions });
   } catch (error) {
-    console.error(error);
-    res.status(500).send("Unknown error");
+    res.status(400).send(error);
+  }
+});
+
+surveysRouter.delete("/surveys/:surveyId", async (req, res) => {
+  try {
+    const { surveyId } = z
+      .object({ surveyId: z.string().transform((s) => parseInt(s)) })
+      .parse(req.params);
+
+    await pool.query("DELETE FROM Survey WHERE id = ?", [surveyId]);
+
+    res.sendStatus(200);
+  } catch (error) {
+    res.status(400).send(error);
   }
 });
 

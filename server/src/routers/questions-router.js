@@ -5,6 +5,7 @@
 // TODO: add question order (ASC-only)
 // TODO: add question on-delete cascade option
 // TODO: add filtering on `/questions` endpoint, simplify into a single re-usable function
+// TODO: add question kind 'NUMERIC' or 'TEXT'
 
 import express from "express";
 import { pool } from "../db/connection.js";
@@ -21,7 +22,7 @@ questionsRouter.get("/questions", async (req, res) => {
     res.status(200).send(questions);
   } catch (error) {
     console.error(error);
-    res.status(500).send("Unknown error");
+    res.status(400).send(error);
   }
 });
 
@@ -53,7 +54,7 @@ questionsRouter.post("/questions", async (req, res) => {
     res.sendStatus(200);
   } catch (error) {
     console.error(error);
-    res.status(500).send("Unknown error");
+    res.status(400).send(error);
   }
 });
 
@@ -91,7 +92,7 @@ questionsRouter.put("/questions/:id", async (req, res) => {
     res.sendStatus(200);
   } catch (error) {
     console.error(error);
-    res.status(500).send("Unknown error");
+    res.status(400).send(error);
   }
 });
 
@@ -108,8 +109,7 @@ questionsRouter.delete("/questions/:id", async (req, res) => {
 
     res.sendStatus(200);
   } catch (error) {
-    console.error(error);
-    res.status(500).send("Unknown error");
+    res.status(400).send(error);
   }
 });
 
