@@ -3,7 +3,9 @@
 // pedro
 
 // TODO: filter questions by kind
-// TODO: active survey endpoints
+// TODO: add constraint where only one survey can be active at a given time
+// TODO: add transactions ?
+// TODO: consistent id naming
 
 import express from "express";
 import { pool } from "../db/connection.js";
@@ -11,9 +13,48 @@ import { z } from "zod";
 
 const surveysRouter = express.Router();
 
+surveysRouter.get("/surveys/published", async (req, res) => {
+  try {
+    const [surveys] = await pool.query(
+      "SELECT id FROM Survey WHERE isPublished = TRUE"
+    );
+
+    const [survey] = z
+      .object({ id: z.number() })
+      .array()
+      .length(1)
+      .parse(surveys);
+
+    res.status(200).send({ survey });
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+surveysRouter.post("/surveys/published", async (req, res) => {
+  try {
+    const { id: surveyId } = z.object({ id: z.number() }).parse(req.body);
+
+    const [surveys] = await pool.query("SELECT id FROM Survey WHERE id = ?", [
+      surveyId,
+    ]);
+
+    z.object({ id: z.number() }).array().length(1).parse(surveys);
+
+    await pool.query("UPDATE Survey SET isPublished = FALSE");
+    await pool.query("UPDATE Survey SET isPublished = TRUE WHERE id = ?", [
+      surveyId,
+    ]);
+
+    res.sendStatus(200);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
 surveysRouter.get("/surveys", async (req, res) => {
   try {
-    const [surveys] = await pool.query("SELECT * from Survey");
+    const [surveys] = await pool.query("SELECT * FROM Survey");
 
     res.status(200).send(surveys);
   } catch (error) {
