@@ -1,14 +1,29 @@
 import Navbar from "../components/Navbar";
 import LoginForm from "./LoginForm";
-import styles from './LoginPage.module.css';
+import Styles from './LoginPage.module.css';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
 
 const Login = (props) => {
     const activeLinks = false;
+
+    const user = {
+        email: "a00123456@tec.mx",
+        password: "0000",
+        role: "student"
+    }
+
     return(
-        <div>
+        <div >
             <Navbar showLinks={activeLinks} />
-            <h2>Ingresa a tu cuenta</h2>
-            <LoginForm />
+            <div className={Styles.login}>
+                <div className={Styles.heading}>
+                    <FontAwesomeIcon icon={faUser} size="xl" />
+                    <h2>Ingresa a tu cuenta</h2>
+                </div>
+                <LoginForm />
+            </div>
         </div>
     );
 }
