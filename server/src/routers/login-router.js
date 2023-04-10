@@ -10,7 +10,7 @@ import { z } from "zod";
 
 const loginRouter = express.Router();
 
-loginRouter.get("/login", async (req, res) => {
+loginRouter.post("/login", async (req, res) => {
   try {
     const { email, password } = z
       .object({ email: z.string(), password: z.string() })
