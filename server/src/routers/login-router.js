@@ -6,18 +6,16 @@
 
 import express from "express";
 import { pool } from "../db/connection.js";
+import { z } from "zod";
 
 const loginRouter = express.Router();
 
 loginRouter.get("/login", async (req, res) => {
-  const { email, password } = req.body;
-
-  if (!email || !password) {
-    res.status(400).send("Missing required body field");
-    return;
-  }
-
   try {
+    const { email, password } = z
+      .object({ email: z.string(), password: z.string() })
+      .parse(req.body);
+
     const [students] = await pool.query(
       "SELECT id, fullName FROM Student WHERE email = ? AND pass = ?",
       [email, password]
@@ -53,8 +51,7 @@ loginRouter.get("/login", async (req, res) => {
 
     res.status(404).send("User not found. Email or password are incorrect.");
   } catch (error) {
-    console.error(error);
-    res.status(500).send("Unknown error");
+    res.status(400).send(error);
   }
 });
 

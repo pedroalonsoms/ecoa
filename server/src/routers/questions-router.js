@@ -3,47 +3,39 @@
 // pedro
 
 // TODO: add question order (ASC-only)
-// TODO: add question on-delete cascade option
 // TODO: add filtering on `/questions` endpoint, simplify into a single re-usable function
 
 import express from "express";
 import { pool } from "../db/connection.js";
+import { z } from "zod";
 
-const QUESTION_SECTION = ["TEACHER", "COURSE"];
+const SECTION_KIND = ["TEACHER", "COURSE"];
 const ANSWER_KIND = ["NUMERIC", "TEXT"];
 
 const questionsRouter = express.Router();
 
 questionsRouter.get("/questions", async (req, res) => {
   try {
-    const [questions] = await pool.query("SELECT * from Question");
+    const [questions] = await pool.query(
+      "SELECT * FROM Question ORDER BY title ASC"
+    );
 
     res.status(200).send(questions);
   } catch (error) {
-    console.error(error);
-    res.status(500).send("Unknown error");
+    res.status(400).send(error);
   }
 });
 
 questionsRouter.post("/questions", async (req, res) => {
-  const { title, section, answerKind } = req.body;
-
-  if (!title || !section || !answerKind) {
-    res.status(400).send("Missing required body field");
-    return;
-  }
-
-  if (!QUESTION_SECTION.includes(section)) {
-    res.status(400).send("Invalid section");
-    return;
-  }
-
-  if (!ANSWER_KIND.includes(answerKind)) {
-    res.status(400).send("Invalid answer kind");
-    return;
-  }
-
   try {
+    const { title, section, answerKind } = z
+      .object({
+        title: z.string(),
+        section: z.enum(SECTION_KIND),
+        answerKind: z.enum(ANSWER_KIND),
+      })
+      .parse(req.body);
+
     await pool.query("INSERT INTO Question VALUES (NULL, ?, ?, ?)", [
       title,
       section,
@@ -52,64 +44,46 @@ questionsRouter.post("/questions", async (req, res) => {
 
     res.sendStatus(200);
   } catch (error) {
-    console.error(error);
-    res.status(500).send("Unknown error");
+    res.status(400).send(error);
   }
 });
 
 questionsRouter.put("/questions/:id", async (req, res) => {
-  const { id } = req.params;
-
-  if (!id) {
-    res.status(400).send("Missing required path field");
-    return;
-  }
-
-  const { title, section, answerKind } = req.body;
-
-  if (!title || !section || !answerKind) {
-    res.status(400).send("Missing required body field");
-    return;
-  }
-
-  if (!QUESTION_SECTION.includes(section)) {
-    res.status(400).send("Invalid section");
-    return;
-  }
-
-  if (!ANSWER_KIND.includes(answerKind)) {
-    res.status(400).send("Invalid answer kind");
-    return;
-  }
-
   try {
+    const { id } = z
+      .object({ id: z.string().transform((id) => parseInt(id)) })
+      .parse(req.params);
+
+    const { title, section, answerKind } = z
+      .object({
+        title: z.string(),
+        section: z.enum(SECTION_KIND),
+        answerKind: z.enum(ANSWER_KIND),
+      })
+      .parse(req.body);
+
     await pool.query(
       "UPDATE Question SET title = ?, section = ?, answerKind = ? WHERE id = ?",
-      [title, section, answerKind, parseInt(id)]
+      [title, section, answerKind, id]
     );
 
     res.sendStatus(200);
   } catch (error) {
-    console.error(error);
-    res.status(500).send("Unknown error");
+    res.status(400).send(error);
   }
 });
 
 questionsRouter.delete("/questions/:id", async (req, res) => {
-  const { id } = req.params;
-
-  if (!id) {
-    res.status(400).send("Missing required path field");
-    return;
-  }
-
   try {
-    await pool.query("DELETE FROM Question WHERE id = ?", [parseInt(id)]);
+    const { id } = z
+      .object({ id: z.string().transform((id) => parseInt(id)) })
+      .parse(req.params);
+
+    await pool.query("DELETE FROM Question WHERE id = ?", [id]);
 
     res.sendStatus(200);
   } catch (error) {
-    console.error(error);
-    res.status(500).send("Unknown error");
+    res.status(400).send(error);
   }
 });
 
