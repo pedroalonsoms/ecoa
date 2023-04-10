@@ -9,8 +9,7 @@ import { pool } from "../db/connection.js";
 
 const loginRouter = express.Router();
 
-loginRouter.post("/login", async (req, res) => {
-  // res.json("Login route");
+loginRouter.get("/login", async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
