@@ -65,7 +65,7 @@ CREATE TABLE Classroom (
     courseId INT NOT NULL,
 
     PRIMARY KEY (id),
-    FOREIGN KEY (courseId) REFERENCES Course (id)
+    FOREIGN KEY (courseId) REFERENCES Course (id) ON DELETE CASCADE
 );
 
 CREATE TABLE Enrolled (
@@ -73,8 +73,8 @@ CREATE TABLE Enrolled (
     studentId INT NOT NULL,
 
     PRIMARY KEY (studentId, classroomId),
-    FOREIGN KEY (studentId) REFERENCES Student (id),
-    FOREIGN KEY (classroomId) REFERENCES Classroom (id)
+    FOREIGN KEY (studentId) REFERENCES Student (id) ON DELETE CASCADE,
+    FOREIGN KEY (classroomId) REFERENCES Classroom (id) ON DELETE CASCADE
 );
 
 CREATE TABLE Teaches (
@@ -82,8 +82,8 @@ CREATE TABLE Teaches (
     teacherId INT NOT NULL,
 
     PRIMARY KEY (teacherId, classroomId),
-    FOREIGN KEY (teacherId) REFERENCES Teacher (id),
-    FOREIGN KEY (classroomId) REFERENCES Classroom (id)
+    FOREIGN KEY (teacherId) REFERENCES Teacher (id) ON DELETE CASCADE,
+    FOREIGN KEY (classroomId) REFERENCES Classroom (id) ON DELETE CASCADE
 );
 
 CREATE TABLE Question (
@@ -101,8 +101,8 @@ CREATE TABLE TeacherNumericAnswer (
     score INT NOT NULL,
 
     PRIMARY KEY (teacherId, questionId),
-    FOREIGN KEY (teacherId) REFERENCES Teacher (id),
-    FOREIGN KEY (questionId) REFERENCES Question (id)
+    FOREIGN KEY (teacherId) REFERENCES Teacher (id) ON DELETE CASCADE,
+    FOREIGN KEY (questionId) REFERENCES Question (id) ON DELETE CASCADE
 );
 
 CREATE TABLE TeacherTextAnswer (
@@ -111,8 +111,8 @@ CREATE TABLE TeacherTextAnswer (
     comment VARCHAR(1024) NOT NULL,
 
     PRIMARY KEY (teacherId, questionId),
-    FOREIGN KEY (teacherId) REFERENCES Teacher (id),
-    FOREIGN KEY (questionId) REFERENCES Question (id)
+    FOREIGN KEY (teacherId) REFERENCES Teacher (id) ON DELETE CASCADE,
+    FOREIGN KEY (questionId) REFERENCES Question (id) ON DELETE CASCADE
 );
 
 CREATE TABLE CourseNumericAnswer (
@@ -121,8 +121,8 @@ CREATE TABLE CourseNumericAnswer (
     score INT NOT NULL,
 
     PRIMARY KEY (courseId, questionId),
-    FOREIGN KEY (courseId) REFERENCES Course (id),
-    FOREIGN KEY (questionId) REFERENCES Question (id)
+    FOREIGN KEY (courseId) REFERENCES Course (id) ON DELETE CASCADE,
+    FOREIGN KEY (questionId) REFERENCES Question (id) ON DELETE CASCADE
 );
 
 CREATE TABLE CourseTextAnswer (
@@ -131,8 +131,8 @@ CREATE TABLE CourseTextAnswer (
     comment VARCHAR(1024),
 
     PRIMARY KEY (courseId, questionId),
-    FOREIGN KEY (courseId) REFERENCES Course (id),
-    FOREIGN KEY (questionId) REFERENCES Question (id)
+    FOREIGN KEY (courseId) REFERENCES Course (id) ON DELETE CASCADE,
+    FOREIGN KEY (questionId) REFERENCES Question (id) ON DELETE CASCADE
 );
 
 CREATE TABLE TmpTeacherNumericAnswer (
@@ -142,9 +142,9 @@ CREATE TABLE TmpTeacherNumericAnswer (
     score INT NOT NULL,
     
     PRIMARY KEY (studentId, teacherId, questionId),
-    FOREIGN KEY (studentId) REFERENCES Student (id),
-    FOREIGN KEY (teacherId) REFERENCES Teacher (id),
-    FOREIGN KEY (questionId) REFERENCES Question (id)
+    FOREIGN KEY (studentId) REFERENCES Student (id) ON DELETE CASCADE,
+    FOREIGN KEY (teacherId) REFERENCES Teacher (id) ON DELETE CASCADE,
+    FOREIGN KEY (questionId) REFERENCES Question (id) ON DELETE CASCADE
 );
 
 CREATE TABLE TmpTeacherTextAnswer (
@@ -154,9 +154,9 @@ CREATE TABLE TmpTeacherTextAnswer (
     comment VARCHAR(1024) NOT NULL,
     
     PRIMARY KEY (studentId, teacherId, questionId),
-    FOREIGN KEY (studentId) REFERENCES Student (id),
-    FOREIGN KEY (teacherId) REFERENCES Teacher (id),
-    FOREIGN KEY (questionId) REFERENCES Question (id)
+    FOREIGN KEY (studentId) REFERENCES Student (id) ON DELETE CASCADE,
+    FOREIGN KEY (teacherId) REFERENCES Teacher (id) ON DELETE CASCADE,
+    FOREIGN KEY (questionId) REFERENCES Question (id) ON DELETE CASCADE
 );
 
 CREATE TABLE TmpCourseNumericAnswer (
@@ -166,9 +166,9 @@ CREATE TABLE TmpCourseNumericAnswer (
     score INT NOT NULL,
     
     PRIMARY KEY (studentId, courseId, questionId),
-    FOREIGN KEY (studentId) REFERENCES Student (id),
-    FOREIGN KEY (courseId) REFERENCES Course (id),
-    FOREIGN KEY (questionId) REFERENCES Question (id)
+    FOREIGN KEY (studentId) REFERENCES Student (id) ON DELETE CASCADE,
+    FOREIGN KEY (courseId) REFERENCES Course (id) ON DELETE CASCADE,
+    FOREIGN KEY (questionId) REFERENCES Question (id) ON DELETE CASCADE
 );
 
 CREATE TABLE TmpCourseTextAnswer (
@@ -178,9 +178,9 @@ CREATE TABLE TmpCourseTextAnswer (
     comment VARCHAR(1024),
     
     PRIMARY KEY (studentId, courseId, questionId),
-    FOREIGN KEY (studentId) REFERENCES Student (id),
-    FOREIGN KEY (courseId) REFERENCES Course (id),
-    FOREIGN KEY (questionId) REFERENCES Question (id)
+    FOREIGN KEY (studentId) REFERENCES Student (id) ON DELETE CASCADE,
+    FOREIGN KEY (courseId) REFERENCES Course (id) ON DELETE CASCADE,
+    FOREIGN KEY (questionId) REFERENCES Question (id) ON DELETE CASCADE
 );
 
 CREATE TABLE Survey (
@@ -196,8 +196,8 @@ CREATE TABLE SurveyQuestion (
     questionId INT NOT NULL,
 
     PRIMARY KEY (surveyId, questionId),
-    FOREIGN KEY (surveyId) REFERENCES Survey (id),
-    FOREIGN KEY (questionId) REFERENCES Question (id)
+    FOREIGN KEY (surveyId) REFERENCES Survey (id) ON DELETE CASCADE,
+    FOREIGN KEY (questionId) REFERENCES Question (id) ON DELETE CASCADE
 );
 
 INSERT INTO Student VALUES (NULL, 'A01741437@tec.mx', 'pedro', 'A01741437', 'Pedro Alonso Moreno Salcedo', 'MTY');
