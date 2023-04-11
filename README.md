@@ -12,6 +12,7 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - Temp answers
 - Dummy data for demo purposes
 - Add CORS protection
+- Filter for survey questions
 
 # References & Credits
 

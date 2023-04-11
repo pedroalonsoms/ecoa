@@ -46,20 +46,19 @@ POST, GET /answers/questions/31
 	section: "MATERIA"
 }
 
-POST, GET /comment/questions/31
+POST, GET /comments/questions/31
 {
 	studentId: 8,
 	toId: 9,
 	section: "MATERIA"
 }
 
-POST /finsish
+POST /finish
 
 Enrolled
 pedro|101
 kerim|101
 daniel|202
-
 
 Classroom
 101 | F1006B
@@ -76,8 +75,3 @@ kerim|101| 101 | F1006B| F1006B | IoT
 daniel|202| 202 | F1007B| F1007B | Const de sw
 
 Iot | Const de SW
-
-// TODO: dummy data
-// TODO: filter for survey questions
-
-
