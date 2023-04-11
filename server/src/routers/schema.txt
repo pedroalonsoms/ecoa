@@ -1,0 +1,81 @@
+/progress/student/18
+
+{
+	"Materias": {
+		completed: false,
+		progress: [
+			"const de software": 14/16,
+			"implementacion de metodos": 13/16,
+			"iot": 0/16
+		]
+	}
+	"Profesores": {
+		completed: true,
+		progress: [
+			"carmen leticia": 14/16,
+			"rafa davalos": 16/16
+		]
+	}
+}
+
+
+only one fetch
+/surveys/published -> 20
+
+/surveys/20?section="MATERIA"?isActive="true"
+
+{
+	[
+		{title: "Los temas y actividades me permitieron desarrollarme y aprender", 
+		kind: "NUMERIC"},
+		{title: "Los temas y actividades me permitieron desarrollarme y aprender", 
+		kind: "NUMERIC"},
+		{title: "Los temas y actividades me permitieron desarrollarme y aprender", 
+		kind: "NUMERIC"}
+	],
+
+}
+
+isTemporary boolean add to db?
+
+
+POST, GET /answers/questions/31
+{
+	studentId: 8,
+	toId: 9,
+	section: "MATERIA"
+}
+
+POST, GET /comment/questions/31
+{
+	studentId: 8,
+	toId: 9,
+	section: "MATERIA"
+}
+
+Enrolled
+pedro|101
+kerim|101
+daniel|202
+
+
+Classroom
+101 | F1006B
+202 | F1007B
+
+
+Course
+F1006B | IoT
+F1007B | Const de sw
+
+
+pedro|101| 101 | F1006B| F1006B | IoT
+kerim|101| 101 | F1006B| F1006B | IoT
+daniel|202| 202 | F1007B| F1007B | Const de sw
+
+Iot | Const de SW
+
+// TODO: dummy data
+// TODO: filter for survey questions
+
+
