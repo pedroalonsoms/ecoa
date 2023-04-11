@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar";
-import LoginForm from "./LoginForm";
+import LoginForm from "../components/LoginForm";
 import Styles from './LoginPage.module.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

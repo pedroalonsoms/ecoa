@@ -5,8 +5,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import ProfessorPage from "./pages/ProfessorPage";
 import StudentPage from "./pages/StudentPage";
-import CollaboratorSurveys from "./pages/CollaboratorSurveys";
-import CollaboratorQuestions from "./pages/CollaboratorQuestions";
+import CollaboratorSurveysPage from "./pages/CollaboratorSurveysPage";
+import CollaboratorQuestionsPage from "./pages/CollaboratorQuestionsPage";
 
 // const router = createBrowserRouter([
 //     {
@@ -27,11 +27,11 @@ import CollaboratorQuestions from "./pages/CollaboratorQuestions";
 //     },
 //     {
 //         path: "/collaborator/surveys",
-//         element: <CollaboratorSurveys />,
+//         element: <CollaboratorSurveysPage />,
 //     },
 //     {
 //         path: "/collaborator/questions",
-//         element: <CollaboratorQuestions />,
+//         element: <CollaboratorQuestionsPage />,
 //     },
 // ]);
 
@@ -45,11 +45,11 @@ const App = () => {
                 <Route path="/professor" element={<ProfessorPage />} />
                 <Route
                     path="/collaborator/surveys"
-                    element={<CollaboratorSurveys />}
+                    element={<CollaboratorSurveysPage />}
                 />
                 <Route
                     path="/collaborator/questions"
-                    element={<CollaboratorQuestions />}
+                    element={<CollaboratorQuestionsPage />}
                 />
             </Routes>
         </BrowserRouter>
