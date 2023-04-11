@@ -2,7 +2,6 @@
 
 // pedro
 
-// TODO: filter questions by kind
 // TODO: add constraint where only one survey can be active at a given time
 // TODO: add transactions ?
 // TODO: consistent id naming
@@ -138,6 +137,8 @@ surveysRouter.put("/surveys/:surveyId", async (req, res) => {
     res.status(400).send({ error: error.message || "Unknown error" });
   }
 });
+
+// TODO: add `published` instead of `:surveyId` dynamic-url path to generalize for the current survey
 
 surveysRouter.get("/surveys/:surveyId", async (req, res) => {
   try {
