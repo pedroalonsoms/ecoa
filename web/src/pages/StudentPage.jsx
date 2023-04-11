@@ -6,12 +6,12 @@ import { useLocation } from "react-router-dom";
 const StudentPage = () => {
   const activeLinks = false;
   const location = useLocation();
-  const data = location.state;
-  console.log(data);
+//   console.log(location);
+
   return (
     <div>
       <Navbar showLinks={activeLinks} />
-      <h2>Bienvenido a la ECOA {data}</h2>
+      <h2>Bienvenido a la ECOA {location.state.data.fullName}</h2>
       <iframe className={Styles.videojuego} src="/game"></iframe>
     </div>
   );

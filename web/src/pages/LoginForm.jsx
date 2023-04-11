@@ -2,12 +2,11 @@ import Styles from "./LoginForm.module.css";
 
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate, createSearchParams } from "react-router-dom";	
+import { useNavigate } from "react-router-dom";	
 
 const LoginForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [loginStatus, setLoginStatus] = useState("");
     const [error, setError] = useState("");
 
     const navigate = useNavigate();
@@ -19,21 +18,23 @@ const LoginForm = () => {
                 email: email,
                 password: password,
             });
-            console.log(res);
+            // console.log(res);
+
             const data = {
                 id: res.data.id,
                 fullName: res.data.fullName,
                 role: res.data.role
             };
+
             switch (data.role) {
                 case "STUDENT":
-                    navigate("/student");
+                    navigate("/student", { state: {data} });
                     break;
                 case "TEACHER":
-                    navigate("/professor");
+                    navigate("/professor", { state: {data} });
                     break;
                 case "COLABORATOR":
-                    navigate("/collaborator/surveys");
+                    navigate("/collaborator/surveys", { state: {data} });
                     break;
                 default:
                     break;

@@ -5,12 +5,16 @@ import Navbar from "../components/Navbar";
 // import ProfessorQuestions from './ProfessorQuestions';
 // import ProfessorComments from './ProfessorComments';
 
+import { useLocation } from "react-router-dom";
+
 const ProfessorPage = () => {
     const activeLinks = false;
+    const location = useLocation();
+
     return (
         <div>
             <Navbar showLinks={activeLinks} />
-            <h2>Bienvenido profesor</h2>
+            <h2>Bienvenido a la ECOA {location.state.data.fullName}</h2>
             {/* <ProfessorInfo />
             <ProfessorQuestions />
             <ProfessorComments /> */}
