@@ -8,9 +8,7 @@
 import express from "express";
 import { pool } from "../db/connection.js";
 import { z } from "zod";
-
-const SECTION_KIND = ["TEACHER", "COURSE"];
-const ANSWER_KIND = ["NUMERIC", "TEXT"];
+import { ANSWER_KIND, SECTION_KIND } from "../utils/constants.js";
 
 const questionsRouter = express.Router();
 
@@ -22,7 +20,7 @@ questionsRouter.get("/questions", async (req, res) => {
 
     res.status(200).send(questions);
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send({ error: error.message || "Unknown error" });
   }
 });
 
@@ -44,7 +42,7 @@ questionsRouter.post("/questions", async (req, res) => {
 
     res.sendStatus(200);
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send({ error: error.message || "Unknown error" });
   }
 });
 
@@ -69,7 +67,7 @@ questionsRouter.put("/questions/:id", async (req, res) => {
 
     res.sendStatus(200);
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send({ error: error.message || "Unknown error" });
   }
 });
 
@@ -83,7 +81,7 @@ questionsRouter.delete("/questions/:id", async (req, res) => {
 
     res.sendStatus(200);
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send({ error: error.message || "Unknown error" });
   }
 });
 

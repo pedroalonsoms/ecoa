@@ -10,6 +10,7 @@
 import express from "express";
 import { pool } from "../db/connection.js";
 import { z } from "zod";
+import { ANSWER_KIND, SECTION_KIND } from "../utils/constants.js";
 
 const surveysRouter = express.Router();
 
@@ -27,7 +28,7 @@ surveysRouter.get("/surveys/published", async (req, res) => {
 
     res.status(200).send({ survey });
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send({ error: error.message || "Unknown error" });
   }
 });
 
@@ -48,7 +49,7 @@ surveysRouter.post("/surveys/published", async (req, res) => {
 
     res.sendStatus(200);
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send({ error: error.message || "Unknown error" });
   }
 });
 
@@ -58,7 +59,7 @@ surveysRouter.get("/surveys", async (req, res) => {
 
     res.status(200).send(surveys);
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send({ error: error.message || "Unknown error" });
   }
 });
 
@@ -93,7 +94,7 @@ surveysRouter.post("/surveys", async (req, res) => {
 
     res.sendStatus(200);
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send({ error: error.message || "Unknown error" });
   }
 });
 
@@ -134,11 +135,10 @@ surveysRouter.put("/surveys/:surveyId", async (req, res) => {
 
     res.sendStatus(200);
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send({ error: error.message || "Unknown error" });
   }
 });
 
-//"questions/surveys/:surveyId?section='TEACHER'&isActive=true"
 surveysRouter.get("/surveys/:surveyId", async (req, res) => {
   try {
     const { surveyId } = z
@@ -156,14 +156,55 @@ surveysRouter.get("/surveys/:surveyId", async (req, res) => {
       .length(1)
       .parse(surveys);
 
-    const [questions] = await pool.query(
+    let [rawQuestions] = await pool.query(
       "SELECT Question.*, IF(surveyId IS NULL, FALSE, TRUE) AS isActive FROM Question LEFT JOIN SurveyQuestion ON Question.id = SurveyQuestion.questionId AND surveyId = ? ORDER BY Question.title ASC",
       [surveyId]
     );
 
+    let questions = z
+      .object({
+        id: z.number(),
+        title: z.string(),
+        section: z.enum(SECTION_KIND),
+        answerKind: z.enum(ANSWER_KIND),
+        isActive: z.number().transform((n) => Boolean(n)),
+      })
+      .array()
+      .parse(rawQuestions);
+
+    const { section, isActive } = z
+      .object({
+        section: z.enum(SECTION_KIND).optional(),
+        isActive: z
+          .string()
+          .transform((s) => {
+            if (s.toLowerCase() === "true") {
+              return true;
+            }
+
+            if (s.toLowerCase() === "false") {
+              return false;
+            }
+
+            throw new Error(`invalid string: ${s} on isActive`);
+          })
+          .optional(),
+      })
+      .parse(req.query);
+
+    if (section !== undefined) {
+      questions = questions.filter((question) => question.section === section);
+    }
+
+    if (isActive !== undefined) {
+      questions = questions.filter(
+        (question) => question.isActive === isActive
+      );
+    }
+
     res.status(200).send({ ...survey, questions });
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send({ error: error.message || "Unknown error" });
   }
 });
 
@@ -177,7 +218,7 @@ surveysRouter.delete("/surveys/:surveyId", async (req, res) => {
 
     res.sendStatus(200);
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send({ error: error.message || "Unknown error" });
   }
 });
 
