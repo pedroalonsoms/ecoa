@@ -211,6 +211,8 @@ INSERT INTO Course VALUES (NULL, 'Construcción de software y toma de decisiones
 
 INSERT INTO Classroom VALUES (NULL, 404, 112233, 1);
 
+INSERT INTO Enrolled VALUES (1,1), (1,2);
+
 INSERT INTO Question VALUES (NULL, 'El profesor(a) muestra dominio y experiencia en los temas de la Materia', 'TEACHER', 'NUMERIC');
 INSERT INTO Question VALUES (NULL, 'El profesor(a) me retó para dar lo mejor de mí(desarrollar nuevas habilidades, nuevos conceptos e ideas, pensar de manera diferente, etc.)', 'TEACHER', 'NUMERIC');
 INSERT INTO Question VALUES (NULL, '¿Qué le comentarías a un estudiante que quisiera inscribir la Materia con este(a) profesor(a)?', 'TEACHER', 'TEXT');
