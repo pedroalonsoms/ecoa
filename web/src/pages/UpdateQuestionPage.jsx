@@ -4,15 +4,15 @@ import axios from 'axios';
 import { useState } from 'react';
 
 const UpdateQuestionPage = (props) => {
-    const [question, setQuestion] = useState({
+    const [questionData, setQuestionData] = useState({
         title: "",
         section: "",
         answerKind: "",
     });
 
-    const handelChange = (e) => {
-        setQuestion({
-            ...question,
+    const handleChange = (e) => {
+        setQuestionData({
+            ...questionData,
             [e.target.name]: e.target.value,
         });
     };
@@ -30,7 +30,7 @@ const UpdateQuestionPage = (props) => {
         try {
             const res = await axios.put(
                 `http://localhost:8080/api/questions/${props.id}`,
-                question
+                questionData
             );
             console.log(res);
             props.hideUpdateQuestion();
@@ -40,7 +40,7 @@ const UpdateQuestionPage = (props) => {
         }
     };
 
-    console.log(question);
+    console.log(questionData);
     console.log(props.id);
     console.log(props.question);
     return (
@@ -51,7 +51,7 @@ const UpdateQuestionPage = (props) => {
                 <select
                     id="section"
                     name="section"
-                    onChange={handelChange}
+                    onChange={handleChange}
                     defaultValue={"DEFAULT"}
                 >
                     <option value="DEFAULT" defaultValue disabled>
@@ -64,7 +64,7 @@ const UpdateQuestionPage = (props) => {
                 <select
                     id="answerKind"
                     name="answerKind"
-                    onChange={handelChange}
+                    onChange={handleChange}
                     defaultValue={"DEFAULT"}
                 >
                     <option value="DEFAULT" disabled>
@@ -79,7 +79,7 @@ const UpdateQuestionPage = (props) => {
                     id="title"
                     name="title"
                     placeholder="Escribe la pregunta aquí"
-                    onChange={handelChange}
+                    onChange={handleChange}
                     defaultValue={props.question.title}
                 />
                 <button type="submit" onClick={cancelButton}>

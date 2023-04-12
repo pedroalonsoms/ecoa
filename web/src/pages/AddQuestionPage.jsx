@@ -10,7 +10,7 @@ const AddQuestionPage = (props) => {
         answerKind: "",
     });
 
-    const handelChange = (e) => {
+    const handleChange = (e) => {
         setQuestionData({
             ...questionData,
             [e.target.name]: e.target.value,
@@ -49,7 +49,7 @@ const AddQuestionPage = (props) => {
                 <select
                     id="section"
                     name="section"
-                    onChange={handelChange}
+                    onChange={handleChange}
                     defaultValue={"DEFAULT"}
                 >
                     <option value="DEFAULT" defaultValue disabled>
@@ -62,7 +62,7 @@ const AddQuestionPage = (props) => {
                 <select
                     id="answerKind"
                     name="answerKind"
-                    onChange={handelChange}
+                    onChange={handleChange}
                     defaultValue={"DEFAULT"}
                 >
                     <option value="DEFAULT" disabled>
@@ -77,7 +77,7 @@ const AddQuestionPage = (props) => {
                     id="title"
                     name="title"
                     placeholder="Escribe la pregunta aquí"
-                    onChange={handelChange}
+                    onChange={handleChange}
                 />
                 <button type="submit" onClick={cancelButton}>
                     Cancelar
