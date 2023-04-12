@@ -42,6 +42,7 @@ const CollaboratorQuestions = () => {
 
     const handleClick = () => {
         setShowAddQuestion(!showAddQuestion);
+        document.body.classList.add('stopScroll');
     };
 
     const handleEdit = (id) => {
@@ -53,6 +54,7 @@ const CollaboratorQuestions = () => {
             updateId: id,
         });
         console.log(showUpdateQuestion);
+        document.body.classList.add('stopScroll');
     };
 
     return (
