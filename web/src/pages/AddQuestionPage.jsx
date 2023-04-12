@@ -49,7 +49,7 @@ const AddQuestionPage = (props) => {
             <div className={Styles.wrapper}>
                 <div className={Styles.content}>
                     <h2>Crear Pregunta</h2>
-                    <form>
+                    <form className={Styles.form}>
                         <label htmlFor="section">Sección</label>
                         <select
                             id="section"
@@ -84,12 +84,14 @@ const AddQuestionPage = (props) => {
                             placeholder="Escribe la pregunta aquí"
                             onChange={handleChange}
                         />
-                        <button type="submit" onClick={cancelButton}>
-                            Cancelar
-                        </button>
-                        <button type="submit" onClick={saveButton}>
-                            Guardar
-                        </button>
+                        <div className={Styles.buttons}>
+                            <button className={Styles.cancel} type="submit" onClick={cancelButton}>
+                                Cancelar
+                            </button>
+                            <button className={Styles.save} type="submit" onClick={saveButton}>
+                                Guardar
+                            </button>
+                        </div>
                         {/* {error && <p className={Styles.error}>{error}</p>} */}
                     </form>
                 </div>

@@ -9,9 +9,11 @@
     width: 80%;
 }
 
-/* .buttons {
-
-} */
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 
 .button {
     background-color: #ffffff; /* Green */

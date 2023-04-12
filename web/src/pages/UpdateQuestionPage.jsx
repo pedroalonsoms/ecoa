@@ -48,9 +48,9 @@ const UpdateQuestionPage = (props) => {
         <div className={Styles.overlay}>
             <div className={Styles.wrapper}>
                 <div className={Styles.content}>
-                <h2>Editar Pregunta con el id: {props.id}</h2>
-                <form>
-                <label htmlFor="section">Sección</label>
+                <h2>Editar Pregunta: {props.question.title}</h2>
+                <form className={Styles.form}>
+                    <label htmlFor="section">Sección</label>
                     <select
                         id="section"
                         name="section"
@@ -85,12 +85,14 @@ const UpdateQuestionPage = (props) => {
                         onChange={handleChange}
                         defaultValue={props.question.title}
                     />
-                    <button type="submit" onClick={cancelButton}>
-                        Cancelar
-                    </button>
-                    <button type="submit" onClick={saveButton}>
-                        Guardar
-                    </button>
+                    <div className={Styles.buttons}>
+                        <button className={Styles.cancel} type="submit" onClick={cancelButton}>
+                            Cancelar
+                        </button>
+                        <button className={Styles.save} type="submit" onClick={saveButton}>
+                            Guardar
+                        </button>
+                    </div>
                     {/* {error && <p className={Styles.error}>{error}</p>} */}
                 </form>
                 </div>
