@@ -6,7 +6,7 @@ import LoginPage from "./pages/LoginPage";
 import ProfessorPage from "./pages/ProfessorPage";
 import StudentPage from "./pages/StudentPage";
 import CollaboratorSurveysPage from "./pages/CollaboratorSurveysPage";
-import CollaboratorQuestionsPage from "./pages/CollaboratorQuestionsPage";
+import CollaboratorQuestionsPage from "./pages/CollaboratorQuestionPage";
 
 // const router = createBrowserRouter([
 //     {
