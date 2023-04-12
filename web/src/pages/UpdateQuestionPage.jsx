@@ -5,9 +5,9 @@ import { useState } from 'react';
 
 const UpdateQuestionPage = (props) => {
     const [questionData, setQuestionData] = useState({
-        title: "",
-        section: "",
-        answerKind: "",
+        title: props.question.title,
+        section: props.question.section,
+        answerKind: props.question.answerKind,
     });
 
     const handleChange = (e) => {
@@ -55,7 +55,7 @@ const UpdateQuestionPage = (props) => {
                         id="section"
                         name="section"
                         onChange={handleChange}
-                        defaultValue={"DEFAULT"}
+                        defaultValue={questionData.section="" ? "DEFAULT" : questionData.section}
                     >
                         <option value="DEFAULT" defaultValue disabled>
                             -- Escoge una sección para la pregunta --
@@ -68,7 +68,7 @@ const UpdateQuestionPage = (props) => {
                         id="answerKind"
                         name="answerKind"
                         onChange={handleChange}
-                        defaultValue={"DEFAULT"}
+                        defaultValue={questionData.answerKind="" ? "DEFAULT" : questionData.answerKind}
                     >
                         <option value="DEFAULT" disabled>
                             -- Ecoge el tipo de la pregunta --
@@ -83,7 +83,7 @@ const UpdateQuestionPage = (props) => {
                         name="title"
                         placeholder="Escribe la pregunta aquí"
                         onChange={handleChange}
-                        defaultValue={props.question.title}
+                        defaultValue={questionData.title}
                     />
                     <div className={Styles.buttons}>
                         <button className={Styles.cancel} type="submit" onClick={cancelButton}>
