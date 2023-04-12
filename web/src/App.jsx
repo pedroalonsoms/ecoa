@@ -36,25 +36,26 @@ import CollaboratorQuestionsPage from "./pages/CollaboratorQuestionPage";
 // ]);
 
 const App = () => {
-    return (
-        <BrowserRouter>
-            <Routes>
-                <Route index element={<LoginPage />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/student" element={<StudentPage />} />
-                <Route path="/professor" element={<ProfessorPage />} />
-                <Route
-                    path="/collaborator/surveys"
-                    element={<CollaboratorSurveysPage />}
-                />
-                <Route
-                    path="/collaborator/questions"
-                    element={<CollaboratorQuestionsPage />}
-                />
-            </Routes>
-        </BrowserRouter>
-        // <RouterProvider router={router} />
-    );
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<LoginPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/student" element={<StudentPage />} />
+        <Route path="/professor" element={<ProfessorPage />} />
+        <Route
+          path="/collaborator/surveys"
+          element={<CollaboratorSurveysPage />}
+        />
+        <Route
+          path="/collaborator/questions"
+          element={<CollaboratorQuestionsPage />}
+        />
+        <Route path="*" element={<LoginPage />} />
+      </Routes>
+    </BrowserRouter>
+    // <RouterProvider router={router} />
+  );
 };
 
 export default App;
