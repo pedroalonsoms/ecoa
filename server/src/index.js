@@ -11,7 +11,6 @@ import surveysRouter from "./routers/surveys-router.js";
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use("/", express.static("../web/dist"));
 app.use(
   "/game",
 
@@ -39,6 +38,10 @@ app.use(
 app.use("/api", loginRouter);
 app.use("/api", questionsRouter);
 app.use("/api", surveysRouter);
+app.use(express.static("../web/dist"));
+app.use("*", (req, res) => {
+  res.sendFile("index.html", { root: "../web/dist" });
+});
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
