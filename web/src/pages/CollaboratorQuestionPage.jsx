@@ -20,6 +20,9 @@ const CollaboratorQuestions = () => {
     const [showUpdateQuestion, setShowUpdateQuestion] = useState({
         state: false,
         updateId: null,
+        title: "",
+        section: "",
+        answerKind: "",
     });
 
     useEffect(() => {
@@ -63,8 +66,9 @@ const CollaboratorQuestions = () => {
 
             {showUpdateQuestion.state && (
                 <UpdateQuestionPage
-                    id={showUpdateQuestion.updateId}
                     hideUpdateQuestion={handleEdit}
+                    id={showUpdateQuestion.updateId}
+                    question={questions.find( answer => answer.id === showUpdateQuestion.updateId)}
                 />
             )}
 

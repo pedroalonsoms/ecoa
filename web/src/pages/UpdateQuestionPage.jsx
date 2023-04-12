@@ -42,11 +42,12 @@ const UpdateQuestionPage = (props) => {
 
     console.log(question);
     console.log(props.id);
+    console.log(props.question);
     return (
         <div className={Styles.questionPage}>
             <h2>Editar Pregunta con el id: {props.id}</h2>
             <form>
-                <label htmlFor="section">Sección</label>
+            <label htmlFor="section">Sección</label>
                 <select
                     id="section"
                     name="section"
@@ -79,6 +80,7 @@ const UpdateQuestionPage = (props) => {
                     name="title"
                     placeholder="Escribe la pregunta aquí"
                     onChange={handelChange}
+                    defaultValue={props.question.title}
                 />
                 <button type="submit" onClick={cancelButton}>
                     Cancelar
