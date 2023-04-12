@@ -1,49 +1,50 @@
-import Styles from "./AddQuestionPage.module.css";
+import Styles from './UpdateQuestionPage.module.css';
 
-import { useState } from "react";
-import axios from "axios";
+import axios from 'axios';
+import { useState } from 'react';
 
-const AddQuestionPage = (props) => {
-    const [questionData, setQuestionData] = useState({
+const UpdateQuestionPage = (props) => {
+    const [question, setQuestion] = useState({
         title: "",
         section: "",
         answerKind: "",
     });
 
     const handelChange = (e) => {
-        setQuestionData({
-            ...questionData,
+        setQuestion({
+            ...question,
             [e.target.name]: e.target.value,
         });
     };
 
-    console.log(questionData);
-
     const cancelButton = (e) => {
         e.preventDefault();
-        console.log("cancel add");
-        props.hideAddQuestion();
+        console.log("cancel update");
+        props.hideUpdateQuestion();
     };
 
     const saveButton = async (e) => {
         e.preventDefault();
-        console.log("save");
+        console.log("save update");
+        console.log(props.id);
         try {
-            const res = await axios.post(
-                "http://localhost:8080/api/questions",
-                questionData
+            const res = await axios.put(
+                `http://localhost:8080/api/questions/${props.id}`,
+                question
             );
             console.log(res);
-            props.hideAddQuestion();
+            props.hideUpdateQuestion();
             window.location.reload();
         } catch (err) {
             console.log(err);
         }
     };
 
+    console.log(question);
+    console.log(props.id);
     return (
         <div className={Styles.questionPage}>
-            <h2>Crear Pregunta</h2>
+            <h2>Editar Pregunta con el id: {props.id}</h2>
             <form>
                 <label htmlFor="section">Sección</label>
                 <select
@@ -91,4 +92,4 @@ const AddQuestionPage = (props) => {
     );
 };
 
-export default AddQuestionPage;
+export default UpdateQuestionPage;

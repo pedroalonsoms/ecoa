@@ -3,10 +3,11 @@ import Styles from "./CollaboratorQuestionPage.module.css";
 import Navbar from "../components/Navbar";
 import Question from "../components/Question";
 import AddQuestionPage from "./AddQuestionPage";
+import UpdateQuestionPage from "./UpdateQuestionPage";
 
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -16,6 +17,10 @@ const CollaboratorQuestions = () => {
 
     const [questions, setQuestions] = useState([]);
     const [showAddQuestion, setShowAddQuestion] = useState(false);
+    const [showUpdateQuestion, setShowUpdateQuestion] = useState({
+        state: false,
+        updateId: null,
+    });
 
     useEffect(() => {
         const fetchQuestions = async () => {
@@ -36,31 +41,58 @@ const CollaboratorQuestions = () => {
         setShowAddQuestion(!showAddQuestion);
     };
 
+    const handleEdit = (id) => {
+        console.log(id);
+        // console.log(data.UpdateId);
+        console.log(showUpdateQuestion);
+        setShowUpdateQuestion({
+            state: !showUpdateQuestion.state,
+            updateId: id,
+        });
+        console.log(showUpdateQuestion);
+    };
+
     return (
         <div>
             <Navbar showLinks={activeLinks} />
             <h2>Preguntas</h2>
 
-            {showAddQuestion && <AddQuestionPage hideAddQuestion={handleClick} />}
-            
+            {showAddQuestion && (
+                <AddQuestionPage hideAddQuestion={handleClick} />
+            )}
+
+            {showUpdateQuestion.state && (
+                <UpdateQuestionPage
+                    id={showUpdateQuestion.updateId}
+                    hideUpdateQuestion={handleEdit}
+                />
+            )}
+
             <h3>Profesor</h3>
             {questions.map(
                 (question) =>
                     question.section === "TEACHER" && (
-                        <Question key={question.id} title={question.title} />
+                        <Question
+                            key={question.id}
+                            title={question.title}
+                            data={question}
+                            handleEdit={handleEdit}
+                        />
                     )
             )}
             <h3>Materia</h3>
             {questions.map(
                 (question) =>
                     question.section === "COURSE" && (
-                        <Question key={question.id} title={question.title} />
+                        <Question
+                            key={question.id}
+                            title={question.title}
+                            data={question}
+                            handleEdit={handleEdit}
+                        />
                     )
             )}
-            <button
-                className={Styles.addButton}
-                onClick={handleClick}
-            >
+            <button className={Styles.addButton} onClick={handleClick}>
                 <FontAwesomeIcon icon={faPlus} size="2xl" />
             </button>
         </div>
