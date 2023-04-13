@@ -6,9 +6,11 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 
 # ToDo's
 
-- Periods
+- Funcionalidad de periodos: cuando se le asigna a un alumno la materia, siempre está inscrito. Lo que pasa es que hay un campo de "P1", "P2", "P3", "ST". Entonces, se hace por fechas y dependiendo de la fecha es P1, P2, P3, etcetera. En el dashboard podemos incluir un campo para modificar ya sea el periodo actual directamente con un dropdown, o bien la "fecha" en la que estamos.
+- Respuestas del 0 - 10 y el NULL value
+- Cambiar `colaborador` a `administrador`
 - Campuses
-- Prizes?
+- Prizes. Ruleta random?
 - How to implement tec_week?
 - Referencias?
 - Temp answers
