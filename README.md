@@ -8,12 +8,13 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 
 - Periods
 - Campuses
-- Prizes
+- Prizes?
+- How to implement tec_week?
+- Referencias?
 - Temp answers
 - Dummy data for demo purposes
 - Add CORS protection
 - Filter for survey questions
-- Fix client-side routing on express
 - `surveys/current` and `surveys/2`
 
 # References & Credits
