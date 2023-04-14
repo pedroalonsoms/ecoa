@@ -12,6 +12,7 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - Tabla de Prizes, ruleta random al final, endpoint `/prizes`
 - Escena de prize random al final del juego
 - Cambiar `colaborador` a `administrador`
+- Insertar los datos en la base de datos con el CSV
 - Campuses
 - Prizes. Ruleta random?
 - How to implement tec_week?
