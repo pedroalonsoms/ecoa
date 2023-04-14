@@ -14,7 +14,7 @@ DROP TABLE IF EXISTS Enrolled;
 DROP TABLE IF EXISTS Classroom;
 DROP TABLE IF EXISTS Course;
 DROP TABLE IF EXISTS Teacher;
-DROP TABLE IF EXISTS Colaborator;
+DROP TABLE IF EXISTS Administrator;
 DROP TABLE IF EXISTS Student;
 
 CREATE TABLE Student (
@@ -28,7 +28,7 @@ CREATE TABLE Student (
     PRIMARY KEY (id)
 );
 
-CREATE TABLE Colaborator (
+CREATE TABLE Administrator (
     id INT AUTO_INCREMENT,
     email VARCHAR(64) UNIQUE NOT NULL,
     pass VARCHAR(32) NOT NULL,
@@ -98,7 +98,7 @@ CREATE TABLE Question (
 CREATE TABLE TeacherNumericAnswer (
     teacherId INT NOT NULL,
     questionId INT NOT NULL,
-    score INT NOT NULL,
+    score INT,
 
     PRIMARY KEY (teacherId, questionId),
     FOREIGN KEY (teacherId) REFERENCES Teacher (id) ON DELETE CASCADE,
@@ -118,7 +118,7 @@ CREATE TABLE TeacherTextAnswer (
 CREATE TABLE CourseNumericAnswer (
     courseId INT NOT NULL,
     questionId INT NOT NULL,
-    score INT NOT NULL,
+    score INT,
 
     PRIMARY KEY (courseId, questionId),
     FOREIGN KEY (courseId) REFERENCES Course (id) ON DELETE CASCADE,
@@ -139,7 +139,7 @@ CREATE TABLE TmpTeacherNumericAnswer (
     studentId INT NOT NULL,
     teacherId INT NOT NULL,
     questionId INT NOT NULL,
-    score INT NOT NULL,
+    score INT,
     
     PRIMARY KEY (studentId, teacherId, questionId),
     FOREIGN KEY (studentId) REFERENCES Student (id) ON DELETE CASCADE,
@@ -163,7 +163,7 @@ CREATE TABLE TmpCourseNumericAnswer (
     studentId INT NOT NULL,
     courseId INT NOT NULL,
     questionId INT NOT NULL,
-    score INT NOT NULL,
+    score INT,
     
     PRIMARY KEY (studentId, courseId, questionId),
     FOREIGN KEY (studentId) REFERENCES Student (id) ON DELETE CASCADE,
@@ -203,7 +203,7 @@ CREATE TABLE SurveyQuestion (
 INSERT INTO Student VALUES (NULL, 'A01741437@tec.mx', 'pedro', 'A01741437', 'Pedro Alonso Moreno Salcedo', 'MTY');
 INSERT INTO Student VALUES (NULL, 'A00827581@tec.mx', 'kerim', 'A00827581', 'Kerim Taray Malagon', 'MTY');
 
-INSERT INTO Colaborator VALUES (NULL, 'rafadavalos@tec.mx', 'rafa', 'L00000001', 'Rafael Emilio Dávalos', 'MTY');
+INSERT INTO Administrator VALUES (NULL, 'rafadavalos@tec.mx', 'rafa', 'L00000001', 'Rafael Emilio Dávalos', 'MTY');
 
 INSERT INTO Teacher VALUES (NULL, 'csalazar@tec.mx', 'carmen', 'L00000002', 'Carmen Leticia Salazar Cano', 'MTY');
 

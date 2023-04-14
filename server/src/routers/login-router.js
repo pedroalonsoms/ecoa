@@ -38,14 +38,14 @@ loginRouter.post("/login", async (req, res) => {
       return;
     }
 
-    const [colaborators] = await pool.query(
-      "SELECT id, fullName FROM Colaborator WHERE email = ? AND pass = ?",
+    const [administrators] = await pool.query(
+      "SELECT id, fullName FROM Administrator WHERE email = ? AND pass = ?",
       [email, password]
     );
 
-    if (colaborators.length > 0) {
-      const user = colaborators[0];
-      res.status(200).send({ role: "COLABORATOR", ...user });
+    if (administrators.length > 0) {
+      const user = administrators[0];
+      res.status(200).send({ role: "ADMINISTRATOR", ...user });
       return;
     }
 
