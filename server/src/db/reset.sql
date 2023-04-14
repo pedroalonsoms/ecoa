@@ -200,6 +200,14 @@ CREATE TABLE SurveyQuestion (
     FOREIGN KEY (questionId) REFERENCES Question (id) ON DELETE CASCADE
 );
 
+CREATE TABLE Prizes (
+    id INT AUTO_INCREMENT,
+    kind VARCHAR(128) NOT NULL,
+    explanation VARCHAR(128) NOT NULL,
+
+    PRIMARY KEY (id)
+);
+
 INSERT INTO Student VALUES (NULL, 'A01741437@tec.mx', 'pedro', 'A01741437', 'Pedro Alonso Moreno Salcedo', 'MTY');
 INSERT INTO Student VALUES (NULL, 'A00827581@tec.mx', 'kerim', 'A00827581', 'Kerim Taray Malagon', 'MTY');
 
@@ -226,3 +234,8 @@ INSERT INTO Survey VALUES (NULL, "Mi tercera encuesta", TRUE);
 
 INSERT INTO SurveyQuestion VALUES (2, 1), (2, 2);
 INSERT INTO SurveyQuestion VALUES (3, 1), (3, 2), (3, 3), (3, 4), (3, 5);
+
+INSERT INTO Prizes VALUES (NULL, "CHILAQUILES", "Cupón de 15% en chilaquiles");
+INSERT INTO Prizes VALUES (NULL, "TEC_STORE", "Una gorra en TecStore");
+INSERT INTO Prizes VALUES (NULL, "CARLS_JR", "Una Western Bacon gratis");
+INSERT INTO Prizes VALUES (NULL, "SUBWAY", "Una subway del día gratis");
