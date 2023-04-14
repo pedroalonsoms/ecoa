@@ -23,7 +23,7 @@ CREATE TABLE Student (
     pass VARCHAR(32) NOT NULL,
     registration CHAR(9) UNIQUE NOT NULL,
     fullName VARCHAR(64) NOT NULL,
-    campus CHAR(3) NOT NULL,
+    campus VARCHAR(32) NOT NULL,
 
     PRIMARY KEY (id)
 );
@@ -34,7 +34,7 @@ CREATE TABLE Administrator (
     pass VARCHAR(32) NOT NULL,
     registration CHAR(9) UNIQUE NOT NULL,
     fullName VARCHAR(64) NOT NULL,
-    campus CHAR(3) NOT NULL,
+    campus VARCHAR(32) NOT NULL,
 
     PRIMARY KEY (id)
 );
@@ -45,7 +45,7 @@ CREATE TABLE Teacher (
     pass VARCHAR(32) NOT NULL,
     registration CHAR(9) UNIQUE NOT NULL,
     fullName VARCHAR(64) NOT NULL,
-    campus CHAR(3) NOT NULL,
+    campus VARCHAR(32) NOT NULL,
 
     PRIMARY KEY (id)
 );
@@ -208,9 +208,6 @@ CREATE TABLE Prizes (
     PRIMARY KEY (id)
 );
 
-INSERT INTO Student VALUES (NULL, 'A01741437@tec.mx', 'pedro', 'A01741437', 'Pedro Alonso Moreno Salcedo', 'MTY');
-INSERT INTO Student VALUES (NULL, 'A00827581@tec.mx', 'kerim', 'A00827581', 'Kerim Taray Malagon', 'MTY');
-
 INSERT INTO Administrator VALUES (NULL, 'rafadavalos@tec.mx', 'rafa', 'L00000001', 'Rafael Emilio Dávalos', 'MTY');
 
 INSERT INTO Teacher VALUES (NULL, 'csalazar@tec.mx', 'carmen', 'L00000002', 'Carmen Leticia Salazar Cano', 'MTY');
@@ -239,3 +236,6 @@ INSERT INTO Prizes VALUES (NULL, "CHILAQUILES", "Cupón de 15% en chilaquiles");
 INSERT INTO Prizes VALUES (NULL, "TEC_STORE", "Una gorra en TecStore");
 INSERT INTO Prizes VALUES (NULL, "CARLS_JR", "Una Western Bacon gratis");
 INSERT INTO Prizes VALUES (NULL, "SUBWAY", "Una subway del día gratis");
+
+-- WARNING: Change to your absolute path 
+source /Users/ben10pedrin/Documents/school/ecoa/server/src/db/seed-data/students.sql;
