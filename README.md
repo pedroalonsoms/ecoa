@@ -13,6 +13,7 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - Escena de prize random al final del juego
 - Cambiar `colaborador` a `administrador`
 - Insertar los datos en la base de datos con el CSV
+- Pasar los `Campuses` en la base de datos a otra tabla, puede haber varios campus en una misma ciudad: `MTY`
 - Campuses
 - Prizes. Ruleta random?
 - How to implement tec_week?
