@@ -6,27 +6,33 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/main.unity
     guid: ee5a60bdaac59483b895849f0dd112e3
   - enabled: 1
-    path: Assets/Scenes/template.unity
+    path: Assets/Scenes/comment.unity
     guid: 673b49fdd9e5340ea9031a563fd5d701
   - enabled: 1
     path: Assets/Scenes/menu.unity
     guid: a5331893121634e2aad4e4971505b2c0
-  - enabled: 1
-    path: Assets/Scenes/template2.unity
+  - enabled: 0
+    path: Assets/Scenes/materia.unity
     guid: 79c0a1c0aaa734276b546554fb6eeff2
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/template3.unity
-    guid: 7013f15d396a449c890ac5dafb326f2b
-  - enabled: 1
-    path: Assets/Scenes/template4.unity
+    path: Assets/Scenes/final.unity
     guid: f2894e23283c9489a85138fc16b6e118
   - enabled: 1
-    path: Assets/Scenes/postmenu_materia.unity
+    path: Assets/Scenes/teacher_menu.unity
     guid: 3a90818f11f614d238e4a8c4d8457ab9
+  - enabled: 1
+    path: Assets/Scenes/subject_menu.unity
+    guid: ae6d9caec66784774a2a7e8f1fbbe52f
+  - enabled: 1
+    path: Assets/Scenes/scaled_question.unity
+    guid: e2cc5c9fafc5849a39b597adab5b8d4b
   m_configObjects: {}

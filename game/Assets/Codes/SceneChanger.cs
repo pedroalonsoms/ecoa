@@ -5,28 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
-    public void ChangerScenePre()
-    {
-        SceneManager.LoadScene("postmenu_materia");
-    }
+    public void toMain()
+    {   SceneManager.LoadScene("main");   } // Mueve a escena principal
 
-    public void ChangerScene1()
-    {
-        SceneManager.LoadScene("template");
-    }
+    public void toSubjectMenu()
+    {   SceneManager.LoadScene("subject_menu");   } // Mueve a escena de menú de materias
 
-    public void ChangerScene2()
-    {
-        SceneManager.LoadScene("template2");
-    }
+    public void toTeacherMenu()
+    {   SceneManager.LoadScene("teacher_menu");   } // Mueve a escena de menú de profesores
 
-    public void ChangerScene3()
-    {
-        SceneManager.LoadScene("template3");
-    }
+    public void toMenu()
+    {   SceneManager.LoadScene("menu");   } // Mueve a menú principal
 
-    public void ChangerScene4()
-    {
-        SceneManager.LoadScene("template4");
-    }
+    public void toScaledQuestion()
+    {   SceneManager.LoadScene("scaled_question");   } // Mueve a escena de pregunta cerrada con escala del 0 al 10
+
+    public void toComment()
+    {   SceneManager.LoadScene("comment");   } // Mueve a escena de pregunta abierta
+
+    public void toFinal()
+    {   SceneManager.LoadScene("final");   } // Mueve a escena principal
+
 }
