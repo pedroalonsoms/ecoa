@@ -3,10 +3,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import LoginPage from "./pages/LoginPage";
-import ProfessorPage from "./pages/ProfessorPage";
+import TeacherPage from "./pages/TeacherPage";
 import StudentPage from "./pages/StudentPage";
-import CollaboratorSurveysPage from "./pages/CollaboratorSurveysPage";
-import CollaboratorQuestionsPage from "./pages/CollaboratorQuestionPage";
+import AdministratorSurveysPage from "./pages/AdministratorSurveysPage";
+import AdministratorQuestionsPage from "./pages/AdministratorQuestionPage";
 
 // const router = createBrowserRouter([
 //     {
@@ -22,16 +22,16 @@ import CollaboratorQuestionsPage from "./pages/CollaboratorQuestionPage";
 //         element: <StudentPage />,
 //     },
 //     {
-//         path: "/professor",
-//         element: <ProfessorPage />,
+//         path: "/teacher",
+//         element: <TeacherPage />,
 //     },
 //     {
-//         path: "/collaborator/surveys",
-//         element: <CollaboratorSurveysPage />,
+//         path: "/administrator/surveys",
+//         element: <AdministratorSurveysPage />,
 //     },
 //     {
-//         path: "/collaborator/questions",
-//         element: <CollaboratorQuestionsPage />,
+//         path: "/administrator/questions",
+//         element: <AdministratorQuestionsPage />,
 //     },
 // ]);
 
@@ -42,14 +42,14 @@ const App = () => {
         <Route index element={<LoginPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/student" element={<StudentPage />} />
-        <Route path="/professor" element={<ProfessorPage />} />
+        <Route path="/teacher" element={<TeacherPage />} />
         <Route
-          path="/collaborator/surveys"
-          element={<CollaboratorSurveysPage />}
+          path="/administrator/surveys"
+          element={<AdministratorSurveysPage />}
         />
         <Route
-          path="/collaborator/questions"
-          element={<CollaboratorQuestionsPage />}
+          path="/administrator/questions"
+          element={<AdministratorQuestionsPage />}
         />
         <Route path="*" element={<LoginPage />} />
       </Routes>

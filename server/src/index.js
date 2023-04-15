@@ -6,6 +6,7 @@ import cors from "cors";
 import loginRouter from "./routers/login-router.js";
 import questionsRouter from "./routers/questions-router.js";
 import surveysRouter from "./routers/surveys-router.js";
+import prizesRouter from "./routers/prizes-router.js";
 
 // TODO: future cors implementation when needing cross-domain request
 const app = express();
@@ -38,6 +39,7 @@ app.use(
 app.use("/api", loginRouter);
 app.use("/api", questionsRouter);
 app.use("/api", surveysRouter);
+app.use("/api", prizesRouter);
 app.use(express.static("../web/dist"));
 app.use("*", (req, res) => {
   res.sendFile("index.html", { root: "../web/dist" });

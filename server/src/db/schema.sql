@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS Prizes;
 DROP TABLE IF EXISTS SurveyQuestion;
 DROP TABLE IF EXISTS Survey;
 DROP TABLE IF EXISTS TmpCourseTextAnswer;
@@ -14,7 +15,7 @@ DROP TABLE IF EXISTS Enrolled;
 DROP TABLE IF EXISTS Classroom;
 DROP TABLE IF EXISTS Course;
 DROP TABLE IF EXISTS Teacher;
-DROP TABLE IF EXISTS Colaborator;
+DROP TABLE IF EXISTS Administrator;
 DROP TABLE IF EXISTS Student;
 
 CREATE TABLE Student (
@@ -23,18 +24,18 @@ CREATE TABLE Student (
     pass VARCHAR(32) NOT NULL,
     registration CHAR(9) UNIQUE NOT NULL,
     fullName VARCHAR(64) NOT NULL,
-    campus CHAR(3) NOT NULL,
+    campus VARCHAR(32) NOT NULL,
 
     PRIMARY KEY (id)
 );
 
-CREATE TABLE Colaborator (
+CREATE TABLE Administrator (
     id INT AUTO_INCREMENT,
     email VARCHAR(64) UNIQUE NOT NULL,
     pass VARCHAR(32) NOT NULL,
     registration CHAR(9) UNIQUE NOT NULL,
     fullName VARCHAR(64) NOT NULL,
-    campus CHAR(3) NOT NULL,
+    campus VARCHAR(32) NOT NULL,
 
     PRIMARY KEY (id)
 );
@@ -45,7 +46,7 @@ CREATE TABLE Teacher (
     pass VARCHAR(32) NOT NULL,
     registration CHAR(9) UNIQUE NOT NULL,
     fullName VARCHAR(64) NOT NULL,
-    campus CHAR(3) NOT NULL,
+    campus VARCHAR(32) NOT NULL,
 
     PRIMARY KEY (id)
 );
@@ -98,7 +99,7 @@ CREATE TABLE Question (
 CREATE TABLE TeacherNumericAnswer (
     teacherId INT NOT NULL,
     questionId INT NOT NULL,
-    score INT NOT NULL,
+    score INT,
 
     PRIMARY KEY (teacherId, questionId),
     FOREIGN KEY (teacherId) REFERENCES Teacher (id) ON DELETE CASCADE,
@@ -118,7 +119,7 @@ CREATE TABLE TeacherTextAnswer (
 CREATE TABLE CourseNumericAnswer (
     courseId INT NOT NULL,
     questionId INT NOT NULL,
-    score INT NOT NULL,
+    score INT,
 
     PRIMARY KEY (courseId, questionId),
     FOREIGN KEY (courseId) REFERENCES Course (id) ON DELETE CASCADE,
@@ -139,7 +140,7 @@ CREATE TABLE TmpTeacherNumericAnswer (
     studentId INT NOT NULL,
     teacherId INT NOT NULL,
     questionId INT NOT NULL,
-    score INT NOT NULL,
+    score INT,
     
     PRIMARY KEY (studentId, teacherId, questionId),
     FOREIGN KEY (studentId) REFERENCES Student (id) ON DELETE CASCADE,
@@ -163,7 +164,7 @@ CREATE TABLE TmpCourseNumericAnswer (
     studentId INT NOT NULL,
     courseId INT NOT NULL,
     questionId INT NOT NULL,
-    score INT NOT NULL,
+    score INT,
     
     PRIMARY KEY (studentId, courseId, questionId),
     FOREIGN KEY (studentId) REFERENCES Student (id) ON DELETE CASCADE,
@@ -200,10 +201,15 @@ CREATE TABLE SurveyQuestion (
     FOREIGN KEY (questionId) REFERENCES Question (id) ON DELETE CASCADE
 );
 
-INSERT INTO Student VALUES (NULL, 'A01741437@tec.mx', 'pedro', 'A01741437', 'Pedro Alonso Moreno Salcedo', 'MTY');
-INSERT INTO Student VALUES (NULL, 'A00827581@tec.mx', 'kerim', 'A00827581', 'Kerim Taray Malagon', 'MTY');
+CREATE TABLE Prizes (
+    id INT AUTO_INCREMENT,
+    kind VARCHAR(128) NOT NULL,
+    explanation VARCHAR(128) NOT NULL,
 
-INSERT INTO Colaborator VALUES (NULL, 'rafadavalos@tec.mx', 'rafa', 'L00000001', 'Rafael Emilio Dávalos', 'MTY');
+    PRIMARY KEY (id)
+);
+
+INSERT INTO Administrator VALUES (NULL, 'rafadavalos@tec.mx', 'rafa', 'L00000001', 'Rafael Emilio Dávalos', 'MTY');
 
 INSERT INTO Teacher VALUES (NULL, 'csalazar@tec.mx', 'carmen', 'L00000002', 'Carmen Leticia Salazar Cano', 'MTY');
 
@@ -226,3 +232,8 @@ INSERT INTO Survey VALUES (NULL, "Mi tercera encuesta", TRUE);
 
 INSERT INTO SurveyQuestion VALUES (2, 1), (2, 2);
 INSERT INTO SurveyQuestion VALUES (3, 1), (3, 2), (3, 3), (3, 4), (3, 5);
+
+INSERT INTO Prizes VALUES (NULL, "CHILAQUILES", "Cupón de 15% en chilaquiles");
+INSERT INTO Prizes VALUES (NULL, "TEC_STORE", "Una gorra en TecStore");
+INSERT INTO Prizes VALUES (NULL, "CARLS_JR", "Una Western Bacon gratis");
+INSERT INTO Prizes VALUES (NULL, "SUBWAY", "Una subway del día gratis");
