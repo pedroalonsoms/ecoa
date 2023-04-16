@@ -74,8 +74,8 @@ CREATE TABLE Enrolled (
     studentId INT NOT NULL,
 
     PRIMARY KEY (studentId, classroomId),
-    FOREIGN KEY (studentId) REFERENCES Student (id) ON DELETE CASCADE,
-    FOREIGN KEY (classroomId) REFERENCES Classroom (id) ON DELETE CASCADE
+    FOREIGN KEY (classroomId) REFERENCES Classroom (id) ON DELETE CASCADE,
+    FOREIGN KEY (studentId) REFERENCES Student (id) ON DELETE CASCADE
 );
 
 CREATE TABLE Teaches (
@@ -83,8 +83,8 @@ CREATE TABLE Teaches (
     teacherId INT NOT NULL,
 
     PRIMARY KEY (teacherId, classroomId),
-    FOREIGN KEY (teacherId) REFERENCES Teacher (id) ON DELETE CASCADE,
-    FOREIGN KEY (classroomId) REFERENCES Classroom (id) ON DELETE CASCADE
+    FOREIGN KEY (classroomId) REFERENCES Classroom (id) ON DELETE CASCADE,
+    FOREIGN KEY (teacherId) REFERENCES Teacher (id) ON DELETE CASCADE
 );
 
 CREATE TABLE Question (
@@ -208,6 +208,10 @@ CREATE TABLE Prizes (
 
     PRIMARY KEY (id)
 );
+
+
+INSERT INTO Student VALUES (NULL, 'A01741437@tec.mx', 'pedro', 'A01741437', 'Pedro Alonso Moreno Salcedo', 'MTY');
+INSERT INTO Student VALUES (NULL, 'A00827581@tec.mx', 'kerim', 'A00827581', 'Kerim Taray Malagon', 'MTY');
 
 INSERT INTO Administrator VALUES (NULL, 'rafadavalos@tec.mx', 'rafa', 'L00000001', 'Rafael Emilio Dávalos', 'MTY');
 

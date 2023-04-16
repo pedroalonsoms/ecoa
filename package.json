@@ -8,6 +8,7 @@
     "web"
   ],
   "scripts": {
+    "db:reset": "npm run db:reset --workspace=server",
     "build": "npm run build --workspace=web",
     "start": "npm run start --workspace=server"
   },

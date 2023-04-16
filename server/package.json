@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "db:reset": "node src/db/reset.js",
     "start": "NODE_ENV=production node src/index.js",
     "dev": "nodemon src/index.js"
   },
