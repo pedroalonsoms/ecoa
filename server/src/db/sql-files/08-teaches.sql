@@ -1,0 +1,1 @@
+INSERT INTO Teaches VALUES (1, 1);

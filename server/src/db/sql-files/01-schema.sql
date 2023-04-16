@@ -53,7 +53,8 @@ CREATE TABLE Teacher (
 
 CREATE TABLE Course (
     id INT AUTO_INCREMENT,
-    title VARCHAR(64) NOT NULL,
+    code VARCHAR(16) NOT NULL,
+    title VARCHAR(128) NOT NULL,
     kind VARCHAR(32) NOT NULL,
 
     PRIMARY KEY (id)
@@ -61,8 +62,8 @@ CREATE TABLE Course (
 
 CREATE TABLE Classroom (
     id INT AUTO_INCREMENT,
-    code INT NOT NULL,
-    CRN INT NOT NULL,
+    crn INT NOT NULL,
+    campus VARCHAR(32) NOT NULL,
     courseId INT NOT NULL,
 
     PRIMARY KEY (id),
@@ -208,36 +209,3 @@ CREATE TABLE Prizes (
 
     PRIMARY KEY (id)
 );
-
-
-INSERT INTO Student VALUES (NULL, 'A01741437@tec.mx', 'pedro', 'A01741437', 'Pedro Alonso Moreno Salcedo', 'MTY');
-INSERT INTO Student VALUES (NULL, 'A00827581@tec.mx', 'kerim', 'A00827581', 'Kerim Taray Malagon', 'MTY');
-
-INSERT INTO Administrator VALUES (NULL, 'rafadavalos@tec.mx', 'rafa', 'L00000001', 'Rafael Emilio Dávalos', 'MTY');
-
-INSERT INTO Teacher VALUES (NULL, 'csalazar@tec.mx', 'carmen', 'L00000002', 'Carmen Leticia Salazar Cano', 'MTY');
-
-INSERT INTO Course VALUES (NULL, 'Construcción de software y toma de decisiones', 'BLOQUE');
-
-INSERT INTO Classroom VALUES (NULL, 404, 112233, 1);
-
-INSERT INTO Enrolled VALUES (1,1), (1,2);
-
-INSERT INTO Question VALUES (NULL, 'El profesor(a) muestra dominio y experiencia en los temas de la Materia', 'TEACHER', 'NUMERIC');
-INSERT INTO Question VALUES (NULL, 'El profesor(a) me retó para dar lo mejor de mí(desarrollar nuevas habilidades, nuevos conceptos e ideas, pensar de manera diferente, etc.)', 'TEACHER', 'NUMERIC');
-INSERT INTO Question VALUES (NULL, '¿Qué le comentarías a un estudiante que quisiera inscribir la Materia con este(a) profesor(a)?', 'TEACHER', 'TEXT');
-
-INSERT INTO Question VALUES (NULL, 'Los temas, las actividades y la situación-problema durante la Materia: (A) Me permitieron aprender y desarrollarme.', 'COURSE', 'NUMERIC');
-INSERT INTO Question VALUES (NULL, 'Los temas, las actividades y la situación-problema durante la Materia: (B) Son aplicables y de valor.', 'COURSE', 'NUMERIC');
-
-INSERT INTO Survey VALUES (NULL, "Mi primera encuesta", FALSE);
-INSERT INTO Survey VALUES (NULL, "Mi segunda encuesta", FALSE);
-INSERT INTO Survey VALUES (NULL, "Mi tercera encuesta", TRUE);
-
-INSERT INTO SurveyQuestion VALUES (2, 1), (2, 2);
-INSERT INTO SurveyQuestion VALUES (3, 1), (3, 2), (3, 3), (3, 4), (3, 5);
-
-INSERT INTO Prizes VALUES (NULL, "CHILAQUILES", "Cupón de 15% en chilaquiles");
-INSERT INTO Prizes VALUES (NULL, "TEC_STORE", "Una gorra en TecStore");
-INSERT INTO Prizes VALUES (NULL, "CARLS_JR", "Una Western Bacon gratis");
-INSERT INTO Prizes VALUES (NULL, "SUBWAY", "Una subway del día gratis");

@@ -1,4 +1,6 @@
 INSERT INTO Student VALUES
+(NULL,'A01741437@tec.mx','123','A01741437','Pedro Alonso Moreno Salcedo','Monterrey'),
+(NULL,'A00827581@tec.mx','123','A00827581','Kerim Taray Malagon','Monterrey'),
 (NULL,'A01620855@tec.mx','123','A01620855','Alumno 1','Aguascalientes'),
 (NULL,'A01620856@tec.mx','123','A01620856','Alumno 2','Aguascalientes'),
 (NULL,'A01620857@tec.mx','123','A01620857','Alumno 3','Aguascalientes'),
