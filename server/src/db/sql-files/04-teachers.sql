@@ -1,5 +1,8 @@
 INSERT INTO Teacher VALUES
 (NULL,'csalazar@tec.mx','123','L00000001','Carmen Leticia Salazar Cano','Monterrey'),
+(NULL,'e.ferrer@tec.mx','123','L00000002','Jose Eduardo Ferrer Cruz','Monterrey'),
+(NULL,'jperezrangel@tec.mx','123','L00000003','Juan Francisco Cecilio Pérez Rangel','Monterrey'),
+(NULL,'jsalazar@tec.mx','123','L00000004','Juan Francisco Salazar Ortiz','Monterrey'),
 (NULL,'L00621438@tec.mx','123','L00621438','Profesor 114','Aguascalientes'),
 (NULL,'L00621504@tec.mx','123','L00621504','Profesor 180','Aguascalientes'),
 (NULL,'L00621505@tec.mx','123','L00621505','Profesor 181','Aguascalientes'),
