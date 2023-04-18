@@ -12,7 +12,9 @@ const StudentPage = () => {
     <div>
       <Navbar showLinks={activeLinks} />
       <h2>Bienvenido a la ECOA {location.state.data.fullName}</h2>
-      <iframe className={Styles.videojuego} src="/game"></iframe>
+      <div className={Styles.container}>
+        <iframe className={Styles.game} src="/game"></iframe>
+      </div>
     </div>
   );
 };
