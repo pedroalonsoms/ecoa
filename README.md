@@ -6,7 +6,9 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 
 # ToDo's
 
+- Modificar el color del dashboard, que no sea todo negro
 - Funcionalidad de periodos: cuando se le asigna a un alumno la materia, siempre está inscrito. Lo que pasa es que hay un campo de "P1", "P2", "P3", "ST". Entonces, se hace por fechas y dependiendo de la fecha es P1, P2, P3, etcetera. En el dashboard podemos incluir un campo para modificar ya sea el periodo actual directamente con un dropdown, o bien la "fecha" en la que estamos.
+- Crear ruta de `/unpublish` para las surveys?
 - Respuestas del 0 - 10 y el NULL value, front y back. Add `zod` validation for this.
 - Sharp pixel-art on `Unity`, preguntar a Immanol.
 - Escena de prize random al final del juego
