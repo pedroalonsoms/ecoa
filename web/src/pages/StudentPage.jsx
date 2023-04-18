@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 const StudentPage = () => {
   const activeLinks = false;
   const location = useLocation();
-//   console.log(location);
+  console.log(location);
 
   return (
     <div>
