@@ -4,27 +4,41 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 
 ![](demo.jpeg)
 
-# ToDo's
+# ToDo's - Domingo
 
-- Modificar el color del dashboard, que no sea todo negro
-- Funcionalidad de periodos: cuando se le asigna a un alumno la materia, siempre está inscrito. Lo que pasa es que hay un campo de "P1", "P2", "P3", "ST". Entonces, se hace por fechas y dependiendo de la fecha es P1, P2, P3, etcetera. En el dashboard podemos incluir un campo para modificar ya sea el periodo actual directamente con un dropdown, o bien la "fecha" en la que estamos.
-- Crear ruta de `/unpublish` para las surveys?
-- Respuestas del 0 - 10 y el NULL value, front y back. Add `zod` validation for this.
-- Sharp pixel-art on `Unity`, preguntar a Immanol.
-- Escena de prize random al final del juego
-- Insertar los datos en la base de datos con el CSV
-- Pasar los `Campuses` en la base de datos a otra tabla, puede haber varios campus en una misma ciudad: `MTY`
-- Re-ordenar las preguntas en el dashboard? Mantener el orden inicial?
-- Podemos omitir columnas que no necesitamos en el `csv`?
-- Campuses
-- Prizes. Ruleta random?
-- How to implement tec_week?
-- Referencias?
-- Temp answers
-- Dummy data for demo purposes
-- Add CORS protection
-- Filter for survey questions
-- `surveys/current` and `surveys/2`
+## Videojuego
+
+- [ ] Animación Teus feliz/triste
+- [ ] Animación Espada ✅
+- [ ] Animación Premio Random
+- [ ] Fondos con PixelArt
+- [ ] Referencias de las imagenes
+- [ ] Hacer los fetch para las preguntas, profesores y materias
+- [ ] Hacer el fetch para el premio final
+- [ ] Sharp pixel-art on `Unity`, preguntar a Immanol.
+- [ ] Botón para hacer `skip` de la pregunta.
+- [ ] Implementar sprites del profe
+- [ ] Música de fondo
+- [ ] Sonido de click al botón
+- [ ] Arreglar el botón de `back`
+
+## Front
+
+- [ ] Color de UI similar al del videojuego
+- [ ] Terminar sección de Encuestas
+- [ ] Agregar botón y feature para seleccionar el periodo actual
+- [ ] Mejorar diseño de CSS
+
+## Backend
+
+- [ ] Agregar feature de seleccionar periodo actual
+- [ ] Endpoints faltantes de `answers`, `comments`, `finish`
+- [ ] Checar con la miss de base de datos que las tablas que llevamos estén bien (Miércoles 19)
+- [ ] Podemos omitir columnas que no necesitamos en el `csv`? (Miércoles 19)
+- [ ] Separar preguntas de materia y bloque? (Miércoles 19)
+- [ ] Respuestas del 0 - 10 y el NULL value. Agregar validación `zod`.
+- [ ] Implement `survey/unpublished` endpoint ?
+- [ ] Implement `survey/current` & `survey/2` endpoint ?
 
 # References & Credits
 
