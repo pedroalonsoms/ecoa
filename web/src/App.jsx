@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import TeacherPage from "./pages/TeacherPage";
 import StudentPage from "./pages/StudentPage";
-import AdministratorSurveysPage from "./pages/AdministratorSurveysPage";
+import AdministratorSurveysPage from "./pages/AdministratorSurveyPage";
 import AdministratorQuestionsPage from "./pages/AdministratorQuestionPage";
 
 // const router = createBrowserRouter([
