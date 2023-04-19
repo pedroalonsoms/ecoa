@@ -27,7 +27,6 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 
 - [ ] Color de UI similar al del videojuego
 - [ ] Terminar sección de Encuestas
-- [ ] Agregar botón y feature para seleccionar el periodo actual
 - [ ] Mejorar diseño de CSS
 - [ ] Re-diseñar front de encuesta activa, ahora será por medio de fechas
 
@@ -56,6 +55,9 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - [ ] Combinar 8 tablas de respuestas en 1
 - [ ] Re-diseñar encuesta activa, ahora será por medio de fechas
 - [ ] Re-diseñar las tablas de SQL
+- [ ] Encuesta activa por fecha, no por periodo
+- [ ] Que no te deje hacer dos encuestas activas al mismo tiempo
+- [ ] Poner en el CRN un campo de "activa" para que le mueva la miss
 
 # References & Credits
 
