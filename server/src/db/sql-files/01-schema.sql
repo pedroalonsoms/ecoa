@@ -15,6 +15,7 @@ DROP TABLE IF EXISTS Enrolled;
 DROP TABLE IF EXISTS Classroom;
 DROP TABLE IF EXISTS Course;
 DROP TABLE IF EXISTS Teacher;
+DROP TABLE IF EXISTS Colaborator;
 DROP TABLE IF EXISTS Administrator;
 DROP TABLE IF EXISTS Student;
 
@@ -25,6 +26,7 @@ CREATE TABLE Student (
     registration CHAR(9) UNIQUE NOT NULL,
     fullName VARCHAR(64) NOT NULL,
     campus VARCHAR(32) NOT NULL,
+    academicExerciseKey VARCHAR(64) NOT NULL
 
     PRIMARY KEY (id)
 );
