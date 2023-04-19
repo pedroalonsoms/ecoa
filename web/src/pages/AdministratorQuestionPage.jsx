@@ -72,30 +72,38 @@ const AdministratorQuestions = () => {
         />
       )}
 
-      <h3>Profesor</h3>
-      {questions.map(
-        (question) =>
-          question.section === "TEACHER" && (
-            <Question
-              key={question.id}
-              title={question.title}
-              data={question}
-              handleEdit={handleEdit}
-            />
-          )
-      )}
-      <h3>Materia</h3>
-      {questions.map(
-        (question) =>
-          question.section === "COURSE" && (
-            <Question
-              key={question.id}
-              title={question.title}
-              data={question}
-              handleEdit={handleEdit}
-            />
-          )
-      )}
+      <div className={Styles.container}>
+        <h3>Profesor</h3>
+        <div className={Styles.questions}>
+          {questions.map(
+            (question) =>
+              question.section === "TEACHER" && (
+                <Question
+                  key={question.id}
+                  title={question.title}
+                  data={question}
+                  handleEdit={handleEdit}
+                />
+              )
+          )}
+        </div>
+        <h3>Materia</h3>
+        <div className={Styles.questions}>
+          {questions.map(
+            (question) =>
+              question.section === "COURSE" && (
+                <Question
+                  key={question.id}
+                  title={question.title}
+                  data={question}
+                  handleEdit={handleEdit}
+                />
+              )
+          )}
+        </div>
+      </div>
+
+      
       <button className={Styles.addButton} onClick={handleClick}>
         <FontAwesomeIcon icon={faPlus} size="2xl" />
       </button>

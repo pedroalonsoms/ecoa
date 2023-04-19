@@ -1,13 +1,19 @@
 .links {
     display: flex;
-    gap: 20px;
+    gap: 30px;
+    list-style: none;
 }
 
 .link {
     color:#fff;
     text-decoration: none;
+    font-weight: 600;
+    font-size: 18px;
 }
 
 .link:hover {
-    color: #0033a0;
+    color: #e1e1e1;
+    transition: 0.2s;
+    padding: 2px;
+    border-bottom: 2px solid;
 }
