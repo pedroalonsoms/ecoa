@@ -24,14 +24,19 @@
 }
 
 .form button {
-    background-color: #000;
+    /* background-color: #000;
     color: #fff;
-    border: 2px solid #000;
+    border: 2px solid #000; */
     border-radius: 10px;
     padding: 10px;
     font-weight: 600;
     cursor: pointer;
     margin: 20px 0;
+
+    background: rgb(4,16,79);
+    background: linear-gradient(135deg, rgba(4,16,79,1) 0%, rgba(0,67,196,1) 35%, rgba(0,188,226,1) 100%);
+    color: #fff;
+    border: none;
 }
 
 .form button:hover {
