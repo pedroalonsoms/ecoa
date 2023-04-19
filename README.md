@@ -21,13 +21,14 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - [ ] Música de fondo
 - [ ] Sonido de click al botón
 - [ ] Arreglar el botón de `back`
+- [ ] Cambiar materia a `unidad de formación`,
 
 ## Front
 
 - [ ] Color de UI similar al del videojuego
 - [ ] Terminar sección de Encuestas
-- [ ] Agregar botón y feature para seleccionar el periodo actual
 - [ ] Mejorar diseño de CSS
+- [ ] Re-diseñar front de encuesta activa, ahora será por medio de fechas
 
 ## Backend
 
@@ -39,6 +40,26 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - [ ] Respuestas del 0 - 10 y el NULL value. Agregar validación `zod`.
 - [ ] Implement `survey/unpublished` endpoint ?
 - [ ] Implement `survey/current` & `survey/2` endpoint ?
+- [ ] Re-hacer todas las columnas del CSV
+- [ ] Podemos agregar más profsores a la tabla?
+- [ ] Concentración también aplican las preguntas para profesor
+- [ ] Incluir todos los fields del Excel
+- [ ] Diferenciar preguntas de Materia, Bloque y Profesor. Deben de aparecer de manera distinta
+- [ ] Poner RUBRICA 2 stores procedures y 1 trigger (aunque no se ocupen)
+- [ ] Reordenar preguntas de la Ecoa?
+- [ ] Cambiar a `unidad de formación`, meter todods `bloque`, `materia`, `concentración`
+- [ ] Cambiar concentración a bloque
+- [ ] Re-hacer el CSV
+- [ ] (Opcional) normalizar campus
+- [ ] Combinar tablas de Materia y Course en una denormalizada
+- [ ] Combinar 8 tablas de respuestas en 1
+- [ ] Re-diseñar encuesta activa, ahora será por medio de fechas
+- [ ] Re-diseñar las tablas de SQL
+- [ ] Encuesta activa por fecha, no por periodo
+- [ ] Que no te deje hacer dos encuestas activas al mismo tiempo
+- [ ] Poner en el CRN un campo de "activa" para que le mueva la miss
+- [ ] Archivar preguntas en lugar de borrarlas
+- [ ] Archivar es necesario? Podemos dejar on delete cascade?
 
 # References & Credits
 
