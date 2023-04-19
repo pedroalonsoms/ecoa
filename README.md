@@ -58,6 +58,8 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - [ ] Encuesta activa por fecha, no por periodo
 - [ ] Que no te deje hacer dos encuestas activas al mismo tiempo
 - [ ] Poner en el CRN un campo de "activa" para que le mueva la miss
+- [ ] Archivar preguntas en lugar de borrarlas
+- [ ] Archivar es necesario? Podemos dejar on delete cascade?
 
 # References & Credits
 
