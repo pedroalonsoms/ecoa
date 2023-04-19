@@ -1,4 +1,6 @@
 DROP TABLE IF EXISTS Prizes;
+DROP TABLE IF EXISTS TmpAnswer;
+DROP TABLE IF EXISTS Answer;
 DROP TABLE IF EXISTS SurveyQuestion;
 DROP TABLE IF EXISTS Survey;
 DROP TABLE IF EXISTS TmpCourseTextAnswer;
@@ -9,7 +11,6 @@ DROP TABLE IF EXISTS CourseTextAnswer;
 DROP TABLE IF EXISTS CourseNumericAnswer;
 DROP TABLE IF EXISTS TeacherTextAnswer;
 DROP TABLE IF EXISTS TeacherNumericAnswer;
-DROP TABLE IF EXISTS Answer;
 DROP TABLE IF EXISTS Question;
 DROP TABLE IF EXISTS Teaches;
 DROP TABLE IF EXISTS Enrolled;
@@ -116,6 +117,20 @@ CREATE TABLE Answer (
     crn INT NOT NULL,
     content VARCHAR(1024) NOT NULL,
 
+    FOREIGN KEY (surveyQuestionId) REFERENCES SurveyQuestion (id) ON DELETE CASCADE,
+    FOREIGN KEY (teacherRegistration) REFERENCES Teacher (registration) ON DELETE CASCADE,
+    FOREIGN KEY (crn) REFERENCES FormationUnits (crn) ON DELETE CASCADE
+);
+
+CREATE TABLE TmpAnswer (
+    studentRegistration CHAR(9) NOT NULL,
+    surveyQuestionId INT NOT NULL,
+    targetKind VARCHAR(32) NOT NULL,
+    teacherRegistration CHAR(9) NOT NULL,
+    crn INT NOT NULL,
+    content VARCHAR(1024) NOT NULL,
+
+    FOREIGN KEY (studentRegistration) REFERENCES Student (registration) ON DELETE CASCADE,
     FOREIGN KEY (surveyQuestionId) REFERENCES SurveyQuestion (id) ON DELETE CASCADE,
     FOREIGN KEY (teacherRegistration) REFERENCES Teacher (registration) ON DELETE CASCADE,
     FOREIGN KEY (crn) REFERENCES FormationUnits (crn) ON DELETE CASCADE
