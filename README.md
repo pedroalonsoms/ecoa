@@ -30,6 +30,7 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - [ ] Mejorar diseño de CSS
 - [ ] Re-diseñar front de encuesta activa, ahora será por medio de fechas
 - [ ] Añadir sección para `Bloque`
+- [ ] Añadir campos de `acronym` y `keyAcronym` al crear una pregunta (preguntar a la miss)
 
 ## Backend
 
