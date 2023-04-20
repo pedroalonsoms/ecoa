@@ -31,6 +31,9 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - [ ] Re-diseñar front de encuesta activa, ahora será por medio de fechas
 - [ ] Añadir sección para `Bloque`
 - [ ] Añadir campos de `acronym` y `keyAcronym` al crear una pregunta (preguntar a la miss)
+- [ ] Cachar error cuando pones título duplicado en el survey
+- [ ] Cachar error cuando quieres crear una encuesta que es en una fecha con overlap
+- [ ] Cachar error cuando la startDate es mayor que la endDate
 
 ## Backend
 
@@ -63,7 +66,9 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - [ ] Archivar preguntas en lugar de borrarlas
 - [ ] Archivar es necesario? Podemos dejar on delete cascade?
 - [ ] Hacer un trigger dependiendo de la fecha
+- [ ] Ver qué procede con los timestamps
 - [ ] Acomodar bien el diagrama relacional del workbench
+- [ ] Validar que el usuario no haya metido una fecha inicial mayor a la final
 
 # References & Credits
 

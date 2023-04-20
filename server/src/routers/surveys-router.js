@@ -3,7 +3,6 @@
 // pedro
 
 // TODO: add constraint where only one survey can be active at a given time
-// TODO: add transactions ?
 // TODO: consistent id naming
 
 import express from "express";
@@ -11,42 +10,63 @@ import { pool } from "../db/connection.js";
 import { z } from "zod";
 import { ANSWER_KIND, SECTION_KIND } from "../utils/constants.js";
 
+const stringToDateWithZeroTime = (s) => {
+  const date = new Date(s);
+  if (isNaN(date)) {
+    throw new Error("Could not parse Date string");
+  }
+  /* 
+    This is a hack to throw away the seconds.
+    Using `setHours` method causes date to shift in some cases
+    (maybe because of timezone calculations)
+  */
+  date.setUTCHours(0, 0, 0, 0);
+  return date.toISOString().split("T")[0];
+};
+
+const validateSurvey = async (requestBody) => {
+  const parsedRequestBody = z
+    .object({
+      title: z.string(),
+      questionIds: z.number().array().nonempty(),
+      startDate: z.string().transform(stringToDateWithZeroTime),
+      endDate: z.string().transform(stringToDateWithZeroTime),
+    })
+    .parse(requestBody);
+
+  const { startDate, endDate } = parsedRequestBody;
+
+  if (new Date(startDate) > new Date(endDate)) {
+    throw new Error("startDate cannot be greater than endDate");
+  }
+
+  const [surveysThatOverlap] = await pool.query(
+    "SELECT id FROM Survey WHERE CAST(? AS DATE) BETWEEN startDate AND endDate OR CAST(? AS DATE) BETWEEN startDate AND endDate",
+    [startDate, endDate]
+  );
+
+  if (surveysThatOverlap.length > 0) {
+    throw new Error("Cannot create survey that overlaps");
+  }
+
+  return parsedRequestBody;
+};
+
 const surveysRouter = express.Router();
 
-surveysRouter.get("/surveys/published", async (req, res) => {
+surveysRouter.get("/surveys/active", async (req, res) => {
   try {
     const [surveys] = await pool.query(
-      "SELECT id FROM Survey WHERE isPublished = TRUE"
+      "SELECT id FROM Survey WHERE CURDATE() BETWEEN startDate AND endDate"
     );
 
-    const [survey] = z
-      .object({ id: z.number() })
-      .array()
-      .length(1)
-      .parse(surveys);
+    if (surveys.length < 1) {
+      throw new Error("There are no active surveys");
+    }
 
-    res.status(200).send({ survey });
-  } catch (error) {
-    res.status(400).send({ error: error.message || "Unknown error" });
-  }
-});
+    const [survey] = surveys;
 
-surveysRouter.post("/surveys/published", async (req, res) => {
-  try {
-    const { id: surveyId } = z.object({ id: z.number() }).parse(req.body);
-
-    const [surveys] = await pool.query("SELECT id FROM Survey WHERE id = ?", [
-      surveyId,
-    ]);
-
-    z.object({ id: z.number() }).array().length(1).parse(surveys);
-
-    await pool.query("UPDATE Survey SET isPublished = FALSE");
-    await pool.query("UPDATE Survey SET isPublished = TRUE WHERE id = ?", [
-      surveyId,
-    ]);
-
-    res.sendStatus(200);
+    res.status(200).send({ id: survey.id });
   } catch (error) {
     res.status(400).send({ error: error.message || "Unknown error" });
   }
@@ -54,7 +74,20 @@ surveysRouter.post("/surveys/published", async (req, res) => {
 
 surveysRouter.get("/surveys", async (req, res) => {
   try {
-    const [surveys] = await pool.query("SELECT * FROM Survey");
+    const [rawSurveys] = await pool.query(
+      "SELECT id, title, startDate, endDate, IF(startDate <= CURDATE() AND CURDATE() <= endDate, TRUE, FALSE) AS isActive FROM Survey"
+    );
+
+    const surveys = z
+      .object({
+        id: z.number(),
+        title: z.string(),
+        startDate: z.string(),
+        endDate: z.string(),
+        isActive: z.number().transform((n) => Boolean(n)),
+      })
+      .array()
+      .parse(rawSurveys);
 
     res.status(200).send(surveys);
   } catch (error) {
@@ -64,14 +97,23 @@ surveysRouter.get("/surveys", async (req, res) => {
 
 surveysRouter.post("/surveys", async (req, res) => {
   try {
-    const { title, questionIds } = z
-      .object({
-        title: z.string(),
-        questionIds: z.number().array().nonempty(),
-      })
-      .parse(req.body);
+    const { title, questionIds, startDate, endDate } = await validateSurvey(
+      req.body
+    );
 
-    await pool.query("INSERT INTO Survey VALUES (NULL, ?, FALSE)", [title]);
+    const [surveysWithSameName] = await pool.query(
+      "SELECT id FROM Survey WHERE title = ?",
+      [title]
+    );
+
+    if (surveysWithSameName.length > 0) {
+      throw new Error("Cannot create survey with duplicate title");
+    }
+
+    await pool.query(
+      "INSERT INTO Survey VALUES (NULL, ?, CAST(? AS DATE), CAST(? AS DATE))",
+      [title, startDate, endDate]
+    );
 
     const [surveys] = await pool.query(
       "SELECT id FROM Survey WHERE title = ?",
@@ -85,7 +127,7 @@ surveysRouter.post("/surveys", async (req, res) => {
       .parse(surveys);
 
     for (const questionId of questionIds) {
-      await pool.query("INSERT INTO SurveyQuestion VALUES (?, ?)", [
+      await pool.query("INSERT INTO SurveyQuestion VALUES (NULL, ?, ?)", [
         survey.id,
         questionId,
       ]);
@@ -103,30 +145,30 @@ surveysRouter.put("/surveys/:surveyId", async (req, res) => {
       .object({ surveyId: z.string().transform((s) => parseInt(s)) })
       .parse(req.params);
 
-    const [surveys] = await pool.query("SELECT id FROM Survey WHERE id = ?", [
-      surveyId,
-    ]);
+    const [existingSurveys] = await pool.query(
+      "SELECT id FROM Survey WHERE id = ?",
+      [surveyId]
+    );
 
-    z.object({ id: z.number() }).array().length(1).parse(surveys);
+    if (existingSurveys.length < 1) {
+      throw new Error("Could not found survey with given id");
+    }
+
+    const { title, questionIds, startDate, endDate } = await validateSurvey(
+      req.body
+    );
+
+    await pool.query(
+      "UPDATE Survey SET title = ?, startDate = CAST(? AS DATE), endDate = CAST(? AS DATE) WHERE id = ?",
+      [title, startDate, endDate, surveyId]
+    );
 
     await pool.query("DELETE FROM SurveyQuestion WHERE surveyId = ?", [
       surveyId,
     ]);
 
-    const { title, questionIds } = z
-      .object({
-        title: z.string(),
-        questionIds: z.number().array().nonempty(),
-      })
-      .parse(req.body);
-
-    await pool.query("UPDATE Survey SET title = ? WHERE id = ?", [
-      title,
-      surveyId,
-    ]);
-
     for (const questionId of questionIds) {
-      await pool.query("INSERT INTO SurveyQuestion VALUES (?, ?)", [
+      await pool.query("INSERT INTO SurveyQuestion VALUES (NULL, ?, ?)", [
         surveyId,
         questionId,
       ]);
@@ -147,12 +189,17 @@ surveysRouter.get("/surveys/:surveyId", async (req, res) => {
       .parse(req.params);
 
     const [surveys] = await pool.query(
-      "SELECT id, title FROM Survey WHERE id = ?",
+      "SELECT id, title, startDate, endDate FROM Survey WHERE id = ?",
       [surveyId]
     );
 
     const [survey] = z
-      .object({ id: z.number(), title: z.string() })
+      .object({
+        id: z.number(),
+        title: z.string(),
+        startDate: z.string(),
+        endDate: z.string(),
+      })
       .array()
       .length(1)
       .parse(surveys);
@@ -214,6 +261,15 @@ surveysRouter.delete("/surveys/:surveyId", async (req, res) => {
     const { surveyId } = z
       .object({ surveyId: z.string().transform((s) => parseInt(s)) })
       .parse(req.params);
+
+    const [existingSurveys] = await pool.query(
+      "SELECT id FROM Survey WHERE id = ?",
+      [surveyId]
+    );
+
+    if (existingSurveys.length < 1) {
+      throw new Error("Cannot delete survey with given id, it does not exist");
+    }
 
     await pool.query("DELETE FROM Survey WHERE id = ?", [surveyId]);
 
