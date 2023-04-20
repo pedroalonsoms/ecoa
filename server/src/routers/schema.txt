@@ -1,15 +1,21 @@
-/progress/student/18
+/progress/student/A01741437
 
 {
-	"Materias": {
+	"FormationUnits": {
 		completed: false,
 		progress: [
-			"const de software": 14/16,
-			"implementacion de metodos": 13/16,
-			"iot": 0/16
+			{
+				"const de software": 14/16,
+				"kind": "COURSE"
+			},
+			{
+				"implementacion de metodos": 13/16,
+				"kind": "BLOCK"
+			}
+			"iot": 0/16,
 		]
 	}
-	"Profesores": {
+	"Teachers": {
 		completed: true,
 		progress: [
 			"carmen leticia": 14/16,
@@ -40,13 +46,6 @@ isTemporary boolean add to db?
 
 
 POST, GET /answers/questions/31
-{
-	studentId: 8,
-	toId: 9,
-	section: "MATERIA"
-}
-
-POST, GET /comments/questions/31
 {
 	studentId: 8,
 	toId: 9,

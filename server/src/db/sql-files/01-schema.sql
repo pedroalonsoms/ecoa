@@ -112,25 +112,30 @@ CREATE TABLE SurveyQuestion (
 );
 
 CREATE TABLE Answer (
+    id INT AUTO_INCREMENT,
+    folio CHAR(64) NOT NULL,
     surveyQuestionId INT NOT NULL,
     targetKind VARCHAR(32) NOT NULL,
-    teacherRegistration CHAR(9) NOT NULL,
-    crn INT NOT NULL,
+    teacherRegistration CHAR(9),
+    crn INT,
     content VARCHAR(1024),
 
+    PRIMARY KEY (id),
     FOREIGN KEY (surveyQuestionId) REFERENCES SurveyQuestion (id) ON DELETE CASCADE,
     FOREIGN KEY (teacherRegistration) REFERENCES Teacher (registration) ON DELETE CASCADE,
     FOREIGN KEY (crn) REFERENCES Classroom (crn) ON DELETE CASCADE
 );
 
 CREATE TABLE TmpAnswer (
+    id INT AUTO_INCREMENT,
     studentRegistration CHAR(9) NOT NULL,
     surveyQuestionId INT NOT NULL,
     targetKind VARCHAR(32) NOT NULL,
-    teacherRegistration CHAR(9) NOT NULL,
-    crn INT NOT NULL,
-    content VARCHAR(1024) NOT NULL,
+    teacherRegistration CHAR(9),
+    crn INT,
+    content VARCHAR(1024),
 
+    PRIMARY KEY (id),
     FOREIGN KEY (studentRegistration) REFERENCES Student (registration) ON DELETE CASCADE,
     FOREIGN KEY (surveyQuestionId) REFERENCES SurveyQuestion (id) ON DELETE CASCADE,
     FOREIGN KEY (teacherRegistration) REFERENCES Teacher (registration) ON DELETE CASCADE,
@@ -146,15 +151,32 @@ CREATE TABLE Prizes (
 );
 
 DROP PROCEDURE IF EXISTS getAllSurveys;
-CREATE PROCEDURE getAllSurveys()
+DROP PROCEDURE IF EXISTS getAllQuestions;
+
+DROP PROCEDURE IF EXISTS deleteAllFromTmpAnswer;
+CREATE PROCEDURE deleteAllFromTmpAnswer()
 BEGIN
-    SELECT id, title, startDate, endDate, IF(CURDATE() BETWEEN startDate AND endDate, TRUE, FALSE) AS isActive FROM Survey ORDER BY startDate ASC;
+    DELETE FROM TmpAnswer;
 END;
 
-DROP PROCEDURE IF EXISTS getAllQuestions;
-CREATE PROCEDURE getAllQuestions()
+DROP PROCEDURE IF EXISTS transferTmpAnswersByStudentRegistration;
+CREATE PROCEDURE transferTmpAnswersByStudentRegistration(
+    IN _studentRegistration CHAR(9)
+)
 BEGIN
-    SELECT id, title, section, answerKind FROM Question ORDER BY title ASC;
+    INSERT INTO Answer (
+        SELECT 
+            NULL, 
+            SHA2(studentRegistration, 256),
+            surveyQuestionId,
+            targetKind,
+            teacherRegistration,
+            crn,
+            content 
+        FROM TmpAnswer 
+        WHERE studentRegistration = _studentRegistration
+    );
+    DELETE FROM TmpAnswer WHERE studentRegistration = _studentRegistration;
 END;
 
 DROP TRIGGER IF EXISTS trimQuestionTitleWhitespace;

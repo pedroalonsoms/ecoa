@@ -21,7 +21,8 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - [ ] Música de fondo
 - [ ] Sonido de click al botón
 - [ ] Arreglar el botón de `back`
-- [ ] Cambiar materia a `unidad de formación`,
+- [ ] Cambiar materia a `unidad de formación`
+- [ ] Cuando el usuario le de a finalizar, debe haber un fetch que probablemente retorne un error si intenta finalizarla pero le faltan preguntas. Eso se debe mostrar en una alerta en el videojuego.
 
 ## Front
 
@@ -34,19 +35,25 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - [ ] Cachar error cuando pones título duplicado en el survey (viene del back)
 - [ ] Cachar error cuando quieres crear una encuesta que es en una fecha con overlap (viene del back)
 - [ ] Cachar error cuando la startDate es mayor que la endDate (viene del back)
+- [ ] Dashboard de PowerBI
 
 ## Backend
 
 - [ ] Endpoints faltantes de `answers`, `comments`, `finish`
 - [ ] Respuestas del 0 - 10 y el NULL value. Agregar validación `zod`.
 - [ ] Poner RUBRICA 2 stores procedures y 1 trigger (aunque no se ocupen)
-- [ ] Poder reordenar preguntas de la Ecoa?
+- [ ] Poder reordenar preguntas de la Ecoa? Si, mantener orden
 - [ ] Poner en el CRN un campo de "activa" para que le mueva la miss
 - [ ] Implementar feature de `activa` para simular periodos
-- [ ] Archivar preguntas es necesario? Podemos dejar on delete cascade?
+- [ ] Archivar preguntas es necesario? Podemos dejar on delete cascade? opcional
+- [ ] Crear stored procedures para borrar las preguntas de Tmp Answer (no linux cronjob)
+- [ ] Folio, hacer hash de matricula
 - [ ] Hacer un trigger dependiendo de la fecha
 - [ ] Acomodar bien el diagrama relacional del workbench
-- [ ] Preguntar si los 2 stored procedures y 1 trigger que llevamos están bien
+- [ ] Preguntar si los 2 stored procedures y 1 trigger que re-hicimos están bien
+- [ ] Dashboard de PowerBI
+- [ ] Stored procedure para borrar tmpAnswers sin finalizar
+- [ ] Cuando el usuario le de a finalizar, debe haber un error si intenta finalizarla pero le faltan preguntas.
 
 # References & Credits
 
