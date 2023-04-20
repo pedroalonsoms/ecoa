@@ -46,6 +46,7 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - [ ] Archivar preguntas es necesario? Podemos dejar on delete cascade?
 - [ ] Hacer un trigger dependiendo de la fecha
 - [ ] Acomodar bien el diagrama relacional del workbench
+- [ ] Preguntar si los 2 stored procedures y 1 trigger que llevamos están bien
 
 # References & Credits
 

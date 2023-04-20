@@ -156,3 +156,7 @@ CREATE PROCEDURE getAllQuestions()
 BEGIN
     SELECT id, title, section, answerKind FROM Question ORDER BY title ASC;
 END;
+
+DROP TRIGGER IF EXISTS trimQuestionTitleWhitespace;
+CREATE TRIGGER trimQuestionTitleWhitespace BEFORE INSERT ON Question
+    FOR EACH ROW SET NEW.title = TRIM(NEW.title);
