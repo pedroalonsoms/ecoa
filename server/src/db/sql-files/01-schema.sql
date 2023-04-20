@@ -58,6 +58,7 @@ CREATE TABLE Classroom (
     title VARCHAR(128) NOT NULL,
     kind VARCHAR(32) NOT NULL,
     campus VARCHAR(32) NOT NULL,
+    isActive BOOLEAN NOT NULL DEFAULT TRUE,
 
     PRIMARY KEY (crn)
 );

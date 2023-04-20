@@ -31,44 +31,21 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - [ ] Re-diseñar front de encuesta activa, ahora será por medio de fechas
 - [ ] Añadir sección para `Bloque`
 - [ ] Añadir campos de `acronym` y `keyAcronym` al crear una pregunta (preguntar a la miss)
-- [ ] Cachar error cuando pones título duplicado en el survey
-- [ ] Cachar error cuando quieres crear una encuesta que es en una fecha con overlap
-- [ ] Cachar error cuando la startDate es mayor que la endDate
+- [ ] Cachar error cuando pones título duplicado en el survey (viene del back)
+- [ ] Cachar error cuando quieres crear una encuesta que es en una fecha con overlap (viene del back)
+- [ ] Cachar error cuando la startDate es mayor que la endDate (viene del back)
 
 ## Backend
 
-- [ ] Agregar feature de seleccionar periodo actual
 - [ ] Endpoints faltantes de `answers`, `comments`, `finish`
-- [ ] Checar con la miss de base de datos que las tablas que llevamos estén bien (Miércoles 19)
-- [ ] Podemos omitir columnas que no necesitamos en el `csv`? (Miércoles 19)
-- [ ] Separar preguntas de materia y bloque? (Miércoles 19)
 - [ ] Respuestas del 0 - 10 y el NULL value. Agregar validación `zod`.
-- [ ] Implement `survey/unpublished` endpoint ?
-- [ ] Implement `survey/current` & `survey/2` endpoint ?
-- [ ] Re-hacer todas las columnas del CSV
-- [ ] Podemos agregar más profsores a la tabla?
-- [ ] Concentración también aplican las preguntas para profesor
-- [ ] Incluir todos los fields del Excel
-- [ ] Diferenciar preguntas de Materia, Bloque y Profesor. Deben de aparecer de manera distinta
 - [ ] Poner RUBRICA 2 stores procedures y 1 trigger (aunque no se ocupen)
 - [ ] Poder reordenar preguntas de la Ecoa?
-- [ ] Cambiar a `unidad de formación`, meter todods `bloque`, `materia`, `concentración`
-- [ ] Cambiar concentración a bloque
-- [ ] Re-hacer el CSV
-- [ ] (Opcional) normalizar campus
-- [ ] Combinar tablas de Materia y Course en una denormalizada
-- [ ] Combinar 8 tablas de respuestas en 1
-- [ ] Re-diseñar encuesta activa, ahora será por medio de fechas
-- [ ] Re-diseñar las tablas de SQL
-- [ ] Encuesta activa por fecha, no por periodo
-- [ ] Que no te deje hacer dos encuestas activas al mismo tiempo
 - [ ] Poner en el CRN un campo de "activa" para que le mueva la miss
-- [ ] Archivar preguntas en lugar de borrarlas
-- [ ] Archivar es necesario? Podemos dejar on delete cascade?
+- [ ] Implementar feature de `activa` para simular periodos
+- [ ] Archivar preguntas es necesario? Podemos dejar on delete cascade?
 - [ ] Hacer un trigger dependiendo de la fecha
-- [ ] Ver qué procede con los timestamps
 - [ ] Acomodar bien el diagrama relacional del workbench
-- [ ] Validar que el usuario no haya metido una fecha inicial mayor a la final
 
 # References & Credits
 
