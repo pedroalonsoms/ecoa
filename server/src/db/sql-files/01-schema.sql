@@ -148,7 +148,7 @@ CREATE TABLE Prizes (
 DROP PROCEDURE IF EXISTS getAllSurveys;
 CREATE PROCEDURE getAllSurveys()
 BEGIN
-    SELECT id, title, startDate, endDate, IF(CURDATE() BETWEEN startDate AND endDate, TRUE, FALSE) AS isActive FROM Survey;
+    SELECT id, title, startDate, endDate, IF(CURDATE() BETWEEN startDate AND endDate, TRUE, FALSE) AS isActive FROM Survey ORDER BY startDate ASC;
 END;
 
 DROP PROCEDURE IF EXISTS getAllQuestions;
