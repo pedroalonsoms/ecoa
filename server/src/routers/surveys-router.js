@@ -205,7 +205,7 @@ surveysRouter.get("/surveys/:surveyId", async (req, res) => {
       .parse(surveys);
 
     let [rawQuestions] = await pool.query(
-      "SELECT Question.*, IF(surveyId IS NULL, FALSE, TRUE) AS isActive FROM Question LEFT JOIN SurveyQuestion ON Question.id = SurveyQuestion.questionId AND surveyId = ? ORDER BY Question.title ASC",
+      "SELECT Question.*, IF(surveyId IS NULL, FALSE, TRUE) AS isActive FROM Question LEFT JOIN SurveyQuestion ON Question.id = SurveyQuestion.questionId AND surveyId = ? ORDER BY Question.id ASC",
       [surveyId]
     );
 

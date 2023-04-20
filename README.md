@@ -31,7 +31,6 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - [ ] Mejorar diseño de CSS
 - [ ] Re-diseñar front de encuesta activa, ahora será por medio de fechas
 - [ ] Añadir sección para `Bloque`
-- [ ] Añadir campos de `acronym` y `keyAcronym` al crear una pregunta (preguntar a la miss)
 - [ ] Cachar error cuando pones título duplicado en el survey (viene del back)
 - [ ] Cachar error cuando quieres crear una encuesta que es en una fecha con overlap (viene del back)
 - [ ] Cachar error cuando la startDate es mayor que la endDate (viene del back)
@@ -43,17 +42,12 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - [ ] Respuestas del 0 - 10 y el NULL value. Agregar validación `zod`.
 - [ ] Poner RUBRICA 2 stores procedures y 1 trigger (aunque no se ocupen)
 - [ ] Poder reordenar preguntas de la Ecoa? Si, mantener orden
-- [ ] Poner en el CRN un campo de "activa" para que le mueva la miss
-- [ ] Implementar feature de `activa` para simular periodos
-- [ ] Archivar preguntas es necesario? Podemos dejar on delete cascade? opcional
-- [ ] Crear stored procedures para borrar las preguntas de Tmp Answer (no linux cronjob)
-- [ ] Folio, hacer hash de matricula
-- [ ] Hacer un trigger dependiendo de la fecha
+- [ ] Implementar feature de `activa` internamente para simular periodos
 - [ ] Acomodar bien el diagrama relacional del workbench
 - [ ] Preguntar si los 2 stored procedures y 1 trigger que re-hicimos están bien
-- [ ] Dashboard de PowerBI
-- [ ] Stored procedure para borrar tmpAnswers sin finalizar
+- [ ] Dashboard de PowerBI para vista de /profesor?
 - [ ] Cuando el usuario le de a finalizar, debe haber un error si intenta finalizarla pero le faltan preguntas.
+- [ ] Pasa algo si agregamos el string: `¿Cómo evalúas los siguientes enunciados relacionados con el Bloque?  Los temas, las actividades y el reto durante el Bloque:` antes de cada pregunta?
 
 # References & Credits
 
