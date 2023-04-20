@@ -74,9 +74,7 @@ surveysRouter.get("/surveys/active", async (req, res) => {
 
 surveysRouter.get("/surveys", async (req, res) => {
   try {
-    const [rawSurveys] = await pool.query(
-      "SELECT id, title, startDate, endDate, IF(startDate <= CURDATE() AND CURDATE() <= endDate, TRUE, FALSE) AS isActive FROM Survey"
-    );
+    const [[rawSurveys]] = await pool.query("CALL getAllSurveys()");
 
     const surveys = z
       .object({

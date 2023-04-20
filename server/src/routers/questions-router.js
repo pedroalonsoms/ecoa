@@ -13,9 +13,7 @@ const questionsRouter = express.Router();
 
 questionsRouter.get("/questions", async (req, res) => {
   try {
-    const [questions] = await pool.query(
-      "SELECT id, title, section, answerKind FROM Question ORDER BY title ASC"
-    );
+    const [[questions]] = await pool.query("CALL getAllQuestions()");
 
     res.status(200).send(questions);
   } catch (error) {

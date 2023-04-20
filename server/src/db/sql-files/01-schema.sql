@@ -116,7 +116,7 @@ CREATE TABLE Answer (
     targetKind VARCHAR(32) NOT NULL,
     teacherRegistration CHAR(9) NOT NULL,
     crn INT NOT NULL,
-    content VARCHAR(1024) NOT NULL,
+    content VARCHAR(1024),
 
     FOREIGN KEY (surveyQuestionId) REFERENCES SurveyQuestion (id) ON DELETE CASCADE,
     FOREIGN KEY (teacherRegistration) REFERENCES Teacher (registration) ON DELETE CASCADE,
@@ -144,3 +144,15 @@ CREATE TABLE Prizes (
 
     PRIMARY KEY (id)
 );
+
+DROP PROCEDURE IF EXISTS getAllSurveys;
+CREATE PROCEDURE getAllSurveys()
+BEGIN
+    SELECT id, title, startDate, endDate, IF(CURDATE() BETWEEN startDate AND endDate, TRUE, FALSE) AS isActive FROM Survey;
+END;
+
+DROP PROCEDURE IF EXISTS getAllQuestions;
+CREATE PROCEDURE getAllQuestions()
+BEGIN
+    SELECT id, title, section, answerKind FROM Question ORDER BY title ASC;
+END;
