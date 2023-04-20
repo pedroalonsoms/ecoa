@@ -14,7 +14,7 @@ const questionsRouter = express.Router();
 questionsRouter.get("/questions", async (req, res) => {
   try {
     const [questions] = await pool.query(
-      "SELECT * FROM Question ORDER BY title ASC"
+      "SELECT id, title, section, answerKind FROM Question ORDER BY title ASC"
     );
 
     res.status(200).send(questions);
@@ -25,15 +25,19 @@ questionsRouter.get("/questions", async (req, res) => {
 
 questionsRouter.post("/questions", async (req, res) => {
   try {
-    const { title, section, answerKind } = z
+    const { acronym, keyAcronym, title, section, answerKind } = z
       .object({
+        acronym: z.string(),
+        keyAcronym: z.string(),
         title: z.string(),
         section: z.enum(SECTION_KIND),
         answerKind: z.enum(ANSWER_KIND),
       })
       .parse(req.body);
 
-    await pool.query("INSERT INTO Question VALUES (NULL, ?, ?, ?)", [
+    await pool.query("INSERT INTO Question VALUES (NULL, ?, ?, ?, ?, ?)", [
+      acronym,
+      keyAcronym,
       title,
       section,
       answerKind,
@@ -51,8 +55,10 @@ questionsRouter.put("/questions/:id", async (req, res) => {
       .object({ id: z.string().transform((id) => parseInt(id)) })
       .parse(req.params);
 
-    const { title, section, answerKind } = z
+    const { acronym, keyAcronym, title, section, answerKind } = z
       .object({
+        acronym: z.string(),
+        keyAcronym: z.string(),
         title: z.string(),
         section: z.enum(SECTION_KIND),
         answerKind: z.enum(ANSWER_KIND),
@@ -60,8 +66,8 @@ questionsRouter.put("/questions/:id", async (req, res) => {
       .parse(req.body);
 
     await pool.query(
-      "UPDATE Question SET title = ?, section = ?, answerKind = ? WHERE id = ?",
-      [title, section, answerKind, id]
+      "UPDATE Question SET acronym = ?, keyAcronym = ?, title = ?, section = ?, answerKind = ? WHERE id = ?",
+      [acronym, keyAcronym, title, section, answerKind, id]
     );
 
     res.sendStatus(200);
@@ -75,6 +81,15 @@ questionsRouter.delete("/questions/:id", async (req, res) => {
     const { id } = z
       .object({ id: z.string().transform((id) => parseInt(id)) })
       .parse(req.params);
+
+    const [questions] = await pool.query(
+      "SELECT id FROM Question WHERE id = ?",
+      [id]
+    );
+
+    if (questions.length < 1) {
+      throw new Error("Question does not exist");
+    }
 
     await pool.query("DELETE FROM Question WHERE id = ?", [id]);
 

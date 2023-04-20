@@ -42,7 +42,6 @@ h2 {
     font-size: 20px;
     padding: 15px 15px;
     cursor: pointer;
-    /* Place it on the right bottom corner */
     position: fixed;
     bottom: 80px;
     right: 80px;

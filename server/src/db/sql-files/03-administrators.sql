@@ -1,1 +1,1 @@
-INSERT INTO Administrator VALUES (NULL, 'rafadavalos@tec.mx', 'rafa', 'L00000001', 'Rafael Emilio Dávalos', 'MTY');
+INSERT INTO Administrator VALUES ('L00000001', 'rafadavalos@tec.mx', 'rafa', 'Rafael Emilio Dávalos', 'Campus Monterrey');

@@ -1,4 +1,6 @@
 DROP TABLE IF EXISTS Prizes;
+DROP TABLE IF EXISTS TmpAnswer;
+DROP TABLE IF EXISTS Answer;
 DROP TABLE IF EXISTS SurveyQuestion;
 DROP TABLE IF EXISTS Survey;
 DROP TABLE IF EXISTS TmpCourseTextAnswer;
@@ -14,82 +16,74 @@ DROP TABLE IF EXISTS Teaches;
 DROP TABLE IF EXISTS Enrolled;
 DROP TABLE IF EXISTS Classroom;
 DROP TABLE IF EXISTS Course;
+DROP TABLE IF EXISTS FormationUnits;
 DROP TABLE IF EXISTS Teacher;
+DROP TABLE IF EXISTS Colaborator;
 DROP TABLE IF EXISTS Administrator;
 DROP TABLE IF EXISTS Student;
 
 CREATE TABLE Student (
-    id INT AUTO_INCREMENT,
+    registration CHAR(9) NOT NULL,
     email VARCHAR(64) UNIQUE NOT NULL,
     pass VARCHAR(32) NOT NULL,
-    registration CHAR(9) UNIQUE NOT NULL,
     fullName VARCHAR(64) NOT NULL,
     campus VARCHAR(32) NOT NULL,
 
-    PRIMARY KEY (id)
+    PRIMARY KEY (registration)
 );
 
 CREATE TABLE Administrator (
-    id INT AUTO_INCREMENT,
+    registration CHAR(9) UNIQUE NOT NULL,
     email VARCHAR(64) UNIQUE NOT NULL,
     pass VARCHAR(32) NOT NULL,
-    registration CHAR(9) UNIQUE NOT NULL,
     fullName VARCHAR(64) NOT NULL,
     campus VARCHAR(32) NOT NULL,
 
-    PRIMARY KEY (id)
+    PRIMARY KEY (registration)
 );
 
 CREATE TABLE Teacher (
-    id INT AUTO_INCREMENT,
+    registration CHAR(9) UNIQUE NOT NULL,
     email VARCHAR(64) UNIQUE NOT NULL,
     pass VARCHAR(32) NOT NULL,
-    registration CHAR(9) UNIQUE NOT NULL,
     fullName VARCHAR(64) NOT NULL,
     campus VARCHAR(32) NOT NULL,
 
-    PRIMARY KEY (id)
-);
-
-CREATE TABLE Course (
-    id INT AUTO_INCREMENT,
-    code VARCHAR(16) NOT NULL,
-    title VARCHAR(128) NOT NULL,
-    kind VARCHAR(32) NOT NULL,
-
-    PRIMARY KEY (id)
+    PRIMARY KEY (registration)
 );
 
 CREATE TABLE Classroom (
-    id INT AUTO_INCREMENT,
     crn INT NOT NULL,
+    code VARCHAR(16) NOT NULL,
+    title VARCHAR(128) NOT NULL,
+    kind VARCHAR(32) NOT NULL,
     campus VARCHAR(32) NOT NULL,
-    courseId INT NOT NULL,
 
-    PRIMARY KEY (id),
-    FOREIGN KEY (courseId) REFERENCES Course (id) ON DELETE CASCADE
+    PRIMARY KEY (crn)
 );
 
 CREATE TABLE Enrolled (
-    classroomId INT NOT NULL,
-    studentId INT NOT NULL,
+    crn INT NOT NULL,
+    studentRegistration CHAR(9) NOT NULL,
 
-    PRIMARY KEY (studentId, classroomId),
-    FOREIGN KEY (classroomId) REFERENCES Classroom (id) ON DELETE CASCADE,
-    FOREIGN KEY (studentId) REFERENCES Student (id) ON DELETE CASCADE
+    PRIMARY KEY (crn, studentRegistration),
+    FOREIGN KEY (crn) REFERENCES Classroom (crn) ON DELETE CASCADE,
+    FOREIGN KEY (studentRegistration) REFERENCES Student (registration) ON DELETE CASCADE
 );
 
 CREATE TABLE Teaches (
-    classroomId INT NOT NULL,
-    teacherId INT NOT NULL,
+    crn INT NOT NULL,
+    teacherRegistration CHAR(9) NOT NULL,
 
-    PRIMARY KEY (teacherId, classroomId),
-    FOREIGN KEY (classroomId) REFERENCES Classroom (id) ON DELETE CASCADE,
-    FOREIGN KEY (teacherId) REFERENCES Teacher (id) ON DELETE CASCADE
+    PRIMARY KEY (crn, teacherRegistration),
+    FOREIGN KEY (crn) REFERENCES Classroom (crn) ON DELETE CASCADE,
+    FOREIGN KEY (teacherRegistration) REFERENCES Teacher (registration) ON DELETE CASCADE
 );
 
 CREATE TABLE Question (
     id INT AUTO_INCREMENT,
+    acronym VARCHAR(16) NOT NULL,
+    keyAcronym VARCHAR(16) NOT NULL,
     title VARCHAR(512) NOT NULL,
     section VARCHAR(32) NOT NULL,
     answerKind VARCHAR(32) NOT NULL,
@@ -97,109 +91,49 @@ CREATE TABLE Question (
     PRIMARY KEY (id)
 );
 
-CREATE TABLE TeacherNumericAnswer (
-    teacherId INT NOT NULL,
-    questionId INT NOT NULL,
-    score INT,
-
-    PRIMARY KEY (teacherId, questionId),
-    FOREIGN KEY (teacherId) REFERENCES Teacher (id) ON DELETE CASCADE,
-    FOREIGN KEY (questionId) REFERENCES Question (id) ON DELETE CASCADE
-);
-
-CREATE TABLE TeacherTextAnswer (
-    teacherId INT NOT NULL,
-    questionId INT NOT NULL,
-    comment VARCHAR(1024) NOT NULL,
-
-    PRIMARY KEY (teacherId, questionId),
-    FOREIGN KEY (teacherId) REFERENCES Teacher (id) ON DELETE CASCADE,
-    FOREIGN KEY (questionId) REFERENCES Question (id) ON DELETE CASCADE
-);
-
-CREATE TABLE CourseNumericAnswer (
-    courseId INT NOT NULL,
-    questionId INT NOT NULL,
-    score INT,
-
-    PRIMARY KEY (courseId, questionId),
-    FOREIGN KEY (courseId) REFERENCES Course (id) ON DELETE CASCADE,
-    FOREIGN KEY (questionId) REFERENCES Question (id) ON DELETE CASCADE
-);
-
-CREATE TABLE CourseTextAnswer (
-    courseId INT NOT NULL,
-    questionId INT NOT NULL,
-    comment VARCHAR(1024),
-
-    PRIMARY KEY (courseId, questionId),
-    FOREIGN KEY (courseId) REFERENCES Course (id) ON DELETE CASCADE,
-    FOREIGN KEY (questionId) REFERENCES Question (id) ON DELETE CASCADE
-);
-
-CREATE TABLE TmpTeacherNumericAnswer (
-    studentId INT NOT NULL,
-    teacherId INT NOT NULL,
-    questionId INT NOT NULL,
-    score INT,
-    
-    PRIMARY KEY (studentId, teacherId, questionId),
-    FOREIGN KEY (studentId) REFERENCES Student (id) ON DELETE CASCADE,
-    FOREIGN KEY (teacherId) REFERENCES Teacher (id) ON DELETE CASCADE,
-    FOREIGN KEY (questionId) REFERENCES Question (id) ON DELETE CASCADE
-);
-
-CREATE TABLE TmpTeacherTextAnswer (
-    studentId INT NOT NULL,
-    teacherId INT NOT NULL,
-    questionId INT NOT NULL,
-    comment VARCHAR(1024) NOT NULL,
-    
-    PRIMARY KEY (studentId, teacherId, questionId),
-    FOREIGN KEY (studentId) REFERENCES Student (id) ON DELETE CASCADE,
-    FOREIGN KEY (teacherId) REFERENCES Teacher (id) ON DELETE CASCADE,
-    FOREIGN KEY (questionId) REFERENCES Question (id) ON DELETE CASCADE
-);
-
-CREATE TABLE TmpCourseNumericAnswer (
-    studentId INT NOT NULL,
-    courseId INT NOT NULL,
-    questionId INT NOT NULL,
-    score INT,
-    
-    PRIMARY KEY (studentId, courseId, questionId),
-    FOREIGN KEY (studentId) REFERENCES Student (id) ON DELETE CASCADE,
-    FOREIGN KEY (courseId) REFERENCES Course (id) ON DELETE CASCADE,
-    FOREIGN KEY (questionId) REFERENCES Question (id) ON DELETE CASCADE
-);
-
-CREATE TABLE TmpCourseTextAnswer (
-    studentId INT NOT NULL,
-    courseId INT NOT NULL,
-    questionId INT NOT NULL,
-    comment VARCHAR(1024),
-    
-    PRIMARY KEY (studentId, courseId, questionId),
-    FOREIGN KEY (studentId) REFERENCES Student (id) ON DELETE CASCADE,
-    FOREIGN KEY (courseId) REFERENCES Course (id) ON DELETE CASCADE,
-    FOREIGN KEY (questionId) REFERENCES Question (id) ON DELETE CASCADE
-);
-
 CREATE TABLE Survey (
     id INT AUTO_INCREMENT,
     title VARCHAR(64) UNIQUE NOT NULL,
-    isPublished BOOLEAN NOT NULL,
+    startDate DATE NOT NULL,
+    endDate DATE NOT NULL,
 
     PRIMARY KEY (id)
 );
 
 CREATE TABLE SurveyQuestion (
+    id INT AUTO_INCREMENT,
     surveyId INT NOT NULL,
     questionId INT NOT NULL,
 
-    PRIMARY KEY (surveyId, questionId),
+    PRIMARY KEY (id),
     FOREIGN KEY (surveyId) REFERENCES Survey (id) ON DELETE CASCADE,
     FOREIGN KEY (questionId) REFERENCES Question (id) ON DELETE CASCADE
+);
+
+CREATE TABLE Answer (
+    surveyQuestionId INT NOT NULL,
+    targetKind VARCHAR(32) NOT NULL,
+    teacherRegistration CHAR(9) NOT NULL,
+    crn INT NOT NULL,
+    content VARCHAR(1024) NOT NULL,
+
+    FOREIGN KEY (surveyQuestionId) REFERENCES SurveyQuestion (id) ON DELETE CASCADE,
+    FOREIGN KEY (teacherRegistration) REFERENCES Teacher (registration) ON DELETE CASCADE,
+    FOREIGN KEY (crn) REFERENCES Classroom (crn) ON DELETE CASCADE
+);
+
+CREATE TABLE TmpAnswer (
+    studentRegistration CHAR(9) NOT NULL,
+    surveyQuestionId INT NOT NULL,
+    targetKind VARCHAR(32) NOT NULL,
+    teacherRegistration CHAR(9) NOT NULL,
+    crn INT NOT NULL,
+    content VARCHAR(1024) NOT NULL,
+
+    FOREIGN KEY (studentRegistration) REFERENCES Student (registration) ON DELETE CASCADE,
+    FOREIGN KEY (surveyQuestionId) REFERENCES SurveyQuestion (id) ON DELETE CASCADE,
+    FOREIGN KEY (teacherRegistration) REFERENCES Teacher (registration) ON DELETE CASCADE,
+    FOREIGN KEY (crn) REFERENCES Classroom (crn) ON DELETE CASCADE
 );
 
 CREATE TABLE Prizes (
