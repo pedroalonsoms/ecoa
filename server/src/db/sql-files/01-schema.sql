@@ -52,7 +52,7 @@ CREATE TABLE Teacher (
     PRIMARY KEY (registration)
 );
 
-CREATE TABLE FormationUnits (
+CREATE TABLE Classroom (
     crn INT NOT NULL,
     code VARCHAR(16) NOT NULL,
     title VARCHAR(128) NOT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE Enrolled (
     studentRegistration CHAR(9) NOT NULL,
 
     PRIMARY KEY (crn, studentRegistration),
-    FOREIGN KEY (crn) REFERENCES FormationUnits (crn) ON DELETE CASCADE,
+    FOREIGN KEY (crn) REFERENCES Classroom (crn) ON DELETE CASCADE,
     FOREIGN KEY (studentRegistration) REFERENCES Student (registration) ON DELETE CASCADE
 );
 
@@ -76,7 +76,7 @@ CREATE TABLE Teaches (
     teacherRegistration CHAR(9) NOT NULL,
 
     PRIMARY KEY (crn, teacherRegistration),
-    FOREIGN KEY (crn) REFERENCES FormationUnits (crn) ON DELETE CASCADE,
+    FOREIGN KEY (crn) REFERENCES Classroom (crn) ON DELETE CASCADE,
     FOREIGN KEY (teacherRegistration) REFERENCES Teacher (registration) ON DELETE CASCADE
 );
 
@@ -119,7 +119,7 @@ CREATE TABLE Answer (
 
     FOREIGN KEY (surveyQuestionId) REFERENCES SurveyQuestion (id) ON DELETE CASCADE,
     FOREIGN KEY (teacherRegistration) REFERENCES Teacher (registration) ON DELETE CASCADE,
-    FOREIGN KEY (crn) REFERENCES FormationUnits (crn) ON DELETE CASCADE
+    FOREIGN KEY (crn) REFERENCES Classroom (crn) ON DELETE CASCADE
 );
 
 CREATE TABLE TmpAnswer (
@@ -133,7 +133,7 @@ CREATE TABLE TmpAnswer (
     FOREIGN KEY (studentRegistration) REFERENCES Student (registration) ON DELETE CASCADE,
     FOREIGN KEY (surveyQuestionId) REFERENCES SurveyQuestion (id) ON DELETE CASCADE,
     FOREIGN KEY (teacherRegistration) REFERENCES Teacher (registration) ON DELETE CASCADE,
-    FOREIGN KEY (crn) REFERENCES FormationUnits (crn) ON DELETE CASCADE
+    FOREIGN KEY (crn) REFERENCES Classroom (crn) ON DELETE CASCADE
 );
 
 CREATE TABLE Prizes (

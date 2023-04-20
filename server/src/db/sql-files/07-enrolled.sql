@@ -1,1 +1,0 @@
-INSERT INTO Enrolled VALUES (1,1), (1,2), (2,1);

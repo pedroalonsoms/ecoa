@@ -29,6 +29,7 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - [ ] Terminar sección de Encuestas
 - [ ] Mejorar diseño de CSS
 - [ ] Re-diseñar front de encuesta activa, ahora será por medio de fechas
+- [ ] Añadir sección para `Bloque`
 
 ## Backend
 
@@ -46,7 +47,7 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - [ ] Incluir todos los fields del Excel
 - [ ] Diferenciar preguntas de Materia, Bloque y Profesor. Deben de aparecer de manera distinta
 - [ ] Poner RUBRICA 2 stores procedures y 1 trigger (aunque no se ocupen)
-- [ ] Reordenar preguntas de la Ecoa?
+- [ ] Poder reordenar preguntas de la Ecoa?
 - [ ] Cambiar a `unidad de formación`, meter todods `bloque`, `materia`, `concentración`
 - [ ] Cambiar concentración a bloque
 - [ ] Re-hacer el CSV
@@ -60,6 +61,8 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - [ ] Poner en el CRN un campo de "activa" para que le mueva la miss
 - [ ] Archivar preguntas en lugar de borrarlas
 - [ ] Archivar es necesario? Podemos dejar on delete cascade?
+- [ ] Hacer un trigger dependiendo de la fecha
+- [ ] Acomodar bien el diagrama relacional del workbench
 
 # References & Credits
 
