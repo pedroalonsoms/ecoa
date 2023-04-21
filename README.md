@@ -24,6 +24,11 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - [ ] Cambiar materia a `unidad de formación`
 - [ ] Cuando el usuario le de a finalizar, debe haber un fetch que probablemente retorne un error si intenta finalizarla pero le faltan preguntas. Eso se debe mostrar en una alerta en el videojuego.
 - [ ] Pasar `studentRegistration` al videojuego en el iframe
+- [ ] Poner pantalla de inicio con instrucciones y mecánica
+- [ ] Agregar control por teclado exclusivamente
+- [ ] Agregar animaciones
+- [ ] No debe de dejar avanzar a la siguiente si no ha contestado la pregunta actual (mostrar una alerta)
+- [ ] Variedad de los sonidos
 
 ## Front
 
