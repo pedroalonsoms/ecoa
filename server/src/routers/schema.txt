@@ -1,0 +1,132 @@
+/progress/student/A01741437
+
+{	
+	"FormationUnits": {
+		"questionAmount": 16,
+		"completed": false,
+		progress: [
+			{	
+				"courseName": "construccion de software",
+				"questionsAnswered": 14,
+				"kind": "COURSE",
+				"completed": false
+			},
+			{
+				"courseName": "imp de metodos",
+				"questionsAnswered": 14,
+				"kind": "BLOCK",
+				"completed": false
+			}
+		]
+	}
+
+	"Teachers": {
+		"questionAmount": 16,
+		"completed": true,
+		progress: [
+			{
+				"teacherName": "carmen leticia",
+				"questionsAnswered": 14,
+				"completed": false
+			}
+		]
+	}
+}
+
+//    const output = { 
+      "COURSES": 
+      {
+        "questionAmount": 0,
+        "completed": false,
+        progress: [
+          {	
+            "courseName": "",
+            "questionsAnswered": 0,
+            "kind": "",
+            "completed": false
+          },
+        ]
+      },
+      "BLOCK": 
+      {
+        "questionAmount": 16,
+        "completed": false,
+        progress: [
+          {	
+            "courseName": "",
+            "questionsAnswered": 14,
+            "kind": "COURSE",
+            "completed": false
+          },
+          {
+            "courseName": "imp de metodos",
+            "questionsAnswered": 14,
+            "kind": "BLOCK",
+            "completed": false
+          }
+        ]
+      },
+      "TEACHER": 
+      {
+        "questionAmount": 16,
+        "completed": true,
+        progress: [
+          {
+            "teacherName": "carmen leticia",
+            "questionsAnswered": 14,
+            "completed": false
+          }
+        ]
+      }
+   };
+
+
+only one fetch
+/surveys/published -> 20
+
+/surveys/20?section="MATERIA"?isActive="true"
+
+{
+	[
+		{title: "Los temas y actividades me permitieron desarrollarme y aprender", 
+		kind: "NUMERIC"},
+		{title: "Los temas y actividades me permitieron desarrollarme y aprender", 
+		kind: "NUMERIC"},
+		{title: "Los temas y actividades me permitieron desarrollarme y aprender", 
+		kind: "NUMERIC"}
+	],
+
+}
+
+isTemporary boolean add to db?
+
+
+POST, GET /answers/questions/31
+{
+	studentId: 8,
+	toId: 9,
+	section: "MATERIA"
+}
+
+POST /finish
+
+Enrolled
+pedro|101
+kerim|101
+daniel|202
+
+Classroom
+101 | F1006B
+202 | F1007B
+
+
+Course
+F1006B | IoT
+F1007B | Const de sw
+
+
+pedro|101| 101 | F1006B| F1006B | IoT
+kerim|101| 101 | F1006B| F1006B | IoT
+daniel|202| 202 | F1007B| F1007B | Const de sw
+
+Iot | Const de SW
