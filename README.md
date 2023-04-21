@@ -43,14 +43,12 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - [ ] Endpoints faltantes de `answers`, `comments`, `finish`
 - [ ] Respuestas del 0 - 10 y el NULL value. Agregar validación `zod`.
 - [ ] Poner RUBRICA 2 stores procedures y 1 trigger (aunque no se ocupen)
-- [ ] Poder reordenar preguntas de la Ecoa? Si, mantener orden
 - [ ] Implementar feature de `activa` internamente para simular periodos
 - [ ] Acomodar bien el diagrama relacional del workbench
 - [ ] Preguntar si los 2 stored procedures y 1 trigger que re-hicimos están bien
 - [ ] Dashboard de PowerBI para vista de /profesor?
 - [ ] Cuando el usuario le de a finalizar, debe haber un error si intenta finalizarla pero le faltan preguntas.
 - [ ] Pasa algo si agregamos el string: `¿Cómo evalúas los siguientes enunciados relacionados con el Bloque?  Los temas, las actividades y el reto durante el Bloque:` antes de cada pregunta?
-- [ ] Proteger ruta `/game`
 
 # References & Credits
 
