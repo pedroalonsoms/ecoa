@@ -23,6 +23,7 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - [ ] Arreglar el botón de `back`
 - [ ] Cambiar materia a `unidad de formación`
 - [ ] Cuando el usuario le de a finalizar, debe haber un fetch que probablemente retorne un error si intenta finalizarla pero le faltan preguntas. Eso se debe mostrar en una alerta en el videojuego.
+- [ ] Pasar `studentRegistration` al videojuego en el iframe
 
 ## Front
 
@@ -49,6 +50,7 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - [ ] Dashboard de PowerBI para vista de /profesor?
 - [ ] Cuando el usuario le de a finalizar, debe haber un error si intenta finalizarla pero le faltan preguntas.
 - [ ] Pasa algo si agregamos el string: `¿Cómo evalúas los siguientes enunciados relacionados con el Bloque?  Los temas, las actividades y el reto durante el Bloque:` antes de cada pregunta?
+- [ ] Proteger ruta `/game`
 
 # References & Credits
 
