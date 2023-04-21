@@ -35,6 +35,7 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - [ ] Cachar error cuando quieres crear una encuesta que es en una fecha con overlap (viene del back)
 - [ ] Cachar error cuando la startDate es mayor que la endDate (viene del back)
 - [ ] Dashboard de PowerBI
+- [ ] Seguridad para el login es necesaria (dice el profe de web). Osea, si ponemos `/teachers` y no estamos autenticados, no debería dejarnos entrar. (Protected Routes w/ React Router)
 
 ## Backend
 
