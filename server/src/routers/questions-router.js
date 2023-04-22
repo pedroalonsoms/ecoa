@@ -55,6 +55,15 @@ questionsRouter.put("/questions/:id", async (req, res) => {
       .object({ id: z.string().transform((id) => parseInt(id)) })
       .parse(req.params);
 
+    const [existingQuestions] = await pool.query(
+      "SELECT id FROM Question WHERE id = ?",
+      [id]
+    );
+
+    if (existingQuestions < 1) {
+      throw new Error("Survey with given id does not exist");
+    }
+
     const { acronym, keyAcronym, title, section, answerKind } = z
       .object({
         acronym: z.string(),
