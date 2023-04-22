@@ -1,0 +1,7 @@
+POST http://localhost:8080/api/login
+content-type: application/json
+
+{
+    "email": "clsalazar@tec.mx",
+    "password": "123"
+}
