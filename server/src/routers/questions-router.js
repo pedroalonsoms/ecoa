@@ -60,7 +60,7 @@ questionsRouter.put("/questions/:id", async (req, res) => {
       [id]
     );
 
-    if (existingQuestions < 1) {
+    if (existingQuestions.length < 1) {
       throw new Error("Survey with given id does not exist");
     }
 
