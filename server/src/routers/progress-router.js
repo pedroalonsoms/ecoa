@@ -6,8 +6,6 @@ import { z } from "zod";
 
 const progressesRouter = express.Router();
 
-
-
 progressesRouter.post("/progress/student/:studentRegistration", async (req, res) => {
   try {
     const { studentRegistration } = z
@@ -24,165 +22,118 @@ progressesRouter.post("/progress/student/:studentRegistration", async (req, res)
       const [survey] = surveys;
       console.log(survey)
 
+     // Courses Progress
+      const [coursesProgress] = await pool.query(`
+      SELECT c.title, q.section, COUNT(DISTINCT a.id) AS questionsAnswered
+      FROM Classroom c
+      INNER JOIN Enrolled e ON c.crn = e.crn
+      INNER JOIN Question q ON q.section LIKE CONCAT(c.code, '%')
+      LEFT JOIN Answer a ON a.studentRegistration = ? AND a.surveyQuestionId IN (
+        SELECT sq.id FROM SurveyQuestion sq WHERE sq.surveyId = ?
+      ) AND q.id = a.surveyQuestionId
+      WHERE e.studentRegistration = ?
+      GROUP BY c.title, q.section
+    `, [studentRegistration, survey.id, studentRegistration]);
 
-      const [rows] = await pool.query(`
-      SELECT 
-        c.crn, c.code AS courseCode, c.title AS courseTitle, c.kind AS courseKind, q.id AS questionId, q.section AS questionSection, a.content AS answerContent, t.registration AS teacherRegistration, t.fullName AS teacherFullName
-      FROM 
-        Student s JOIN Enrolled e ON s.registration = e.studentRegistration
-        JOIN Classroom c ON e.crn = c.crn JOIN Teaches tc ON c.crn = tc.crn
-        JOIN Teacher t ON tc.teacherRegistration = t.registration
-        LEFT JOIN SurveyQuestion sq ON sq.targetKind = c.kind
-        LEFT JOIN Question q ON sq.questionId = q.id
-        LEFT JOIN Answer a ON a.surveyQuestionId = sq.id AND a.targetKind = sq.targetKind AND a.crn = c.crn AND a.teacherRegistration = t.registration
-        WHERE s.registration = ?
-    `, [studentRegistration]);
+    // Block progress
+    const [blockProgress] = await pool.query(`
+      SELECT q.section, COUNT(DISTINCT a.id) AS questionsAnswered
+      FROM Question q
+      LEFT JOIN Answer a ON a.studentRegistration = ? AND a.surveyQuestionId IN (
+        SELECT sq.id FROM SurveyQuestion sq WHERE sq.surveyId = ?
+      ) AND q.id = a.surveyQuestionId
+      WHERE q.kind = 'BLOCK'
+      GROUP BY q.section
+    `, [studentRegistration, survey.id]);
 
-    // Temporary data structures
-    const courses = {};
-    const blocks = {};
-    const teachers = {};
+    // Teacher progress
+    const [teacherProgress] = await pool.query(`
+      SELECT t.fullName, COUNT(DISTINCT a.id) AS questionsAnswered
+      FROM Teacher t
+      INNER JOIN Teaches tc ON t.registration = tc.teacherRegistration
+      INNER JOIN Classroom c ON tc.crn = c.crn
+      INNER JOIN Question q ON q.section LIKE CONCAT(c.code, '%')
+      LEFT JOIN Answer a ON a.studentRegistration = ? AND a.surveyQuestionId IN (
+        SELECT sq.id FROM SurveyQuestion sq WHERE sq.surveyId = ?
+      ) AND q.id = a.surveyQuestionId AND a.teacherRegistration = t.registration
+      WHERE c.isActive = true
+      GROUP BY t.fullName
+    `, [studentRegistration, survey.id]);
 
-    // Processing each row from the query
-    for (const row of rows) {
-      const courseId = row.crn;
-      const courseName = row.courseTitle;
-      const courseKind = row.courseKind;
-      const questionId = row.questionId;
-      const questionSection = row.questionSection;
-      const answerContent = row.answerContent;
-      const teacherId = row.teacherRegistration;
-      const teacherName = row.teacherFullName;
-    
-      // Course
-      if (!courses[courseId]) {
-        courses[courseId] = {
-          courseName,
-          questionsAnswered: 0,
-          kind: courseKind,
-          completed: false
-        };
+    // Format Response
+    const response = {
+      COURSES: {
+        questionAmount: 0,
+        completed: false,
+        progress: [],
+      },
+      BLOCK: {
+        questionAmount: 0,
+        completed: false,
+        progress: [],
+      },
+      TEACHER: {
+        questionAmount: 0,
+        completed: false,
+        progress: [],
+      },
+    };
+
+    for (const course of coursesProgress) {
+      const section = course.section.split(" ")[1];
+      const existingProgress = response.COURSES.progress.find((p) => p.kind === section);
+
+      const completed = course.questionsAnswered === course.questionAmount;
+
+      if (existingProgress) {
+        existingProgress.questionsAnswered += course.questionsAnswered;
+        existingProgress.completed = existingProgress.completed && completed;
+      } else {
+        response.COURSES.progress.push({
+          courseName: course.title,
+          questionsAnswered: course.questionsAnswered,
+          kind: section,
+          completed,
+        });
       }
+  response.COURSES.questionAmount += course.questionAmount;
+  response.COURSES.completed = response.COURSES.completed || completed;
+}
 
-      if (answerContent) {
-        courses[courseId].questionsAnswered++;
+    for (const block of blockProgress) {
+      const existingProgress = response.BLOCK.progress.find((p) => p.kind === block.section);
+      const completed = block.questionsAnswered === response.BLOCK.questionAmount;
+      if (existingProgress) {
+        existingProgress.questionsAnswered += block.questionsAnswered;
+        existingProgress.completed = existingProgress.completed && completed;
+      } else {
+        response.BLOCK.progress.push({
+          courseName: "",
+          questionsAnswered: block.questionsAnswered,
+          kind: block.section,
+          completed,
+        });
       }
-
-      if (courses[courseId].questionsAnswered === output[courseKind].questionAmount) {
-        courses[courseId].completed = true;
-      }
-
-      //Blocks
-      if (courseKind === 'BLOCK') {
-        if (!blocks[courseId]) {
-            blocks[courseId] = {
-            courseName,
-            questionsAnswered: 0,
-            kind: courseKind,
-            completed: false
-          };
-        }
-
-        if (answerContent) {
-          blocks[courseId].questionsAnswered++;
-        }
-        if (blocks[courseId].questionsAnswered === output.BLOCK.questionAmount){
-          blocks[courseId].completed = true;
-        }
-      }
-
-      //Teacher
-      if (!teachers[teacherId]) {
-        teachers[teacherId] = {
-            teacherName,
-            questionsAnswered: 0,
-            completed: false
-          };
-        }
-        if (answerContent) {
-          teachers[teacherId].questionsAnswered++;
-        }
-        if (teachers[teacherId].questionsAnswered === output.TEACHER.questionAmount) {
-          teachers[teacherId].completed = true;
-          }
-        }
-
-      // Completing output object with processed data
-    output.COURSES.progress = Object.values(courses);
-    output.BLOCK.progress = Object.values(blocks);
-    output.TEACHER.progress = Object.values(teachers);
-
-    // Calculating completion status of each category
-    output.COURSES.completed = output.COURSES.progress.every(course => course.completed);
-    output.BLOCK.completed = output.BLOCK.progress.every(block => block.completed);
-    output.TEACHER.completed = output.TEACHER.progress.every(teacher => teacher.completed);
-
-    console.log (output);
-      
-      
-
-      
-      //Testing start
-      
-    // query de todos los datos
-    //fors
-    // loop que mete datos dentro de progress
-
-    {	
-      "courseName": "",
-      "questionsAnswered": 0,
-      "kind": "",
-      "completed": false
+      response.BLOCK.completed = response.BLOCK.completed || completed;
     }
 
-    const output = { 
-      "COURSES": 
-      {
-        "questionAmount": 0,
-        "completed": false,
-        progress: [
-          {	
-            "courseName": "",
-            "questionsAnswered": 0,
-            "kind": "",
-            "completed": false
-          },
-        ]
-      },
-      "BLOCK": 
-      {
-        "questionAmount": 16,
-        "completed": false,
-        progress: [
-          {	
-            "courseName": "",
-            "questionsAnswered": 14,
-            "kind": "COURSE",
-            "completed": false
-          },
-          {
-            "courseName": "imp de metodos",
-            "questionsAnswered": 14,
-            "kind": "BLOCK",
-            "completed": false
-          }
-        ]
-      },
-      "TEACHER": 
-      {
-        "questionAmount": 16,
-        "completed": true,
-        progress: [
-          {
-            "teacherName": "carmen leticia",
-            "questionsAnswered": 14,
-            "completed": false
-          }
-        ]
+    for (const teacher of teacherProgress) {
+      const existingProgress = response.TEACHER.progress.find((p) => p.teacherName === teacher.fullName);
+      const completed = teacher.questionsAnswered === response.TEACHER.questionAmount;
+      if (existingProgress) {
+        existingProgress.questionsAnswered += teacher.questionsAnswered;
+        existingProgress.completed = existingProgress.completed && completed;
+      } else {
+        response.TEACHER.progress.push({
+          teacherName: teacher.fullName,
+          questionsAnswered: teacher.questionsAnswered,
+          completed,
+        });
       }
-   };
+      response.TEACHER.completed = response.TEACHER.completed || completed;
+    }
 
-    res.status(200).send(output);
+    res.status(200).send(response);
   } catch (error) {
     res.status(400).send({ error: error.message || "Unknown error" });
   }
