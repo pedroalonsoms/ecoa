@@ -53,7 +53,6 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - [ ] Acomodar bien el diagrama relacional del workbench
 - [ ] Cuando el usuario le de a finalizar, debe haber un error si intenta finalizarla pero le faltan preguntas.
 - [ ] Dashboard de PowerBI para vista de /profesor?
-- [ ] Bug Fix: take caution when using `PUT` method on unexistent questions
 
 # References & Credits
 
