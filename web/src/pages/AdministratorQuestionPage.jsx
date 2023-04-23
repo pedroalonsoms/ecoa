@@ -101,6 +101,20 @@ const AdministratorQuestions = () => {
               )
           )}
         </div>
+        <h3>Bloque</h3>
+        <div className={Styles.questions}>
+          {questions.map(
+            (question) =>
+              question.section === "BLOCK" && (
+                <Question
+                  key={question.id}
+                  title={question.title}
+                  data={question}
+                  handleEdit={handleEdit}
+                />
+              )
+          )}
+        </div>
       </div>
 
       

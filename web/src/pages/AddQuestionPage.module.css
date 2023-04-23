@@ -15,7 +15,7 @@
     overflow-x: hidden;
     overflow-y: hidden;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
+    z-index: 10;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -24,6 +24,7 @@
 .wrapper {
     /* max-width: 500px; */
     /* margin: 2rem auto; */
+    z-index: 11;
     width: 60vw;
     height: 60vh;
 }
@@ -37,6 +38,7 @@
     display: flex;
     flex-direction: column;
     padding: 10px;
+    z-index: 12;
 }
 
 .content h2 {

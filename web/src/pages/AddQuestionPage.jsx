@@ -10,8 +10,6 @@ const AddQuestionPage = (props) => {
         answerKind: "",
     });
 
-    const [scroll, setScroll] = useState(true);
-
     const handleChange = (e) => {
         setQuestionData({
             ...questionData,

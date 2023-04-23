@@ -2,6 +2,7 @@ import Styles from './AdministratorSurveyPage.module.css';
 
 import Navbar from "../components/Navbar";
 import Survey from "../components/Survey";
+import AddSurveyPage from "./AddSurveyPage";
 
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -14,6 +15,7 @@ const AdministratorSurveys = () => {
   const activeLinks = true;
 
   const [surveys, setSurveys] = useState([]);
+  const [showAddSurvey, setShowAddSurvey] = useState(false);
 
   useEffect(() => {
     const fetchSurveys = async () => {
@@ -28,22 +30,29 @@ const AdministratorSurveys = () => {
     fetchSurveys();
   }, []);
 
+  const handleClick = () => {
+    setShowAddSurvey(!showAddSurvey);
+  };
+
   return (
     <div>
       <Navbar showLinks={activeLinks} />
       <h2>Encuestas</h2>
+
+      {showAddSurvey && <AddSurveyPage hideAddQuestion={handleClick} />}
+
       <div className={Styles.container}>
         <div className={Styles.surveys}>
           {surveys.map((survey) => (
-            <Survey key={survey.id} title={survey.title} />
+            <Survey key={survey.id} data={survey} />
           ))}
         </div>
       </div>
-      <div className={Styles.buttons}>
-        <button className={Styles.addButton}>
+      {!showAddSurvey &&
+        <button className={Styles.addButton} onClick={handleClick}>
           <FontAwesomeIcon icon={faPlus} size="2xl" />
         </button>
-      </div>
+      }
     </div>
   );
 };
