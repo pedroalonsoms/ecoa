@@ -13,7 +13,9 @@ const questionsRouter = express.Router();
 
 questionsRouter.get("/questions", async (req, res) => {
   try {
-    const [[questions]] = await pool.query("CALL getAllQuestions()");
+    const [questions] = await pool.query(
+      "SELECT id, title, section, answerKind FROM Question ORDER BY id ASC"
+    );
 
     res.status(200).send(questions);
   } catch (error) {
@@ -52,6 +54,15 @@ questionsRouter.put("/questions/:id", async (req, res) => {
     const { id } = z
       .object({ id: z.string().transform((id) => parseInt(id)) })
       .parse(req.params);
+
+    const [existingQuestions] = await pool.query(
+      "SELECT id FROM Question WHERE id = ?",
+      [id]
+    );
+
+    if (existingQuestions.length < 1) {
+      throw new Error("Survey with given id does not exist");
+    }
 
     const { acronym, keyAcronym, title, section, answerKind } = z
       .object({

@@ -1,0 +1,31 @@
+GET http://localhost:8080/api/questions
+
+###
+
+POST http://localhost:8080/api/questions
+content-type: application/json
+
+{
+    "acronym": "ABC",
+    "keyAcronym": "MyABC",
+    "title": "    test question 02    ",
+    "section": "COURSE",
+    "answerKind": "TEXT"
+}
+
+###
+
+PUT http://localhost:8080/api/questions/12
+content-type: application/json
+
+{
+    "acronym": "DEF",
+    "keyAcronym": "MyDEF",
+    "title": "test question 99",
+    "section": "TEACHER",
+    "answerKind": "NUMERIC"
+}
+
+###
+
+DELETE http://localhost:8080/api/questions/12

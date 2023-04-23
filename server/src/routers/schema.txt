@@ -1,22 +1,84 @@
-/progress/student/18
+/progress/student/A01741437
 
-{
-	"Materias": {
-		completed: false,
+{	
+	"FormationUnits": {
+		"questionAmount": 16,
+		"completed": false,
 		progress: [
-			"const de software": 14/16,
-			"implementacion de metodos": 13/16,
-			"iot": 0/16
+			{	
+				"courseName": "construccion de software",
+				"questionsAnswered": 14,
+				"kind": "COURSE",
+				"completed": false
+			},
+			{
+				"courseName": "imp de metodos",
+				"questionsAnswered": 14,
+				"kind": "BLOCK",
+				"completed": false
+			}
 		]
 	}
-	"Profesores": {
-		completed: true,
+
+	"Teachers": {
+		"questionAmount": 16,
+		"completed": true,
 		progress: [
-			"carmen leticia": 14/16,
-			"rafa davalos": 16/16
+			{
+				"teacherName": "carmen leticia",
+				"questionsAnswered": 14,
+				"completed": false
+			}
 		]
 	}
 }
+
+//    const output = { 
+      "COURSES": 
+      {
+        "questionAmount": 0,
+        "completed": false,
+        progress: [
+          {	
+            "courseName": "",
+            "questionsAnswered": 0,
+            "kind": "",
+            "completed": false
+          },
+        ]
+      },
+      "BLOCK": 
+      {
+        "questionAmount": 16,
+        "completed": false,
+        progress: [
+          {	
+            "courseName": "",
+            "questionsAnswered": 14,
+            "kind": "COURSE",
+            "completed": false
+          },
+          {
+            "courseName": "imp de metodos",
+            "questionsAnswered": 14,
+            "kind": "BLOCK",
+            "completed": false
+          }
+        ]
+      },
+      "TEACHER": 
+      {
+        "questionAmount": 16,
+        "completed": true,
+        progress: [
+          {
+            "teacherName": "carmen leticia",
+            "questionsAnswered": 14,
+            "completed": false
+          }
+        ]
+      }
+   };
 
 
 only one fetch
@@ -40,13 +102,6 @@ isTemporary boolean add to db?
 
 
 POST, GET /answers/questions/31
-{
-	studentId: 8,
-	toId: 9,
-	section: "MATERIA"
-}
-
-POST, GET /comments/questions/31
 {
 	studentId: 8,
 	toId: 9,

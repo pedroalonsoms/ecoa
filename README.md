@@ -21,7 +21,14 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - [ ] Música de fondo
 - [ ] Sonido de click al botón
 - [ ] Arreglar el botón de `back`
-- [ ] Cambiar materia a `unidad de formación`,
+- [ ] Cambiar materia a `unidad de formación`
+- [ ] Cuando el usuario le de a finalizar, debe haber un fetch que probablemente retorne un error si intenta finalizarla pero le faltan preguntas. Eso se debe mostrar en una alerta en el videojuego.
+- [ ] Pasar `studentRegistration` al videojuego en el iframe
+- [ ] Poner pantalla de inicio con instrucciones y mecánica
+- [ ] Agregar control por teclado exclusivamente
+- [ ] Agregar animaciones
+- [ ] No debe de dejar avanzar a la siguiente si no ha contestado la pregunta actual (mostrar una alerta)
+- [ ] Variedad de los sonidos
 
 ## Front
 
@@ -30,23 +37,22 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - [ ] Mejorar diseño de CSS
 - [ ] Re-diseñar front de encuesta activa, ahora será por medio de fechas
 - [ ] Añadir sección para `Bloque`
-- [ ] Añadir campos de `acronym` y `keyAcronym` al crear una pregunta (preguntar a la miss)
 - [ ] Cachar error cuando pones título duplicado en el survey (viene del back)
 - [ ] Cachar error cuando quieres crear una encuesta que es en una fecha con overlap (viene del back)
 - [ ] Cachar error cuando la startDate es mayor que la endDate (viene del back)
+- [ ] Dashboard de PowerBI
+- [ ] Seguridad para el login es necesaria (dice el profe de web). Osea, si ponemos `/teachers` y no estamos autenticados, no debería dejarnos entrar. (Protected Routes w/ React Router)
 
 ## Backend
 
 - [ ] Endpoints faltantes de `answers`, `comments`, `finish`
 - [ ] Respuestas del 0 - 10 y el NULL value. Agregar validación `zod`.
-- [ ] Poner RUBRICA 2 stores procedures y 1 trigger (aunque no se ocupen)
-- [ ] Poder reordenar preguntas de la Ecoa?
-- [ ] Poner en el CRN un campo de "activa" para que le mueva la miss
-- [ ] Implementar feature de `activa` para simular periodos
-- [ ] Archivar preguntas es necesario? Podemos dejar on delete cascade?
-- [ ] Hacer un trigger dependiendo de la fecha
+- [ ] Preguntar si los 2 stored procedures y 1 trigger que re-hicimos están bien
+- [ ] Pasa algo si agregamos el string: `¿Cómo evalúas los siguientes enunciados relacionados con el Bloque?  Los temas, las actividades y el reto durante el Bloque:` antes de cada pregunta?
+- [ ] Implementar feature de `activa` internamente para simular periodos
 - [ ] Acomodar bien el diagrama relacional del workbench
-- [ ] Preguntar si los 2 stored procedures y 1 trigger que llevamos están bien
+- [ ] Cuando el usuario le de a finalizar, debe haber un error si intenta finalizarla pero le faltan preguntas.
+- [ ] Dashboard de PowerBI para vista de /profesor?
 
 # References & Credits
 

@@ -1,0 +1,49 @@
+GET http://localhost:8080/api/surveys
+
+###
+
+POST http://localhost:8080/api/surveys
+content-type: application/json
+
+{
+    "title": "survey four",
+    "questionIds": [2,3],
+    "startDate": "2023-04-22",
+    "endDate": "2023-04-22"
+}
+
+###
+
+PUT http://localhost:8080/api/surveys/4
+content-type: application/json
+
+{
+    "title": "survey four",
+    "questionIds": [2,3],
+    "startDate": "2023-04-22",
+    "endDate": "2023-04-22"
+}
+
+###
+
+DELETE http://localhost:8080/api/surveys/4
+
+###
+
+GET http://localhost:8080/api/surveys/2
+
+###
+
+GET http://localhost:8080/api/surveys/active
+
+###
+
+GET http://localhost:8080/api/surveys/2?section=TEACHER
+
+###
+
+GET http://localhost:8080/api/surveys/2?isActive=true
+
+###
+
+GET http://localhost:8080/api/surveys/3?section=TEACHER&isActive=true
