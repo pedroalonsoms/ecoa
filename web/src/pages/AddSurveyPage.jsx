@@ -13,11 +13,24 @@ const AddSurveyPage = (props) => {
     startDate: "",
     endDate: "",
   });
-  // Make a function to get the ids of the children component
+
   const toggleActive = (id) => {
-    console.log(id);
-    setSurveyData({ ...surveyData, questionIds: [...surveyData.questionIds, id] });
-  };
+		console.log(id);
+		const ids = surveyData.questionIds;
+		if (ids.includes(id)) {
+			setSurveyData({
+				...surveyData,
+				questionIds: surveyData.questionIds.filter(
+					questionId => questionId !== id
+				)
+			})
+		} else {
+			setSurveyData({
+				...surveyData,
+				questionIds: [...surveyData.questionIds, id]
+			})
+		}
+	};
 
   const handleChange = (e) => {
     setSurveyData({ ...surveyData, [e.target.name]: e.target.value });

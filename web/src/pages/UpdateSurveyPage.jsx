@@ -109,8 +109,6 @@ const UpdateSurveyPage = (props) => {
 				questionIds: [...sendSurvey.questionIds, id]
 			})
 		}
-
-		// setSendSurvey({ ...sendSurvey, questionIds:  })
 	};
 
 	const cancelButton = (e) => {
