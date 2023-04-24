@@ -14,7 +14,7 @@ const AddSurveyPage = (props) => {
     endDate: "",
   });
   // Make a function to get the ids of the children component
-  const getIds = (id) => {
+  const toggleActive = (id) => {
     console.log(id);
     setSurveyData({ ...surveyData, questionIds: [...surveyData.questionIds, id] });
   };
@@ -115,7 +115,7 @@ const AddSurveyPage = (props) => {
                       title={question.title}
                       data={question}
                       className={Styles.question}
-                      getIds={getIds}
+                      toggleActive={toggleActive}
                     />
                   )
               )}
@@ -130,7 +130,7 @@ const AddSurveyPage = (props) => {
                       title={question.title}
                       data={question}
                       className={Styles.question}
-                      getIds={getIds}
+                      toggleActive={toggleActive}
                     />
                   )
               )}
@@ -145,7 +145,7 @@ const AddSurveyPage = (props) => {
                       title={question.title}
                       data={question}
                       className={Styles.question}
-                      getIds={getIds}
+                      toggleActive={toggleActive}
                     />
                   )
               )}

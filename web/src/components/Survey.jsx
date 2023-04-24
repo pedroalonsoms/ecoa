@@ -34,7 +34,9 @@ const Survey = (props) => {
 					>
 						<FontAwesomeIcon icon={faTrash} />
 					</button>
-					<button className={Styles.button}>
+					<button className={Styles.button}
+						onClick={(e) => props.handleEdit(props.data.id)}
+					>
 						<FontAwesomeIcon icon={faPenToSquare} />
 					</button>
 				</div>
