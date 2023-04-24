@@ -24,15 +24,8 @@
     height: 100%;   
 }
 
-.buttons {
-    position: fixed;
-    bottom: 80px;
-    right: 80px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
+.hide {
+    display: none;
 }
 
 .applyButton {
@@ -47,6 +40,14 @@
 }
 
 .addButton {
+    position: fixed;
+    bottom: 80px;
+    right: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
     background-color: #000000;
     border-radius: 100%;
     border: none;
