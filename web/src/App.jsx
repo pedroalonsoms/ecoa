@@ -1,60 +1,42 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {Routes, Route } from "react-router-dom";
 
 import LoginPage from "./pages/LoginPage";
 import TeacherPage from "./pages/TeacherPage";
 import StudentPage from "./pages/StudentPage";
 import AdministratorSurveysPage from "./pages/AdministratorSurveyPage";
 import AdministratorQuestionsPage from "./pages/AdministratorQuestionPage";
-
-// const router = createBrowserRouter([
-//     {
-//         path: "/",
-//         element: <LoginPage />,
-//     },
-//     {
-//         path: "/login",
-//         element: <LoginPage />,
-//     },
-//     {
-//         path: "/student",
-//         element: <StudentPage />,
-//     },
-//     {
-//         path: "/teacher",
-//         element: <TeacherPage />,
-//     },
-//     {
-//         path: "/administrator/surveys",
-//         element: <AdministratorSurveysPage />,
-//     },
-//     {
-//         path: "/administrator/questions",
-//         element: <AdministratorQuestionsPage />,
-//     },
-// ]);
+import Layout from "./components/Layout";
+import RequireAuth from "./components/RequireAuth";
+import Error404 from "./pages/Error404";
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route index element={<LoginPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/student" element={<StudentPage />} />
-        <Route path="/teacher" element={<TeacherPage />} />
-        <Route
-          path="/administrator/surveys"
-          element={<AdministratorSurveysPage />}
-        />
-        <Route
-          path="/administrator/questions"
-          element={<AdministratorQuestionsPage />}
-        />
-        <Route path="*" element={<LoginPage />} />
-      </Routes>
-    </BrowserRouter>
-    // <RouterProvider router={router} />
+    <Routes>
+      <Route path="/" element={<Layout />} > 
+        {/* Public Routes */}
+        <Route path="/" element={<LoginPage />} />
+        <Route path="login" element={<LoginPage />} />
+
+        {/* Protected Routes */}
+        <Route element={<RequireAuth allowedRoles={["STUDENT"]} />}>
+          <Route path="student" element={<StudentPage />} />
+          <Route path="game" element={<StudentPage />} />
+        </Route>
+
+        <Route element={<RequireAuth allowedRoles={["TEACHER"]} />}>
+          <Route path="teacher" element={<TeacherPage />} />
+        </Route>
+
+        <Route element={<RequireAuth allowedRoles={["ADMINISTRATOR"]} />}>
+          <Route path="administrator/surveys" element={<AdministratorSurveysPage />} />
+          <Route path="administrator/questions" element={<AdministratorQuestionsPage />} />
+        </Route>
+        
+        {/* Catch All */}
+        <Route path="*" element={<Error404 />} />
+      </Route>
+    </Routes>
   );
 };
 

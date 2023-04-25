@@ -7,11 +7,11 @@ h2 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin: -20px;
 }
 
 .game {
   background-color: white;
-  margin: 20px;
   height: 680px;
   width: 1200px;
   border: none;
