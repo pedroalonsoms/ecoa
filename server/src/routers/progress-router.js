@@ -26,12 +26,20 @@ progressRouter.post(
       const [survey] = surveys;
 
       // Course Progress
-      const [courseProgress] = await pool.query(
+      const [formationUnitsProgress] = await pool.query(
         `SELECT
-        Classroom.title AS courseName,
+        Classroom.title AS title,
         Classroom.kind AS kind,
         COUNT(Classroom.crn) AS questionsAnswered,
-        (SELECT COUNT(*) FROM Question WHERE section = kind) AS questionAmount
+        (
+          SELECT 
+          COUNT(*) 
+          FROM SurveyQuestion
+          JOIN Question 
+          ON SurveyQuestion.questionId = Question.id
+          WHERE SurveyQuestion.surveyId = ? 
+          AND Question.section = kind
+        ) AS questionAmount
         FROM Classroom
         LEFT JOIN TmpAnswer
         ON Classroom.crn = TmpAnswer.crn
@@ -45,111 +53,71 @@ progressRouter.post(
           WHERE studentRegistration = ?
         )
         GROUP BY Classroom.crn`,
-        [studentRegistration, studentRegistration]
+        [survey.id, studentRegistration, studentRegistration]
       );
-
-      res.send(courseProgress);
-      return;
 
       // Teacher progress
-      const [teacherProgress] = await pool.query(
-        `
-      SELECT t.fullName, COUNT(DISTINCT a.id) AS questionsAnswered
-      FROM Teacher t
-      INNER JOIN Teaches tc ON t.registration = tc.teacherRegistration
-      INNER JOIN Classroom c ON tc.crn = c.crn
-      INNER JOIN Question q ON q.section LIKE CONCAT(c.code, '%')
-      LEFT JOIN Answer a ON a.studentRegistration = ? AND a.surveyQuestionId IN (
-        SELECT sq.id FROM SurveyQuestion sq WHERE sq.surveyId = ?
-      ) AND q.id = a.surveyQuestionId AND a.teacherRegistration = t.registration
-      WHERE c.isActive = true
-      GROUP BY t.fullName
-    `,
-        [studentRegistration, survey.id]
+      const [teachersProgress] = await pool.query(
+        `SELECT Teacher.fullName AS fullName,
+        COUNT(Teacher.registration) AS questionsAnswered,
+        (
+          SELECT 
+          COUNT(*) 
+          FROM SurveyQuestion
+          JOIN Question 
+          ON SurveyQuestion.questionId = Question.id
+          WHERE SurveyQuestion.surveyId = ? 
+          AND Question.section = 'TEACHER'
+        ) AS questionAmount
+        FROM Teacher
+        LEFT JOIN TmpAnswer
+        ON Teacher.registration = TmpAnswer.teacherRegistration
+        AND TmpAnswer.targetKind = 'TEACHER_REGISTRATION'
+        AND TmpAnswer.studentRegistration = ?
+        WHERE Teacher.registration IN (
+          SELECT teacherRegistration
+          FROM Teaches
+          WHERE crn IN (
+            SELECT Enrolled.crn
+            FROM Enrolled
+            JOIN Classroom
+            ON Enrolled.crn = Classroom.crn
+            WHERE studentRegistration = ? AND Classroom.isActive = TRUE
+          ) 
+        )
+        GROUP BY Teacher.registration
+        `,
+        [survey.id, studentRegistration, studentRegistration]
       );
 
-      // Format Response
-      const response = {
-        COURSES: {
-          questionAmount: 0,
-          completed: false,
-          progress: [],
-        },
-        BLOCK: {
-          questionAmount: 0,
-          completed: false,
-          progress: [],
-        },
-        TEACHER: {
-          questionAmount: 0,
-          completed: false,
-          progress: [],
-        },
+      const sumByKey = (progressArray, key) => {
+        return progressArray.reduce(
+          (accumulator, item) => accumulator + item[key],
+          0
+        );
       };
 
-      for (const course of courseProgress) {
-        const section = course.section.split(" ")[1];
-        const existingProgress = response.COURSES.progress.find(
-          (p) => p.kind === section
-        );
-
-        const completed = course.questionsAnswered === course.questionAmount;
-
-        if (existingProgress) {
-          existingProgress.questionsAnswered += course.questionsAnswered;
-          existingProgress.completed = existingProgress.completed && completed;
-        } else {
-          response.COURSES.progress.push({
-            courseName: course.title,
-            questionsAnswered: course.questionsAnswered,
-            kind: section,
-            completed,
-          });
-        }
-        response.COURSES.questionAmount += course.questionAmount;
-        response.COURSES.completed = response.COURSES.completed || completed;
-      }
-
-      for (const block of blockProgress) {
-        const existingProgress = response.BLOCK.progress.find(
-          (p) => p.kind === block.section
-        );
-        const completed =
-          block.questionsAnswered === response.BLOCK.questionAmount;
-        if (existingProgress) {
-          existingProgress.questionsAnswered += block.questionsAnswered;
-          existingProgress.completed = existingProgress.completed && completed;
-        } else {
-          response.BLOCK.progress.push({
-            courseName: "",
-            questionsAnswered: block.questionsAnswered,
-            kind: block.section,
-            completed,
-          });
-        }
-        response.BLOCK.completed = response.BLOCK.completed || completed;
-      }
-
-      for (const teacher of teacherProgress) {
-        const existingProgress = response.TEACHER.progress.find(
-          (p) => p.teacherName === teacher.fullName
-        );
-        const completed =
-          teacher.questionsAnswered === response.TEACHER.questionAmount;
-        if (existingProgress) {
-          existingProgress.questionsAnswered += teacher.questionsAnswered;
-          existingProgress.completed = existingProgress.completed && completed;
-        } else {
-          response.TEACHER.progress.push({
-            teacherName: teacher.fullName,
-            questionsAnswered: teacher.questionsAnswered,
-            completed,
-          });
-        }
-        response.TEACHER.completed = response.TEACHER.completed || completed;
-      }
-
-      res.status(200).send(response);
+      res.status(200).send({
+        FORMATION_UNITS: {
+          totalQuestionAmount: sumByKey(
+            formationUnitsProgress,
+            "questionAmount"
+          ),
+          totalQuestionsAnswered: sumByKey(
+            formationUnitsProgress,
+            "questionsAnswered"
+          ),
+          progress: formationUnitsProgress,
+        },
+        TEACHERS: {
+          totalQuestionAmount: sumByKey(teachersProgress, "questionAmount"),
+          totalQuestionsAnswered: sumByKey(
+            teachersProgress,
+            "questionsAnswered"
+          ),
+          progress: teachersProgress,
+        },
+      });
     } catch (error) {
       res.status(400).send({ error: error.message || "Unknown error" });
     }
