@@ -42,6 +42,8 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - [ ] Cachar error cuando la startDate es mayor que la endDate (viene del back)
 - [ ] Dashboard de PowerBI
 - [ ] Seguridad para el login es necesaria (dice el profe de web). Osea, si ponemos `/teachers` y no estamos autenticados, no debería dejarnos entrar. (Protected Routes w/ React Router)
+- [ ] Agregar botón de logout
+- [ ] Enviar información del front al videojuego
 
 ## Backend
 
