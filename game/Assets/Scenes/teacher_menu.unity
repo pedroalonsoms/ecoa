@@ -914,7 +914,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 785656847}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: toComment
+        m_MethodName: toTeacherNumericQuestion
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1253,7 +1253,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 785656847}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: toScaledQuestion
+        m_MethodName: toTeacherNumericQuestion
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1560,7 +1560,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 785656847}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: toScaledQuestion
+        m_MethodName: toTeacherNumericQuestion
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2359,7 +2359,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 785656847}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: toScaledQuestion
+        m_MethodName: toTeacherNumericQuestion
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2554,7 +2554,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 785656847}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: toScaledQuestion
+        m_MethodName: toTeacherNumericQuestion
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2645,7 +2645,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 785656847}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: toScaledQuestion
+        m_MethodName: toTeacherNumericQuestion
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3011,7 +3011,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 785656847}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: toComment
+        m_MethodName: toTeacherNumericQuestion
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3500,7 +3500,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 785656847}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: toScaledQuestion
+        m_MethodName: toTeacherNumericQuestion
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
