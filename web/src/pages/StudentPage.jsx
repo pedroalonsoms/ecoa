@@ -1,16 +1,22 @@
 import Styles from "./StudentPage.module.css";
 
 import Navbar from "../components/Navbar";
-import { useLocation } from "react-router-dom";
+import { useLocation, Navigate } from "react-router-dom";
 import { Unity, useUnityContext, SendMessage } from "react-unity-webgl";
 
 const StudentPage = () => {
   const activeLinks = false;
-  const location = useLocation();
-  console.log(location);
+  try {
+    const location = useLocation();
+    console.log(location);
 
-  const data = location.state.data;
-  console.log(data);
+    const data = location.state.data;
+    console.log(data);
+    const name = location.state.data.fullName;
+  } catch (error) {
+    console.log(error);
+    <Navigate to="/" />;
+  }
 
   // const { unityProvider, sendMessage } = useUnityContext({
   //   loaderUrl: "./game/dist/Build/dist.loader.js",
@@ -31,7 +37,7 @@ const StudentPage = () => {
   return (
     <div>
       <Navbar showLinks={activeLinks} />
-      <h2>Bienvenido a la ECOA <span id="name">{location.state.data.fullName}</span></h2>
+      <h2>Bienvenido a la ECOA <span id="name">{name}</span></h2>
       <div className={Styles.container}>
         <iframe className={Styles.game} src="/game"></iframe>
         {/* <Unity className={Styles.game} unityProvider={unityProvider} /> */}

@@ -26,6 +26,9 @@ const LoginForm = () => {
         role: res.data.role,
       };
 
+      // Save session in localstorage
+      localStorage.setItem("auth", JSON.stringify({...data, isLogged: true}));
+
       switch (data.role) {
         case "STUDENT":
           navigate("/student", { state: { data } });
