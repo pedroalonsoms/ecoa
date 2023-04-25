@@ -35,7 +35,7 @@ progressRouter.post(
       const [courseProgress] = await pool.query(
         `SELECT
         Classroom.title AS courseName,
-        Classroom.kind as kind,
+        Classroom.kind AS kind,
         COUNT(Classroom.crn) AS questionsAnswered,
         IF(COUNT(Classroom.crn) = ?, TRUE, FALSE) AS completed
         FROM Classroom
