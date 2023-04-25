@@ -25,52 +25,36 @@ progressRouter.post(
 
       const [survey] = surveys;
 
-      const [[{ TOTAL_COURSE_QUESTIONS }]] = await pool.query(
-        `SELECT COUNT(*) AS TOTAL_COURSE_QUESTIONS
-        FROM Question
-        WHERE section = 'COURSE'`
-      );
-
       // Course Progress
       const [courseProgress] = await pool.query(
         `SELECT
         Classroom.title AS courseName,
         Classroom.kind AS kind,
         COUNT(Classroom.crn) AS questionsAnswered,
-        IF(COUNT(Classroom.crn) = ?, TRUE, FALSE) AS completed
+        IF(
+          COUNT(Classroom.crn) = 
+          (SELECT COUNT(*)
+          FROM Question
+          WHERE section = kind), TRUE, FALSE
+        ) AS completed
         FROM Classroom
         LEFT JOIN TmpAnswer
         ON Classroom.crn = TmpAnswer.crn
         AND TmpAnswer.targetKind = 'CRN'
         AND TmpAnswer.studentRegistration = ?
         WHERE
-        Classroom.kind = 'COURSE' 
-        AND Classroom.isActive = TRUE
+        Classroom.isActive = TRUE
         AND Classroom.crn IN (
           SELECT crn
           FROM Enrolled
           WHERE studentRegistration = ?
         )
         GROUP BY Classroom.crn`,
-        [TOTAL_COURSE_QUESTIONS, studentRegistration, studentRegistration]
+        [studentRegistration, studentRegistration]
       );
 
       res.send(courseProgress);
       return;
-
-      // Block progress
-      const [blockProgress] = await pool.query(
-        `
-      SELECT q.section, COUNT(DISTINCT a.id) AS questionsAnswered
-      FROM Question q
-      LEFT JOIN Answer a ON a.studentRegistration = ? AND a.surveyQuestionId IN (
-        SELECT sq.id FROM SurveyQuestion sq WHERE sq.surveyId = ?
-      ) AND q.id = a.surveyQuestionId
-      WHERE q.kind = 'BLOCK'
-      GROUP BY q.section
-    `,
-        [studentRegistration, survey.id]
-      );
 
       // Teacher progress
       const [teacherProgress] = await pool.query(
