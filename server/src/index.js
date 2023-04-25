@@ -9,6 +9,7 @@ import surveysRouter from "./routers/surveys-router.js";
 import prizesRouter from "./routers/prizes-router.js";
 import answersRouter from "./routers/answers-router.js";
 import finishRouter from "./routers/finish-router.js";
+import progressRouter from "./routers/progress-router.js";
 
 // TODO: future cors implementation when needing cross-domain request
 const app = express();
@@ -43,6 +44,7 @@ app.use("/api", questionsRouter);
 app.use("/api", surveysRouter);
 app.use("/api", prizesRouter);
 app.use("/api", answersRouter);
+app.use("/api", progressRouter);
 app.use("/api", finishRouter);
 app.use(express.static("../web/dist"));
 app.use("*", (req, res) => {
