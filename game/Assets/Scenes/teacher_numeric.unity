@@ -1231,9 +1231,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1918855352}
+        m_TargetAssemblyTypeName: TeacherQuestionManager, Assembly-CSharp
+        m_MethodName: score7
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1242,7 +1242,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
       - m_Target: {fileID: 8300000, guid: c93e458b29e1d49e999c87dd51dfdda2, type: 3}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
         m_MethodName: 
@@ -1778,9 +1778,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1918855352}
+        m_TargetAssemblyTypeName: TeacherQuestionManager, Assembly-CSharp
+        m_MethodName: score4
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1789,7 +1789,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
       - m_Target: {fileID: 8300000, guid: c93e458b29e1d49e999c87dd51dfdda2, type: 3}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
         m_MethodName: 
@@ -2089,9 +2089,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1918855352}
+        m_TargetAssemblyTypeName: TeacherQuestionManager, Assembly-CSharp
+        m_MethodName: score10
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2100,7 +2100,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
       - m_Target: {fileID: 8300000, guid: c93e458b29e1d49e999c87dd51dfdda2, type: 3}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
         m_MethodName: 
@@ -2320,9 +2320,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1918855352}
+        m_TargetAssemblyTypeName: TeacherQuestionManager, Assembly-CSharp
+        m_MethodName: score8
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2331,7 +2331,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
       - m_Target: {fileID: 8300000, guid: c93e458b29e1d49e999c87dd51dfdda2, type: 3}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
         m_MethodName: 
@@ -2467,9 +2467,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1918855352}
+        m_TargetAssemblyTypeName: TeacherQuestionManager, Assembly-CSharp
+        m_MethodName: score3
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2478,7 +2478,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
       - m_Target: {fileID: 8300000, guid: c93e458b29e1d49e999c87dd51dfdda2, type: 3}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
         m_MethodName: 
@@ -3065,9 +3065,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1918855352}
+        m_TargetAssemblyTypeName: TeacherQuestionManager, Assembly-CSharp
+        m_MethodName: score1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3076,7 +3076,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
       - m_Target: {fileID: 8300000, guid: c93e458b29e1d49e999c87dd51dfdda2, type: 3}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
         m_MethodName: 
@@ -3598,9 +3598,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1918855352}
+        m_TargetAssemblyTypeName: TeacherQuestionManager, Assembly-CSharp
+        m_MethodName: score5
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3609,7 +3609,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
       - m_Target: {fileID: 8300000, guid: c93e458b29e1d49e999c87dd51dfdda2, type: 3}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
         m_MethodName: 
@@ -3988,9 +3988,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 627904539}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: toScaledQuestion
+      - m_Target: {fileID: 1918855352}
+        m_TargetAssemblyTypeName: TeacherQuestionManager, Assembly-CSharp
+        m_MethodName: loadNextQuestion
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4215,9 +4215,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1918855352}
+        m_TargetAssemblyTypeName: TeacherQuestionManager, Assembly-CSharp
+        m_MethodName: score0
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4226,7 +4226,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
       - m_Target: {fileID: 8300000, guid: c93e458b29e1d49e999c87dd51dfdda2, type: 3}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
         m_MethodName: 
@@ -4362,9 +4362,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1918855352}
+        m_TargetAssemblyTypeName: TeacherQuestionManager, Assembly-CSharp
+        m_MethodName: score6
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4373,7 +4373,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
       - m_Target: {fileID: 8300000, guid: c93e458b29e1d49e999c87dd51dfdda2, type: 3}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
         m_MethodName: 
@@ -4508,9 +4508,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1918855352}
+        m_TargetAssemblyTypeName: TeacherQuestionManager, Assembly-CSharp
+        m_MethodName: scoreNull
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4519,7 +4519,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
       - m_Target: {fileID: 8300000, guid: c93e458b29e1d49e999c87dd51dfdda2, type: 3}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
         m_MethodName: 
@@ -4818,9 +4818,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 627904539}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: toSubjectMenu
+      - m_Target: {fileID: 1918855352}
+        m_TargetAssemblyTypeName: TeacherQuestionManager, Assembly-CSharp
+        m_MethodName: loadPrevQuestion
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4918,6 +4918,8 @@ MonoBehaviour:
   qAnswerKind: 
   pregunta: {fileID: 0}
   profesorNombre: {fileID: 0}
+  totalQuestions: 0
+  currentIndex: 0
 --- !u!4 &1918855353
 Transform:
   m_ObjectHideFlags: 0
@@ -5018,9 +5020,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1918855352}
+        m_TargetAssemblyTypeName: TeacherQuestionManager, Assembly-CSharp
+        m_MethodName: score2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5029,7 +5031,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
       - m_Target: {fileID: 8300000, guid: c93e458b29e1d49e999c87dd51dfdda2, type: 3}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
         m_MethodName: 
@@ -5329,9 +5331,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1918855352}
+        m_TargetAssemblyTypeName: TeacherQuestionManager, Assembly-CSharp
+        m_MethodName: score9
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5340,7 +5342,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
       - m_Target: {fileID: 8300000, guid: c93e458b29e1d49e999c87dd51dfdda2, type: 3}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
         m_MethodName: 
