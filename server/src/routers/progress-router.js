@@ -31,12 +31,7 @@ progressRouter.post(
         Classroom.title AS courseName,
         Classroom.kind AS kind,
         COUNT(Classroom.crn) AS questionsAnswered,
-        IF(
-          COUNT(Classroom.crn) = 
-          (SELECT COUNT(*)
-          FROM Question
-          WHERE section = kind), TRUE, FALSE
-        ) AS completed
+        (SELECT COUNT(*) FROM Question WHERE section = kind) AS questionAmount
         FROM Classroom
         LEFT JOIN TmpAnswer
         ON Classroom.crn = TmpAnswer.crn
