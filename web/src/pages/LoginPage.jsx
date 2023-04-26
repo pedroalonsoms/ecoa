@@ -34,9 +34,9 @@ const Login = (props) => {
       // console.log(res);
 
       const data = {
-        id: res.data.id,
         fullName: res.data.fullName,
         role: res.data.role,
+        registration: res.data.registration
       };
 
       // Save session in localstorage
@@ -46,7 +46,7 @@ const Login = (props) => {
 
       switch (data.role) {
         case "STUDENT":
-          navigate("/student", { state: { data } });
+          navigate(`/game?studentRegistration=${data.registration}`, { state: { data } });
           break;
         case "TEACHER":
           navigate("/teacher", { state: { data } });
