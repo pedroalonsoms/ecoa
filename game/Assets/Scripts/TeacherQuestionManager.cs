@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,8 @@ using static Question;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class QuestionAPI : MonoBehaviour
+
+public class TeacherQuestionManager : MonoBehaviour
 {
     public string JSONurl = "";
     public string JSONIDurl = "";
@@ -20,6 +22,9 @@ public class QuestionAPI : MonoBehaviour
     public string qAnswerKind = ""; 
     public TextMeshProUGUI pregunta;
     public TextMeshProUGUI profesorNombre;
+    public Question[] questions = new Question[20];
+    public int totalQuestions;
+    public int currentIndex;
 
     IEnumerator Start() 
     {
@@ -58,9 +63,9 @@ public class QuestionAPI : MonoBehaviour
         {
             Debug.Log(web.downloadHandler.text);
             JSONNode questionData = SimpleJSON.JSON.Parse(web.downloadHandler.text);
-            Question[] Questions = InitializeArray<Question>(questionData["questions"].Count);
+            totalQuestions = questionData["questions"].Count;
 
-            for(int c = 0; c<questionData["questions"].Count; c++){
+            for(int c = 0; c<totalQuestions; c++){
 
                 Debug.Log("ID: " + questionData["questions"][c]["id"].ToString());
                 qID = questionData["questions"][c]["id"].ToString();
@@ -77,28 +82,45 @@ public class QuestionAPI : MonoBehaviour
                 Question questionReceived = new Question(qID, qTitle, qSection, qAnswerKind);
                 Debug.Log(questionReceived.toString());
 
-                Questions[c] = questionReceived;
+                questions[c] = questionReceived;
             }
 
-            Debug.Log(Questions);
-            Debug.Log(Questions[0].toString());
-            pregunta.text = Questions[0].title;
-            //LoadQuestion(Questions[0]);
+            Debug.Log(questions);
+            Debug.Log(questions[0].toString());
+            currentIndex = 0;
+            updateQuestion(currentIndex);
         }
     }
 
-    void LoadQuestion(Question question){
-
-        if (question.answerKind == "TEXT"){
-            SceneManager.LoadScene("comment");
-            pregunta.text = question.title;
-        }
-        else if (question.answerKind == "NUMERIC"){
-            SceneManager.LoadScene("numeric");
-            pregunta.text = question.title;
-        }
-        
+    void updateQuestion(int qIndex) 
+    {   
+        pregunta.text = questions[qIndex].title;   
+        Debug.Log(questions[qIndex].score);
     }
+
+    public void loadNextQuestion(){
+        if (currentIndex < totalQuestions-1) {
+            // Aqui va el send answer a la base de datos
+            currentIndex++;
+            updateQuestion(currentIndex);
+        } else {
+            // Aquí va el send answer a la base de datos 
+            SceneManager.LoadScene("teacher_menu");
+        }
+    }
+
+    public void loadPrevQuestion(){
+        if  (currentIndex > 0) {
+            currentIndex--;
+            updateQuestion(currentIndex);
+        }
+    }
+
+    IEnumerator errorDelay(string errorMessage) {
+        pregunta.text = errorMessage;
+        yield return new WaitForSeconds(3);
+    }
+
 
     T[] InitializeArray<T>(int length) where T : new()
     {
@@ -111,14 +133,30 @@ public class QuestionAPI : MonoBehaviour
         return array;
     }
 
-    public void UpdateQuestion(string newQuestion) 
-    {
-        pregunta.text = newQuestion;
-    }
+    public void score0() 
+    {   questions[currentIndex].score = 0;  Debug.Log(questions[currentIndex].score);}
+    public void score1() 
+    {   questions[currentIndex].score = 1;  Debug.Log(questions[currentIndex].score);}
+    public void score2() 
+    {   questions[currentIndex].score = 2;  Debug.Log(questions[currentIndex].score);}
+    public void score3() 
+    {   questions[currentIndex].score = 3;  Debug.Log(questions[currentIndex].score);}
+    public void score4() 
+    {   questions[currentIndex].score = 4;  Debug.Log(questions[currentIndex].score);}
+    public void score5() 
+    {   questions[currentIndex].score = 5;  Debug.Log(questions[currentIndex].score);}
+    public void score6() 
+    {   questions[currentIndex].score = 6;  Debug.Log(questions[currentIndex].score);}
+    public void score7() 
+    {   questions[currentIndex].score = 7;  Debug.Log(questions[currentIndex].score);}
+    public void score8() 
+    {   questions[currentIndex].score = 8;  Debug.Log(questions[currentIndex].score);}
+    public void score9() 
+    {   questions[currentIndex].score = 9;  Debug.Log(questions[currentIndex].score);}
+    public void score10() 
+    {   questions[currentIndex].score = 10;  Debug.Log(questions[currentIndex].score);}
+    public void scoreNull() 
+    {   questions[currentIndex].score = null;  Debug.Log(questions[currentIndex].score);}
 
-    public void UpdateProfesor(string newName) 
-    {
-        profesorNombre.text = newName;
-    }
 }
 

@@ -47,3 +47,6 @@ GET http://localhost:8080/api/surveys/2?isActive=true
 ###
 
 GET http://localhost:8080/api/surveys/3?section=TEACHER&isActive=true
+
+###
+GET http://localhost:8080/api/surveys/3?section=COURSE&isActive=true

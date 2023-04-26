@@ -8,7 +8,7 @@ public class Question
     public string title;
     public string section;
     public string answerKind;
-    public int score;
+    public System.Nullable<int> score;
     public string comment;
 
     public Question(){
