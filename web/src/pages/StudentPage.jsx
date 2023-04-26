@@ -2,7 +2,6 @@ import Styles from "./StudentPage.module.css";
 
 import Navbar from "../components/Navbar";
 import { useLocation, Navigate } from "react-router-dom";
-import { Unity, useUnityContext, SendMessage } from "react-unity-webgl";
 
 const StudentPage = () => {
   const activeLinks = false;
@@ -41,7 +40,9 @@ const StudentPage = () => {
   return (
     <div>
       <Navbar showLinks={activeLinks} />
-      <h2>Bienvenido a la ECOA <span>{name}</span></h2>
+      <h2>
+        Bienvenido a la ECOA <span>{name}</span>
+      </h2>
       <div className={Styles.container}>
         <iframe className={Styles.game} src={urlGame}></iframe>
         {/* <Unity className={Styles.game} unityProvider={unityProvider} /> */}
