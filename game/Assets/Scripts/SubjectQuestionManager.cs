@@ -11,7 +11,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 
 
-public class TeacherQuestionManager : MonoBehaviour
+public class SubjectQuestionManager : MonoBehaviour
 {
     public string JSONurl = "";
     public string JSONIDurl = "";
@@ -48,7 +48,7 @@ public class TeacherQuestionManager : MonoBehaviour
             ID = jsonReceived["id"].ToString();
         }
 
-        JSONurl = "http://localhost:8080/api/surveys/" + ID + "?section=TEACHER&isActive=true";
+        JSONurl = "http://localhost:8080/api/surveys/" + ID + "?section=COURSE&isActive=true";
 
         web = UnityWebRequest.Get(JSONurl);
         web.useHttpContinue = false;

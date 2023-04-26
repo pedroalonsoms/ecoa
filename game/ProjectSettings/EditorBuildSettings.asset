@@ -33,6 +33,6 @@ EditorBuildSettings:
     path: Assets/Scenes/subject_menu.unity
     guid: ae6d9caec66784774a2a7e8f1fbbe52f
   - enabled: 1
-    path: Assets/Scenes/teacher_numeric.unity
+    path: Assets/Scenes/subject_numeric.unity
     guid: e2cc5c9fafc5849a39b597adab5b8d4b
   m_configObjects: {}
