@@ -22,7 +22,7 @@ answersRouter.get("/answers/:studentRegistration/questions/:questionId", async (
     res.status(200).json(rows);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Internal Server Error" });
+    res.status(500).send({ error: error.message || "Unknown error" });
   }
 });
 
@@ -55,8 +55,7 @@ answersRouter.post("/answers/:studentRegistration/questions/:questionId", async 
 
     res.status(201).json({ message: "Answer created successfully" });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal Server Error" });
+    res.status(500).send({ error: error.message || "Unknown error" });
   }
 });
 

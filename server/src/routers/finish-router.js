@@ -13,7 +13,7 @@ finishRouter.post("/finish/:studentRegistration", async (req, res) => {
     // TODO: add validation where you can not `finish` if you didn't complete all of the active-survey questions 
 
     const [activeSurvey] = await pool.query(
-      "SELECT id, startDate, endDate FROM Survey WHERE startDate <= CURDATE() AND endDate >= CURDATE()"
+      "SELECT id FROM Survey WHERE CURDATE() BETWEEN startDate AND endDate"
     );
 
     if (activeSurvey.length === 0) {
