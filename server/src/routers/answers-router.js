@@ -15,7 +15,7 @@ answersRouter.get("/answers/:studentRegistration/questions/:questionId", async (
       .parse(req.params);
 
     const { rows } = await pool.query(
-      `SELECT * FROM Answer WHERE folio = SHA2(?, 256) AND surveyQuestionId = ?`,
+      `SELECT * FROM TmpAnswer JOIN SurveyQuestion ON TmpAnswer.surveyQuestionId = SurveyQuestion.id WHERE studentRegistration = ? AND SurveyQuestionId.questionId = ?`,
       [studentRegistration, questionId]
     );
 

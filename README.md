@@ -30,6 +30,7 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - [ ] No debe de dejar avanzar a la siguiente si no ha contestado la pregunta actual (mostrar una alerta)
 - [ ] Variedad de los sonidos
 - [ ] Cachar un error en caso de que no haya encuestas activas al hacer el /progress
+- [ ] Cambiar `materia` a `unidada de formacion` en las rpegunras de la ecoa
 
 ## Front
 
