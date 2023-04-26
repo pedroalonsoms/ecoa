@@ -10,6 +10,7 @@ import { useLocation } from "react-router-dom";
 const TeacherPage = () => {
   const activeLinks = false;
   const location = useLocation();
+  console.log(location);
 
   return (
     <div>
