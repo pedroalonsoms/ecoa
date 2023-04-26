@@ -18,7 +18,13 @@ public class SceneChanger : MonoBehaviour
     {   SceneManager.LoadScene("menu");   } // Mueve a menú principal
 
     public void toTeacherNumericQuestion()
-    {   SceneManager.LoadScene("Teacher_numeric");   } // Mueve a escena de pregunta cerrada con escala del 0 al 10
+    {   SceneManager.LoadScene("teacher_numeric");   } // Mueve a escena de pregunta cerrada de profesor con escala del 0 al 10
+
+    public void toSubjectNumericQuestion()
+    {   SceneManager.LoadScene("subject_numeric");   }
+
+    public void toBlockNumericQuestion()
+    {   SceneManager.LoadScene("block_numeric");   }
 
     public void toComment()
     {   SceneManager.LoadScene("comment");   } // Mueve a escena de pregunta abierta
