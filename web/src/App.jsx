@@ -22,7 +22,7 @@ const App = () => {
         <Route element={<RequireAuth allowedRoles={["STUDENT"]} />}>
           <Route path="student" element={<StudentPage />} />
           <Route path="game" element={<StudentPage />} />
-          <Route path="game?studentRegistration=:studentRegistration" element={<StudentPage />} />
+          {/* <Route path="game?studentRegistration=:studentRegistration" element={<StudentPage />} /> */}
         </Route>
 
         <Route element={<RequireAuth allowedRoles={["TEACHER"]} />}>

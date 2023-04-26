@@ -43,7 +43,7 @@ const StudentPage = () => {
       <Navbar showLinks={activeLinks} />
       <h2>Bienvenido a la ECOA <span>{name}</span></h2>
       <div className={Styles.container}>
-        <iframe className={Styles.game} src="/game"></iframe>
+        <iframe className={Styles.game} src={urlGame}></iframe>
         {/* <Unity className={Styles.game} unityProvider={unityProvider} /> */}
         {/* <Unity
           src='/game'

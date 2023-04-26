@@ -46,7 +46,7 @@ const Login = (props) => {
 
       switch (data.role) {
         case "STUDENT":
-          navigate(`/game?studentRegistration=${data.registration}`, { state: { data } });
+          navigate("/student", { state: { data } });
           break;
         case "TEACHER":
           navigate("/teacher", { state: { data } });
