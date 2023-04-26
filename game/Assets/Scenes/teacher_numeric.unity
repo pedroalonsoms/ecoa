@@ -4920,6 +4920,13 @@ MonoBehaviour:
   profesorNombre: {fileID: 0}
   totalQuestions: 0
   currentIndex: 0
+  backButton: {fileID: 1857123367}
+  nextButton: {fileID: 1537362784}
+  bButtonOn: {fileID: 21300000, guid: a6ea20d6d03fa457c96be2d2ff36a093, type: 3}
+  bButtonOff: {fileID: 21300000, guid: 383fb45012b094dafb55a0b2ae32805b, type: 3}
+  nButtonOn: {fileID: 21300000, guid: cd37f0bece67f41198f5cf7adddb923d, type: 3}
+  nButtonOff: {fileID: 21300000, guid: 99a710e36aa36459394f2ede3af60334, type: 3}
+  eButton: {fileID: 21300000, guid: 0a96f80840a10433c99b1f76c5e7a918, type: 3}
 --- !u!4 &1918855353
 Transform:
   m_ObjectHideFlags: 0

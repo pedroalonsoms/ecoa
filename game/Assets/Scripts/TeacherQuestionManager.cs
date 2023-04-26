@@ -26,6 +26,19 @@ public class TeacherQuestionManager : MonoBehaviour
     public int totalQuestions;
     public int currentIndex;
 
+    public Image backButtonI;
+    public Image nextButtonI;
+
+    public Sprite bButtonOn;
+    public Sprite bButtonOff;
+
+    public Sprite nButtonOn;
+    public Sprite nButtonOff;
+    public Sprite eButton;
+
+    public Button backButtonB;
+    public Button nextButtonB;
+
     IEnumerator Start() 
     {
         pregunta = GameObject.Find("Question").GetComponent<TextMeshProUGUI>();
@@ -89,6 +102,14 @@ public class TeacherQuestionManager : MonoBehaviour
             Debug.Log(questions[0].toString());
             currentIndex = 0;
             updateQuestion(currentIndex);
+
+            if (currentIndex == 0) {
+                backButtonI.sprite = bButtonOff;
+                nextButtonI.sprite = nButtonOn;
+                nextButtonB.onClick.AddListener(loadNextQuestion);
+            } 
+            
+
         }
     }
 
@@ -103,6 +124,7 @@ public class TeacherQuestionManager : MonoBehaviour
             // Aqui va el send answer a la base de datos
             currentIndex++;
             updateQuestion(currentIndex);
+            // Función para la animación
         } else {
             // Aquí va el send answer a la base de datos 
             SceneManager.LoadScene("teacher_menu");
