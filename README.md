@@ -4,59 +4,68 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 
 ![](demo.jpeg)
 
-# ToDo's - Domingo
-
-## Videojuego
+### Santiago
 
 - [ ] Animación Teus feliz/triste
-- [ ] Animación Espada ✅
+- [ ] Animación Pájaro
 - [ ] Animación Premio Random
-- [ ] Fondos con PixelArt
 - [ ] Referencias de las imagenes
-- [ ] Hacer los fetch para las preguntas, profesores y materias
-- [ ] Hacer el fetch para el premio final
-- [ ] Sharp pixel-art on `Unity`, preguntar a Immanol.
-- [ ] Botón para hacer `skip` de la pregunta.
-- [ ] Implementar sprites del profe
-- [ ] Música de fondo
+- [ ] Música de fondo (que no se cruce con la final)
 - [ ] Sonido de click al botón
-- [ ] Arreglar el botón de `back`
-- [ ] Cambiar materia a `unidad de formación`
-- [ ] Cuando el usuario le de a finalizar, debe haber un fetch que probablemente retorne un error si intenta finalizarla pero le faltan preguntas. Eso se debe mostrar en una alerta en el videojuego.
-- [ ] Pasar `studentRegistration` al videojuego en el iframe
+- [ ] Cambiar materia a `unidad de formación` en la banderita inicial
 - [ ] Poner pantalla de inicio con instrucciones y mecánica
-- [ ] Agregar control por teclado exclusivamente
-- [ ] Agregar animaciones
-- [ ] No debe de dejar avanzar a la siguiente si no ha contestado la pregunta actual (mostrar una alerta)
 - [ ] Variedad de los sonidos
-- [ ] Cachar un error en caso de que no haya encuestas activas al hacer el /progress
-- [ ] Cambiar `materia` a `unidada de formacion` en las rpegunras de la ecoa
+- [ ] Contraste de botones en la UI (no deben ser rojos/verdes)
+- [ ] Hacer el fetch para el premio final
+- [ ] Tamaño de botones consistentes
+- [ ] Cambiar icono de home a uno visible en todas las pantallas (blanco)
+- [ ] Avanzar en las diapositivas de la presentación final
 
 ## Front
 
-- [ ] Color de UI similar al del videojuego
-- [ ] Terminar sección de Encuestas
-- [ ] Mejorar diseño de CSS
-- [ ] Re-diseñar front de encuesta activa, ahora será por medio de fechas
-- [ ] Añadir sección para `Bloque`
+### Adrián
+
+- [ ] Mostrar un dashboard de los datos en `/teachers` en lugar de una página en blanco, con caso de error cuando no existe el profe
 - [ ] Cachar error cuando pones título duplicado en el survey (viene del back)
 - [ ] Cachar error cuando quieres crear una encuesta que es en una fecha con overlap (viene del back)
 - [ ] Cachar error cuando la startDate es mayor que la endDate (viene del back)
-- [ ] Dashboard de PowerBI
-- [ ] Seguridad para el login es necesaria (dice el profe de web). Osea, si ponemos `/teachers` y no estamos autenticados, no debería dejarnos entrar. (Protected Routes w/ React Router)
-- [ ] Agregar botón de logout
-- [ ] Enviar información del front al videojuego
+- [ ] Cachar más errores que probablemente vengan del back (hacer testing)
+- [ ] Si terminas, ayudar a los demás O.o
 
 ## Backend
 
-- [ ] Endpoints faltantes de `answers`, `comments`, `finish`
-- [ ] Respuestas del 0 - 10 y el NULL value. Agregar validación `zod`.
-- [ ] Preguntar si los 2 stored procedures y 1 trigger que re-hicimos están bien
-- [ ] Pasa algo si agregamos el string: `¿Cómo evalúas los siguientes enunciados relacionados con el Bloque?  Los temas, las actividades y el reto durante el Bloque:` antes de cada pregunta?
+### Pedro
+
+- [ ] Scrum master (repartir tareas)
+- [ ] Mover todo a git (?)
+- [ ] Acomodar rubrica de excel en el Git/Readme
+- [ ] Importar tabla de teacher del CSV que nos dieron, no agregar info de matrícula de la miss, solamente lectura y desplegar, no escribir en tabla de teacher
+- [ ] Revisar PR's de Kerim
 - [ ] Implementar feature de `activa` internamente para simular periodos
 - [ ] Acomodar bien el diagrama relacional del workbench
-- [ ] Cuando el usuario le de a finalizar, debe haber un error si intenta finalizarla pero le faltan preguntas.
-- [ ] Dashboard de PowerBI para vista de /profesor?
+- [ ] Mover preguntas abiertas a lo último
+- [ ] Quitar preámbulos de preguntas B y C
+- [ ] Cambiar `materia` a `unidada de formacion` en las preguntas de la ecoa
+- [ ] Stored procedure para tener fecha de la ultima encuesta activa, y luego hacer el delete
+
+### Kerim
+
+- [ ] En `/finish`, debe haber un error si intenta finalizarla pero le faltan preguntas por contestar.
+- [ ] Agregar validación `zod` en `/answers` POST, 0 - 10 y el NULL value.
+- [ ] Corregir endpoints de `answers` y `finish`
+- [ ] Crear endpoint de `/teacherInfo` o algo así, para que el Front pueda tomar datos del dashboard de cada profesor
+
+# Development Team
+
+Team **2**
+
+- **Backend** - Pedro Alonso Moreno Salcedo A01741437
+- **Backend** - Kerim Taray Malagon A0027581
+- **Unity** - Santiago Velasquez Chang A00832788
+- **Unity** - Felipe de Jesús González Acosta A01275536
+- **Frontend** - Adrián Alejandro Ramírez Cruz A00830640
+
+![](https://contrib.rocks/image?repo=pedroalonsoms/ecoa)
 
 # References & Credits
 
@@ -71,15 +80,3 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - StackExchange: https://stackexchange.com/
 - StackOverflow: https://stackoverflow.com/
 - MySQLTutorial: https://www.mysqltutorial.org/
-
-# Development Team
-
-Team **2**
-
-- **Backend** - Pedro Alonso Moreno Salcedo A01741437
-- **Backend** - Kerim Taray Malagon A0027581
-- **Unity** - Santiago Velasquez Chang A00832788
-- **Unity** - Felipe de Jesús González Acosta A01275536
-- **Frontend** - Adrián Alejandro Ramírez Cruz A00830640
-
-![](https://contrib.rocks/image?repo=pedroalonsoms/ecoa)
