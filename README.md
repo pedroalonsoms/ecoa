@@ -4,23 +4,10 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 
 ![](demo.jpeg)
 
-# ToDo's - Domingo
-
-## Videojuego
-
-### Felipe
-
-- [ ] Deshabilitar botón de finalizar si el progress no está en verde en ambas banderitas
-- [ ] Obtener `?studentRegistration` del iframe URL con `Application.absoluteURL`
-- [ ] Agregar control por teclado exclusivamente (preguntarle al profe si se ocupa)
-- [ ] No debe de dejar avanzar a la siguiente si no ha contestado la pregunta actual (mostrar una alerta)
-- [ ] Que no pueda quitarle el focus a la pregunta cuando clickea afuera
-- [ ] Cachar un error en caso de que no haya encuestas activas al hacer el /progress (mostrar una alerta)
-- [ ] Confusión: botón de back no funcionando en la pregunta inicial (tienes que picarle a home)
-
 ### Santiago
 
 - [ ] Animación Teus feliz/triste
+- [ ] Animación Pájaro
 - [ ] Animación Premio Random
 - [ ] Referencias de las imagenes
 - [ ] Música de fondo (que no se cruce con la final)
