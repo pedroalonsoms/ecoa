@@ -8,29 +8,31 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 
 ## Videojuego
 
-- [ ] Animación Teus feliz/triste
-- [ ] Animación Espada ✅
-- [ ] Animación Premio Random
-- [ ] Fondos con PixelArt
-- [ ] Referencias de las imagenes
-- [ ] Hacer los fetch para las preguntas, profesores y materias
-- [ ] Hacer el fetch para el premio final
-- [ ] Sharp pixel-art on `Unity`, preguntar a Immanol.
-- [ ] Botón para hacer `skip` de la pregunta.
-- [ ] Implementar sprites del profe
-- [ ] Música de fondo
-- [ ] Sonido de click al botón
-- [ ] Arreglar el botón de `back`
-- [ ] Cambiar materia a `unidad de formación`
-- [ ] Cuando el usuario le de a finalizar, debe haber un fetch que probablemente retorne un error si intenta finalizarla pero le faltan preguntas. Eso se debe mostrar en una alerta en el videojuego.
-- [ ] Pasar `studentRegistration` al videojuego en el iframe
-- [ ] Poner pantalla de inicio con instrucciones y mecánica
-- [ ] Agregar control por teclado exclusivamente
-- [ ] Agregar animaciones
+### Felipe
+
+- [ ] Deshabilitar botón de finalizar si el progress no está en verde en ambas banderitas
+- [ ] Obtener `?studentRegistration` del iframe URL con `Application.absoluteURL`
+- [ ] Agregar control por teclado exclusivamente (preguntarle al profe si se ocupa)
 - [ ] No debe de dejar avanzar a la siguiente si no ha contestado la pregunta actual (mostrar una alerta)
+- [ ] Que no pueda quitarle el focus a la pregunta cuando clickea afuera
+- [ ] Cachar un error en caso de que no haya encuestas activas al hacer el /progress (mostrar una alerta)
+- [ ] Confusión: botón de back no funcionando en la pregunta inicial (tienes que picarle a home)
+
+### Santiago
+
+- [ ] Animación Teus feliz/triste
+- [ ] Animación Premio Random
+- [ ] Referencias de las imagenes
+- [ ] Música de fondo (que no se cruce con la final)
+- [ ] Sonido de click al botón
+- [ ] Cambiar materia a `unidad de formación` en la banderita inicial
+- [ ] Poner pantalla de inicio con instrucciones y mecánica
 - [ ] Variedad de los sonidos
-- [ ] Cachar un error en caso de que no haya encuestas activas al hacer el /progress
-- [ ] Cambiar `materia` a `unidada de formacion` en las rpegunras de la ecoa
+- [ ] Contraste de botones en la UI (no deben ser rojos/verdes)
+- [ ] Hacer el fetch para el premio final
+- [ ] Tamaño de botones consistentes
+- [ ] Cambiar icono de home a uno visible en todas las pantallas (blanco)
+- [ ] Avanzar en las diapositivas de la presentación final
 
 ## Front
 
@@ -46,6 +48,7 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - [ ] Seguridad para el login es necesaria (dice el profe de web). Osea, si ponemos `/teachers` y no estamos autenticados, no debería dejarnos entrar. (Protected Routes w/ React Router)
 - [ ] Agregar botón de logout
 - [ ] Enviar información del front al videojuego
+- [ ] Mostrarla info del Teacher en el dashboard, con caso de error cuando no existe el profe
 
 ## Backend
 
@@ -57,6 +60,13 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - [ ] Acomodar bien el diagrama relacional del workbench
 - [ ] Cuando el usuario le de a finalizar, debe haber un error si intenta finalizarla pero le faltan preguntas.
 - [ ] Dashboard de PowerBI para vista de /profesor?
+- [ ] Endpoint de teacherInfo
+- [ ] Mover preguntas abiertas a lo último
+- [ ] Quitar preámbulos de preguntas B y C
+- [ ] Importar tabla de teacher del CSV que nos dieron, no agregar info de matrícula de la miss, solamente lectura y desplegar, no escribir en tabla de teacher
+- [ ] Terminar rubrica de excel
+- [ ] Stored procedure para tener fecha de la ultima encuesta activa, y luego hacer el delete
+- [ ] Cambiar `materia` a `unidada de formacion` en las preguntas de la ecoa
 
 # References & Credits
 
