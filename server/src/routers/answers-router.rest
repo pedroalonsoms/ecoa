@@ -1,4 +1,4 @@
-GET http://localhost:8080/answers/{{studentRegistration}}/questions/{{questionId}}
+GET http://localhost:8080/answers/A01741437/questions/1
 
 Content-Type: application/json
 Accept: application/json
@@ -17,15 +17,15 @@ JSON response structure:
   }
 ]
 
-POST http://localhost:8080/answers/{{studentRegistration}}/questions/{{questionId}}
+POST http://localhost:8080/answers/A01741437/questions/1
 
 Content-Type: application/json
 Accept: application/json
 
 {
-  "targetKind": "{{targetKind}}",
-  "teacherRegistration": "{{teacherRegistration}}",
-  "crn": "{{crn}}",
-  "content": "{{content}}"
+  "targetKind": "TEACHER_REGISTRATION",
+  "teacherRegistration": "L00000001",
+  "crn": null,
+  "content": "El profesor fue muy bueno"
 }
 
