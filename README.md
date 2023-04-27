@@ -32,29 +32,6 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - [ ] Cachar más errores que probablemente vengan del back (hacer testing)
 - [ ] Si terminas, ayudar a los demás O.o
 
-## Backend
-
-### Pedro
-
-- [ ] Scrum master (repartir tareas)
-- [ ] Mover todo a git (?)
-- [ ] Acomodar rubrica de excel en el Git/Readme
-- [ ] Importar tabla de teacher del CSV que nos dieron, no agregar info de matrícula de la miss, solamente lectura y desplegar, no escribir en tabla de teacher
-- [ ] Revisar PR's de Kerim
-- [ ] Implementar feature de `activa` internamente para simular periodos
-- [ ] Acomodar bien el diagrama relacional del workbench
-- [ ] Mover preguntas abiertas a lo último
-- [ ] Quitar preámbulos de preguntas B y C
-- [ ] Cambiar `materia` a `unidada de formacion` en las preguntas de la ecoa
-- [ ] Stored procedure para tener fecha de la ultima encuesta activa, y luego hacer el delete
-
-### Kerim
-
-- [ ] En `/finish`, debe haber un error si intenta finalizarla pero le faltan preguntas por contestar.
-- [ ] Agregar validación `zod` en `/answers` POST, 0 - 10 y el NULL value.
-- [ ] Corregir endpoints de `answers` y `finish`
-- [ ] Crear endpoint de `/teacherInfo` o algo así, para que el Front pueda tomar datos del dashboard de cada profesor
-
 # Development Team
 
 Team **2**
