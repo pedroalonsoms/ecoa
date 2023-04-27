@@ -1344,7 +1344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -3153,8 +3153,8 @@ Transform:
   m_GameObject: {fileID: 1240801966}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.12, y: 7.56, z: 0}
-  m_LocalScale: {x: 61.021328, y: 72.622375, z: 50.05}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 83.90433, y: 99.85577, z: 68.81875}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 627904538}
   m_RootOrder: 0
@@ -3297,7 +3297,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 627904539}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: toMenu
+        m_MethodName: toTeacherMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3988,20 +3988,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1918855352}
-        m_TargetAssemblyTypeName: TeacherQuestionManager, Assembly-CSharp
-        m_MethodName: loadNextQuestion
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 8300000, guid: c93e458b29e1d49e999c87dd51dfdda2, type: 3}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
+      - m_Target: {fileID: 1918855351}
+        m_TargetAssemblyTypeName: 
         m_MethodName: 
         m_Mode: 1
         m_Arguments:
@@ -4011,7 +3999,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 1
+        m_CallState: 2
 --- !u!114 &1537362784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4920,6 +4908,15 @@ MonoBehaviour:
   profesorNombre: {fileID: 0}
   totalQuestions: 0
   currentIndex: 0
+  backButtonI: {fileID: 1857123367}
+  nextButtonI: {fileID: 1537362784}
+  bButtonOn: {fileID: 21300000, guid: a6ea20d6d03fa457c96be2d2ff36a093, type: 3}
+  bButtonOff: {fileID: 21300000, guid: 383fb45012b094dafb55a0b2ae32805b, type: 3}
+  nButtonOn: {fileID: 21300000, guid: cd37f0bece67f41198f5cf7adddb923d, type: 3}
+  nButtonOff: {fileID: 21300000, guid: 99a710e36aa36459394f2ede3af60334, type: 3}
+  eButton: {fileID: 21300000, guid: 0a96f80840a10433c99b1f76c5e7a918, type: 3}
+  backButtonB: {fileID: 1857123366}
+  nextButtonB: {fileID: 1537362783}
 --- !u!4 &1918855353
 Transform:
   m_ObjectHideFlags: 0

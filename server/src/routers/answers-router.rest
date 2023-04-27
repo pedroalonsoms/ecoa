@@ -1,1 +1,10 @@
 POST http://localhost:8080/api/answers/
+
+localhost:8080/api/answers/A01741437/questions/3
+
+{
+  "targetKind": "TEACHER_REGISTRATION",
+  "teacherRegistration": "L00000001",
+  "crn": null,
+  "content": "10"
+}

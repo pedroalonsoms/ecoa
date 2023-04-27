@@ -1,61 +1,40 @@
-# ECOA
+<p align="center">
+    <img src="logo.png">
+</p>
 
-A major redesign of the traditional Tec's primary satisfaction survey: ECOA
+<h2 align="center"> 
+    A major redesign of the traditional Tec's primary satisfaction survey: ECOA
+<h2>
+
+<p align="center">
+    <a href="https://github.com/prettier/prettier">
+        <img alt="code style: prettier" src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square">
+    </a>
+</p>
 
 ![](demo.jpeg)
 
-# ToDo's - Domingo
+# 📑 Documents
 
-## Videojuego
+- 📦 [Google Drive Folder](https://drive.google.com/drive/folders/1D2RHVyTfaO_m26Hka9A1EXCZ5MDTx3B7?usp=sharing)
+- 📷 [Final Presentation Slides]()
+- 📌 [Rubric](https://docs.google.com/spreadsheets/d/1_pA1fRWtzcggmU9Bw4S-WutvSK5uTGxi/edit?usp=share_link&ouid=112199480319751895298&rtpof=true&sd=true)
 
-- [ ] Animación Teus feliz/triste
-- [ ] Animación Espada ✅
-- [ ] Animación Premio Random
-- [ ] Fondos con PixelArt
-- [ ] Referencias de las imagenes
-- [ ] Hacer los fetch para las preguntas, profesores y materias
-- [ ] Hacer el fetch para el premio final
-- [ ] Sharp pixel-art on `Unity`, preguntar a Immanol.
-- [ ] Botón para hacer `skip` de la pregunta.
-- [ ] Implementar sprites del profe
-- [ ] Música de fondo
-- [ ] Sonido de click al botón
-- [ ] Arreglar el botón de `back`
-- [ ] Cambiar materia a `unidad de formación`
-- [ ] Cuando el usuario le de a finalizar, debe haber un fetch que probablemente retorne un error si intenta finalizarla pero le faltan preguntas. Eso se debe mostrar en una alerta en el videojuego.
-- [ ] Pasar `studentRegistration` al videojuego en el iframe
-- [ ] Poner pantalla de inicio con instrucciones y mecánica
-- [ ] Agregar control por teclado exclusivamente
-- [ ] Agregar animaciones
-- [ ] No debe de dejar avanzar a la siguiente si no ha contestado la pregunta actual (mostrar una alerta)
-- [ ] Variedad de los sonidos
-- [ ] Cachar un error en caso de que no haya encuestas activas al hacer el /progress
+# 💿 SQL Diagram
 
-## Front
+![](server/src/db/diagramav7.png)
 
-- [ ] Color de UI similar al del videojuego
-- [ ] Terminar sección de Encuestas
-- [ ] Mejorar diseño de CSS
-- [ ] Re-diseñar front de encuesta activa, ahora será por medio de fechas
-- [ ] Añadir sección para `Bloque`
-- [ ] Cachar error cuando pones título duplicado en el survey (viene del back)
-- [ ] Cachar error cuando quieres crear una encuesta que es en una fecha con overlap (viene del back)
-- [ ] Cachar error cuando la startDate es mayor que la endDate (viene del back)
-- [ ] Dashboard de PowerBI
-- [ ] Seguridad para el login es necesaria (dice el profe de web). Osea, si ponemos `/teachers` y no estamos autenticados, no debería dejarnos entrar. (Protected Routes w/ React Router)
-- [ ] Agregar botón de logout
-- [ ] Enviar información del front al videojuego
+# Development Team
 
-## Backend
+Team **2**
 
-- [ ] Endpoints faltantes de `answers`, `comments`, `finish`
-- [ ] Respuestas del 0 - 10 y el NULL value. Agregar validación `zod`.
-- [ ] Preguntar si los 2 stored procedures y 1 trigger que re-hicimos están bien
-- [ ] Pasa algo si agregamos el string: `¿Cómo evalúas los siguientes enunciados relacionados con el Bloque?  Los temas, las actividades y el reto durante el Bloque:` antes de cada pregunta?
-- [ ] Implementar feature de `activa` internamente para simular periodos
-- [ ] Acomodar bien el diagrama relacional del workbench
-- [ ] Cuando el usuario le de a finalizar, debe haber un error si intenta finalizarla pero le faltan preguntas.
-- [ ] Dashboard de PowerBI para vista de /profesor?
+- **Backend** - Pedro Alonso Moreno Salcedo A01741437
+- **Backend** - Kerim Taray Malagon A0027581
+- **Unity** - Santiago Velasquez Chang A00832788
+- **Unity** - Felipe de Jesús González Acosta A01275536
+- **Frontend** - Adrián Alejandro Ramírez Cruz A00830640
+
+![](https://contrib.rocks/image?repo=pedroalonsoms/ecoa)
 
 # References & Credits
 
@@ -70,15 +49,3 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - StackExchange: https://stackexchange.com/
 - StackOverflow: https://stackoverflow.com/
 - MySQLTutorial: https://www.mysqltutorial.org/
-
-# Development Team
-
-Team **2**
-
-- **Backend** - Pedro Alonso Moreno Salcedo A01741437
-- **Backend** - Kerim Taray Malagon A0027581
-- **Unity** - Santiago Velasquez Chang A00832788
-- **Unity** - Felipe de Jesús González Acosta A01275536
-- **Frontend** - Adrián Alejandro Ramírez Cruz A00830640
-
-![](https://contrib.rocks/image?repo=pedroalonsoms/ecoa)

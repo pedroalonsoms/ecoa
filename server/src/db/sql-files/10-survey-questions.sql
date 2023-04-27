@@ -1,2 +1,0 @@
-INSERT INTO SurveyQuestion VALUES (NULL, 2, 1), (NULL, 2, 2);
-INSERT INTO SurveyQuestion VALUES (NULL, 3, 1), (NULL, 3, 2), (NULL, 3, 3), (NULL, 3, 4), (NULL, 3, 5), (NULL, 3, 6), (NULL, 3, 7), (NULL, 3, 8), (NULL, 3, 9), (NULL, 3, 10), (NULL, 3, 11);

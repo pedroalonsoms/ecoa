@@ -26,6 +26,19 @@ public class TeacherQuestionManager : MonoBehaviour
     public int totalQuestions;
     public int currentIndex;
 
+    public Image backButtonI;
+    public Image nextButtonI;
+
+    public Sprite bButtonOn;
+    public Sprite bButtonOff;
+
+    public Sprite nButtonOn;
+    public Sprite nButtonOff;
+    public Sprite eButton;
+
+    public Button backButtonB;
+    public Button nextButtonB;
+
     IEnumerator Start() 
     {
         pregunta = GameObject.Find("Question").GetComponent<TextMeshProUGUI>();
@@ -88,7 +101,25 @@ public class TeacherQuestionManager : MonoBehaviour
             Debug.Log(questions);
             Debug.Log(questions[0].toString());
             currentIndex = 0;
+
+            backButtonI.sprite = bButtonOff;
+            nextButtonI.sprite = nButtonOn;
+            nextButtonB.onClick.AddListener(loadNextQuestion);
+
             updateQuestion(currentIndex);
+
+        }
+    }
+
+    void Update() {
+        if (currentIndex == 0) {
+            backButtonI.sprite = bButtonOff;
+            nextButtonI.sprite = nButtonOn;
+        } else if (currentIndex < totalQuestions-1) {
+            backButtonI.sprite = bButtonOn;
+            nextButtonI.sprite = nButtonOn;
+        } else{
+            nextButtonI.sprite = eButton;
         }
     }
 
@@ -103,10 +134,14 @@ public class TeacherQuestionManager : MonoBehaviour
             // Aqui va el send answer a la base de datos
             currentIndex++;
             updateQuestion(currentIndex);
+            // Función para la animación
         } else {
-            // Aquí va el send answer a la base de datos 
-            SceneManager.LoadScene("teacher_menu");
+            toTeacherMenu();
         }
+    }
+
+    public void toTeacherMenu() {
+         SceneManager.LoadScene("teacher_menu");
     }
 
     public void loadPrevQuestion(){
@@ -114,23 +149,6 @@ public class TeacherQuestionManager : MonoBehaviour
             currentIndex--;
             updateQuestion(currentIndex);
         }
-    }
-
-    IEnumerator errorDelay(string errorMessage) {
-        pregunta.text = errorMessage;
-        yield return new WaitForSeconds(3);
-    }
-
-
-    T[] InitializeArray<T>(int length) where T : new()
-    {
-        T[] array = new T[length];
-        for (int i = 0; i < length; ++i)
-        {
-            array[i] = new T();
-        }
-
-        return array;
     }
 
     public void score0() 

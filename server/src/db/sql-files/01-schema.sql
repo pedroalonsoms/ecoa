@@ -17,6 +17,7 @@ DROP TABLE IF EXISTS Enrolled;
 DROP TABLE IF EXISTS Classroom;
 DROP TABLE IF EXISTS Course;
 DROP TABLE IF EXISTS FormationUnits;
+DROP TABLE IF EXISTS TeacherInfo;
 DROP TABLE IF EXISTS Teacher;
 DROP TABLE IF EXISTS Colaborator;
 DROP TABLE IF EXISTS Administrator;
@@ -50,6 +51,30 @@ CREATE TABLE Teacher (
     campus VARCHAR(32) NOT NULL,
 
     PRIMARY KEY (registration)
+);
+
+CREATE TABLE TeacherInfo (
+    id INT AUTO_INCREMENT,
+    academicExercise VARCHAR(1024) NOT NULL,
+    region VARCHAR(1024) NOT NULL,
+    campus VARCHAR(1024) NOT NULL,
+    courseCode VARCHAR(1024) NOT NULL,
+    courseTitle VARCHAR(1024) NOT NULL,
+    registration VARCHAR(1024) NOT NULL,
+    candidateAmount INT NOT NULL,
+    answerAmount INT NOT NULL,
+    participation FLOAT NOT NULL,
+    01DOM_Prom FLOAT NOT NULL,
+    02RET_Prom FLOAT NOT NULL,
+    03REC_Prom FLOAT NOT NULL,
+    05ASE_Prom FLOAT NOT NULL,
+    05MET_Prom FLOAT NOT NULL,
+    courseKind VARCHAR(1024) NOT NULL,
+    semesterPeriod VARCHAR(1024) NOT NULL,
+    lengthInWeeks INT NOT NULL,
+    term VARCHAR(1024) NOT NULL,
+
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE Classroom (

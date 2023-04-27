@@ -6,7 +6,7 @@ import { z } from "zod";
 
 const progressRouter = express.Router();
 
-progressRouter.post(
+progressRouter.get(
   "/progress/student/:studentRegistration",
   async (req, res) => {
     try {
