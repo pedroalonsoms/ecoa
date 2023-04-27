@@ -32,7 +32,7 @@
     justify-content: center;
 }
 
-.content {
+/* .content { */
     /* position: relative;
     background-color: #fff;
     background-clip: padding-box;
@@ -44,7 +44,7 @@
     /* max-width: 800px;
     align-items: center;
     justify-content: center; */
-}
+/* } */
 
 .content h2 {
     text-align: center;
@@ -172,4 +172,8 @@
     padding: 10px;
     font-weight: 800;
     cursor: pointer;
+}
+
+.error {
+    color: red;
 }

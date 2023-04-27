@@ -36,6 +36,11 @@ const App = () => {
         
         {/* Catch All */}
         <Route path="*" element={<Error404 />} />
+
+        {/* Redirect using local storage */}
+        <Route path="/" element={localStorage.getItem("auth").role == "STUDENT" && <StudentPage />} />
+        <Route path="/" element={localStorage.getItem("auth").role == "TEACHER" && <TeacherPage />} />
+        <Route path="/" element={localStorage.getItem("auth").role == "ADMINISTRATOR" && <AdministratorSurveysPage />} />
       </Route>
     </Routes>
   );
