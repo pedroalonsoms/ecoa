@@ -1,24 +1,24 @@
 .question {
-    display: flex;
-    justify-content: space-between;
-    background-color: #ffffff;
-    border: 3px solid #d9d9d9;
-    border-radius: 10px;
-    padding: 2px 10px;
-    margin: 20px 0;
-    width: 80%;
+  display: flex;
+  justify-content: space-between;
+  background-color: #ffffff;
+  border: 3px solid #d9d9d9;
+  border-radius: 10px;
+  padding: 2px 10px;
+  margin: 20px 0;
+  width: 80%;
 }
 
 .buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .button {
-    background-color: #ffffff; /* Green */
-    border: none;
-    color: black;
-    padding: 10px 10px;
-    cursor: pointer;
+  background-color: #ffffff; /* Green */
+  border: none;
+  color: black;
+  padding: 10px 10px;
+  cursor: pointer;
 }

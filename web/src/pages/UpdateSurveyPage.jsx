@@ -1,4 +1,4 @@
-import Styles from './UpdateSurveyPage.module.css';
+import Styles from "./UpdateSurveyPage.module.css";
 
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -28,7 +28,7 @@ const UpdateSurveyPage = (props) => {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setSendSurvey({ ...sendSurvey, [e.target.name]: e.target.value })
+    setSendSurvey({ ...sendSurvey, [e.target.name]: e.target.value });
   };
 
   console.log(questions);
@@ -37,9 +37,7 @@ const UpdateSurveyPage = (props) => {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const res = await axios.get(
-          "http://localhost:8080/api/questions"
-        );
+        const res = await axios.get("http://localhost:8080/api/questions");
         console.log(res);
         setQuestions(res.data);
       } catch (err) {
@@ -57,13 +55,12 @@ const UpdateSurveyPage = (props) => {
         );
         console.log(res);
         setSurvey(res.data);
-        const ids = []
-        res.data.questions.map(question => {
+        const ids = [];
+        res.data.questions.map((question) => {
           if (question.isActive) {
-            ids.push(question.id)
+            ids.push(question.id);
           }
-        }
-        );
+        });
         setSendSurvey({
           title: res.data.title,
           questionIds: ids,
@@ -105,14 +102,14 @@ const UpdateSurveyPage = (props) => {
       setSendSurvey({
         ...sendSurvey,
         questionIds: sendSurvey.questionIds.filter(
-          questionId => questionId !== id
-        )
-      })
+          (questionId) => questionId !== id
+        ),
+      });
     } else {
       setSendSurvey({
         ...sendSurvey,
-        questionIds: [...sendSurvey.questionIds, id]
-      })
+        questionIds: [...sendSurvey.questionIds, id],
+      });
     }
   };
 
@@ -141,7 +138,6 @@ const UpdateSurveyPage = (props) => {
       // window.location.reload();
       // window.location.reload("/administrator/surveys");
       navigate("/administrator/surveys", { state: { sendSurvey } });
-
     } catch (err) {
       console.log(err);
     }
@@ -151,13 +147,21 @@ const UpdateSurveyPage = (props) => {
     if (!err) return;
     console.log(err);
     if (err.includes("must contain at least 1 element")) {
-      return <p className={Styles.error}>Selecciona por lo menos una pregunta</p>;
+      return (
+        <p className={Styles.error}>Selecciona por lo menos una pregunta</p>
+      );
     } else if (err == "Could not parse Date string") {
       return <p className={Styles.error}>Recuerda llenar todos los campos</p>;
     } else if (err == "Cannot create survey that overlaps") {
-      return <p className={Styles.error}>La encuesta se empalma con otra encuesta</p>;
+      return (
+        <p className={Styles.error}>La encuesta se empalma con otra encuesta</p>
+      );
     } else if (err == "startDate cannot be greater than endDate") {
-      return <p className={Styles.error}>La fecha de inicio no puede ser mayor a la fecha de finalización</p>;
+      return (
+        <p className={Styles.error}>
+          La fecha de inicio no puede ser mayor a la fecha de finalización
+        </p>
+      );
     } else {
       return <p className={Styles.error}>{error}</p>;
     }
@@ -186,9 +190,7 @@ const UpdateSurveyPage = (props) => {
             </div>
             <div className={Styles.dates}>
               <div className={Styles.date}>
-                <label htmlFor="startDate">
-                  Fecha de Inicio
-                </label>
+                <label htmlFor="startDate">Fecha de Inicio</label>
                 <input
                   type="date"
                   id="startDate"
@@ -198,9 +200,7 @@ const UpdateSurveyPage = (props) => {
                 />
               </div>
               <div className={Styles.date}>
-                <label htmlFor="endDate">
-                  Fecha de Finalización
-                </label>
+                <label htmlFor="endDate">Fecha de Finalización</label>
                 <input
                   type="date"
                   id="endDate"
@@ -224,8 +224,7 @@ const UpdateSurveyPage = (props) => {
                       className={Styles.question}
                       onChange={handleChange}
                       toggleActive={toggleActive}
-                    // TODO. Charge the toggle option
-
+                      // TODO. Charge the toggle option
                     />
                   )
               )}
@@ -272,11 +271,7 @@ const UpdateSurveyPage = (props) => {
             >
               Cancelar
             </button>
-            <button
-              className={Styles.save}
-              type="submit"
-              onClick={saveButton}
-            >
+            <button className={Styles.save} type="submit" onClick={saveButton}>
               Guardar
             </button>
           </div>

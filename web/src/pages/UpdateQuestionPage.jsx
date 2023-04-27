@@ -1,7 +1,7 @@
-import Styles from './UpdateQuestionPage.module.css';
+import Styles from "./UpdateQuestionPage.module.css";
 
-import axios from 'axios';
-import { useState } from 'react';
+import axios from "axios";
+import { useState } from "react";
 
 const UpdateQuestionPage = (props) => {
   const [questionData, setQuestionData] = useState({
@@ -10,7 +10,6 @@ const UpdateQuestionPage = (props) => {
     answerKind: props.question.answerKind,
   });
   const [error, setError] = useState("");
-
 
   const handleChange = (e) => {
     setQuestionData({
@@ -23,7 +22,7 @@ const UpdateQuestionPage = (props) => {
     e.preventDefault();
     console.log("cancel update");
     props.hideUpdateQuestion();
-    document.body.classList.remove('stopScroll');
+    document.body.classList.remove("stopScroll");
   };
 
   const saveButton = async (e) => {
@@ -58,7 +57,9 @@ const UpdateQuestionPage = (props) => {
               id="section"
               name="section"
               onChange={handleChange}
-              defaultValue={questionData.section = "" ? "DEFAULT" : questionData.section}
+              defaultValue={
+                (questionData.section = "" ? "DEFAULT" : questionData.section)
+              }
             >
               <option value="DEFAULT" defaultValue disabled>
                 -- Escoge una sección para la pregunta --
@@ -71,7 +72,11 @@ const UpdateQuestionPage = (props) => {
               id="answerKind"
               name="answerKind"
               onChange={handleChange}
-              defaultValue={questionData.answerKind = "" ? "DEFAULT" : questionData.answerKind}
+              defaultValue={
+                (questionData.answerKind = ""
+                  ? "DEFAULT"
+                  : questionData.answerKind)
+              }
             >
               <option value="DEFAULT" disabled>
                 -- Ecoge el tipo de la pregunta --
@@ -89,14 +94,24 @@ const UpdateQuestionPage = (props) => {
               defaultValue={questionData.title}
             />
             <div className={Styles.buttons}>
-              <button className={Styles.cancel} type="submit" onClick={cancelButton}>
+              <button
+                className={Styles.cancel}
+                type="submit"
+                onClick={cancelButton}
+              >
                 Cancelar
               </button>
-              <button className={Styles.save} type="submit" onClick={saveButton}>
+              <button
+                className={Styles.save}
+                type="submit"
+                onClick={saveButton}
+              >
                 Guardar
               </button>
             </div>
-            {error && <p className={Styles.error}>Recuerda llenar todos los campos</p>}
+            {error && (
+              <p className={Styles.error}>Recuerda llenar todos los campos</p>
+            )}
           </form>
         </div>
       </div>

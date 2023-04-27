@@ -15,24 +15,23 @@ const AddSurveyPage = (props) => {
   });
   const [error, setError] = useState("");
 
-
   const toggleActive = (id) => {
-		console.log(id);
-		const ids = surveyData.questionIds;
-		if (ids.includes(id)) {
-			setSurveyData({
-				...surveyData,
-				questionIds: surveyData.questionIds.filter(
-					questionId => questionId !== id
-				)
-			})
-		} else {
-			setSurveyData({
-				...surveyData,
-				questionIds: [...surveyData.questionIds, id]
-			})
-		}
-	};
+    console.log(id);
+    const ids = surveyData.questionIds;
+    if (ids.includes(id)) {
+      setSurveyData({
+        ...surveyData,
+        questionIds: surveyData.questionIds.filter(
+          (questionId) => questionId !== id
+        ),
+      });
+    } else {
+      setSurveyData({
+        ...surveyData,
+        questionIds: [...surveyData.questionIds, id],
+      });
+    }
+  };
 
   const handleChange = (e) => {
     setSurveyData({ ...surveyData, [e.target.name]: e.target.value });
@@ -44,9 +43,7 @@ const AddSurveyPage = (props) => {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const res = await axios.get(
-          "http://localhost:8080/api/questions"
-        );
+        const res = await axios.get("http://localhost:8080/api/questions");
         console.log(res);
         setQuestions(res.data);
       } catch (err) {
@@ -80,16 +77,24 @@ const AddSurveyPage = (props) => {
   };
 
   const handleError = (err) => {
-    if(!err) return;
+    if (!err) return;
     console.log(err);
     if (err.includes("must contain at least 1 element")) {
-      return <p className={Styles.error}>Selecciona por lo menos una pregunta</p>;
+      return (
+        <p className={Styles.error}>Selecciona por lo menos una pregunta</p>
+      );
     } else if (err == "Could not parse Date string") {
       return <p className={Styles.error}>Recuerda llenar todos los campos</p>;
     } else if (err == "Cannot create survey that overlaps") {
-      return <p className={Styles.error}>La encuesta se empalma con otra encuesta</p>;
+      return (
+        <p className={Styles.error}>La encuesta se empalma con otra encuesta</p>
+      );
     } else if (err == "startDate cannot be greater than endDate") {
-      return <p className={Styles.error}>La fecha de inicio no puede ser mayor a la fecha de finalización</p>;
+      return (
+        <p className={Styles.error}>
+          La fecha de inicio no puede ser mayor a la fecha de finalización
+        </p>
+      );
     } else {
       return <p className={Styles.error}>{error}</p>;
     }
@@ -113,9 +118,7 @@ const AddSurveyPage = (props) => {
             </div>
             <div className={Styles.dates}>
               <div className={Styles.date}>
-                <label htmlFor="startDate">
-                  Fecha de Inicio
-                </label>
+                <label htmlFor="startDate">Fecha de Inicio</label>
                 <input
                   type="date"
                   id="startDate"
@@ -124,9 +127,7 @@ const AddSurveyPage = (props) => {
                 />
               </div>
               <div className={Styles.date}>
-                <label htmlFor="endDate">
-                  Fecha de Finalización
-                </label>
+                <label htmlFor="endDate">Fecha de Finalización</label>
                 <input
                   type="date"
                   id="endDate"
@@ -192,11 +193,7 @@ const AddSurveyPage = (props) => {
             >
               Cancelar
             </button>
-            <button
-              className={Styles.save}
-              type="submit"
-              onClick={saveButton}
-            >
+            <button className={Styles.save} type="submit" onClick={saveButton}>
               Guardar
             </button>
           </div>

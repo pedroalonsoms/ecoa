@@ -1,13 +1,13 @@
 import Navbar from "../components/Navbar";
 import LoginForm from "../components/LoginForm";
-import Styles from './LoginPage.module.css';
+import Styles from "./LoginPage.module.css";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 import { useContext, useState } from "react";
 import axios from "axios";
-import { useNavigate, Link , useLocation} from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 
 import useAuth from "../hooks/useAuth";
 
@@ -36,13 +36,13 @@ const Login = (props) => {
       const data = {
         fullName: res.data.fullName,
         role: res.data.role,
-        registration: res.data.registration
+        registration: res.data.registration,
       };
 
       // Save session in localstorage
-      localStorage.setItem("auth", JSON.stringify({...data, isLogged: true}));
+      localStorage.setItem("auth", JSON.stringify({ ...data, isLogged: true }));
 
-      setAuth({...data, isLogged: true});
+      setAuth({ ...data, isLogged: true });
 
       switch (data.role) {
         case "STUDENT":
@@ -64,7 +64,7 @@ const Login = (props) => {
   };
 
   return (
-    <div >
+    <div>
       <Navbar showLinks={activeLinks} isLogin={isLogin} />
       <div className={Styles.login}>
         <div className={Styles.heading}>
@@ -102,6 +102,6 @@ const Login = (props) => {
       </div>
     </div>
   );
-}
+};
 
 export default Login;

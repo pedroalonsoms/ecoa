@@ -1,59 +1,64 @@
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 2rem;
-    height: 4rem;
-    background-color: #000000;
-    /* background: rgb(9,31,142);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  height: 4rem;
+  background-color: #000000;
+  /* background: rgb(9,31,142);
     background: linear-gradient(135deg, rgba(9,31,142,1) 0%, rgba(0,67,196,1) 35%, rgba(0,188,226,1) 100%); */
-    background: rgb(4,16,79);
-    background: linear-gradient(135deg, rgba(4,16,79,1) 0%, rgba(0,67,196,1) 35%, rgba(0,188,226,1) 100%);
+  background: rgb(4, 16, 79);
+  background: linear-gradient(
+    135deg,
+    rgba(4, 16, 79, 1) 0%,
+    rgba(0, 67, 196, 1) 35%,
+    rgba(0, 188, 226, 1) 100%
+  );
 }
 
 .buttons {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
 }
 
 h1 {
-    color: #fff;
-    font-size: 1.5rem;
-    font-weight: 700;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .e {
-    color: #F8C132;
+  color: #f8c132;
 }
 
 .c {
-    color: #EE6C22;
+  color: #ee6c22;
 }
 
 .o {
-    color: #1A7DC1;
+  color: #1a7dc1;
 }
 
 .a {
-    color: #792B6D;
+  color: #792b6d;
 }
 
 .logout {
-    cursor: pointer;
-    background: none;
-    border: solid 1px #fff;
-    border-radius: 10px;
-    padding: 10px;
-    color: #fff;
-    font-size: 1rem;
-    font-weight: 700;
+  cursor: pointer;
+  background: none;
+  border: solid 1px #fff;
+  border-radius: 10px;
+  padding: 10px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
 }
 
 .logout:hover {
-    background-color: #fff;
-    color: #000;
-    transition: 0.2s;
-    transform: scale(1.05);
+  background-color: #fff;
+  color: #000;
+  transition: 0.2s;
+  transform: scale(1.05);
 }
