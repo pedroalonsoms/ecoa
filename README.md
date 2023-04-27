@@ -1,6 +1,16 @@
-# ECOA
+<p align="center">
+    <img src="logo.png">
+</p>
 
-A major redesign of the traditional Tec's primary satisfaction survey: ECOA
+<h2 align="center"> 
+    A major redesign of the traditional Tec's primary satisfaction survey: ECOA
+<h2>
+
+<p align="center">
+    <a href="https://github.com/prettier/prettier">
+        <img alt="code style: prettier" src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square">
+    </a>
+</p>
 
 ![](demo.jpeg)
 
