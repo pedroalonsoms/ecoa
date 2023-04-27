@@ -101,15 +101,25 @@ public class TeacherQuestionManager : MonoBehaviour
             Debug.Log(questions);
             Debug.Log(questions[0].toString());
             currentIndex = 0;
+
+            backButtonI.sprite = bButtonOff;
+            nextButtonI.sprite = nButtonOn;
+            nextButtonB.onClick.AddListener(loadNextQuestion);
+
             updateQuestion(currentIndex);
 
-            if (currentIndex == 0) {
-                backButtonI.sprite = bButtonOff;
-                nextButtonI.sprite = nButtonOn;
-                nextButtonB.onClick.AddListener(loadNextQuestion);
-            } 
-            
+        }
+    }
 
+    void Update() {
+        if (currentIndex == 0) {
+            backButtonI.sprite = bButtonOff;
+            nextButtonI.sprite = nButtonOn;
+        } else if (currentIndex < totalQuestions-1) {
+            backButtonI.sprite = bButtonOn;
+            nextButtonI.sprite = nButtonOn;
+        } else{
+            nextButtonI.sprite = eButton;
         }
     }
 
@@ -126,9 +136,12 @@ public class TeacherQuestionManager : MonoBehaviour
             updateQuestion(currentIndex);
             // Función para la animación
         } else {
-            // Aquí va el send answer a la base de datos 
-            SceneManager.LoadScene("teacher_menu");
+            toTeacherMenu();
         }
+    }
+
+    public void toTeacherMenu() {
+         SceneManager.LoadScene("teacher_menu");
     }
 
     public void loadPrevQuestion(){

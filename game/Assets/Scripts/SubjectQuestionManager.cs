@@ -26,6 +26,19 @@ public class SubjectQuestionManager : MonoBehaviour
     public int totalQuestions;
     public int currentIndex;
 
+    public Image backButtonI;
+    public Image nextButtonI;
+
+    public Sprite bButtonOn;
+    public Sprite bButtonOff;
+
+    public Sprite nButtonOn;
+    public Sprite nButtonOff;
+    public Sprite eButton;
+
+    public Button backButtonB;
+    public Button nextButtonB;
+
     IEnumerator Start() 
     {
         pregunta = GameObject.Find("Question").GetComponent<TextMeshProUGUI>();
@@ -89,6 +102,18 @@ public class SubjectQuestionManager : MonoBehaviour
             Debug.Log(questions[0].toString());
             currentIndex = 0;
             updateQuestion(currentIndex);
+        }
+    }
+
+    void Update() {
+        if (currentIndex == 0) {
+            backButtonI.sprite = bButtonOff;
+            nextButtonI.sprite = nButtonOn;
+        } else if (currentIndex < totalQuestions-1) {
+            backButtonI.sprite = bButtonOn;
+            nextButtonI.sprite = nButtonOn;
+        } else{
+            nextButtonI.sprite = eButton;
         }
     }
 
