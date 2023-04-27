@@ -1,4 +1,6 @@
-POST http://localhost:8080/api/answers/
+POST http://localhost:8080/api//answers/:studentRegistration/questions/:questionId
+
+GET  http://localhost:8080/api/answers/:studentRegistration/questions/:questionId
 
 localhost:8080/api/answers/A01741437/questions/3
 
