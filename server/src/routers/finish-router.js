@@ -1,4 +1,3 @@
-// kerim
 import express from "express";
 import { pool } from "../db/connection.js";
 import { z } from "zod";
@@ -10,25 +9,23 @@ finishRouter.post("/finish/:studentRegistration", async (req, res) => {
       .object({ studentRegistration: z.string().length(9) })
       .parse(req.params);
 
-    // TODO: add validation where you can not `finish` if you didn't complete all of the active-survey questions 
-
     const [activeSurvey] = await pool.query(
-      "SELECT id, startDate, endDate FROM Survey WHERE startDate <= CURDATE() AND endDate >= CURDATE()"
+      "SELECT id FROM Survey WHERE CURDATE() BETWEEN startDate AND endDate"
     );
 
     if (activeSurvey.length === 0) {
-      throw new Error("No active survey found");
+      throw new Error("There's no current active survey");
     }
 
-    // counting number of questions in active survey
+    // Counting number of questions in active survey
     const [questionCount] = await pool.query(
-      "SELECT COUNT(*) as total FROM SurveyQuestion WHERE surveyId = ?",
+      "SELECT COUNT(*) AS total FROM SurveyQuestion WHERE surveyId = ?",
       [activeSurvey[0].id]
     );
 
     // Counting the answered questions per student IN THE ACTIVE SURVEY
     const [answeredQuestions] = await pool.query(
-      `SELECT COUNT(*) as total
+      `SELECT COUNT(*) AS total
        FROM TmpAnswer
        WHERE studentRegistration = ? AND surveyQuestionId IN (
          SELECT id
