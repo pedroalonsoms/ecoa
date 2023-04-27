@@ -9,6 +9,8 @@ const UpdateQuestionPage = (props) => {
     section: props.question.section,
     answerKind: props.question.answerKind,
   });
+  const [error, setError] = useState("");
+
 
   const handleChange = (e) => {
     setQuestionData({
@@ -38,6 +40,7 @@ const UpdateQuestionPage = (props) => {
       window.location.reload();
     } catch (err) {
       console.log(err);
+      setError(err.response.data.error);
     }
   };
 
@@ -93,7 +96,7 @@ const UpdateQuestionPage = (props) => {
                 Guardar
               </button>
             </div>
-            {/* {error && <p className={Styles.error}>{error}</p>} */}
+            {error && <p className={Styles.error}>Recuerda llenar todos los campos</p>}
           </form>
         </div>
       </div>

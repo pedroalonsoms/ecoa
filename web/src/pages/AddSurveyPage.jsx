@@ -13,6 +13,8 @@ const AddSurveyPage = (props) => {
     startDate: "",
     endDate: "",
   });
+  const [error, setError] = useState("");
+
 
   const toggleActive = (id) => {
 		console.log(id);
@@ -70,9 +72,27 @@ const AddSurveyPage = (props) => {
       );
       console.log(res);
       props.hideAddQuestion();
-      window.location.reload();
+      window.location.reload("/administrator/surveys");
     } catch (err) {
       console.log(err);
+      setError(err.response.data.error);
+    }
+  };
+
+  const handleError = (err) => {
+    if(!err) return;
+    console.log(err);
+    console.log(err.includes("must contain at least 1 element"));
+    if (err.includes("must contain at least 1 element")) {
+      return <p className={Styles.error}>Selecciona por lo menos una pregunta</p>;
+    } else if (err == "Could not parse Date string") {
+      return <p className={Styles.error}>Recuerda llenar todos los campos</p>;
+    } else if (err == "Cannot create survey that overlaps") {
+      return <p className={Styles.error}>La encuesta se empalma con otra encuesta</p>;
+    } else if (err == "startDate cannot be greater than endDate") {
+      return <p className={Styles.error}>La fecha de inicio no puede ser mayor a la fecha de finalización</p>;
+    } else {
+      return <p className={Styles.error}>{error}</p>;
     }
   };
 
@@ -164,6 +184,7 @@ const AddSurveyPage = (props) => {
               )}
             </div>
           </div>
+          {handleError(error)}
           <div className={Styles.buttons}>
             <button
               className={Styles.cancel}
