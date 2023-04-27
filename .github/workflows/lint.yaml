@@ -18,5 +18,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: lts/*
-      - run: npm ci
-      - run: npm run lint
+
+      - name: Install Prettier
+        run: npm i -D prettier
+
+      - name: Run Linter
+        run: npm run lint
