@@ -17,6 +17,6 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: lts
+          node-version: lts/*
       - run: npm ci
       - run: npm run lint
