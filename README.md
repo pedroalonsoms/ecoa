@@ -32,6 +32,10 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 - [ ] Cachar más errores que probablemente vengan del back (hacer testing)
 - [ ] Si terminas, ayudar a los demás O.o
 
+# SQL Diagram
+
+![](server/src/db/diagramav7.png)
+
 # Development Team
 
 Team **2**
