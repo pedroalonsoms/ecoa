@@ -82,7 +82,6 @@ const AddSurveyPage = (props) => {
   const handleError = (err) => {
     if(!err) return;
     console.log(err);
-    console.log(err.includes("must contain at least 1 element"));
     if (err.includes("must contain at least 1 element")) {
       return <p className={Styles.error}>Selecciona por lo menos una pregunta</p>;
     } else if (err == "Could not parse Date string") {
