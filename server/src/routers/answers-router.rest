@@ -1,12 +1,31 @@
-POST http://localhost:8080/api//answers/:studentRegistration/questions/:questionId
+GET http://localhost:8080/answers/{{studentRegistration}}/questions/{{questionId}}
 
-GET  http://localhost:8080/api/answers/:studentRegistration/questions/:questionId
+Content-Type: application/json
+Accept: application/json
 
-localhost:8080/api/answers/A01741437/questions/3
+JSON response structure: 
+
+[
+  {
+    "id": 1,
+    "studentRegistration": "A01741437",
+    "surveyQuestionId": 2,
+    "targetKind": "TEACHER_REGISTRATION",
+    "teacherRegistration": "L00000001",
+    "crn": null,
+    "content": "El profesor fue muy bueno"
+  }
+]
+
+POST http://localhost:8080/answers/{{studentRegistration}}/questions/{{questionId}}
+
+Content-Type: application/json
+Accept: application/json
 
 {
-  "targetKind": "TEACHER_REGISTRATION",
-  "teacherRegistration": "L00000001",
-  "crn": null,
-  "content": "10"
+  "targetKind": "{{targetKind}}",
+  "teacherRegistration": "{{teacherRegistration}}",
+  "crn": "{{crn}}",
+  "content": "{{content}}"
 }
+

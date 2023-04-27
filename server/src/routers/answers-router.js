@@ -20,16 +20,15 @@ answersRouter.get("/answers/:studentRegistration/questions/:questionId", async (
     );
 
     if (rows.length === 0) {
-      res.status(400).send({ error: "The requested question has not been answered." });
-    } else {
-      res.status(200).send(rows);
-    }  
+      throw new Error("The requested question has not been answered.");
+    }
+
+    return res.status(200).send(rows);
   } catch (error) {
     res.status(400).send({ error: error.message || "Unknown error" });
   }
 });
 
-// POST /answers/:studentId/questions/:questionId
 answersRouter.post("/answers/:studentRegistration/questions/:questionId", async (req, res) => {
   try {
     const { studentRegistration, questionId } = z
@@ -42,20 +41,26 @@ answersRouter.post("/answers/:studentRegistration/questions/:questionId", async 
     const { targetKind, teacherRegistration, crn, content } = z
       .object({
         targetKind: z.enum(TARGET_KIND),
-        teacherRegistration: z.string().nullable().refine(value => value !== null, {
-          message: "teacherRegistration must not be null",
-        }),
+        teacherRegistration: z.string().nullable(),
         crn: z.number().nullable(),
         content: z.string(),
       })
       .parse(req.body);
+
+      if (targetKind === "TEACHER_REGISTRATION" && teacherRegistration === null) {
+        throw new Error("Teacher registration cannot be null when targetKind is TEACHER_REGISTRATION");
+      }
+  
+      if (targetKind === "CRN" && crn === null) {
+        throw new Error("CRN cannot be null when targetKind is CRN");
+      }
 
     await pool.query(
       `INSERT INTO TmpAnswer (studentRegistration, surveyQuestionId, targetKind, teacherRegistration, crn, content) VALUES (?, ?, ?, ?, ?, ?)`,
       [studentRegistration, questionId, targetKind, teacherRegistration, crn, content]
     );
 
-    res.status(200).send({ message: "Answer created successfully" });
+    res.sendStatus(200);
   } catch (error) {
     res.status(400).send({ error: error.message || "Unknown error" });
   }
