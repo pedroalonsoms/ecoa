@@ -20,7 +20,7 @@ jobs:
           node-version: lts/*
 
       - name: Install Prettier
-        run: npm i -D prettier
+        run: npm ci
 
       - name: Run Linter
         run: npm run lint
