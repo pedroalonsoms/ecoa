@@ -4,35 +4,13 @@ A major redesign of the traditional Tec's primary satisfaction survey: ECOA
 
 ![](demo.jpeg)
 
-### Santiago
+# 📑 Documents
 
-- [ ] Animación Teus feliz/triste
-- [ ] Animación Pájaro
-- [ ] Animación Premio Random
-- [ ] Referencias de las imagenes
-- [ ] Música de fondo (que no se cruce con la final)
-- [ ] Sonido de click al botón
-- [ ] Cambiar materia a `unidad de formación` en la banderita inicial
-- [ ] Poner pantalla de inicio con instrucciones y mecánica
-- [ ] Variedad de los sonidos
-- [ ] Contraste de botones en la UI (no deben ser rojos/verdes)
-- [ ] Hacer el fetch para el premio final
-- [ ] Tamaño de botones consistentes
-- [ ] Cambiar icono de home a uno visible en todas las pantallas (blanco)
-- [ ] Avanzar en las diapositivas de la presentación final
+- 📦 [Google Drive Folder](https://drive.google.com/drive/folders/1D2RHVyTfaO_m26Hka9A1EXCZ5MDTx3B7?usp=sharing)
+- 📷 [Final Presentation Slides]()
+- 📌 [Rubric](https://docs.google.com/spreadsheets/d/1_pA1fRWtzcggmU9Bw4S-WutvSK5uTGxi/edit?usp=share_link&ouid=112199480319751895298&rtpof=true&sd=true)
 
-## Front
-
-### Adrián
-
-- [ ] Mostrar un dashboard de los datos en `/teachers` en lugar de una página en blanco, con caso de error cuando no existe el profe
-- [ ] Cachar error cuando pones título duplicado en el survey (viene del back)
-- [ ] Cachar error cuando quieres crear una encuesta que es en una fecha con overlap (viene del back)
-- [ ] Cachar error cuando la startDate es mayor que la endDate (viene del back)
-- [ ] Cachar más errores que probablemente vengan del back (hacer testing)
-- [ ] Si terminas, ayudar a los demás O.o
-
-# SQL Diagram
+# 💿 SQL Diagram
 
 ![](server/src/db/diagramav7.png)
 
