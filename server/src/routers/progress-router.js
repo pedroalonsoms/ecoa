@@ -28,6 +28,7 @@ progressRouter.get(
       // Course Progress
       const [formationUnitsProgress] = await pool.query(
         `SELECT
+        Classroom.crn AS crn,
         Classroom.title AS title,
         Classroom.kind AS kind,
         COUNT(Classroom.crn) AS questionsAnswered,
@@ -58,7 +59,9 @@ progressRouter.get(
 
       // Teacher progress
       const [teachersProgress] = await pool.query(
-        `SELECT Teacher.fullName AS fullName,
+        `SELECT 
+        Teacher.registration AS registration,
+        Teacher.fullName AS fullName,
         COUNT(Teacher.registration) AS questionsAnswered,
         (
           SELECT 
