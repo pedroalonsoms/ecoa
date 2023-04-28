@@ -95,7 +95,9 @@ const AddSurveyPage = (props) => {
           La fecha de inicio no puede ser mayor a la fecha de finalización
         </p>
       );
-    } else {
+    } else if (err == "Cannot create survey with duplicate title") {
+      return <p className={Styles.error}>Ya existe una encuesta con ese título</p>;
+    } else{
       return <p className={Styles.error}>{error}</p>;
     }
   };
