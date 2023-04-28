@@ -1,31 +1,4 @@
-GET http://localhost:8080/api/answers/A01741437/questions/1
+GET http://localhost:8080/api/answers/A01741437
 
-Content-Type: application/json
-Accept: application/json
-
-JSON response structure: 
-
-[
-  {
-    "id": 1,
-    "studentRegistration": "A01741437",
-    "surveyQuestionId": 2,
-    "targetKind": "TEACHER_REGISTRATION",
-    "teacherRegistration": "L00000001",
-    "crn": null,
-    "content": "El profesor fue muy bueno"
-  }
-]
 ###
-POST http://localhost:8080/answers/A01741437/questions/1
-
-Content-Type: application/json
-Accept: application/json
-
-{
-  "targetKind": "TEACHER_REGISTRATION",
-  "teacherRegistration": "L00000001",
-  "crn": null,
-  "content": "El profesor fue muy bueno"
-}
-
+POST http://localhost:8080/api/answers/A01741437/questions/1
