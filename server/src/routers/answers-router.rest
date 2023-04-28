@@ -1,4 +1,4 @@
-GET http://localhost:8080/answers/A01741437/questions/1
+GET http://localhost:8080/api/answers/A01741437/questions/1
 
 Content-Type: application/json
 Accept: application/json
@@ -16,7 +16,7 @@ JSON response structure:
     "content": "El profesor fue muy bueno"
   }
 ]
-
+###
 POST http://localhost:8080/answers/A01741437/questions/1
 
 Content-Type: application/json

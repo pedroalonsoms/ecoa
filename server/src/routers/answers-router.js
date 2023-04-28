@@ -16,8 +16,8 @@ answersRouter.get(
         })
         .parse(req.params);
 
-      const { rows } = await pool.query(
-        `SELECT * FROM TmpAnswer JOIN SurveyQuestion ON TmpAnswer.surveyQuestionId = SurveyQuestion.id WHERE studentRegistration = ? AND SurveyQuestionId.questionId = ?`,
+      const [rows] = await pool.query(
+        `SELECT * FROM TmpAnswer JOIN SurveyQuestion ON TmpAnswer.surveyQuestionId = SurveyQuestion.id WHERE studentRegistration = ? AND SurveyQuestion.questionId = ?`,
         [studentRegistration, questionId]
       );
 
@@ -66,7 +66,7 @@ answersRouter.post(
       }
 
       await pool.query(
-        `INSERT INTO TmpAnswer (studentRegistration, surveyQuestionId, targetKind, teacherRegistration, crn, content) VALUES (?, ?, ?, ?, ?, ?)`,
+        `INSERT INTO TmpAnswer (studentRegistration, surveyQuestion, targetKind, teacherRegistration, crn, content) VALUES (?, ?, ?, ?, ?, ?)`,
         [
           studentRegistration,
           questionId,
