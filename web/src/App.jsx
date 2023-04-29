@@ -1,5 +1,5 @@
 import "./App.css";
-import {Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import LoginPage from "./pages/LoginPage";
 import TeacherPage from "./pages/TeacherPage";
@@ -13,7 +13,7 @@ import Error404 from "./pages/Error404";
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<Layout />} > 
+      <Route path="/" element={<Layout />}>
         {/* Public Routes */}
         <Route path="/" element={<LoginPage />} />
         <Route path="login" element={<LoginPage />} />
@@ -30,12 +30,40 @@ const App = () => {
         </Route>
 
         <Route element={<RequireAuth allowedRoles={["ADMINISTRATOR"]} />}>
-          <Route path="administrator/surveys" element={<AdministratorSurveysPage />} />
-          <Route path="administrator/questions" element={<AdministratorQuestionsPage />} />
+          <Route
+            path="administrator/surveys"
+            element={<AdministratorSurveysPage />}
+          />
+          <Route
+            path="administrator/questions"
+            element={<AdministratorQuestionsPage />}
+          />
         </Route>
-        
+
         {/* Catch All */}
         <Route path="*" element={<Error404 />} />
+
+        {/* Redirect using local storage */}
+        <Route
+          path="/"
+          element={
+            localStorage.getItem("auth").role == "STUDENT" && <StudentPage />
+          }
+        />
+        <Route
+          path="/"
+          element={
+            localStorage.getItem("auth").role == "TEACHER" && <TeacherPage />
+          }
+        />
+        <Route
+          path="/"
+          element={
+            localStorage.getItem("auth").role == "ADMINISTRATOR" && (
+              <AdministratorSurveysPage />
+            )
+          }
+        />
       </Route>
     </Routes>
   );

@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "humao.rest-client",
+    "ms-dotnettools.csharp"
+  ]
+}

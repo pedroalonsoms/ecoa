@@ -1,104 +1,108 @@
 *,
 ::before,
 ::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .wrapper {
-    /* max-width: 500px; */
-    /* margin: 2rem auto; */
-    z-index: 11;
-    width: 60vw;
-    height: 60vh;
+  /* max-width: 500px; */
+  /* margin: 2rem auto; */
+  z-index: 11;
+  width: 60vw;
+  height: 60vh;
 }
 
 .content {
-    position: relative;
-    background-color: #fff;
-    border: 3px solid #ccc;
-    background-clip: padding-box;
-    border-radius: 18px;
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    z-index: 12;
+  position: relative;
+  background-color: #fff;
+  border: 3px solid #ccc;
+  background-clip: padding-box;
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  z-index: 12;
 }
 
 .content h2 {
-    text-align: center;
-    padding-top: 10px;
+  text-align: center;
+  padding-top: 10px;
 }
 
 .form {
-    padding: 0px 10px 10px;
+  padding: 0px 10px 10px;
 }
 
 .form label {
-    display: block;
-    margin: 10px 0px;
-    font-weight: 800;
-    font-size: 20px;
+  display: block;
+  margin: 10px 0px;
+  font-weight: 800;
+  font-size: 20px;
 }
 
 .form select {
-    display: block;
-    width: 100%;
-    padding: 5px;
-    margin: 5px 0px;
-    border: 3px solid #000;
-    border-radius: 18px;
-    font-weight: 500;
+  display: block;
+  width: 100%;
+  padding: 5px;
+  margin: 5px 0px;
+  border: 3px solid #000;
+  border-radius: 18px;
+  font-weight: 500;
 }
 
 .form input {
-    display: block;
-    width: 100%;
-    padding: 5px;
-    margin: 5px 0px;
-    border: 3px solid #000;
-    border-radius: 18px;
+  display: block;
+  width: 100%;
+  padding: 5px;
+  margin: 5px 0px;
+  border: 3px solid #000;
+  border-radius: 18px;
 }
 
 .buttons {
-    display: flex;
-    justify-content: flex-end;
-    padding: 10px;
-    gap: 20px;
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  gap: 20px;
 }
 
 .cancel {
-    background-color: #fff;
-    color: #000;
-    border: 3px solid #000;
-    border-radius: 20px;
-    padding: 10px;
-    font-weight: 800;
-    cursor: pointer;
+  background-color: #fff;
+  color: #000;
+  border: 3px solid #000;
+  border-radius: 20px;
+  padding: 10px;
+  font-weight: 800;
+  cursor: pointer;
 }
 
 .save {
-    background-color: #000;
-    color: #fff;
-    border: 3px solid #000;
-    border-radius: 20px;
-    padding: 10px;
-    font-weight: 800;
-    cursor: pointer;
+  background-color: #000;
+  color: #fff;
+  border: 3px solid #000;
+  border-radius: 20px;
+  padding: 10px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.error {
+  color: red;
 }

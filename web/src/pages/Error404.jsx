@@ -1,4 +1,4 @@
-import Styles from './Error404.module.css';
+import Styles from "./Error404.module.css";
 
 const Error404 = () => {
   return (
@@ -26,7 +26,12 @@ const Error404 = () => {
         </figcaption>
       </figure>
       <div className={Styles.button}>
-        <button className={Styles.home} onClick={() => window.location.href = "/"}>Ir a la página principal</button>
+        <button
+          className={Styles.home}
+          onClick={() => (window.location.href = "/")}
+        >
+          Ir a la página principal
+        </button>
       </div>
     </div>
   );

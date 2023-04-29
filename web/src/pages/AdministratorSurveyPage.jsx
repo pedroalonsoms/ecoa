@@ -1,4 +1,4 @@
-import Styles from './AdministratorSurveyPage.module.css';
+import Styles from "./AdministratorSurveyPage.module.css";
 
 import Navbar from "../components/Navbar";
 import Survey from "../components/Survey";
@@ -55,7 +55,7 @@ const AdministratorSurveys = () => {
       state: !showUpdateSurvey.state,
       updateId: id,
     });
-    
+
     console.log("showUpdateSurvey");
     console.log(showUpdateSurvey);
   };
@@ -86,11 +86,11 @@ const AdministratorSurveys = () => {
         </div>
       </div>
 
-      {(!showAddSurvey && !showUpdateSurvey.state) &&
+      {!showAddSurvey && !showUpdateSurvey.state && (
         <button className={Styles.addButton} onClick={handleClick}>
           <FontAwesomeIcon icon={faPlus} size="2xl" />
         </button>
-      }
+      )}
     </div>
   );
 };

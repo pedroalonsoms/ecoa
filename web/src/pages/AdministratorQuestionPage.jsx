@@ -117,7 +117,6 @@ const AdministratorQuestions = () => {
         </div>
       </div>
 
-      
       <button className={Styles.addButton} onClick={handleClick}>
         <FontAwesomeIcon icon={faPlus} size="2xl" />
       </button>

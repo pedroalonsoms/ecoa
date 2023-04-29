@@ -1,7 +1,7 @@
-import Styles from './Navbar.module.css';
-import Links from './Links';
+import Styles from "./Navbar.module.css";
+import Links from "./Links";
 
-import LoginPage from "../pages/LoginPage"
+import LoginPage from "../pages/LoginPage";
 
 const Navbar = (props) => {
   const showLinks = props.showLinks;
@@ -21,9 +21,11 @@ const Navbar = (props) => {
       </h1>
       <div className={Styles.buttons}>
         {showLinks && <Links />}
-        {!props.isLogin && <button className={Styles.logout} onClick={logout}>
-          Cerrar sesión
-        </button>}
+        {!props.isLogin && (
+          <button className={Styles.logout} onClick={logout}>
+            Cerrar sesión
+          </button>
+        )}
       </div>
     </div>
   );
