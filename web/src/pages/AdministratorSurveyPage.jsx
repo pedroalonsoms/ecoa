@@ -13,86 +13,92 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const AdministratorSurveys = () => {
-  const activeLinks = true;
+    const activeLinks = true;
 
-  const [surveys, setSurveys] = useState([]);
-  const [showAddSurvey, setShowAddSurvey] = useState(false);
-  const [showUpdateSurvey, setShowUpdateSurvey] = useState({
-    state: false,
-    updateId: null,
-    data: {
-      id: null,
-      title: null,
-      startDate: null,
-      endDate: null,
-      questionIds: [],
-    },
-  });
-
-  useEffect(() => {
-    const fetchSurveys = async () => {
-      try {
-        const res = await axios.get("http://localhost:8080/api/surveys");
-        console.log(res);
-        setSurveys(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchSurveys();
-  }, []);
-
-  const handleClick = () => {
-    setShowAddSurvey(!showAddSurvey);
-  };
-
-  const handleEdit = (id) => {
-    console.log(id);
-    // console.log(data.UpdateId);
-    console.log(showUpdateSurvey);
-    setShowUpdateSurvey({
-      ...showUpdateSurvey,
-      state: !showUpdateSurvey.state,
-      updateId: id,
+    const [surveys, setSurveys] = useState([]);
+    const [showAddSurvey, setShowAddSurvey] = useState(false);
+    const [showUpdateSurvey, setShowUpdateSurvey] = useState({
+        state: false,
+        updateId: null,
+        data: {
+            id: null,
+            title: null,
+            startDate: null,
+            endDate: null,
+            questionIds: [],
+        },
     });
 
-    console.log("showUpdateSurvey");
-    console.log(showUpdateSurvey);
-  };
+    useEffect(() => {
+        const fetchSurveys = async () => {
+            try {
+                const res = await axios.get(
+                    "http://localhost:8080/api/surveys"
+                );
+                // console.log(res);
+                setSurveys(res.data);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        fetchSurveys();
+    }, [surveys]);
 
-  return (
-    <div>
-      <Navbar showLinks={activeLinks} />
-      <h2>Encuestas</h2>
+    const handleClick = () => {
+        setShowAddSurvey(!showAddSurvey);
+    };
 
-      {showAddSurvey && <AddSurveyPage hideAddQuestion={handleClick} />}
+    const handleEdit = (id) => {
+        console.log(id);
+        // console.log(data.UpdateId);
+        console.log(showUpdateSurvey);
+        setShowUpdateSurvey({
+            ...showUpdateSurvey,
+            state: !showUpdateSurvey.state,
+            updateId: id,
+        });
 
-      {showUpdateSurvey.state && (
-        <UpdateSurveyPage
-          hideUpdateSurvey={handleEdit}
-          id={showUpdateSurvey.updateId}
-          data={showUpdateSurvey.data}
-          survey={surveys.find(
-            (survey) => survey.id === showUpdateSurvey.updateId
-          )}
-        />
-      )}
+        console.log("showUpdateSurvey");
+        console.log(showUpdateSurvey);
+    };
 
-      <div className={Styles.container}>
-        <div className={Styles.surveys}>
-          {surveys.map((survey) => (
-            <Survey key={survey.id} data={survey} handleEdit={handleEdit} />
-          ))}
+    return (
+        <div>
+            <Navbar showLinks={activeLinks} />
+            <h2>Encuestas</h2>
+
+            {showAddSurvey && <AddSurveyPage hideAddQuestion={handleClick} />}
+
+            {showUpdateSurvey.state && (
+                <UpdateSurveyPage
+                    hideUpdateSurvey={handleEdit}
+                    id={showUpdateSurvey.updateId}
+                    data={showUpdateSurvey.data}
+                    survey={surveys.find(
+                        (survey) => survey.id === showUpdateSurvey.updateId
+                    )}
+                />
+            )}
+
+            <div className={Styles.container}>
+                <div className={Styles.surveys}>
+                    {surveys.map((survey) => (
+                        <Survey
+                            key={survey.id}
+                            data={survey}
+                            handleEdit={handleEdit}
+                        />
+                    ))}
+                </div>
+            </div>
+
+            {!showAddSurvey && !showUpdateSurvey.state && (
+                <button className={Styles.addButton} onClick={handleClick}>
+                    <FontAwesomeIcon icon={faPlus} size="2xl" />
+                </button>
+            )}
         </div>
-      </div>
-
-      {!showAddSurvey && !showUpdateSurvey.state && (
-        <button className={Styles.addButton} onClick={handleClick}>
-          <FontAwesomeIcon icon={faPlus} size="2xl" />
-        </button>
-      )}
-    </div>
-  );
+    );
 };
 
 export default AdministratorSurveys;
