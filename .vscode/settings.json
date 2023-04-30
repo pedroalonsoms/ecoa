@@ -1,5 +1,6 @@
 {
   "editor.formatOnSave": true,
+  "omnisharp.useModernNet": false,
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },

@@ -40,15 +40,6 @@ const validateSurvey = async (requestBody) => {
     throw new Error("startDate cannot be greater than endDate");
   }
 
-  const [surveysThatOverlap] = await pool.query(
-    "SELECT id FROM Survey WHERE CAST(? AS DATE) BETWEEN startDate AND endDate OR CAST(? AS DATE) BETWEEN startDate AND endDate",
-    [startDate, endDate]
-  );
-
-  if (surveysThatOverlap.length > 0) {
-    throw new Error("Cannot create survey that overlaps");
-  }
-
   return parsedRequestBody;
 };
 
@@ -101,6 +92,15 @@ surveysRouter.post("/surveys", async (req, res) => {
       req.body
     );
 
+    const [surveysThatOverlap] = await pool.query(
+      "SELECT id FROM Survey WHERE CAST(? AS DATE) BETWEEN startDate AND endDate OR CAST(? AS DATE) BETWEEN startDate AND endDate",
+      [startDate, endDate]
+    );
+
+    if (surveysThatOverlap.length > 0) {
+      throw new Error("Cannot create survey that overlaps");
+    }
+
     const [surveysWithSameName] = await pool.query(
       "SELECT id FROM Survey WHERE title = ?",
       [title]
@@ -145,18 +145,40 @@ surveysRouter.put("/surveys/:surveyId", async (req, res) => {
       .object({ surveyId: z.string().transform((s) => parseInt(s)) })
       .parse(req.params);
 
+    const { title, questionIds, startDate, endDate } = await validateSurvey(
+      req.body
+    );
+
     const [existingSurveys] = await pool.query(
       "SELECT id FROM Survey WHERE id = ?",
       [surveyId]
     );
 
     if (existingSurveys.length < 1) {
-      throw new Error("Could not found survey with given id");
+      throw new Error("Could not find survey with given id");
     }
 
-    const { title, questionIds, startDate, endDate } = await validateSurvey(
-      req.body
+    const [surveysThatOverlap] = await pool.query(
+      `SELECT id 
+      FROM Survey 
+      WHERE (CAST(? AS DATE) BETWEEN startDate AND endDate
+      OR CAST(? AS DATE) BETWEEN startDate AND endDate)
+      AND id != ?`,
+      [startDate, endDate, surveyId]
     );
+
+    if (surveysThatOverlap.length > 0) {
+      throw new Error("Cannot update survey that overlaps");
+    }
+
+    const [surveysWithSameName] = await pool.query(
+      "SELECT id FROM Survey WHERE title = ? AND id != ?",
+      [title, surveyId]
+    );
+
+    if (surveysWithSameName.length > 0) {
+      throw new Error("Cannot update survey with duplicate title");
+    }
 
     await pool.query(
       "UPDATE Survey SET title = ?, startDate = CAST(? AS DATE), endDate = CAST(? AS DATE) WHERE id = ?",

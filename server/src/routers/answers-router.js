@@ -5,32 +5,28 @@ import { TARGET_KIND } from "../utils/constants.js";
 
 const answersRouter = express.Router();
 
-answersRouter.get(
-  "/answers/:studentRegistration/questions/:questionId",
-  async (req, res) => {
-    try {
-      const { studentRegistration, questionId } = z
-        .object({
-          studentRegistration: z.string().length(9),
-          questionId: z.string().transform((s) => parseInt(s)),
-        })
-        .parse(req.params);
+answersRouter.get("/answers/:studentRegistration", async (req, res) => {
+  try {
+    const { studentRegistration } = z
+      .object({
+        studentRegistration: z.string().length(9),
+      })
+      .parse(req.params);
 
-      const [rows] = await pool.query(
-        `SELECT * FROM TmpAnswer JOIN SurveyQuestion ON TmpAnswer.surveyQuestionId = SurveyQuestion.id WHERE studentRegistration = ? AND SurveyQuestion.questionId = ?`,
-        [studentRegistration, questionId]
-      );
+    const [rows] = await pool.query(
+      `SELECT TmpAnswer.*, SurveyQuestion.questionId FROM TmpAnswer JOIN SurveyQuestion ON TmpAnswer.surveyQuestionId = SurveyQuestion.id WHERE TmpAnswer.studentRegistration = ? ORDER BY TmpAnswer.id ASC`,
+      [studentRegistration]
+    );
 
-      if (rows.length === 0) {
-        throw new Error("The requested question has not been answered.");
-      }
-
-      return res.status(200).send(rows);
-    } catch (error) {
-      res.status(400).send({ error: error.message || "Unknown error" });
+    if (rows.length === 0) {
+      throw new Error("No answers found for the given student registration.");
     }
+
+    return res.status(200).send(rows);
+  } catch (error) {
+    res.status(400).send({ error: error.message || "Unknown error" });
   }
-);
+});
 
 answersRouter.post(
   "/answers/:studentRegistration/questions/:questionId",

@@ -6,7 +6,7 @@ POST http://localhost:8080/api/surveys
 content-type: application/json
 
 {
-    "title": "survey four",
+    "title": "survey five",
     "questionIds": [2,3],
     "startDate": "2023-04-22",
     "endDate": "2023-04-22"
@@ -14,11 +14,11 @@ content-type: application/json
 
 ###
 
-PUT http://localhost:8080/api/surveys/4
+PUT http://localhost:8080/api/surveys/5
 content-type: application/json
 
 {
-    "title": "survey four",
+    "title": "survey five",
     "questionIds": [2,3],
     "startDate": "2023-04-22",
     "endDate": "2023-04-22"
@@ -26,7 +26,7 @@ content-type: application/json
 
 ###
 
-DELETE http://localhost:8080/api/surveys/4
+DELETE http://localhost:8080/api/surveys/5
 
 ###
 
