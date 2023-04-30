@@ -220,6 +220,134 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a330a9c550b9d455eb26ada2f6b46ac0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &90828222
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 90828224}
+  - component: {fileID: 90828223}
+  m_Layer: 0
+  m_Name: Audio Source3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &90828223
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90828222}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: c9adff2375209472785d2cea4efed9e8, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &90828224
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90828222}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.52127, y: 0.21466762, z: -9.943346}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &186677461
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,6 +881,7 @@ GameObject:
   m_Component:
   - component: {fileID: 461993654}
   - component: {fileID: 461993655}
+  - component: {fileID: 461993656}
   m_Layer: 0
   m_Name: teus
   m_TagString: Untagged
@@ -768,7 +897,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 461993653}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -214, y: -55, z: -1}
+  m_LocalPosition: {x: -260, y: -42, z: -1}
   m_LocalScale: {x: 61.05, y: 64.35, z: 1.65}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -816,7 +945,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 461ab39962db44d76b0775dc7a8f7848, type: 3}
+  m_Sprite: {fileID: -6995749434047622103, guid: 87dffa9b3df659f44bb82592b456ad6e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -827,6 +956,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &461993656
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461993653}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e134e39122be241e18f8f35e6000a9aa, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &486135655
 GameObject:
   m_ObjectHideFlags: 0
@@ -1265,9 +1414,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1918855354}
-        m_TargetAssemblyTypeName: SubjectQuestionManager, Assembly-CSharp
-        m_MethodName: score7
+      - m_Target: {fileID: 972200222}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1277,13 +1426,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8300000, guid: c93e458b29e1d49e999c87dd51dfdda2, type: 3}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 461993656}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Happy
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1918855354}
+        m_TargetAssemblyTypeName: SubjectQuestionManager, Assembly-CSharp
+        m_MethodName: score7
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1812,9 +1973,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1918855354}
-        m_TargetAssemblyTypeName: SubjectQuestionManager, Assembly-CSharp
-        m_MethodName: score4
+      - m_Target: {fileID: 1256349744}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1824,13 +1985,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8300000, guid: c93e458b29e1d49e999c87dd51dfdda2, type: 3}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 461993656}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Sad
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1918855354}
+        m_TargetAssemblyTypeName: SubjectQuestionManager, Assembly-CSharp
+        m_MethodName: score4
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2123,9 +2296,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1918855354}
-        m_TargetAssemblyTypeName: SubjectQuestionManager, Assembly-CSharp
-        m_MethodName: score10
+      - m_Target: {fileID: 972200222}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2135,13 +2308,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8300000, guid: c93e458b29e1d49e999c87dd51dfdda2, type: 3}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 461993656}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Happy
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1918855354}
+        m_TargetAssemblyTypeName: SubjectQuestionManager, Assembly-CSharp
+        m_MethodName: score10
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2354,9 +2539,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1918855354}
-        m_TargetAssemblyTypeName: SubjectQuestionManager, Assembly-CSharp
-        m_MethodName: score8
+      - m_Target: {fileID: 972200222}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2366,13 +2551,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8300000, guid: c93e458b29e1d49e999c87dd51dfdda2, type: 3}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 461993656}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Happy
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1918855354}
+        m_TargetAssemblyTypeName: SubjectQuestionManager, Assembly-CSharp
+        m_MethodName: score8
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2416,6 +2613,134 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 929158180}
   m_CullTransparentMesh: 1
+--- !u!1 &972200221
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 972200223}
+  - component: {fileID: 972200222}
+  m_Layer: 0
+  m_Name: Audio Source2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &972200222
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972200221}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 6d3b40a8b8ccf4575b96b4ca5aad122f, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &972200223
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972200221}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.52127, y: 0.21466762, z: -9.943346}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1034755317
 GameObject:
   m_ObjectHideFlags: 0
@@ -2501,9 +2826,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1918855354}
-        m_TargetAssemblyTypeName: SubjectQuestionManager, Assembly-CSharp
-        m_MethodName: score3
+      - m_Target: {fileID: 1256349744}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2513,13 +2838,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8300000, guid: c93e458b29e1d49e999c87dd51dfdda2, type: 3}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 461993656}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Sad
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1918855354}
+        m_TargetAssemblyTypeName: SubjectQuestionManager, Assembly-CSharp
+        m_MethodName: score3
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3099,9 +3436,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1918855354}
-        m_TargetAssemblyTypeName: SubjectQuestionManager, Assembly-CSharp
-        m_MethodName: score1
+      - m_Target: {fileID: 1256349744}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3111,13 +3448,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8300000, guid: c93e458b29e1d49e999c87dd51dfdda2, type: 3}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 461993656}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Sad
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1918855354}
+        m_TargetAssemblyTypeName: SubjectQuestionManager, Assembly-CSharp
+        m_MethodName: score1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3186,8 +3535,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1240801966}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.7409277, y: 13.791382, z: 0}
-  m_LocalScale: {x: 64.07239, y: 72.622375, z: 50.05}
+  m_LocalPosition: {x: 0.79, y: 4.21, z: 0}
+  m_LocalScale: {x: 64.71311, y: 75.52727, z: 50.05}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 627904538}
@@ -3273,7 +3622,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c93e458b29e1d49e999c87dd51dfdda2, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -3760,9 +4109,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1918855354}
-        m_TargetAssemblyTypeName: SubjectQuestionManager, Assembly-CSharp
-        m_MethodName: score5
+      - m_Target: {fileID: 1256349744}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3772,13 +4121,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8300000, guid: c93e458b29e1d49e999c87dd51dfdda2, type: 3}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 461993656}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Sad
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1918855354}
+        m_TargetAssemblyTypeName: SubjectQuestionManager, Assembly-CSharp
+        m_MethodName: score5
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -4377,6 +4738,30 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1256349744}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: click
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 461993656}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Sad
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1918855354}
         m_TargetAssemblyTypeName: SubjectQuestionManager, Assembly-CSharp
         m_MethodName: score0
@@ -4387,18 +4772,6 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 8300000, guid: c93e458b29e1d49e999c87dd51dfdda2, type: 3}
-        m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
-        m_MethodName: set_name
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: click
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1572190452
@@ -4524,9 +4897,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1918855354}
-        m_TargetAssemblyTypeName: SubjectQuestionManager, Assembly-CSharp
-        m_MethodName: score6
+      - m_Target: {fileID: 972200222}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4536,13 +4909,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8300000, guid: c93e458b29e1d49e999c87dd51dfdda2, type: 3}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 461993656}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Happy
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1918855354}
+        m_TargetAssemblyTypeName: SubjectQuestionManager, Assembly-CSharp
+        m_MethodName: score6
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -4670,9 +5055,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1918855354}
-        m_TargetAssemblyTypeName: SubjectQuestionManager, Assembly-CSharp
-        m_MethodName: scoreNull
+      - m_Target: {fileID: 972200222}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4682,13 +5067,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8300000, guid: c93e458b29e1d49e999c87dd51dfdda2, type: 3}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1918855354}
+        m_TargetAssemblyTypeName: SubjectQuestionManager, Assembly-CSharp
+        m_MethodName: scoreNull
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -5191,9 +5576,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1918855354}
-        m_TargetAssemblyTypeName: SubjectQuestionManager, Assembly-CSharp
-        m_MethodName: score2
+      - m_Target: {fileID: 1256349744}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5203,13 +5588,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8300000, guid: c93e458b29e1d49e999c87dd51dfdda2, type: 3}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 461993656}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Sad
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1918855354}
+        m_TargetAssemblyTypeName: SubjectQuestionManager, Assembly-CSharp
+        m_MethodName: score2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -5502,9 +5899,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1918855354}
-        m_TargetAssemblyTypeName: SubjectQuestionManager, Assembly-CSharp
-        m_MethodName: score9
+      - m_Target: {fileID: 972200222}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5514,13 +5911,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8300000, guid: c93e458b29e1d49e999c87dd51dfdda2, type: 3}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 461993656}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Happy
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1918855354}
+        m_TargetAssemblyTypeName: SubjectQuestionManager, Assembly-CSharp
+        m_MethodName: score9
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
