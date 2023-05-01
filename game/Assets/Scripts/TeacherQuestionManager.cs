@@ -13,6 +13,7 @@ using TMPro;
 
 public class TeacherQuestionManager : MonoBehaviour
 {
+    public GameObject userObject;
     public string JSONurl = "";
     public string JSONIDurl = "";
     public string ID = "";
