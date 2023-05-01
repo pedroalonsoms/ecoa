@@ -8,6 +8,10 @@ public class SceneChanger : MonoBehaviour
     public void toMain()
     {   SceneManager.LoadScene("main");   } // Mueve a escena principal
 
+    public void toInstructions()
+    {   SceneManager.LoadScene("instrucciones");   } // Mueve a escena de instrucciones
+
+
     public void toSubjectMenu()
     {   SceneManager.LoadScene("subject_menu");   } // Mueve a escena de menú de materias
 
