@@ -19,7 +19,7 @@ public class TeacherQuestionManager : MonoBehaviour
     public string qID = "";
     public string qTitle = "";
     public string qSection = "";
-    public string qAnswerKind = ""; 
+    public string qAnswerKind = "";
     public TextMeshProUGUI pregunta;
     public TextMeshProUGUI profesorNombre;
     public Question[] questions = new Question[20];
@@ -39,7 +39,7 @@ public class TeacherQuestionManager : MonoBehaviour
     public Button backButtonB;
     public Button nextButtonB;
 
-    IEnumerator Start() 
+    IEnumerator Start()
     {
         pregunta = GameObject.Find("Question").GetComponent<TextMeshProUGUI>();
         profesorNombre = GameObject.Find("Profesor").GetComponent<TextMeshProUGUI>();
@@ -78,7 +78,8 @@ public class TeacherQuestionManager : MonoBehaviour
             JSONNode questionData = SimpleJSON.JSON.Parse(web.downloadHandler.text);
             totalQuestions = questionData["questions"].Count;
 
-            for(int c = 0; c<totalQuestions; c++){
+            for (int c = 0; c < totalQuestions; c++)
+            {
 
                 Debug.Log("ID: " + questionData["questions"][c]["id"].ToString());
                 qID = questionData["questions"][c]["id"].ToString();
@@ -111,70 +112,83 @@ public class TeacherQuestionManager : MonoBehaviour
         }
     }
 
-    void Update() {
-        if (currentIndex == 0) {
+    void Update()
+    {
+        if (currentIndex == 0)
+        {
             backButtonI.sprite = bButtonOff;
             nextButtonI.sprite = nButtonOn;
-        } else if (currentIndex < totalQuestions-1) {
+        }
+        else if (currentIndex < totalQuestions - 1)
+        {
             backButtonI.sprite = bButtonOn;
             nextButtonI.sprite = nButtonOn;
-        } else{
+        }
+        else
+        {
             nextButtonI.sprite = eButton;
         }
     }
 
-    void updateQuestion(int qIndex) 
-    {   
-        pregunta.text = questions[qIndex].title;   
+    void updateQuestion(int qIndex)
+    {
+        pregunta.text = questions[qIndex].title;
         Debug.Log(questions[qIndex].score);
     }
 
-    public void loadNextQuestion(){
-        if (currentIndex < totalQuestions-1) {
+    public void loadNextQuestion()
+    {
+        if (currentIndex < totalQuestions - 1)
+        {
             // Aqui va el send answer a la base de datos
             currentIndex++;
             updateQuestion(currentIndex);
             // Función para la animación
-        } else {
+        }
+        else
+        {
             toTeacherMenu();
         }
     }
 
-    public void toTeacherMenu() {
-         SceneManager.LoadScene("teacher_menu");
+    public void toTeacherMenu()
+    {
+        SceneManager.LoadScene("teacher_menu");
     }
 
-    public void loadPrevQuestion(){
-        if  (currentIndex > 0) {
+    public void loadPrevQuestion()
+    {
+        if (currentIndex > 0)
+        {
             currentIndex--;
             updateQuestion(currentIndex);
         }
     }
 
-    public void score0() 
-    {   questions[currentIndex].score = 0;  Debug.Log(questions[currentIndex].score);}
-    public void score1() 
-    {   questions[currentIndex].score = 1;  Debug.Log(questions[currentIndex].score);}
-    public void score2() 
-    {   questions[currentIndex].score = 2;  Debug.Log(questions[currentIndex].score);}
-    public void score3() 
-    {   questions[currentIndex].score = 3;  Debug.Log(questions[currentIndex].score);}
-    public void score4() 
-    {   questions[currentIndex].score = 4;  Debug.Log(questions[currentIndex].score);}
-    public void score5() 
-    {   questions[currentIndex].score = 5;  Debug.Log(questions[currentIndex].score);}
-    public void score6() 
-    {   questions[currentIndex].score = 6;  Debug.Log(questions[currentIndex].score);}
-    public void score7() 
-    {   questions[currentIndex].score = 7;  Debug.Log(questions[currentIndex].score);}
-    public void score8() 
-    {   questions[currentIndex].score = 8;  Debug.Log(questions[currentIndex].score);}
-    public void score9() 
-    {   questions[currentIndex].score = 9;  Debug.Log(questions[currentIndex].score);}
-    public void score10() 
-    {   questions[currentIndex].score = 10;  Debug.Log(questions[currentIndex].score);}
-    public void scoreNull() 
-    {   questions[currentIndex].score = null;  Debug.Log(questions[currentIndex].score);}
+    public void score0()
+    { questions[currentIndex].score = 0; Debug.Log(questions[currentIndex].score); }
+    public void score1()
+    { questions[currentIndex].score = 1; Debug.Log(questions[currentIndex].score); }
+    public void score2()
+    { questions[currentIndex].score = 2; Debug.Log(questions[currentIndex].score); }
+    public void score3()
+    { questions[currentIndex].score = 3; Debug.Log(questions[currentIndex].score); }
+    public void score4()
+    { questions[currentIndex].score = 4; Debug.Log(questions[currentIndex].score); }
+    public void score5()
+    { questions[currentIndex].score = 5; Debug.Log(questions[currentIndex].score); }
+    public void score6()
+    { questions[currentIndex].score = 6; Debug.Log(questions[currentIndex].score); }
+    public void score7()
+    { questions[currentIndex].score = 7; Debug.Log(questions[currentIndex].score); }
+    public void score8()
+    { questions[currentIndex].score = 8; Debug.Log(questions[currentIndex].score); }
+    public void score9()
+    { questions[currentIndex].score = 9; Debug.Log(questions[currentIndex].score); }
+    public void score10()
+    { questions[currentIndex].score = 10; Debug.Log(questions[currentIndex].score); }
+    public void scoreNull()
+    { questions[currentIndex].score = null; Debug.Log(questions[currentIndex].score); }
 
 }
 
