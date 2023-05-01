@@ -7,16 +7,13 @@ import { useNavigate } from "react-router-dom";
 import ActiveQuestion from "../components/ActiveQuestion";
 
 const UpdateSurveyPage = (props) => {
+    const [questions, setQuestions] = useState([]);
     const [surveyData, setSurveyData] = useState({
-        title: props.survey.title,
-        questionIds: props.survey.questionIds,
-        startDate: props.survey.startDate,
-        endDate: props.survey.endDate,
+        ...props.survey,
+        questionIds: [],
     });
-    const [idArray, setIdArray] = useState([surveyData.questionIds]);
 
     const [survey, setSurvey] = useState({});
-    const [questions, setQuestions] = useState([]);
     const [sendSurvey, setSendSurvey] = useState({
         title: survey.title,
         questionIds: survey.questionIds,
@@ -25,14 +22,36 @@ const UpdateSurveyPage = (props) => {
     });
     const [error, setError] = useState("");
 
+    console.log("props");
+    console.log(props);
+
     const navigate = useNavigate();
 
     const handleChange = (e) => {
         setSendSurvey({ ...sendSurvey, [e.target.name]: e.target.value });
+        setSurveyData({ ...surveyData, [e.target.name]: e.target.value });
     };
 
-    // console.log(questions);
+    console.log("questions");
+    console.log(questions);
     // console.log(surveyData);
+
+    const [selectedQuestionIds, setSelectedQuestionIds] = useState([]);
+
+    const handleQuestionSelection = (questionId, isActive) => {
+        if (isActive) {
+            setSelectedQuestionIds((prevState) => [...prevState, questionId]);
+        } else {
+            setSelectedQuestionIds((prevState) =>
+                prevState.filter((id) => id !== questionId)
+            );
+        }
+    };
+
+    // setSurveyData({
+    //     ...surveyData,
+    //     questionIds: selectedQuestionIds,
+    // });
 
     useEffect(() => {
         const fetchQuestions = async () => {
@@ -74,7 +93,7 @@ const UpdateSurveyPage = (props) => {
             }
         };
         fetchSurvey();
-    }, [survey, sendSurvey]);
+    }, [sendSurvey]);
 
     // console.log("Survey");
     // console.log(survey);
@@ -98,6 +117,7 @@ const UpdateSurveyPage = (props) => {
         // 		)
         // 	})
         // }
+
         console.log(id);
         const ids = sendSurvey.questionIds;
         if (ids.includes(id)) {
@@ -121,6 +141,13 @@ const UpdateSurveyPage = (props) => {
         props.hideUpdateSurvey();
     };
 
+    useEffect(() => {
+        setSurveyData({
+            ...surveyData,
+            questionIds: sendSurvey.questionIds,
+        });
+    }, [surveyData]);
+
     const saveButton = async (e) => {
         e.preventDefault();
         console.log("save update");
@@ -131,15 +158,19 @@ const UpdateSurveyPage = (props) => {
             // 	startDate: survey.startDate,
             // 	endDate: survey.endDate,
             // });
+            setSurveyData({
+                ...surveyData,
+                questionIds: selectedQuestionIds,
+            });
             const res = await axios.put(
                 `http://localhost:8080/api/surveys/${props.survey.id}`,
-                sendSurvey
+                surveyData
             );
             console.log(res);
-            // props.hideAddQuestion();
+            props.hideUpdateSurvey();
             // window.location.reload();
             // window.location.reload("/administrator/surveys");
-            navigate("/administrator/surveys", { state: { sendSurvey } });
+            // navigate("/administrator/surveys", { state: { sendSurvey } });
         } catch (err) {
             console.log(err);
             setError(err.response.data.error);
@@ -183,9 +214,186 @@ const UpdateSurveyPage = (props) => {
         }
     };
 
-    // console.log(props);
-    // console.log("Send Survey");
-    // console.log(sendSurvey);
+    console.log(props);
+    console.log("Send Survey");
+    console.log(sendSurvey);
+    console.log("Survey Data");
+    console.log(surveyData);
+
+    const getQuestionData = (id) => {
+        console.log("id");
+        setSendSurvey({
+            ...sendSurvey,
+            questionIds: [...sendSurvey.questionIds, id],
+        });
+        // console.log(id);
+        // const question = questions.find((question) => question.id == id);
+        // console.log("question");
+        // console.log(question);
+        // return question;
+    };
+
+    // ----------------------------
+    // const [questions, setQuestions] = useState([]);
+    // const [surveyData, setSurveyData] = useState({
+    //     title: props.survey.title,
+    //     questionIds: props.survey.questionIds,
+    //     startDate: props.survey.startDate,
+    //     endDate: props.survey.endDate,
+    // });
+    // // const [idArray, setIdArray] = useState([surveyData.questionIds]);
+
+    // const [survey, setSurvey] = useState({});
+    // const [sendSurvey, setSendSurvey] = useState({
+    //     title: survey.title,
+    //     questionIds: survey.questionIds,
+    //     startDate: survey.startDate,
+    //     endDate: survey.endDate,
+    // });
+    // const [error, setError] = useState("");
+
+    // // console.log;
+
+    // // const navigate = useNavigate();
+
+    // const handleChange = (e) => {
+    //     setSurveyData({ ...surveyData, [e.target.name]: e.target.value });
+    // };
+
+    // console.log(surveyData);
+    // // console.log(questions);
+    // // console.log(surveyData);
+
+    // useEffect(() => {
+    //     const fetchQuestions = async () => {
+    //         try {
+    //             const res = await axios.get(
+    //                 "http://localhost:8080/api/questions"
+    //             );
+    //             // console.log(res);
+    //             setQuestions(res.data);
+    //         } catch (err) {
+    //             console.log(err);
+    //         }
+    //     };
+    //     fetchQuestions();
+    // }, [questions]);
+
+    // useEffect(() => {
+    //     const fetchSurvey = async () => {
+    //         try {
+    //             const res = await axios.get(
+    //                 `http://localhost:8080/api/surveys/${props.id}`
+    //             );
+    //             // console.log("res");
+    //             // console.log(res);
+    //             setSurvey(res.data);
+    //             const ids = [];
+    //             res.data.questions.map((question) => {
+    //                 if (question.isActive) {
+    //                     ids.push(question.id);
+    //                 }
+    //             });
+    //             setSurveyData({
+    //                 title: res.data.title,
+    //                 questionIds: ids,
+    //                 startDate: res.data.startDate,
+    //                 endDate: res.data.endDate,
+    //             });
+    //         } catch (err) {
+    //             console.log(err);
+    //             setError(err.response.data.error);
+    //         }
+    //     };
+    //     fetchSurvey();
+    // }, [survey]);
+
+    // // console.log("Survey");
+    // // console.log(survey);
+
+    // const toggleActive = (id) => {
+    //     console.log(id);
+    //     const ids = surveyData.questionIds;
+    //     if (ids.includes(id)) {
+    //         setSurveyData({
+    //             ...surveyData,
+    //             questionIds: ids.filter((questionId) => questionId !== id),
+    //         });
+    //     } else {
+    //         setSurveyData({
+    //             ...surveyData,
+    //             questionIds: [...ids, id],
+    //         });
+    //     }
+    // };
+
+    // const cancelButton = (e) => {
+    //     e.preventDefault();
+    //     console.log("cancel update");
+    //     props.hideUpdateSurvey(props.id);
+    // };
+
+    // const saveButton = async (e) => {
+    //     e.preventDefault();
+    //     console.log("save update");
+    //     try {
+    //         // setSendSurvey({
+    //         // 	title: survey.title,
+    //         // 	questionIds: survey.questionIds,
+    //         // 	startDate: survey.startDate,
+    //         // 	endDate: survey.endDate,
+    //         // });
+    //         const res = await axios.put(
+    //             `http://localhost:8080/api/surveys/${props.survey.id}`,
+    //             surveyData
+    //         );
+    //         console.log(res);
+    //         props.hideUpdateSurvey(props.id);
+    //         // window.location.reload();
+    //         // window.location.reload("/administrator/surveys");
+    //         // navigate("/administrator/surveys", { state: { sendSurvey } });
+    //     } catch (err) {
+    //         console.log(err);
+    //         setError(err.response.data.error);
+    //     }
+    // };
+
+    // const handleError = (err) => {
+    //     if (!err) return;
+    //     console.log(err);
+    //     if (err.includes("must contain at least 1 element")) {
+    //         return (
+    //             <p className={Styles.error}>
+    //                 Selecciona por lo menos una pregunta
+    //             </p>
+    //         );
+    //     } else if (err == "Could not parse Date string") {
+    //         return (
+    //             <p className={Styles.error}>Recuerda llenar todos los campos</p>
+    //         );
+    //     } else if (err == "Cannot create survey that overlaps") {
+    //         return (
+    //             <p className={Styles.error}>
+    //                 La encuesta se empalma con otra encuesta
+    //             </p>
+    //         );
+    //     } else if (err == "startDate cannot be greater than endDate") {
+    //         return (
+    //             <p className={Styles.error}>
+    //                 La fecha de inicio no puede ser mayor a la fecha de
+    //                 finalización
+    //             </p>
+    //         );
+    //     } else if (err == "Cannot create survey with duplicate title") {
+    //         return (
+    //             <p className={Styles.error}>
+    //                 Ya existe una encuesta con ese título
+    //             </p>
+    //         );
+    //     } else {
+    //         return <p className={Styles.error}>{error}</p>;
+    //     }
+    // };
 
     return (
         <div className={Styles.overlay}>
@@ -243,7 +451,9 @@ const UpdateSurveyPage = (props) => {
                                             data={question}
                                             className={Styles.question}
                                             onChange={handleChange}
-                                            toggleActive={toggleActive}
+                                            toggleActive={
+                                                handleQuestionSelection
+                                            }
                                             // TODO. Charge the toggle option
                                         />
                                     )
@@ -260,7 +470,9 @@ const UpdateSurveyPage = (props) => {
                                             data={question}
                                             className={Styles.question}
                                             onChange={handleChange}
-                                            toggleActive={toggleActive}
+                                            toggleActive={
+                                                handleQuestionSelection
+                                            }
                                         />
                                     )
                             )}
@@ -276,7 +488,9 @@ const UpdateSurveyPage = (props) => {
                                             data={question}
                                             className={Styles.question}
                                             onChange={handleChange}
-                                            toggleActive={toggleActive}
+                                            toggleActive={
+                                                handleQuestionSelection
+                                            }
                                         />
                                     )
                             )}

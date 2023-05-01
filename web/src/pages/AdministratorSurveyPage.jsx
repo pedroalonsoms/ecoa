@@ -48,14 +48,22 @@ const AdministratorSurveys = () => {
         setShowAddSurvey(!showAddSurvey);
     };
 
-    const handleEdit = (id) => {
-        console.log(id);
+    const handleEdit = (handleId) => {
+        console.log(handleId);
         // console.log(data.UpdateId);
         console.log(showUpdateSurvey);
         setShowUpdateSurvey({
-            ...showUpdateSurvey,
             state: !showUpdateSurvey.state,
-            updateId: id,
+            updateId: handleId,
+            data: {
+                // id: handleId,
+                // title: surveys.find((survey) => survey.id === handleId).title,
+                // startDate: surveys.find((survey) => survey.id === handleId)
+                //     .startDate,
+                // endDate: surveys.find((survey) => survey.id === handleId)
+                //     .endDate,
+                // questionIds: [1],
+            },
         });
 
         console.log("showUpdateSurvey");
@@ -67,7 +75,7 @@ const AdministratorSurveys = () => {
             <Navbar showLinks={activeLinks} />
             <h2>Encuestas</h2>
 
-            {showAddSurvey && <AddSurveyPage hideAddQuestion={handleClick} />}
+            {showAddSurvey && <AddSurveyPage hideAddSurvey={handleClick} />}
 
             {showUpdateSurvey.state && (
                 <UpdateSurveyPage
@@ -77,6 +85,7 @@ const AdministratorSurveys = () => {
                     survey={surveys.find(
                         (survey) => survey.id === showUpdateSurvey.updateId
                     )}
+                    updateSurvey={handleEdit}
                 />
             )}
 

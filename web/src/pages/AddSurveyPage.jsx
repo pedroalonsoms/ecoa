@@ -58,7 +58,7 @@ const AddSurveyPage = (props) => {
     const cancelButton = (e) => {
         e.preventDefault();
         console.log("cancel add");
-        props.hideAddQuestion();
+        props.hideAddSurvey();
     };
 
     const saveButton = async (e) => {
@@ -70,7 +70,7 @@ const AddSurveyPage = (props) => {
                 surveyData
             );
             console.log(res);
-            props.hideAddQuestion();
+            props.hideAddSurvey();
             // window.location.reload("/administrator/surveys");
         } catch (err) {
             console.log(err);
