@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 
 public class TeacherMenuDBManager : MonoBehaviour
 {
+    public GameObject userObject;
     public string JSONurl = "";
     public string studentID = "";
 
@@ -82,8 +83,10 @@ public class TeacherMenuDBManager : MonoBehaviour
     public Sprite gray_flag;
 
 
-    IEnumerator Start() 
+    IEnumerator Start()
     {
+        studentID = userObject.GetComponent<User>().ID;
+
         JSONurl = "http://localhost:8080/api/progress/student/" + studentID;
         UnityWebRequest web = UnityWebRequest.Get(JSONurl);
         web.useHttpContinue = false;
@@ -103,221 +106,244 @@ public class TeacherMenuDBManager : MonoBehaviour
             totalTeachers = jsonReceived["TEACHERS"]["progress"].Count;
             string titleReceived;
             int qAnsReceived, qAmoReceived;
-            
-            for (int c = 0; c < 10; c++) {
+
+            for (int c = 0; c < 10; c++)
+            {
 
                 titleReceived = jsonReceived["TEACHERS"]["progress"][c]["fullName"];
                 qAnsReceived = jsonReceived["TEACHERS"]["progress"][c]["questionsAnswered"];
                 qAmoReceived = jsonReceived["TEACHERS"]["progress"][c]["questionAmount"];
 
                 if (c < totalTeachers)
-                {   teachers[c] = new Teacher(titleReceived, qAnsReceived, qAmoReceived);   }
-                else 
-                {   teachers[c] = new Teacher("No Teacher", 0, 0);   }
+                { teachers[c] = new Teacher(titleReceived, qAnsReceived, qAmoReceived); }
+                else
+                { teachers[c] = new Teacher("No Teacher", 0, 0); }
             }
         }
-    loadFlags();
-}
+        loadFlags();
+    }
 
-    void loadFlags() {
-        for (int i = 0; i < 10; i++) {
+    void loadFlags()
+    {
+        for (int i = 0; i < 10; i++)
+        {
             switch (i)
             {
                 case 0:
-                    if (teachers[i].title != "No Teacher") {
+                    if (teachers[i].title != "No Teacher")
+                    {
                         Teacher1.sprite = purple_flag;
                         Title1.text = teachers[i].title;
                         flag1.onClick.AddListener(teacherNumericScene);
-                        if (teachers[i].questionsAnswered == 0) 
-                        {   Status1.sprite = uncompleted;   } 
-                        else if (teachers[i].questionsAnswered < teachers[i].questionsAmount) 
-                        {   Status1.sprite = inProgress;    }
-                        else if (teachers[i].questionsAnswered == teachers[i].questionsAmount) 
-                        {   Status1.sprite = completed;   }
+                        if (teachers[i].questionsAnswered == 0)
+                        { Status1.sprite = uncompleted; }
+                        else if (teachers[i].questionsAnswered < teachers[i].questionsAmount)
+                        { Status1.sprite = inProgress; }
+                        else if (teachers[i].questionsAnswered == teachers[i].questionsAmount)
+                        { Status1.sprite = completed; }
                         else
-                        {   Status1.sprite = invalid;   }
+                        { Status1.sprite = invalid; }
                     }
-                    else {
+                    else
+                    {
                         Teacher1.sprite = gray_flag;
                         Title1.text = teachers[i].title;
                         Status1.sprite = invalid;
                     }
                     break;
                 case 1:
-                    if (teachers[i].title != "No Teacher") {
+                    if (teachers[i].title != "No Teacher")
+                    {
                         Teacher2.sprite = orange_flag;
-                        Title2.text = teachers[i].title; 
+                        Title2.text = teachers[i].title;
                         flag2.onClick.AddListener(teacherNumericScene);
-                        if (teachers[i].questionsAnswered == 0) 
-                        {   Status2.sprite = uncompleted;   } 
-                        else if (teachers[i].questionsAnswered < teachers[i].questionsAmount) 
-                        {   Status2.sprite = inProgress;    }
-                        else if (teachers[i].questionsAnswered == teachers[i].questionsAmount) 
-                        {   Status2.sprite = completed;   }
+                        if (teachers[i].questionsAnswered == 0)
+                        { Status2.sprite = uncompleted; }
+                        else if (teachers[i].questionsAnswered < teachers[i].questionsAmount)
+                        { Status2.sprite = inProgress; }
+                        else if (teachers[i].questionsAnswered == teachers[i].questionsAmount)
+                        { Status2.sprite = completed; }
                         else
-                        {   Status2.sprite = invalid;   }
+                        { Status2.sprite = invalid; }
                     }
-                    else {
+                    else
+                    {
                         Teacher2.sprite = gray_flag;
                         Title2.text = teachers[i].title;
                         Status2.sprite = invalid;
                     }
                     break;
                 case 2:
-                    if (teachers[i].title != "No Teacher") {
+                    if (teachers[i].title != "No Teacher")
+                    {
                         Teacher3.sprite = blue_flag;
                         Title3.text = teachers[i].title;
                         flag3.onClick.AddListener(teacherNumericScene);
-                        if (teachers[i].questionsAnswered == 0) 
-                        {   Status3.sprite = uncompleted;   } 
-                        else if (teachers[i].questionsAnswered < teachers[i].questionsAmount) 
-                        {   Status3.sprite = inProgress;    }
-                        else if (teachers[i].questionsAnswered == teachers[i].questionsAmount) 
-                        {   Status3.sprite = completed;   }
+                        if (teachers[i].questionsAnswered == 0)
+                        { Status3.sprite = uncompleted; }
+                        else if (teachers[i].questionsAnswered < teachers[i].questionsAmount)
+                        { Status3.sprite = inProgress; }
+                        else if (teachers[i].questionsAnswered == teachers[i].questionsAmount)
+                        { Status3.sprite = completed; }
                         else
-                        {   Status3.sprite = invalid;   }
+                        { Status3.sprite = invalid; }
                     }
-                    else {
+                    else
+                    {
                         Teacher3.sprite = gray_flag;
                         Title3.text = teachers[i].title;
                         Status3.sprite = invalid;
                     }
                     break;
                 case 3:
-                    if (teachers[i].title != "No Teacher") {
+                    if (teachers[i].title != "No Teacher")
+                    {
                         Teacher4.sprite = black_flag;
                         Title4.text = teachers[i].title;
                         flag4.onClick.AddListener(teacherNumericScene);
-                        if (teachers[i].questionsAnswered == 0) 
-                        {   Status4.sprite = uncompleted;   } 
-                        else if (teachers[i].questionsAnswered < teachers[i].questionsAmount) 
-                        {   Status4.sprite = inProgress;    }
-                        else if (teachers[i].questionsAnswered == teachers[i].questionsAmount) 
-                        {   Status4.sprite = completed;   }
+                        if (teachers[i].questionsAnswered == 0)
+                        { Status4.sprite = uncompleted; }
+                        else if (teachers[i].questionsAnswered < teachers[i].questionsAmount)
+                        { Status4.sprite = inProgress; }
+                        else if (teachers[i].questionsAnswered == teachers[i].questionsAmount)
+                        { Status4.sprite = completed; }
                         else
-                        {   Status4.sprite = invalid;   }
+                        { Status4.sprite = invalid; }
                     }
-                    else {
+                    else
+                    {
                         Teacher4.sprite = gray_flag;
                         Title4.text = teachers[i].title;
                         Status4.sprite = invalid;
                     }
                     break;
                 case 4:
-                    if (teachers[i].title != "No Teacher") {
+                    if (teachers[i].title != "No Teacher")
+                    {
                         Teacher5.sprite = yellow_flag;
                         Title5.text = teachers[i].title;
                         flag5.onClick.AddListener(teacherNumericScene);
-                        if (teachers[i].questionsAnswered == 0) 
-                        {   Status5.sprite = uncompleted;   } 
-                        else if (teachers[i].questionsAnswered < teachers[i].questionsAmount) 
-                        {   Status5.sprite = inProgress;    }
-                        else if (teachers[i].questionsAnswered == teachers[i].questionsAmount) 
-                        {   Status5.sprite = completed;   }
+                        if (teachers[i].questionsAnswered == 0)
+                        { Status5.sprite = uncompleted; }
+                        else if (teachers[i].questionsAnswered < teachers[i].questionsAmount)
+                        { Status5.sprite = inProgress; }
+                        else if (teachers[i].questionsAnswered == teachers[i].questionsAmount)
+                        { Status5.sprite = completed; }
                         else
-                        {   Status5.sprite = invalid;   }
+                        { Status5.sprite = invalid; }
                     }
-                    else {
+                    else
+                    {
                         Teacher5.sprite = gray_flag;
                         Title5.text = teachers[i].title;
                         Status5.sprite = invalid;
                     }
                     break;
                 case 5:
-                    if (teachers[i].title != "No Teacher") {
+                    if (teachers[i].title != "No Teacher")
+                    {
                         Teacher6.sprite = darkblue_flag;
                         Title6.text = teachers[i].title;
                         flag6.onClick.AddListener(teacherNumericScene);
-                        if (teachers[i].questionsAnswered == 0) 
-                        {   Status6.sprite = uncompleted;   } 
-                        else if (teachers[i].questionsAnswered < teachers[i].questionsAmount) 
-                        {   Status6.sprite = inProgress;    }
-                        else if (teachers[i].questionsAnswered == teachers[i].questionsAmount) 
-                        {   Status6.sprite = completed;   }
+                        if (teachers[i].questionsAnswered == 0)
+                        { Status6.sprite = uncompleted; }
+                        else if (teachers[i].questionsAnswered < teachers[i].questionsAmount)
+                        { Status6.sprite = inProgress; }
+                        else if (teachers[i].questionsAnswered == teachers[i].questionsAmount)
+                        { Status6.sprite = completed; }
                         else
-                        {   Status6.sprite = invalid;   }
+                        { Status6.sprite = invalid; }
                     }
-                    else {
+                    else
+                    {
                         Teacher6.sprite = gray_flag;
                         Title6.text = teachers[i].title;
                         Status6.sprite = invalid;
                     }
                     break;
                 case 6:
-                    if (teachers[i].title != "No Teacher") {
+                    if (teachers[i].title != "No Teacher")
+                    {
                         Teacher7.sprite = lila_flag;
                         Title7.text = teachers[i].title;
                         flag7.onClick.AddListener(teacherNumericScene);
-                        if (teachers[i].questionsAnswered == 0) 
-                        {   Status7.sprite = uncompleted;   } 
-                        else if (teachers[i].questionsAnswered < teachers[i].questionsAmount) 
-                        {   Status7.sprite = inProgress;    }
-                        else if (teachers[i].questionsAnswered == teachers[i].questionsAmount) 
-                        {   Status7.sprite = completed;   }
+                        if (teachers[i].questionsAnswered == 0)
+                        { Status7.sprite = uncompleted; }
+                        else if (teachers[i].questionsAnswered < teachers[i].questionsAmount)
+                        { Status7.sprite = inProgress; }
+                        else if (teachers[i].questionsAnswered == teachers[i].questionsAmount)
+                        { Status7.sprite = completed; }
                         else
-                        {   Status7.sprite = invalid;   }
+                        { Status7.sprite = invalid; }
                     }
-                    else {
+                    else
+                    {
                         Teacher7.sprite = gray_flag;
                         Title7.text = teachers[i].title;
                         Status7.sprite = invalid;
                     }
                     break;
                 case 7:
-                    if (teachers[i].title != "No Teacher") {
+                    if (teachers[i].title != "No Teacher")
+                    {
                         Teacher8.sprite = red_flag;
                         Title8.text = teachers[i].title;
                         flag8.onClick.AddListener(teacherNumericScene);
-                        if (teachers[i].questionsAnswered == 0) 
-                        {   Status8.sprite = uncompleted;   } 
-                        else if (teachers[i].questionsAnswered < teachers[i].questionsAmount) 
-                        {   Status8.sprite = inProgress;    }
-                        else if (teachers[i].questionsAnswered == teachers[i].questionsAmount) 
-                        {   Status8.sprite = completed;   }
+                        if (teachers[i].questionsAnswered == 0)
+                        { Status8.sprite = uncompleted; }
+                        else if (teachers[i].questionsAnswered < teachers[i].questionsAmount)
+                        { Status8.sprite = inProgress; }
+                        else if (teachers[i].questionsAnswered == teachers[i].questionsAmount)
+                        { Status8.sprite = completed; }
                         else
-                        {   Status8.sprite = invalid;   }
+                        { Status8.sprite = invalid; }
                     }
-                    else {
+                    else
+                    {
                         Teacher8.sprite = gray_flag;
                         Title8.text = teachers[i].title;
                         Status8.sprite = invalid;
                     }
                     break;
                 case 8:
-                    if (teachers[i].title != "No Teacher") {
+                    if (teachers[i].title != "No Teacher")
+                    {
                         Teacher9.sprite = green_flag;
                         Title9.text = teachers[i].title;
                         flag9.onClick.AddListener(teacherNumericScene);
-                        if (teachers[i].questionsAnswered == 0) 
-                        {   Status9.sprite = uncompleted;   } 
-                        else if (teachers[i].questionsAnswered < teachers[i].questionsAmount) 
-                        {   Status9.sprite = inProgress;    }
-                        else if (teachers[i].questionsAnswered == teachers[i].questionsAmount) 
-                        {   Status9.sprite = completed;   }
+                        if (teachers[i].questionsAnswered == 0)
+                        { Status9.sprite = uncompleted; }
+                        else if (teachers[i].questionsAnswered < teachers[i].questionsAmount)
+                        { Status9.sprite = inProgress; }
+                        else if (teachers[i].questionsAnswered == teachers[i].questionsAmount)
+                        { Status9.sprite = completed; }
                         else
-                        {   Status9.sprite = invalid;   }
+                        { Status9.sprite = invalid; }
                     }
-                    else {
+                    else
+                    {
                         Teacher9.sprite = gray_flag;
                         Title9.text = teachers[i].title;
                         Status9.sprite = invalid;
                     }
                     break;
                 case 9:
-                    if (teachers[i].title != "No Teacher") {
+                    if (teachers[i].title != "No Teacher")
+                    {
                         Teacher10.sprite = purple_flag;
                         Title10.text = teachers[i].title;
                         flag10.onClick.AddListener(teacherNumericScene);
-                        if (teachers[i].questionsAnswered == 0) 
-                        {   Status10.sprite = uncompleted;   } 
-                        else if (teachers[i].questionsAnswered < teachers[i].questionsAmount) 
-                        {   Status10.sprite = inProgress;    }
-                        else if (teachers[i].questionsAnswered == teachers[i].questionsAmount) 
-                        {   Status10.sprite = completed;   }
+                        if (teachers[i].questionsAnswered == 0)
+                        { Status10.sprite = uncompleted; }
+                        else if (teachers[i].questionsAnswered < teachers[i].questionsAmount)
+                        { Status10.sprite = inProgress; }
+                        else if (teachers[i].questionsAnswered == teachers[i].questionsAmount)
+                        { Status10.sprite = completed; }
                         else
-                        {   Status10.sprite = invalid;   }
+                        { Status10.sprite = invalid; }
                     }
-                    else {
+                    else
+                    {
                         Teacher10.sprite = gray_flag;
                         Title10.text = teachers[i].title;
                         Status10.sprite = invalid;
@@ -329,7 +355,8 @@ public class TeacherMenuDBManager : MonoBehaviour
             }
         }
     }
-    void teacherNumericScene() {
+    void teacherNumericScene()
+    {
         SceneManager.LoadScene("teacher_numeric");
     }
 }

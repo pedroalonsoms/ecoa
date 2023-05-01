@@ -9,9 +9,10 @@ using SimpleJSON;
 using UnityEngine.SceneManagement;
 
 public class MenuDBManager : MonoBehaviour
-{   
+{
+    public GameObject userObject;
     public string JSONurl = "";
-    public string studentID = "";
+    public string studentID;
     public Image statusMaterias;
     public Image statusProfesores;
     public int answeredM;
@@ -24,8 +25,10 @@ public class MenuDBManager : MonoBehaviour
     public Sprite invalid;
 
 
-    IEnumerator Start() 
+    IEnumerator Start()
     {
+        studentID = userObject.GetComponent<User>().ID;
+
         JSONurl = "http://localhost:8080/api/progress/student/" + studentID;
         UnityWebRequest web = UnityWebRequest.Get(JSONurl);
         web.useHttpContinue = false;
@@ -53,26 +56,28 @@ public class MenuDBManager : MonoBehaviour
 
     }
 
-    void updateStatusM() {
-        if (answeredM == 0) 
-        {   statusMaterias.sprite = uncompleted;   }
+    void updateStatusM()
+    {
+        if (answeredM == 0)
+        { statusMaterias.sprite = uncompleted; }
         else if (answeredM < amountM)
-        {   statusMaterias.sprite = inProgress;   }
+        { statusMaterias.sprite = inProgress; }
         else if (answeredM == amountM)
-        {   statusMaterias.sprite = completed;   }
-        else 
-        {   statusMaterias.sprite = invalid;   }
+        { statusMaterias.sprite = completed; }
+        else
+        { statusMaterias.sprite = invalid; }
     }
 
-    void updateStatusP() {
-        if (answeredP == 0) 
-        {   statusProfesores.sprite = uncompleted;   }
+    void updateStatusP()
+    {
+        if (answeredP == 0)
+        { statusProfesores.sprite = uncompleted; }
         else if (answeredP < amountP)
-        {   statusProfesores.sprite = inProgress;   }
+        { statusProfesores.sprite = inProgress; }
         else if (answeredP == amountP)
-        {   statusProfesores.sprite = completed;   }
-        else 
-        {   statusProfesores.sprite = invalid;   }
+        { statusProfesores.sprite = completed; }
+        else
+        { statusProfesores.sprite = invalid; }
     }
 
 }
