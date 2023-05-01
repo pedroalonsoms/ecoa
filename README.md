@@ -17,7 +17,7 @@
 # 📑 Documents
 
 - 📦 [Google Drive Folder](https://drive.google.com/drive/folders/1D2RHVyTfaO_m26Hka9A1EXCZ5MDTx3B7?usp=sharing)
-- 📷 [Final Presentation Slides]()
+- 📷 [Final Presentation Slides](https://docs.google.com/presentation/d/1TRKWlhR-xqQ-0jJPjkVibcd9BG79nbhD4SOIlAJXn4g/edit#slide=id.gaed0d09453_0_47)
 - 📌 [Rubric](https://docs.google.com/spreadsheets/d/1_pA1fRWtzcggmU9Bw4S-WutvSK5uTGxi/edit?usp=share_link&ouid=112199480319751895298&rtpof=true&sd=true)
 
 # 💿 SQL Diagram
