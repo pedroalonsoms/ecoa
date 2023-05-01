@@ -15,12 +15,12 @@ public class TeacherUIManager : MonoBehaviour
         profesorNombre = GameObject.Find("Profesor").GetComponent<TextMeshProUGUI>();
     }
 
-    public void UpdateQuestion(string newQuestion) 
+    public void UpdateQuestion(string newQuestion)
     {
         pregunta.text = newQuestion;
     }
 
-    public void UpdateProfesor(string newName) 
+    public void UpdateProfesor(string newName)
     {
         profesorNombre.text = newName;
     }
