@@ -1013,7 +1013,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 516437244}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: toMenu
+        m_MethodName: toInstructions
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
