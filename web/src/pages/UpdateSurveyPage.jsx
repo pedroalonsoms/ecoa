@@ -144,7 +144,13 @@ const UpdateSurveyPage = (props) => {
     useEffect(() => {
         setSurveyData({
             ...surveyData,
-            questionIds: sendSurvey.questionIds,
+            // Add the previous question ids and the new ones
+            questionIds: [
+                ...surveyData.questionIds,
+                ...selectedQuestionIds.filter(
+                    (id) => !surveyData.questionIds.includes(id)
+                ),
+            ],
         });
     }, [surveyData]);
 
@@ -190,7 +196,7 @@ const UpdateSurveyPage = (props) => {
             return (
                 <p className={Styles.error}>Recuerda llenar todos los campos</p>
             );
-        } else if (err == "Cannot create survey that overlaps") {
+        } else if (err == "Cannot update survey that overlaps") {
             return (
                 <p className={Styles.error}>
                     La encuesta se empalma con otra encuesta
@@ -203,7 +209,7 @@ const UpdateSurveyPage = (props) => {
                     finalización
                 </p>
             );
-        } else if (err == "Cannot create survey with duplicate title") {
+        } else if (err == "Cannot update survey with duplicate title") {
             return (
                 <p className={Styles.error}>
                     Ya existe una encuesta con ese título
