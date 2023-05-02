@@ -77,13 +77,15 @@ const Login = (props) => {
       switch (dataSubmit.role) {
         case "STUDENT":
           console.log("student");
-          navigate("/student", { state: { data } });
+          navigate("/student", { state: { dataSubmit } });
           break;
         case "TEACHER":
-          navigate("/teacher", { state: { data } });
+          navigate("/teacher", { state: { dataSubmit } });
           break;
         case "ADMINISTRATOR":
-          navigate("/administrator/surveys", { state: { data } });
+          navigate("/administrator/surveys", {
+            state: { dataSubmit },
+          });
           break;
         default:
           break;

@@ -6,7 +6,9 @@ import { useLocation, Navigate } from "react-router-dom";
 const StudentPage = () => {
   const activeLinks = false;
   const location = useLocation();
+  console.log("location");
   console.log(location);
+
   // try {
   //   const location = useLocation();
   //   // console.log(location);
@@ -34,8 +36,8 @@ const StudentPage = () => {
   //   console.log("Sending name to game");
   //   sendName(data.fullName);
   // }, 10000);
-  const name = location.state.data.fullName;
-  const urlGame = `/game?studentRegistration=${location.state.data.registration}`;
+  const name = location.state.dataSubmit.fullName;
+  const urlGame = `/game?studentRegistration=${location.state.dataSubmit.registration}`;
 
   return (
     <div>
