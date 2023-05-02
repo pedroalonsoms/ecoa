@@ -14,7 +14,7 @@ finishRouter.post("/finish/:studentRegistration", async (req, res) => {
     );
 
     if (activeSurvey.length === 0) {
-      throw new Error("There's no current active survey");
+      throw new Error("There is no active survey");
     }
 
     // Counting number of questions in active survey

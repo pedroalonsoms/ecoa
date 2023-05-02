@@ -20,7 +20,7 @@ progressRouter.get(
       );
 
       if (surveys.length < 1) {
-        throw new Error("There are no active surveys");
+        throw new Error("There is no active survey");
       }
 
       const [survey] = surveys;
