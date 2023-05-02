@@ -167,6 +167,7 @@ public class SubjectQuestionManager : MonoBehaviour
             backButtonI.sprite = bButtonOn;
             nextButtonI.sprite = nButtonOn;
         } else{
+            backButtonI.sprite = bButtonOn;
             nextButtonI.sprite = eButton;
         }
     }
