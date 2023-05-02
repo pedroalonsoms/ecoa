@@ -28,56 +28,67 @@ answersRouter.get("/answers/:studentRegistration", async (req, res) => {
   }
 });
 
-answersRouter.post(
-  "/answers/:studentRegistration/questions/:questionId",
-  async (req, res) => {
-    try {
-      const { studentRegistration, questionId } = z
-        .object({
-          studentRegistration: z.string().length(9),
-          questionId: z.string().transform((s) => parseInt(s)),
-        })
-        .parse(req.params);
+answersRouter.post("/answers/:studentRegistration", async (req, res) => {
+  try {
+    const { studentRegistration } = z
+      .object({
+        studentRegistration: z.string().length(9),
+      })
+      .parse(req.params);
 
-      const { targetKind, teacherRegistration, crn, content } = z
-        .object({
-          targetKind: z.enum(TARGET_KIND),
-          teacherRegistration: z.string().nullable(),
-          crn: z.number().nullable(),
-          content: z.string(),
-        })
-        .parse(req.body);
+    const { questionId, targetKind, teacherRegistration, crn, content } = z
+      .object({
+        questionId: z.number(),
+        targetKind: z.enum(TARGET_KIND),
+        teacherRegistration: z.string().length(9).nullable(),
+        crn: z.number().nullable(),
+        content: z.string(),
+      })
+      .parse(req.body);
 
-      if (
-        targetKind === "TEACHER_REGISTRATION" &&
-        teacherRegistration === null
-      ) {
-        throw new Error(
-          "Teacher registration cannot be null when targetKind is TEACHER_REGISTRATION"
-        );
-      }
+    // TODO: add validation for content to be between 0 - 10 when answer is numeric
 
-      if (targetKind === "CRN" && crn === null) {
-        throw new Error("CRN cannot be null when targetKind is CRN");
-      }
-
-      await pool.query(
-        `INSERT INTO TmpAnswer (studentRegistration, surveyQuestion, targetKind, teacherRegistration, crn, content) VALUES (?, ?, ?, ?, ?, ?)`,
-        [
-          studentRegistration,
-          questionId,
-          targetKind,
-          teacherRegistration,
-          crn,
-          content,
-        ]
+    if (targetKind === "TEACHER_REGISTRATION" && teacherRegistration === null) {
+      throw new Error(
+        "Teacher registration cannot be null when targetKind is TEACHER_REGISTRATION"
       );
-
-      res.sendStatus(200);
-    } catch (error) {
-      res.status(400).send({ error: error.message || "Unknown error" });
     }
+
+    if (targetKind === "CRN" && crn === null) {
+      throw new Error("CRN cannot be null when targetKind is CRN");
+    }
+
+    const [surveyQuestions] = await pool.query(
+      `SELECT id 
+      FROM SurveyQuestion 
+      WHERE questionId = ? 
+      AND surveyId = (
+        SELECT id FROM Survey WHERE CURDATE() BETWEEN startDate AND endDate
+      )`,
+      [questionId]
+    );
+
+    if (surveyQuestions.length === 0) {
+      throw new Error(
+        "Question with given id was not found within the active survey"
+      );
+    }
+
+    const surveyQuestion = surveyQuestions[0];
+
+    await pool.query(`INSERT INTO TmpAnswer VALUES (NULL, ?, ?, ?, ?, ?, ?)`, [
+      studentRegistration,
+      surveyQuestion.id,
+      targetKind,
+      teacherRegistration,
+      crn,
+      content,
+    ]);
+
+    res.sendStatus(200);
+  } catch (error) {
+    res.status(400).send({ error: error.message || "Unknown error" });
   }
-);
+});
 
 export default answersRouter;
