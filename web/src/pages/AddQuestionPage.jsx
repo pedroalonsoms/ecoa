@@ -5,6 +5,8 @@ import axios from "axios";
 
 const AddQuestionPage = (props) => {
   const [questionData, setQuestionData] = useState({
+    acronym: "",
+    keyAcronym: "",
     title: "",
     section: "",
     answerKind: "",
@@ -37,7 +39,8 @@ const AddQuestionPage = (props) => {
       );
       console.log(res);
       props.hideAddQuestion();
-      window.location.reload();
+      document.body.classList.remove("stopScroll");
+      // window.location.reload();
     } catch (err) {
       console.log(err);
       setError(err.response.data.error);
@@ -62,6 +65,7 @@ const AddQuestionPage = (props) => {
               </option>
               <option value="TEACHER">Profesor</option>
               <option value="COURSE">Materia</option>
+              <option value="BLOCK">Bloque</option>
             </select>
             <label htmlFor="answerKind">Tipo de Pregunta</label>
             <select

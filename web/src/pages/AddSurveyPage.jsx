@@ -16,7 +16,7 @@ const AddSurveyPage = (props) => {
   const [error, setError] = useState("");
 
   const toggleActive = (id) => {
-    console.log(id);
+    // console.log(id);
     const ids = surveyData.questionIds;
     if (ids.includes(id)) {
       setSurveyData({
@@ -37,14 +37,14 @@ const AddSurveyPage = (props) => {
     setSurveyData({ ...surveyData, [e.target.name]: e.target.value });
   };
 
-  console.log(questions);
-  console.log(surveyData);
+  // console.log(questions);
+  // console.log(surveyData);
 
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
         const res = await axios.get("http://localhost:8080/api/questions");
-        console.log(res);
+        // console.log(res);
         setQuestions(res.data);
       } catch (err) {
         console.log(err);
@@ -56,7 +56,7 @@ const AddSurveyPage = (props) => {
   const cancelButton = (e) => {
     e.preventDefault();
     console.log("cancel add");
-    props.hideAddQuestion();
+    props.hideAddSurvey();
   };
 
   const saveButton = async (e) => {
@@ -68,8 +68,8 @@ const AddSurveyPage = (props) => {
         surveyData
       );
       console.log(res);
-      props.hideAddQuestion();
-      window.location.reload("/administrator/surveys");
+      props.hideAddSurvey();
+      // window.location.reload("/administrator/surveys");
     } catch (err) {
       console.log(err);
       setError(err.response.data.error);
@@ -94,6 +94,10 @@ const AddSurveyPage = (props) => {
         <p className={Styles.error}>
           La fecha de inicio no puede ser mayor a la fecha de finalización
         </p>
+      );
+    } else if (err == "Cannot create survey with duplicate title") {
+      return (
+        <p className={Styles.error}>Ya existe una encuesta con ese título</p>
       );
     } else {
       return <p className={Styles.error}>{error}</p>;

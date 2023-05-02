@@ -5,7 +5,7 @@ import Styles from "./LoginPage.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 
@@ -18,11 +18,24 @@ const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [data, setData] = useState({});
 
-  const { setAuth } = useAuth();
+  // const { setAuth } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
+  // const location = useLocation();
+  // const from = location.state?.from?.pathname || "/";
+
+  useEffect(() => {
+    const authData = window.localStorage.getItem("USER");
+    if (authData) {
+      setData(JSON.parse(authData));
+    }
+    console.log("authData", authData);
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem("USER", JSON.stringify(data));
+  }, [data]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,19 +46,37 @@ const Login = (props) => {
       });
       // console.log(res);
 
-      const data = {
+      const dataSubmit = {
         fullName: res.data.fullName,
         role: res.data.role,
         registration: res.data.registration,
       };
 
+      setData({
+        fullName: res.data.fullName,
+        role: res.data.role,
+        registration: res.data.registration,
+      });
+
+      props.handleClick({
+        fullName: res.data.fullName,
+        role: res.data.role,
+        registration: res.data.registration,
+      });
+
       // Save session in localstorage
-      localStorage.setItem("auth", JSON.stringify({ ...data, isLogged: true }));
+      // localStorage.setItem(
+      //     "auth",
+      //     JSON.stringify({ ...data, isLogged: true })
+      // );
 
-      setAuth({ ...data, isLogged: true });
+      // setAuth({ ...data, isLogged: true });
 
-      switch (data.role) {
+      // console.log("data", data);
+
+      switch (dataSubmit.role) {
         case "STUDENT":
+          console.log("student");
           navigate("/student", { state: { data } });
           break;
         case "TEACHER":

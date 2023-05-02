@@ -11,7 +11,7 @@ const Survey = (props) => {
     try {
       const res = await axios.delete(`http://localhost:8080/api/surveys/${id}`);
       console.log(res);
-      window.location.reload();
+      // window.location.reload();
     } catch (err) {
       console.log(err);
     }
