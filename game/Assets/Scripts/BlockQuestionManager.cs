@@ -104,7 +104,7 @@ public class BlockQuestionManager : MonoBehaviour
                 Debug.Log("Answer Kind: " + questionData["questions"][c]["answerKind"].ToString());
                 qAnswerKind = questionData["questions"][c]["answerKind"].ToString();
 
-                if (qSection == "COURSE"){
+                if (qSection == "BLOCK"){
                     qSection = "CRN";
                 } else {
                     qSection = "TEACHER_REGISTRATION";
@@ -140,20 +140,33 @@ public class BlockQuestionManager : MonoBehaviour
                 JSONNode answersData = SimpleJSON.JSON.Parse(web.downloadHandler.text);
                 totalAnswers = answersData.Count;
 
-                for(int c = 0; c<totalAnswers; c++){
-                    for (int i = 0; i<totalQuestions; i++){
-                        if (answersData[c]["questionId"] == questions[i] && answersData[c]["crn"] == courseCRN) {
-                            if (int.TryParse(answersData[c]["content"], out scoreNum) || answersData[c]["content"] == null) {        
-                                questions[i].score = answersData[c]["content"];
-                            }
-                            else {
-                                questions[i].comment = answersData[c]["content"];
+                for(int x = 0; x<totalAnswers; x++){
+                    if (answersData[x]["crn"] != null) {
+                        for (int i = 0; i<questionData["questions"].Count; i++){
+                            
+                            if (/*answersData[x]["questionId"] == questions[i].id &&*/ answersData[x]["crn"] == courseCRN) {
+                                Debug.Log("Pertenece: ");
+                                Debug.Log(questions[i].toString());
+                                // if (int.TryParse(answersData[x]["content"], out scoreNum) || answersData[x]["content"] == null) {        
+                                //     questions[i].score = answersData[x]["content"];
+                                // }
+                                // else {
+                                //     questions[i].comment = answersData[x]["content"];
+                                // }
+                                if (questions[i].answerKind == "NUMERIC"){
+                                    questions[i].score = int.Parse(answersData[x]["content"]);
+                                } else {
+                                    questions[i].comment = answersData[x]["content"];
+                                }
                             }
                         }
                     }
                 }
+                for (int i = 0; i<questionData["questions"].Count; i++){
+                          Debug.Log(questions[i].toString());
+                }
 
-                // Debug.Log(questions);
+                
                 // Debug.Log(questions[0].toString());
                 currentIndex = 0;
                 updateQuestion(currentIndex);

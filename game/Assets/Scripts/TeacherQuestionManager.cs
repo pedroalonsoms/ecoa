@@ -179,6 +179,7 @@ public class TeacherQuestionManager : MonoBehaviour
         else
         {
             nextButtonI.sprite = eButton;
+            nextButtonI.sprite = eButton;
         }
     }
 
