@@ -20,6 +20,8 @@ const AdministratorQuestions = () => {
   const [showUpdateQuestion, setShowUpdateQuestion] = useState({
     state: false,
     updateId: null,
+    acronym: "",
+    keyAcronym: "",
     title: "",
     section: "",
     answerKind: "",
@@ -36,7 +38,7 @@ const AdministratorQuestions = () => {
       }
     };
     fetchQuestions();
-  }, []);
+  }, [questions]);
 
   const handleClick = () => {
     setShowAddQuestion(!showAddQuestion);

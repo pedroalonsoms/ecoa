@@ -5,6 +5,8 @@ import { useState } from "react";
 
 const UpdateQuestionPage = (props) => {
   const [questionData, setQuestionData] = useState({
+    acronym: "",
+    keyAcronym: "",
     title: props.question.title,
     section: props.question.section,
     answerKind: props.question.answerKind,
@@ -36,7 +38,8 @@ const UpdateQuestionPage = (props) => {
       );
       console.log(res);
       props.hideUpdateQuestion();
-      window.location.reload();
+      document.body.classList.remove("stopScroll");
+      // window.location.reload();
     } catch (err) {
       console.log(err);
       setError(err.response.data.error);
@@ -66,6 +69,7 @@ const UpdateQuestionPage = (props) => {
               </option>
               <option value="TEACHER">Profesor</option>
               <option value="COURSE">Materia</option>
+              <option value="BLOCK">Bloque</option>
             </select>
             <label htmlFor="answerKind">Tipo de Pregunta</label>
             <select
@@ -110,7 +114,10 @@ const UpdateQuestionPage = (props) => {
               </button>
             </div>
             {error && (
-              <p className={Styles.error}>Recuerda llenar todos los campos</p>
+              <p className={Styles.error}>
+                Recuerda llenar todos los campos
+                {error}
+              </p>
             )}
           </form>
         </div>
