@@ -858,6 +858,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 315842396}
   m_CullTransparentMesh: 1
+--- !u!1 &324220343
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 324220345}
+  - component: {fileID: 324220344}
+  m_Layer: 0
+  m_Name: User
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &324220344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324220343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ead0a8af625b4eefbc1d4f704b47715, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  URL: 
+  ID: 
+--- !u!4 &324220345
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324220343}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.5430786, y: 0.75597095, z: -13.927892}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &461993653
 GameObject:
   m_ObjectHideFlags: 0
@@ -5970,6 +6016,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0e06c51c07164b48a154275f3d5bddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  courseObject: {fileID: 0}
+  userObject: {fileID: 324220343}
+  studentID: 
+  courseCRN: 0
+  courseTitle: 
   JSONurl: 
   JSONIDurl: http://localhost:8080/api/surveys/active
   ID: 
@@ -5980,6 +6031,7 @@ MonoBehaviour:
   pregunta: {fileID: 0}
   profesorNombre: {fileID: 0}
   totalQuestions: 0
+  totalAnswers: 0
   currentIndex: 0
   backButtonI: {fileID: 1857123367}
   nextButtonI: {fileID: 1537362784}

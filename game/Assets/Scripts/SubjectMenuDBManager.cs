@@ -11,6 +11,7 @@ using UnityEngine.SceneManagement;
 public class SubjectMenuDBManager : MonoBehaviour
 {
     public GameObject userObject;
+    public GameObject courseObject;
     public string JSONurl = "";
     public string studentID;
 
@@ -86,7 +87,10 @@ public class SubjectMenuDBManager : MonoBehaviour
 
     IEnumerator Start()
     {
+        courseObject = GameObject.Find("Course");
         studentID = userObject.GetComponent<User>().ID;
+        //courseObject.GetComponent<Course>().CRN;
+
         JSONurl = "http://localhost:8080/api/progress/student/" + studentID;
         UnityWebRequest web = UnityWebRequest.Get(JSONurl);
         web.useHttpContinue = false;
@@ -105,7 +109,7 @@ public class SubjectMenuDBManager : MonoBehaviour
 
             totalSubjects = jsonReceived["FORMATION_UNITS"]["progress"].Count;
             string titleReceived, kindReceived;
-            int qAnsReceived, qAmoReceived;
+            int qAnsReceived, qAmoReceived, cCRNReceived;
 
             for (int c = 0; c < 10; c++)
             {
@@ -114,11 +118,12 @@ public class SubjectMenuDBManager : MonoBehaviour
                 kindReceived = jsonReceived["FORMATION_UNITS"]["progress"][c]["kind"];
                 qAnsReceived = jsonReceived["FORMATION_UNITS"]["progress"][c]["questionsAnswered"];
                 qAmoReceived = jsonReceived["FORMATION_UNITS"]["progress"][c]["questionAmount"];
+                cCRNReceived = jsonReceived["FORMATION_UNITS"]["progress"][c]["crn"];
 
                 if (c < totalSubjects)
-                { subjects[c] = new Subject(titleReceived, kindReceived, qAnsReceived, qAmoReceived); }
+                { subjects[c] = new Subject(titleReceived, kindReceived, qAnsReceived, qAmoReceived, cCRNReceived); }
                 else
-                { subjects[c] = new Subject("No Subject", "No kind", 0, 0); }
+                { subjects[c] = new Subject("No Subject", "No kind", 0, 0, 0); }
             }
         }
         loadFlags();
@@ -144,11 +149,7 @@ public class SubjectMenuDBManager : MonoBehaviour
                         else
                         { Status1.sprite = invalid; }
 
-                        if (subjects[i].kind == "BLOCK")
-                        { flag1.onClick.AddListener(blockNumericScene); }
-                        else if (subjects[i].kind == "COURSE")
-                        { flag1.onClick.AddListener(subjectNumericScene); }
-
+                        flag1.onClick.AddListener(flag1Clicked);
                     }
                     else
                     {
@@ -171,10 +172,7 @@ public class SubjectMenuDBManager : MonoBehaviour
                         else
                         { Status2.sprite = invalid; }
 
-                        if (subjects[i].kind == "BLOCK")
-                        { flag2.onClick.AddListener(blockNumericScene); }
-                        else if (subjects[i].kind == "COURSE")
-                        { flag2.onClick.AddListener(subjectNumericScene); }
+                        flag2.onClick.AddListener(flag2Clicked);
                     }
                     else
                     {
@@ -197,10 +195,7 @@ public class SubjectMenuDBManager : MonoBehaviour
                         else
                         { Status3.sprite = invalid; }
 
-                        if (subjects[i].kind == "BLOCK")
-                        { flag3.onClick.AddListener(blockNumericScene); }
-                        else if (subjects[i].kind == "COURSE")
-                        { flag3.onClick.AddListener(subjectNumericScene); }
+                        flag3.onClick.AddListener(flag3Clicked);
                     }
                     else
                     {
@@ -223,10 +218,7 @@ public class SubjectMenuDBManager : MonoBehaviour
                         else
                         { Status4.sprite = invalid; }
 
-                        if (subjects[i].kind == "BLOCK")
-                        { flag4.onClick.AddListener(blockNumericScene); }
-                        else if (subjects[i].kind == "COURSE")
-                        { flag4.onClick.AddListener(subjectNumericScene); }
+                        flag4.onClick.AddListener(flag4Clicked);
                     }
                     else
                     {
@@ -249,10 +241,7 @@ public class SubjectMenuDBManager : MonoBehaviour
                         else
                         { Status5.sprite = invalid; }
 
-                        if (subjects[i].kind == "BLOCK")
-                        { flag5.onClick.AddListener(blockNumericScene); }
-                        else if (subjects[i].kind == "COURSE")
-                        { flag5.onClick.AddListener(subjectNumericScene); }
+                        flag5.onClick.AddListener(flag5Clicked);
                     }
                     else
                     {
@@ -275,10 +264,7 @@ public class SubjectMenuDBManager : MonoBehaviour
                         else
                         { Status6.sprite = invalid; }
 
-                        if (subjects[i].kind == "BLOCK")
-                        { flag6.onClick.AddListener(blockNumericScene); }
-                        else if (subjects[i].kind == "COURSE")
-                        { flag6.onClick.AddListener(subjectNumericScene); }
+                        flag6.onClick.AddListener(flag6Clicked);
                     }
                     else
                     {
@@ -301,10 +287,7 @@ public class SubjectMenuDBManager : MonoBehaviour
                         else
                         { Status7.sprite = invalid; }
 
-                        if (subjects[i].kind == "BLOCK")
-                        { flag7.onClick.AddListener(blockNumericScene); }
-                        else if (subjects[i].kind == "COURSE")
-                        { flag7.onClick.AddListener(subjectNumericScene); }
+                        flag7.onClick.AddListener(flag7Clicked);
                     }
                     else
                     {
@@ -327,10 +310,7 @@ public class SubjectMenuDBManager : MonoBehaviour
                         else
                         { Status8.sprite = invalid; }
 
-                        if (subjects[i].kind == "BLOCK")
-                        { flag8.onClick.AddListener(blockNumericScene); }
-                        else if (subjects[i].kind == "COURSE")
-                        { flag8.onClick.AddListener(subjectNumericScene); }
+                        flag8.onClick.AddListener(flag8Clicked);
                     }
                     else
                     {
@@ -353,10 +333,7 @@ public class SubjectMenuDBManager : MonoBehaviour
                         else
                         { Status9.sprite = invalid; }
 
-                        if (subjects[i].kind == "BLOCK")
-                        { flag9.onClick.AddListener(blockNumericScene); }
-                        else if (subjects[i].kind == "COURSE")
-                        { flag9.onClick.AddListener(subjectNumericScene); }
+                        flag9.onClick.AddListener(flag9Clicked);
                     }
                     else
                     {
@@ -379,10 +356,7 @@ public class SubjectMenuDBManager : MonoBehaviour
                         else
                         { Status10.sprite = invalid; }
 
-                        if (subjects[i].kind == "BLOCK")
-                        { flag10.onClick.AddListener(blockNumericScene); }
-                        else if (subjects[i].kind == "COURSE")
-                        { flag10.onClick.AddListener(subjectNumericScene); }
+                        flag10.onClick.AddListener(flag10Clicked);
                     }
                     else
                     {
@@ -397,6 +371,149 @@ public class SubjectMenuDBManager : MonoBehaviour
             }
         }
     }
+
+    void flag1Clicked() {
+        if (subjects[0].kind == "BLOCK")
+        { 
+            courseObject.GetComponent<Course>().CRN = subjects[0].CRN;
+            courseObject.GetComponent<Course>().title = subjects[0].title;
+            blockNumericScene(); 
+        }
+        else if (subjects[0].kind == "COURSE")
+        { 
+            courseObject.GetComponent<Course>().CRN = subjects[0].CRN;
+            courseObject.GetComponent<Course>().title = subjects[0].title;
+            subjectNumericScene(); 
+        }
+    }
+    void flag2Clicked() {
+        if (subjects[1].kind == "BLOCK")
+        { 
+            courseObject.GetComponent<Course>().CRN = subjects[1].CRN;
+            courseObject.GetComponent<Course>().title = subjects[1].title;
+            blockNumericScene(); 
+        }
+        else if (subjects[1].kind == "COURSE")
+        { 
+            courseObject.GetComponent<Course>().CRN = subjects[1].CRN;
+            courseObject.GetComponent<Course>().title = subjects[1].title;
+            subjectNumericScene(); 
+        }
+    }
+    void flag3Clicked() {
+        if (subjects[2].kind == "BLOCK")
+        { 
+            courseObject.GetComponent<Course>().CRN = subjects[2].CRN;
+            courseObject.GetComponent<Course>().title = subjects[2].title;
+            blockNumericScene(); 
+        }
+        else if (subjects[2].kind == "COURSE")
+        { 
+            courseObject.GetComponent<Course>().CRN = subjects[2].CRN;
+            courseObject.GetComponent<Course>().title = subjects[2].title;
+            subjectNumericScene(); 
+        }
+    }
+    void flag4Clicked() {
+        if (subjects[3].kind == "BLOCK")
+        { 
+            courseObject.GetComponent<Course>().CRN = subjects[3].CRN;
+            courseObject.GetComponent<Course>().title = subjects[3].title;
+            blockNumericScene(); 
+        }
+        else if (subjects[3].kind == "COURSE")
+        { 
+            courseObject.GetComponent<Course>().CRN = subjects[3].CRN;
+            courseObject.GetComponent<Course>().title = subjects[3].title;
+            subjectNumericScene(); 
+        }
+    }
+    void flag5Clicked() {
+        if (subjects[4].kind == "BLOCK")
+        { 
+            courseObject.GetComponent<Course>().CRN = subjects[4].CRN;
+            courseObject.GetComponent<Course>().title = subjects[4].title;
+            blockNumericScene(); 
+        }
+        else if (subjects[4].kind == "COURSE")
+        { 
+            courseObject.GetComponent<Course>().CRN = subjects[4].CRN;
+            courseObject.GetComponent<Course>().title = subjects[4].title;
+            subjectNumericScene(); 
+        }
+    }
+    void flag6Clicked() {
+        if (subjects[5].kind == "BLOCK")
+        { 
+            courseObject.GetComponent<Course>().CRN = subjects[5].CRN;
+            courseObject.GetComponent<Course>().title = subjects[5].title;
+            blockNumericScene(); 
+        }
+        else if (subjects[5].kind == "COURSE")
+        { 
+            courseObject.GetComponent<Course>().CRN = subjects[5].CRN;
+            courseObject.GetComponent<Course>().title = subjects[5].title;
+            subjectNumericScene(); 
+        }
+    }
+    void flag7Clicked() {
+        if (subjects[6].kind == "BLOCK")
+        { 
+            courseObject.GetComponent<Course>().CRN = subjects[6].CRN;
+            courseObject.GetComponent<Course>().title = subjects[6].title;
+            blockNumericScene(); 
+        }
+        else if (subjects[6].kind == "COURSE")
+        { 
+            courseObject.GetComponent<Course>().CRN = subjects[6].CRN;
+            courseObject.GetComponent<Course>().title = subjects[6].title;
+            subjectNumericScene(); 
+        }
+    }
+    void flag8Clicked() {
+        if (subjects[7].kind == "BLOCK")
+        { 
+            courseObject.GetComponent<Course>().CRN = subjects[7].CRN;
+            courseObject.GetComponent<Course>().title = subjects[7].title;
+            blockNumericScene(); 
+        }
+        else if (subjects[7].kind == "COURSE")
+        { 
+            courseObject.GetComponent<Course>().CRN = subjects[7].CRN;
+            courseObject.GetComponent<Course>().title = subjects[7].title;
+            subjectNumericScene(); 
+        }
+    }
+    void flag9Clicked() {
+        if (subjects[8].kind == "BLOCK")
+        { 
+            courseObject.GetComponent<Course>().CRN = subjects[8].CRN;
+            courseObject.GetComponent<Course>().title = subjects[8].title;
+            blockNumericScene(); 
+        }
+        else if (subjects[8].kind == "COURSE")
+        { 
+            courseObject.GetComponent<Course>().CRN = subjects[8].CRN;
+            courseObject.GetComponent<Course>().title = subjects[8].title;
+            subjectNumericScene(); 
+        }
+    }
+    void flag10Clicked() {
+        if (subjects[9].kind == "BLOCK")
+        { 
+            courseObject.GetComponent<Course>().CRN = subjects[9].CRN;
+            courseObject.GetComponent<Course>().title = subjects[9].title;
+            blockNumericScene(); 
+        }
+        else if (subjects[9].kind == "COURSE")
+        { 
+            courseObject.GetComponent<Course>().CRN = subjects[9].CRN;
+            courseObject.GetComponent<Course>().title = subjects[9].title;
+            subjectNumericScene(); 
+        }
+    }
+
+
 
     void subjectNumericScene()
     {

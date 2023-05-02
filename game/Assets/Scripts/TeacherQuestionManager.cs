@@ -13,7 +13,11 @@ using TMPro;
 
 public class TeacherQuestionManager : MonoBehaviour
 {
+    public GameObject teacherObject;
     public GameObject userObject;
+    public string studentID;
+    public string teacherID;
+    public string teacherName;
     public string JSONurl = "";
     public string JSONIDurl = "";
     public string ID = "";
@@ -25,6 +29,7 @@ public class TeacherQuestionManager : MonoBehaviour
     public TextMeshProUGUI profesorNombre;
     public Question[] questions = new Question[20];
     public int totalQuestions;
+    public int totalAnswers;
     public int currentIndex;
 
     public Image backButtonI;
@@ -42,6 +47,12 @@ public class TeacherQuestionManager : MonoBehaviour
 
     IEnumerator Start()
     {
+        teacherObject = GameObject.Find("TeacherObject");
+
+        studentID = userObject.GetComponent<User>().ID;
+        teacherID = teacherObject.GetComponent<TeacherObj>().ID;
+        teacherName = teacherObject.GetComponent<TeacherObj>().name;
+
         pregunta = GameObject.Find("Question").GetComponent<TextMeshProUGUI>();
         profesorNombre = GameObject.Find("Profesor").GetComponent<TextMeshProUGUI>();
 
@@ -94,22 +105,62 @@ public class TeacherQuestionManager : MonoBehaviour
                 Debug.Log("Answer Kind: " + questionData["questions"][c]["answerKind"].ToString());
                 qAnswerKind = questionData["questions"][c]["answerKind"].ToString();
 
-                Question questionReceived = new Question(qID, qTitle, qSection, qAnswerKind);
+                Question questionReceived = new Question(qID, qTitle, qSection, qAnswerKind, teacherName);
                 Debug.Log(questionReceived.toString());
 
                 questions[c] = questionReceived;
             }
 
-            Debug.Log(questions);
-            Debug.Log(questions[0].toString());
-            currentIndex = 0;
+            // Debug.Log(questions);
+            // Debug.Log(questions[0].toString());
+            // currentIndex = 0;
 
-            backButtonI.sprite = bButtonOff;
-            nextButtonI.sprite = nButtonOn;
-            nextButtonB.onClick.AddListener(loadNextQuestion);
+            // backButtonI.sprite = bButtonOff;
+            // nextButtonI.sprite = nButtonOn;
+            // nextButtonB.onClick.AddListener(loadNextQuestion);
 
-            updateQuestion(currentIndex);
+            // updateQuestion(currentIndex);
+            JSONurl = "http://localhost:8080/api/answers/" + studentID;
 
+            web = UnityWebRequest.Get(JSONurl);
+            web.useHttpContinue = false;
+
+            yield return web.SendWebRequest();
+
+            int scoreNum;
+
+            if (web.isNetworkError || web.isHttpError)
+            {
+                Debug.Log("Error API: " + web.error);
+            }
+            else
+            {
+                Debug.Log(web.downloadHandler.text);
+                JSONNode answersData = SimpleJSON.JSON.Parse(web.downloadHandler.text);
+                totalAnswers = answersData.Count;
+
+                for(int c = 0; c<totalAnswers; c++){
+                    for (int i = 0; i<totalQuestions; i++){
+                        if (answersData[c]["questionId"] == questions[i] && answersData[c]["teacherRegistration"] == teacherID) {
+                            if (int.TryParse(answersData[c]["content"], out scoreNum) || answersData[c]["content"] == null) {        
+                                questions[i].score = answersData[c]["content"];
+                            }
+                            else {
+                                questions[i].comment = answersData[c]["content"];
+                            }
+                        }
+                        Debug.Log(questions[i].toString());
+                    }
+                }
+
+                currentIndex = 0;
+
+                backButtonI.sprite = bButtonOff;
+                nextButtonI.sprite = nButtonOn;
+                nextButtonB.onClick.AddListener(loadNextQuestion);
+
+                updateQuestion(currentIndex);
+            }
         }
     }
 
@@ -134,6 +185,7 @@ public class TeacherQuestionManager : MonoBehaviour
     void updateQuestion(int qIndex)
     {
         pregunta.text = questions[qIndex].title;
+        profesorNombre.text = teacherName; 
         Debug.Log(questions[qIndex].score);
     }
 
