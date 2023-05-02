@@ -1,19 +1,10 @@
-GET http://localhost:8080/api/answers/A00827581
-content-type: application/json
-
-{
-    "questionId": 2,
-    "targetKind": "TEACHER_REGISTRATION",
-    "teacherRegistration": "L00000001",
-    "crn": null
-}
+GET http://localhost:8080/api/answers/A00827581/surveyQuestions/4
 
 ###
-POST http://localhost:8080/api/answers/A00827581
+POST http://localhost:8080/api/answers/A00827581/surveyQuestions/4
 content-type: application/json
 
 {
-    "questionId": 2,
     "targetKind": "TEACHER_REGISTRATION",
     "teacherRegistration": "L00000001",
     "crn": null,
