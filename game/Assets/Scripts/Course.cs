@@ -5,7 +5,7 @@ using UnityEngine;
 public class Course : MonoBehaviour
 {
     // Start is called before the first frame update
-    public string CRN;
+    public int CRN;
     public string title;
     public static Course instance = null;
 
@@ -14,11 +14,11 @@ public class Course : MonoBehaviour
         if (instance == null) 
         {
             instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            DontDestroyOnLoad(gameObject);
         } 
         else 
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
         
     }
