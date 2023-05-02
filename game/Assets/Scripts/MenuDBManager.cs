@@ -38,6 +38,7 @@ public class MenuDBManager : MonoBehaviour
         if (web.isNetworkError || web.isHttpError)
         {
             Debug.Log("Error API: " + web.error);
+            SceneManager.LoadScene("Error");
         }
         else
         {
