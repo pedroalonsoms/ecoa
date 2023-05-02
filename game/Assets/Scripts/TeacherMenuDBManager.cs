@@ -11,8 +11,9 @@ using UnityEngine.SceneManagement;
 public class TeacherMenuDBManager : MonoBehaviour
 {
     public GameObject userObject;
+    public GameObject teacherObject;
     public string JSONurl = "";
-    public string studentID = "";
+    public string studentID;
 
     public Image Teacher1;
     public Image Teacher2;
@@ -85,6 +86,7 @@ public class TeacherMenuDBManager : MonoBehaviour
 
     IEnumerator Start()
     {
+        teacherObject = GameObject.Find("TeacherObject");
         studentID = userObject.GetComponent<User>().ID;
 
         JSONurl = "http://localhost:8080/api/progress/student/" + studentID;
@@ -104,7 +106,7 @@ public class TeacherMenuDBManager : MonoBehaviour
             Debug.Log(jsonReceived["TEACHERS"].ToString());
 
             totalTeachers = jsonReceived["TEACHERS"]["progress"].Count;
-            string titleReceived;
+            string titleReceived, registrationReceived;
             int qAnsReceived, qAmoReceived;
 
             for (int c = 0; c < 10; c++)
@@ -113,11 +115,12 @@ public class TeacherMenuDBManager : MonoBehaviour
                 titleReceived = jsonReceived["TEACHERS"]["progress"][c]["fullName"];
                 qAnsReceived = jsonReceived["TEACHERS"]["progress"][c]["questionsAnswered"];
                 qAmoReceived = jsonReceived["TEACHERS"]["progress"][c]["questionAmount"];
+                registrationReceived = jsonReceived["TEACHERS"]["progress"][c]["registration"];
 
                 if (c < totalTeachers)
-                { teachers[c] = new Teacher(titleReceived, qAnsReceived, qAmoReceived); }
+                { teachers[c] = new Teacher(titleReceived, qAnsReceived, qAmoReceived, registrationReceived); }
                 else
-                { teachers[c] = new Teacher("No Teacher", 0, 0); }
+                { teachers[c] = new Teacher("No Teacher", 0, 0, "No ID"); }
             }
         }
         loadFlags();
@@ -143,6 +146,7 @@ public class TeacherMenuDBManager : MonoBehaviour
                         { Status1.sprite = completed; }
                         else
                         { Status1.sprite = invalid; }
+                        flag1.onClick.AddListener(flag1Clicked);
                     }
                     else
                     {
@@ -165,6 +169,7 @@ public class TeacherMenuDBManager : MonoBehaviour
                         { Status2.sprite = completed; }
                         else
                         { Status2.sprite = invalid; }
+                        flag2.onClick.AddListener(flag2Clicked);
                     }
                     else
                     {
@@ -187,6 +192,7 @@ public class TeacherMenuDBManager : MonoBehaviour
                         { Status3.sprite = completed; }
                         else
                         { Status3.sprite = invalid; }
+                        flag3.onClick.AddListener(flag3Clicked);
                     }
                     else
                     {
@@ -209,6 +215,7 @@ public class TeacherMenuDBManager : MonoBehaviour
                         { Status4.sprite = completed; }
                         else
                         { Status4.sprite = invalid; }
+                        flag4.onClick.AddListener(flag4Clicked);
                     }
                     else
                     {
@@ -231,6 +238,7 @@ public class TeacherMenuDBManager : MonoBehaviour
                         { Status5.sprite = completed; }
                         else
                         { Status5.sprite = invalid; }
+                        flag5.onClick.AddListener(flag5Clicked);
                     }
                     else
                     {
@@ -253,6 +261,7 @@ public class TeacherMenuDBManager : MonoBehaviour
                         { Status6.sprite = completed; }
                         else
                         { Status6.sprite = invalid; }
+                        flag6.onClick.AddListener(flag6Clicked);
                     }
                     else
                     {
@@ -275,6 +284,7 @@ public class TeacherMenuDBManager : MonoBehaviour
                         { Status7.sprite = completed; }
                         else
                         { Status7.sprite = invalid; }
+                        flag7.onClick.AddListener(flag7Clicked);
                     }
                     else
                     {
@@ -297,6 +307,7 @@ public class TeacherMenuDBManager : MonoBehaviour
                         { Status8.sprite = completed; }
                         else
                         { Status8.sprite = invalid; }
+                        flag8.onClick.AddListener(flag8Clicked);
                     }
                     else
                     {
@@ -319,6 +330,7 @@ public class TeacherMenuDBManager : MonoBehaviour
                         { Status9.sprite = completed; }
                         else
                         { Status9.sprite = invalid; }
+                        flag9.onClick.AddListener(flag9Clicked);
                     }
                     else
                     {
@@ -341,6 +353,7 @@ public class TeacherMenuDBManager : MonoBehaviour
                         { Status10.sprite = completed; }
                         else
                         { Status10.sprite = invalid; }
+                        flag10.onClick.AddListener(flag10Clicked);
                     }
                     else
                     {
@@ -354,6 +367,57 @@ public class TeacherMenuDBManager : MonoBehaviour
                     break;
             }
         }
+    }
+
+    void flag1Clicked() {
+        teacherObject.GetComponent<TeacherObj>().ID = teachers[0].ID;
+        teacherObject.GetComponent<TeacherObj>().name = teachers[0].title;
+        teacherNumericScene(); 
+    }
+    void flag2Clicked() {
+        teacherObject.GetComponent<TeacherObj>().ID = teachers[1].ID;
+        teacherObject.GetComponent<TeacherObj>().name = teachers[1].title;
+        teacherNumericScene(); 
+    }
+    void flag3Clicked() {
+        teacherObject.GetComponent<TeacherObj>().ID = teachers[2].ID;
+        teacherObject.GetComponent<TeacherObj>().name = teachers[2].title;
+        teacherNumericScene(); 
+    }
+    void flag4Clicked() {
+        teacherObject.GetComponent<TeacherObj>().ID = teachers[3].ID;
+        teacherObject.GetComponent<TeacherObj>().name = teachers[3].title;
+        teacherNumericScene(); 
+    }
+    void flag5Clicked() {
+        teacherObject.GetComponent<TeacherObj>().ID = teachers[4].ID;
+        teacherObject.GetComponent<TeacherObj>().name = teachers[4].title;
+        teacherNumericScene(); 
+    }
+    void flag6Clicked() {
+        teacherObject.GetComponent<TeacherObj>().ID = teachers[5].ID;
+        teacherObject.GetComponent<TeacherObj>().name = teachers[5].title;
+        teacherNumericScene(); 
+    }
+    void flag7Clicked() {
+        teacherObject.GetComponent<TeacherObj>().ID = teachers[6].ID;
+        teacherObject.GetComponent<TeacherObj>().name = teachers[6].title;
+        teacherNumericScene(); 
+    }
+    void flag8Clicked() {
+        teacherObject.GetComponent<TeacherObj>().ID = teachers[7].ID;
+        teacherObject.GetComponent<TeacherObj>().name = teachers[7].title;
+        teacherNumericScene(); 
+    }
+    void flag9Clicked() {
+        teacherObject.GetComponent<TeacherObj>().ID = teachers[8].ID;
+        teacherObject.GetComponent<TeacherObj>().name = teachers[8].title;
+        teacherNumericScene(); 
+    }
+    void flag10Clicked() {
+        teacherObject.GetComponent<TeacherObj>().ID = teachers[9].ID;
+        teacherObject.GetComponent<TeacherObj>().name = teachers[9].title;
+        teacherNumericScene(); 
     }
     void teacherNumericScene()
     {

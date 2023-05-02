@@ -13,6 +13,11 @@ using TMPro;
 
 public class SubjectQuestionManager : MonoBehaviour
 {
+    public GameObject courseObject;
+    public GameObject userObject;
+    public string studentID;
+    public int courseCRN;
+    public string courseTitle;
     public string JSONurl = "";
     public string JSONIDurl = "";
     public string ID = "";
@@ -24,6 +29,7 @@ public class SubjectQuestionManager : MonoBehaviour
     public TextMeshProUGUI profesorNombre;
     public Question[] questions = new Question[20];
     public int totalQuestions;
+    public int totalAnswers;
     public int currentIndex;
 
     public Image backButtonI;
@@ -41,6 +47,11 @@ public class SubjectQuestionManager : MonoBehaviour
 
     IEnumerator Start() 
     {
+        courseObject = GameObject.Find("Course");
+
+        studentID = userObject.GetComponent<User>().ID;
+        courseCRN = courseObject.GetComponent<Course>().CRN;
+        courseTitle = courseObject.GetComponent<Course>().title;
         pregunta = GameObject.Find("Question").GetComponent<TextMeshProUGUI>();
         profesorNombre = GameObject.Find("Profesor").GetComponent<TextMeshProUGUI>();
 
@@ -92,16 +103,59 @@ public class SubjectQuestionManager : MonoBehaviour
                 Debug.Log("Answer Kind: " + questionData["questions"][c]["answerKind"].ToString());
                 qAnswerKind = questionData["questions"][c]["answerKind"].ToString();
 
-                Question questionReceived = new Question(qID, qTitle, qSection, qAnswerKind);
+                if (qSection == "COURSE"){
+                    qSection = "CRN";
+                } else {
+                    qSection = "TEACHER_REGISTRATION";
+                }
+
+                Question questionReceived = new Question(qID, qTitle, qSection, qAnswerKind, courseTitle);
                 Debug.Log(questionReceived.toString());
 
                 questions[c] = questionReceived;
             }
 
-            Debug.Log(questions);
+            /* Debug.Log(questions);
             Debug.Log(questions[0].toString());
             currentIndex = 0;
-            updateQuestion(currentIndex);
+            updateQuestion(currentIndex); */
+            JSONurl = "http://localhost:8080/api/answers/" + studentID;
+
+            web = UnityWebRequest.Get(JSONurl);
+            web.useHttpContinue = false;
+
+            yield return web.SendWebRequest();
+
+            int scoreNum;
+
+            if (web.isNetworkError || web.isHttpError)
+            {
+                Debug.Log("Error API: " + web.error);
+            }
+            else
+            {
+                Debug.Log(web.downloadHandler.text);
+                JSONNode answersData = SimpleJSON.JSON.Parse(web.downloadHandler.text);
+                totalAnswers = answersData.Count;
+
+                for(int c = 0; c<totalAnswers; c++){
+                    for (int i = 0; i<totalQuestions; i++){
+                        if (answersData[c]["questionId"] == questions[i] && answersData[c]["crn"] == courseCRN) {
+                            if (int.TryParse(answersData[c]["content"], out scoreNum) || answersData[c]["content"] == null) {        
+                                questions[i].score = answersData[c]["content"];
+                            }
+                            else {
+                                questions[i].comment = answersData[c]["content"];
+                            }
+                        }
+                    }
+                }
+
+                // Debug.Log(questions);
+                // Debug.Log(questions[0].toString());
+                currentIndex = 0;
+                updateQuestion(currentIndex);
+            }
         }
     }
 
@@ -119,7 +173,8 @@ public class SubjectQuestionManager : MonoBehaviour
 
     void updateQuestion(int qIndex) 
     {   
-        pregunta.text = questions[qIndex].title;   
+        pregunta.text = questions[qIndex].title;  
+        profesorNombre.text = courseTitle; 
         Debug.Log(questions[qIndex].score);
     }
 
