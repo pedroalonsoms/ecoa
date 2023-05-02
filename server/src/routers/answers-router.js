@@ -18,9 +18,9 @@ answersRouter.get("/answers/:studentRegistration", async (req, res) => {
       [studentRegistration]
     );
 
-    if (rows.length === 0) {
+    /* if (rows.length === 0) {
       throw new Error("No answers found for the given student registration.");
-    }
+    } */
 
     return res.status(200).send(rows);
   } catch (error) {
