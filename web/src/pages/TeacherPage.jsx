@@ -15,7 +15,7 @@ const TeacherPage = () => {
   return (
     <div>
       <Navbar showLinks={activeLinks} />
-      <h2>Bienvenido a la ECOA {location.state.data.fullName}</h2>
+      <h2>Bienvenido a la ECOA {location.state.dataSubmit.fullName}</h2>
       {/* <TeacherInfo />
             <TeacherQuestions />
             <TeacherComments /> */}
