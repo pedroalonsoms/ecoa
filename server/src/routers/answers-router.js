@@ -57,7 +57,28 @@ answersRouter.post(
         })
         .parse(req.body);
 
-      // TODO: add validation for content to be between 0 - 10 when answer is numeric
+      const [[question]] = await pool.query(
+        `SELECT answerKind FROM Question WHERE id = ?`,
+        [surveyQuestionId]
+      );
+
+      if (!question) {
+        throw new Error("Question not found");
+      }
+
+      if (question.answerKind === "NUMERIC") {
+        const numericContent = parseFloat(content);
+
+        if (
+          isNaN(numericContent) ||
+          numericContent < 0 ||
+          numericContent > 10
+        ) {
+          throw new Error(
+            "Content must be a number between 0 and 10 or null when answer is numeric"
+          );
+        }
+      }
 
       if (
         targetKind === "TEACHER_REGISTRATION" &&
@@ -72,19 +93,38 @@ answersRouter.post(
         throw new Error("CRN cannot be null when targetKind is CRN");
       }
 
-      // TODO: a answer post should also remove before adding again if exists
-
-      await pool.query(
-        `INSERT INTO TmpAnswer VALUES (NULL, ?, ?, ?, ?, ?, ?)`,
-        [
-          studentRegistration,
-          surveyQuestionId,
-          targetKind,
-          teacherRegistration,
-          crn,
-          content,
-        ]
+      const [existingRecord] = await pool.query(
+        `SELECT * FROM TmpAnswer WHERE studentRegistration = ? AND surveyQuestion = ?`,
+        [studentRegistration, questionId]
       );
+
+      if (existingRecord.length > 0) {
+        // Update the existing record
+        await pool.query(
+          `UPDATE TmpAnswer SET targetKind = ?, teacherRegistration = ?, crn = ?, content = ? WHERE studentRegistration = ? AND surveyQuestion = ?`,
+          [
+            targetKind,
+            teacherRegistration,
+            crn,
+            content,
+            studentRegistration,
+            questionId,
+          ]
+        );
+      } else {
+        // Insert a new record
+        await pool.query(
+          `INSERT INTO TmpAnswer (studentRegistration, surveyQuestion, targetKind, teacherRegistration, crn, content) VALUES (?, ?, ?, ?, ?, ?)`,
+          [
+            studentRegistration,
+            questionId,
+            targetKind,
+            teacherRegistration,
+            crn,
+            content,
+          ]
+        );
+      }
 
       res.sendStatus(200);
     } catch (error) {
