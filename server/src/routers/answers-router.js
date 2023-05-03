@@ -53,7 +53,7 @@ answersRouter.post(
           targetKind: z.enum(TARGET_KIND),
           teacherRegistration: z.string().length(9).nullable(),
           crn: z.number().nullable(),
-          content: z.string(),
+          content: z.string().nullable(),
         })
         .parse(req.body);
 
@@ -94,30 +94,30 @@ answersRouter.post(
       }
 
       const [existingRecord] = await pool.query(
-        `SELECT * FROM TmpAnswer WHERE studentRegistration = ? AND surveyQuestion = ?`,
-        [studentRegistration, questionId]
+        `SELECT * FROM TmpAnswer WHERE studentRegistration = ? AND surveyQuestionId = ?`,
+        [studentRegistration, surveyQuestionId]
       );
 
       if (existingRecord.length > 0) {
         // Update the existing record
         await pool.query(
-          `UPDATE TmpAnswer SET targetKind = ?, teacherRegistration = ?, crn = ?, content = ? WHERE studentRegistration = ? AND surveyQuestion = ?`,
+          `UPDATE TmpAnswer SET targetKind = ?, teacherRegistration = ?, crn = ?, content = ? WHERE studentRegistration = ? AND surveyQuestionId = ?`,
           [
             targetKind,
             teacherRegistration,
             crn,
             content,
             studentRegistration,
-            questionId,
+            surveyQuestionId,
           ]
         );
       } else {
         // Insert a new record
         await pool.query(
-          `INSERT INTO TmpAnswer (studentRegistration, surveyQuestion, targetKind, teacherRegistration, crn, content) VALUES (?, ?, ?, ?, ?, ?)`,
+          `INSERT INTO TmpAnswer (studentRegistration, surveyQuestionId, targetKind, teacherRegistration, crn, content) VALUES (?, ?, ?, ?, ?, ?)`,
           [
             studentRegistration,
-            questionId,
+            surveyQuestionId,
             targetKind,
             teacherRegistration,
             crn,
