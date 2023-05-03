@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS Prizes;
 DROP TABLE IF EXISTS TmpAnswer;
 DROP TABLE IF EXISTS Answer;
 DROP TABLE IF EXISTS SurveyQuestion;
+DROP TABLE IF EXISTS StudentFinishedSurvey;
 DROP TABLE IF EXISTS Survey;
 DROP TABLE IF EXISTS TmpCourseTextAnswer;
 DROP TABLE IF EXISTS TmpCourseNumericAnswer;
@@ -126,6 +127,15 @@ CREATE TABLE Survey (
     PRIMARY KEY (id)
 );
 
+CREATE TABLE StudentFinishedSurvey (
+    studentRegistration CHAR(9) NOT NULL,
+    surveyId INT NOT NULL,
+
+    PRIMARY KEY (surveyId, studentRegistration),
+    FOREIGN KEY (surveyId) REFERENCES Survey (id),
+    FOREIGN KEY (studentRegistration) REFERENCES Student (registration)
+);
+
 CREATE TABLE SurveyQuestion (
     id INT AUTO_INCREMENT,
     surveyId INT NOT NULL,
@@ -192,7 +202,7 @@ BEGIN
     INSERT INTO Answer (
         SELECT 
             NULL, 
-            SHA2(studentRegistration, 256),
+            CONCAT(CONVERT(ROUND(RAND() * 1000000), char), SHA2(studentRegistration, 256)),
             surveyQuestionId,
             targetKind,
             teacherRegistration,

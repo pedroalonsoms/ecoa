@@ -3,7 +3,7 @@ import { pool } from "../db/connection.js";
 import { z } from "zod";
 
 const finishRouter = express.Router();
-finishRouter.post("/finish/:studentRegistration", async (req, res) => {
+finishRouter.post("/finish/student/:studentRegistration", async (req, res) => {
   try {
     const { studentRegistration } = z
       .object({ studentRegistration: z.string().length(9) })
@@ -38,6 +38,11 @@ finishRouter.post("/finish/:studentRegistration", async (req, res) => {
     if (answeredQuestions[0].total !== questionCount[0].total) {
       throw new Error("All questions in active survey must be answered");
     }
+
+    await pool.query("INSERT INTO StudentFinishedSurvey VALUES (?, ?)", [
+      studentRegistration,
+      activeSurvey[0].id,
+    ]);
 
     await pool.query("CALL transferTmpAnswersByStudentRegistration(?)", [
       studentRegistration,
