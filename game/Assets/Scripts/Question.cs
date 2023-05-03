@@ -48,7 +48,7 @@ public class Question
 
     public string toString(){
         string res;
-        res = "ID: " + id + "Title: " + title + "Section: " + section + "Answer Kind: " + answerKind + "Score: " + score.ToString() +  comment + evaluatedObject + CRN +  teacherRegistration;
+        res = "ID: " + id + "Title: " + title + "Section: " + section + "Answer Kind: " + answerKind + "Score: " + score.ToString() +  "Comment: " + comment + "Name: " + evaluatedObject + CRN +  teacherRegistration;
         return res;
     }
 }

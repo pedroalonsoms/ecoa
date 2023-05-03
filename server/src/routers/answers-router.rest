@@ -1,4 +1,12 @@
-GET http://localhost:8080/api/answers/A01741437
+GET http://localhost:8080/api/answers/A00827581/surveyQuestions/4
 
 ###
-POST http://localhost:8080/api/answers/A01741437/questions/1
+POST http://localhost:8080/api/answers/A00827581/surveyQuestions/4
+content-type: application/json
+
+{
+    "targetKind": "TEACHER_REGISTRATION",
+    "teacherRegistration": "L00000001",
+    "crn": null,
+    "content": "9"
+}

@@ -4,38 +4,5 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/main.unity
-    guid: ee5a60bdaac59483b895849f0dd112e3
-  - enabled: 1
-    path: Assets/Scenes/comment.unity
-    guid: 673b49fdd9e5340ea9031a563fd5d701
-  - enabled: 1
-    path: Assets/Scenes/menu.unity
-    guid: a5331893121634e2aad4e4971505b2c0
-  - enabled: 1
-    path: Assets/Scenes/final.unity
-    guid: f2894e23283c9489a85138fc16b6e118
-  - enabled: 1
-    path: Assets/Scenes/teacher_menu.unity
-    guid: 3a90818f11f614d238e4a8c4d8457ab9
-  - enabled: 1
-    path: Assets/Scenes/subject_menu.unity
-    guid: ae6d9caec66784774a2a7e8f1fbbe52f
-  - enabled: 1
-    path: Assets/Scenes/subject_numeric.unity
-    guid: e2cc5c9fafc5849a39b597adab5b8d4b
-  - enabled: 1
-    path: Assets/Scenes/teacher_numeric.unity
-    guid: 0e7ec11fb630c4c4d9c34b6fb8741de2
-  - enabled: 1
-    path: Assets/Scenes/block_numeric.unity
-    guid: 0adb3d6dc7f254a6caa4050809d07313
-  - enabled: 1
-    path: Assets/Scenes/instrucciones.unity
-    guid: e782b515acfe34220b7aafc9e64d701e
-  - enabled: 1
-    path: Assets/Scenes/premioqr.unity
-    guid: 369b50aebb5d34b589d29dbe3ba6a433
+  m_Scenes: []
   m_configObjects: {}

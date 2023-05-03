@@ -23,6 +23,10 @@ public class MenuDBManager : MonoBehaviour
     public Sprite inProgress;
     public Sprite uncompleted;
     public Sprite invalid;
+    public Image endImage;
+    public Sprite endBlocked;
+    public Sprite endUnblocked;
+    public Button endButton;
 
 
     IEnumerator Start()
@@ -38,6 +42,7 @@ public class MenuDBManager : MonoBehaviour
         if (web.isNetworkError || web.isHttpError)
         {
             Debug.Log("Error API: " + web.error);
+            SceneManager.LoadScene("Error");
         }
         else
         {
@@ -53,6 +58,14 @@ public class MenuDBManager : MonoBehaviour
 
         updateStatusM();
         updateStatusP();
+
+        if (answeredM == amountM && answeredP == amountP){
+            endImage.sprite = endUnblocked;
+            endButton.onClick.AddListener(moveToEnd);
+        } else
+        {
+            endImage.sprite = endBlocked;
+        }
 
     }
 
@@ -78,6 +91,11 @@ public class MenuDBManager : MonoBehaviour
         { statusProfesores.sprite = completed; }
         else
         { statusProfesores.sprite = invalid; }
+    }
+
+    void moveToEnd() 
+    {
+        SceneManager.LoadScene("final");
     }
 
 }

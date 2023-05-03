@@ -97,6 +97,7 @@ public class TeacherMenuDBManager : MonoBehaviour
 
         if (web.isNetworkError || web.isHttpError)
         {
+            SceneManager.LoadScene("Error");
             Debug.Log("Error API: " + web.error);
         }
         else

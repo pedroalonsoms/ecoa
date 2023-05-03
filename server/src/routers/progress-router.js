@@ -23,7 +23,19 @@ progressRouter.get(
         throw new Error("There is no active survey");
       }
 
-      const [survey] = surveys;
+      const survey = surveys[0];
+
+      const [studentFinishedSurveys] = await pool.query(
+        `SELECT *
+        FROM StudentFinishedSurvey
+        WHERE studentRegistration = ?
+        AND surveyId = ?`,
+        [studentRegistration, survey.id]
+      );
+
+      if (studentFinishedSurveys.length > 0) {
+        throw new Error("User already answered the survey");
+      }
 
       // Course Progress
       const [formationUnitsProgress] = await pool.query(
@@ -31,7 +43,7 @@ progressRouter.get(
         Classroom.crn AS crn,
         Classroom.title AS title,
         Classroom.kind AS kind,
-        COUNT(Classroom.crn) AS questionsAnswered,
+        COUNT(TmpAnswer.crn) AS questionsAnswered,
         (
           SELECT 
           COUNT(*) 
@@ -62,7 +74,7 @@ progressRouter.get(
         `SELECT 
         Teacher.registration AS registration,
         Teacher.fullName AS fullName,
-        COUNT(Teacher.registration) AS questionsAnswered,
+        COUNT(TmpAnswer.teacherRegistration) AS questionsAnswered,
         (
           SELECT 
           COUNT(*) 

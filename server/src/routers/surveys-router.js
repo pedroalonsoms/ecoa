@@ -227,13 +227,14 @@ surveysRouter.get("/surveys/:surveyId", async (req, res) => {
       .parse(surveys);
 
     let [rawQuestions] = await pool.query(
-      "SELECT Question.*, IF(surveyId IS NULL, FALSE, TRUE) AS isActive FROM Question LEFT JOIN SurveyQuestion ON Question.id = SurveyQuestion.questionId AND surveyId = ? ORDER BY Question.id ASC",
+      "SELECT Question.*, SurveyQuestion.id AS surveyQuestionId, IF(surveyId IS NULL, FALSE, TRUE) AS isActive FROM Question LEFT JOIN SurveyQuestion ON Question.id = SurveyQuestion.questionId AND surveyId = ? ORDER BY Question.id ASC",
       [surveyId]
     );
 
     let questions = z
       .object({
         id: z.number(),
+        surveyQuestionId: z.number(),
         title: z.string(),
         section: z.enum(SECTION_KIND),
         answerKind: z.enum(ANSWER_KIND),
