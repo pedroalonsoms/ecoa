@@ -25,6 +25,7 @@ public class TeacherQuestionManager : MonoBehaviour
     public string qTitle = "";
     public string qSection = "";
     public string qAnswerKind = "";
+    public int qSurveyQuestionID;
     public TextMeshProUGUI pregunta;
     public TextMeshProUGUI profesorNombre;
     public Question[] questions = new Question[20];
@@ -44,6 +45,7 @@ public class TeacherQuestionManager : MonoBehaviour
 
     public Button backButtonB;
     public Button nextButtonB;
+
 
     IEnumerator Start()
     {
@@ -98,6 +100,9 @@ public class TeacherQuestionManager : MonoBehaviour
                 Debug.Log("ID: " + questionData["questions"][c]["id"].ToString());
                 qID = questionData["questions"][c]["id"].ToString();
 
+                Debug.Log("QSurvey ID: " + questionData["questions"][c]["surveyQuestionId"].ToString());
+                qSurveyQuestionID = questionData["questions"][c]["surveyQuestionId"];
+
                 Debug.Log("Title: " + questionData["questions"][c]["title"].ToString());
                 qTitle = questionData["questions"][c]["title"].ToString();
 
@@ -107,64 +112,54 @@ public class TeacherQuestionManager : MonoBehaviour
                 Debug.Log("Answer Kind: " + questionData["questions"][c]["answerKind"].ToString());
                 qAnswerKind = questionData["questions"][c]["answerKind"].ToString();
 
-                Question questionReceived = new Question(qID, qTitle, qSection, qAnswerKind, teacherName);
+                Question questionReceived = new Question(qID, qSurveyQuestionID, qTitle, qSection, qAnswerKind, teacherName);
                 Debug.Log(questionReceived.toString());
 
                 questions[c] = questionReceived;
             }
-
             // Debug.Log(questions);
             // Debug.Log(questions[0].toString());
-            // currentIndex = 0;
+        }
 
-            // backButtonI.sprite = bButtonOff;
-            // nextButtonI.sprite = nButtonOn;
-            // nextButtonB.onClick.AddListener(loadNextQuestion);
-
-            // updateQuestion(currentIndex);
-            JSONurl = "http://localhost:8080/api/answers/" + studentID;
+        for (int f = 0; f < totalQuestions; f++) {
+            JSONurl = "http://localhost:8080/api/answers/" + studentID + "/surveyQuestions/" + questions[f].surveyQuestionId.ToString();
 
             web = UnityWebRequest.Get(JSONurl);
             web.useHttpContinue = false;
 
             yield return web.SendWebRequest();
 
-            int scoreNum;
-
             if (web.isNetworkError || web.isHttpError)
             {
-                SceneManager.LoadScene("Error");
+                // SceneManager.LoadScene("Error");
                 Debug.Log("Error API: " + web.error);
             }
             else
             {
                 Debug.Log(web.downloadHandler.text);
-                JSONNode answersData = SimpleJSON.JSON.Parse(web.downloadHandler.text);
-                totalAnswers = answersData.Count;
-
-                for(int c = 0; c<totalAnswers; c++){
-                    for (int i = 0; i<totalQuestions; i++){
-                        if (answersData[c]["questionId"] == questions[i] && answersData[c]["teacherRegistration"] == teacherID) {
-                            if (int.TryParse(answersData[c]["content"], out scoreNum) || answersData[c]["content"] == null) {        
-                                questions[i].score = answersData[c]["content"];
-                            }
-                            else {
-                                questions[i].comment = answersData[c]["content"];
-                            }
-                        }
-                        Debug.Log(questions[i].toString());
-                    }
+                JSONNode answerData = SimpleJSON.JSON.Parse(web.downloadHandler.text);
+                Debug.Log(questions[f].answerKind);
+                Debug.Log(answerData["content"]);
+                if (questions[f].answerKind ==  "\"NUMERIC\"")
+                {
+                    questions[f].score = int.Parse(answerData["content"]);
+                    Debug.Log(questions[f].ToString());
                 }
-
-                currentIndex = 0;
-
-                backButtonI.sprite = bButtonOff;
-                nextButtonI.sprite = nButtonOn;
-                nextButtonB.onClick.AddListener(loadNextQuestion);
-
-                updateQuestion(currentIndex);
+                else
+                {
+                    questions[f].comment = answerData["content"];
+                }
+                Debug.Log(questions[f].toString());
             }
         }
+
+        currentIndex = 0;
+
+        backButtonI.sprite = bButtonOff;
+        nextButtonI.sprite = nButtonOn;
+        nextButtonB.onClick.AddListener(loadNextQuestion);
+
+        updateQuestion(currentIndex);
     }
 
     void Update()
