@@ -1040,6 +1040,10 @@ MonoBehaviour:
   - {fileID: 7126613188026243222, guid: c6e0131060d5e4149820519ce9c486b0, type: 3}
   - {fileID: 3343117328105654857, guid: c2447aa252fd746be936237082e41822, type: 3}
   - {fileID: 4404441009026363830, guid: 6147ff5038a6c43c3bf315168d96128c, type: 3}
+  JSONurl: http://localhost:8080/api/prizes?random=true&limit=1
+  prize: 
+  prizeType: 
+  prizeTextBox: {fileID: 206090592}
 --- !u!4 &956546540
 Transform:
   m_ObjectHideFlags: 0
