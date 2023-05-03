@@ -72,6 +72,8 @@ answersRouter.post(
         throw new Error("CRN cannot be null when targetKind is CRN");
       }
 
+      // TODO: a answer post should also remove before adding again if exists
+
       await pool.query(
         `INSERT INTO TmpAnswer VALUES (NULL, ?, ?, ?, ?, ?, ?)`,
         [

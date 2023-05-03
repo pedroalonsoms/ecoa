@@ -17,26 +17,16 @@ finishRouter.post("/finish/student/:studentRegistration", async (req, res) => {
       throw new Error("There is no active survey");
     }
 
-    // Counting number of questions in active survey
-    const [questionCount] = await pool.query(
-      "SELECT COUNT(*) AS total FROM SurveyQuestion WHERE surveyId = ?",
-      [activeSurvey[0].id]
-    );
+    // TODO: this endpoint should only be reachable when progress is complete
+    // and user has not already answered the survey (videogame client-side validation)
 
-    // Counting the answered questions per student IN THE ACTIVE SURVEY
-    const [answeredQuestions] = await pool.query(
-      `SELECT COUNT(*) AS total
-       FROM TmpAnswer
-       WHERE studentRegistration = ? AND surveyQuestionId IN (
-         SELECT id
-         FROM SurveyQuestion
-         WHERE surveyId = ?
-       )`,
+    const [studentFinishedSurveys] = await pool.query(
+      "SELECT * FROM StudentFinishedSurvey WHERE studentRegistration = ? AND surveyId = ?",
       [studentRegistration, activeSurvey[0].id]
     );
 
-    if (answeredQuestions[0].total !== questionCount[0].total) {
-      throw new Error("All questions in active survey must be answered");
+    if (studentFinishedSurveys.length > 0) {
+      throw new Error("User already answered the survey");
     }
 
     await pool.query("INSERT INTO StudentFinishedSurvey VALUES (?, ?)", [
