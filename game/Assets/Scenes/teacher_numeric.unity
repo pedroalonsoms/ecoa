@@ -5562,6 +5562,18 @@ MonoBehaviour:
   eButton: {fileID: 21300000, guid: 0a96f80840a10433c99b1f76c5e7a918, type: 3}
   backButtonB: {fileID: 1857123366}
   nextButtonB: {fileID: 1537362783}
+  buttonScore0: {fileID: 1572190451}
+  buttonScore1: {fileID: 1239058702}
+  buttonScore2: {fileID: 1919305087}
+  buttonScore3: {fileID: 1034755319}
+  buttonScore4: {fileID: 727407115}
+  buttonScore5: {fileID: 1388964924}
+  buttonScore6: {fileID: 1650037217}
+  buttonScore7: {fileID: 620816153}
+  buttonScore8: {fileID: 929158182}
+  buttonScore9: {fileID: 2067166198}
+  buttonScore10: {fileID: 874318124}
+  buttonScoreNA: {fileID: 1708622351}
 --- !u!4 &1918855353
 Transform:
   m_ObjectHideFlags: 0
