@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS Prizes;
 DROP TABLE IF EXISTS TmpAnswer;
 DROP TABLE IF EXISTS Answer;
 DROP TABLE IF EXISTS SurveyQuestion;
+DROP TABLE IF EXISTS StudentFinishedSurvey;
 DROP TABLE IF EXISTS Survey;
 DROP TABLE IF EXISTS TmpCourseTextAnswer;
 DROP TABLE IF EXISTS TmpCourseNumericAnswer;
@@ -126,6 +127,15 @@ CREATE TABLE Survey (
     PRIMARY KEY (id)
 );
 
+CREATE TABLE StudentFinishedSurvey (
+    studentRegistration CHAR(9) NOT NULL,
+    surveyId INT NOT NULL,
+
+    PRIMARY KEY (surveyId, studentRegistration),
+    FOREIGN KEY (surveyId) REFERENCES Survey (id),
+    FOREIGN KEY (studentRegistration) REFERENCES Student (registration)
+);
+
 CREATE TABLE SurveyQuestion (
     id INT AUTO_INCREMENT,
     surveyId INT NOT NULL,
@@ -138,7 +148,7 @@ CREATE TABLE SurveyQuestion (
 
 CREATE TABLE Answer (
     id INT AUTO_INCREMENT,
-    folio CHAR(64) NOT NULL,
+    folio INT NOT NULL,
     surveyQuestionId INT NOT NULL,
     targetKind VARCHAR(32) NOT NULL,
     teacherRegistration CHAR(9),
@@ -189,10 +199,11 @@ CREATE PROCEDURE transferTmpAnswersByStudentRegistration(
     IN _studentRegistration CHAR(9)
 )
 BEGIN
+    DECLARE randomNumber INT DEFAULT ROUND(RAND() * 100000000);
     INSERT INTO Answer (
         SELECT 
             NULL, 
-            SHA2(studentRegistration, 256),
+            randomNumber,
             surveyQuestionId,
             targetKind,
             teacherRegistration,

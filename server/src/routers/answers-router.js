@@ -53,11 +53,28 @@ answersRouter.post(
           targetKind: z.enum(TARGET_KIND),
           teacherRegistration: z.string().length(9).nullable(),
           crn: z.number().nullable(),
-          content: z.string(),
+          content: z.string().nullable(),
         })
         .parse(req.body);
 
-      // TODO: add validation for content to be between 0 - 10 when answer is numeric
+      const [[question]] = await pool.query(
+        `SELECT answerKind FROM Question WHERE id = ?`,
+        [surveyQuestionId]
+      );
+
+      if (!question) {
+        throw new Error("Question not found");
+      }
+
+      if (question.answerKind === "NUMERIC") {
+        const numericContent = parseInt(content);
+
+        if (content !== null && (numericContent < 0 || numericContent > 10)) {
+          throw new Error(
+            "Content must be a number between 0 and 10 or null when answer is numeric"
+          );
+        }
+      }
 
       if (
         targetKind === "TEACHER_REGISTRATION" &&
@@ -72,17 +89,38 @@ answersRouter.post(
         throw new Error("CRN cannot be null when targetKind is CRN");
       }
 
-      await pool.query(
-        `INSERT INTO TmpAnswer VALUES (NULL, ?, ?, ?, ?, ?, ?)`,
-        [
-          studentRegistration,
-          surveyQuestionId,
-          targetKind,
-          teacherRegistration,
-          crn,
-          content,
-        ]
+      const [existingRecord] = await pool.query(
+        `SELECT * FROM TmpAnswer WHERE studentRegistration = ? AND surveyQuestionId = ?`,
+        [studentRegistration, surveyQuestionId]
       );
+
+      if (existingRecord.length > 0) {
+        // Update the existing record
+        await pool.query(
+          `UPDATE TmpAnswer SET targetKind = ?, teacherRegistration = ?, crn = ?, content = ? WHERE studentRegistration = ? AND surveyQuestionId = ?`,
+          [
+            targetKind,
+            teacherRegistration,
+            crn,
+            content,
+            studentRegistration,
+            surveyQuestionId,
+          ]
+        );
+      } else {
+        // Insert a new record
+        await pool.query(
+          `INSERT INTO TmpAnswer (studentRegistration, surveyQuestionId, targetKind, teacherRegistration, crn, content) VALUES (?, ?, ?, ?, ?, ?)`,
+          [
+            studentRegistration,
+            surveyQuestionId,
+            targetKind,
+            teacherRegistration,
+            crn,
+            content,
+          ]
+        );
+      }
 
       res.sendStatus(200);
     } catch (error) {
