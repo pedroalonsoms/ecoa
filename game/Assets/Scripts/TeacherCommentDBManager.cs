@@ -28,7 +28,7 @@ public class TeacherCommentDBManager : MonoBehaviour
     public int qSurveyQuestionID;
     public TextMeshProUGUI pregunta;
     public TextMeshProUGUI profesorNombre;
-    public Question[] questions = new Question[20];
+    public Question[] questions = new Question[10];
     public int totalQuestions;
     public int totalAnswers;
     public int currentIndex;
@@ -97,30 +97,38 @@ public class TeacherCommentDBManager : MonoBehaviour
             for (int c = 0; c < totalQuestions; c++)
             {
 
-                Debug.Log("ID: " + questionData["questions"][c]["id"].ToString());
-                qID = questionData["questions"][c]["id"].ToString();
+                if (questionData["questions"][c]["answerKind"].ToString() == "\"NUMERIC\"")
+                {
+                    continue;
+                }
+                else {
+                    Debug.Log("ID: " + questionData["questions"][c]["id"].ToString());
+                    qID = questionData["questions"][c]["id"].ToString();
 
-                Debug.Log("QSurvey ID: " + questionData["questions"][c]["surveyQuestionId"].ToString());
-                qSurveyQuestionID = questionData["questions"][c]["surveyQuestionId"];
+                    Debug.Log("QSurvey ID: " + questionData["questions"][c]["surveyQuestionId"].ToString());
+                    qSurveyQuestionID = questionData["questions"][c]["surveyQuestionId"];
 
-                Debug.Log("Title: " + questionData["questions"][c]["title"].ToString());
-                qTitle = questionData["questions"][c]["title"].ToString();
+                    Debug.Log("Title: " + questionData["questions"][c]["title"].ToString());
+                    qTitle = questionData["questions"][c]["title"].ToString();
 
-                Debug.Log("Section: " + questionData["questions"][c]["section"].ToString());
-                qSection = questionData["questions"][c]["section"].ToString();
+                    Debug.Log("Section: " + questionData["questions"][c]["section"].ToString());
+                    qSection = questionData["questions"][c]["section"].ToString();
 
-                Debug.Log("Answer Kind: " + questionData["questions"][c]["answerKind"].ToString());
-                qAnswerKind = questionData["questions"][c]["answerKind"].ToString();
+                    Debug.Log("Answer Kind: " + questionData["questions"][c]["answerKind"].ToString());
+                    qAnswerKind = questionData["questions"][c]["answerKind"].ToString();
 
-                if (qSection == "\"COURSE\""){
+                    if (qSection == "\"COURSE\""){
                     qSection = "CRN";
-                } else {
-                    qSection = "TEACHER_REGISTRATION";
+                    } else {
+                        qSection = "TEACHER_REGISTRATION";
+                    }
+
+                    Question questionReceived = new Question(qID, qSurveyQuestionID, qTitle, qSection, qAnswerKind, teacherName);
+                    Debug.Log(questionReceived.toString());
+                    questions[c] = questionReceived;
                 }
 
-                Question questionReceived = new Question(qID, qSurveyQuestionID, qTitle, qSection, qAnswerKind, teacherName);
-                Debug.Log(questionReceived.toString());
-                questions[c] = questionReceived;
+                
             }
             // Debug.Log(questions);
             // Debug.Log(questions[0].toString());
@@ -188,16 +196,9 @@ public class TeacherCommentDBManager : MonoBehaviour
 
     void updateQuestion(int qIndex)
     {
-        if (questions[qIndex].answerKind ==  "\"NUMERIC\"")
-        {
-            updateQuestion(qIndex++);
-        } 
-        else 
-        {
-            pregunta.text = questions[qIndex].title;  
-            profesorNombre.text = teacherName; 
-            Debug.Log(questions[qIndex].score);
-        }
+        pregunta.text = questions[qIndex].title;  
+        profesorNombre.text = teacherName; 
+        Debug.Log(questions[qIndex].score);
     }
 
     public void loadNextQuestion()
@@ -235,32 +236,6 @@ public class TeacherCommentDBManager : MonoBehaviour
             updateQuestion(currentIndex);
         }
     }
-
-    public void score0()
-    { questions[currentIndex].score = 0; Debug.Log(questions[currentIndex].score); }
-    public void score1()
-    { questions[currentIndex].score = 1; Debug.Log(questions[currentIndex].score); }
-    public void score2()
-    { questions[currentIndex].score = 2; Debug.Log(questions[currentIndex].score); }
-    public void score3()
-    { questions[currentIndex].score = 3; Debug.Log(questions[currentIndex].score); }
-    public void score4()
-    { questions[currentIndex].score = 4; Debug.Log(questions[currentIndex].score); }
-    public void score5()
-    { questions[currentIndex].score = 5; Debug.Log(questions[currentIndex].score); }
-    public void score6()
-    { questions[currentIndex].score = 6; Debug.Log(questions[currentIndex].score); }
-    public void score7()
-    { questions[currentIndex].score = 7; Debug.Log(questions[currentIndex].score); }
-    public void score8()
-    { questions[currentIndex].score = 8; Debug.Log(questions[currentIndex].score); }
-    public void score9()
-    { questions[currentIndex].score = 9; Debug.Log(questions[currentIndex].score); }
-    public void score10()
-    { questions[currentIndex].score = 10; Debug.Log(questions[currentIndex].score); }
-    public void scoreNull()
-    { questions[currentIndex].score = null; Debug.Log(questions[currentIndex].score); }
-
 
 
     public IEnumerator postAnswers(int index) {

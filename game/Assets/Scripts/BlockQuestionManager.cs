@@ -194,6 +194,10 @@ public class BlockQuestionManager : MonoBehaviour
         {
             nextButtonI.sprite = eButton;
         }
+
+        pregunta.text = questions[currentIndex].title;  
+        profesorNombre.text = courseTitle; 
+        Debug.Log(questions[currentIndex].score);
     }
 
     void updateQuestion(int qIndex)
