@@ -25,6 +25,7 @@ public class BlockQuestionManager : MonoBehaviour
     public string qTitle = "";
     public string qSection = "";
     public string qAnswerKind = ""; 
+    public int qSurveyQuestionID;
     public TextMeshProUGUI pregunta;
     public TextMeshProUGUI profesorNombre;
     public Question[] questions = new Question[20];
@@ -97,6 +98,9 @@ public class BlockQuestionManager : MonoBehaviour
                 Debug.Log("ID: " + questionData["questions"][c]["id"].ToString());
                 qID = questionData["questions"][c]["id"].ToString();
 
+                Debug.Log("QSurvey ID: " + questionData["questions"][c]["surveyQuestionId"].ToString());
+                qSurveyQuestionID = questionData["questions"][c]["surveyQuestionId"];
+
                 Debug.Log("Title: " + questionData["questions"][c]["title"].ToString());
                 qTitle = questionData["questions"][c]["title"].ToString();
 
@@ -112,7 +116,7 @@ public class BlockQuestionManager : MonoBehaviour
                     qSection = "TEACHER_REGISTRATION";
                 }
 
-                Question questionReceived = new Question(qID, qTitle, qSection, qAnswerKind, courseTitle);
+                Question questionReceived = new Question(qID, qSurveyQuestionID, qTitle, qSection, qAnswerKind, courseTitle);
                 Debug.Log(questionReceived.toString());
 
                 questions[c] = questionReceived;
@@ -122,57 +126,37 @@ public class BlockQuestionManager : MonoBehaviour
             // Debug.Log(questions[0].toString());
             // currentIndex = 0;
             // updateQuestion(currentIndex);
+            // Debug.Log(questions[0].toString());
+            currentIndex = 0;
+            updateQuestion(currentIndex);  
+        }
 
-            JSONurl = "http://localhost:8080/api/answers/" + studentID;
+        for (int f = 0; f < totalQuestions; f++) {
+            JSONurl = "http://localhost:8080/api/answers/" + studentID+ "/surveyQuestions/" + questions[f].surveyQuestionId.ToString();
 
             web = UnityWebRequest.Get(JSONurl);
             web.useHttpContinue = false;
 
             yield return web.SendWebRequest();
 
-            int scoreNum;
-
             if (web.isNetworkError || web.isHttpError)
             {
-                SceneManager.LoadScene("Error");
+                // SceneManager.LoadScene("Error");
+                Debug.Log(JSONurl);
                 Debug.Log("Error API: " + web.error);
             }
             else
             {
                 Debug.Log(web.downloadHandler.text);
-                JSONNode answersData = SimpleJSON.JSON.Parse(web.downloadHandler.text);
-                totalAnswers = answersData.Count;
-
-                for(int x = 0; x<totalAnswers; x++){
-                    if (answersData[x]["crn"] != null) {
-                        for (int i = 0; i<questionData["questions"].Count; i++){
-                            
-                            if (/*answersData[x]["questionId"] == questions[i].id &&*/ answersData[x]["crn"] == courseCRN) {
-                                Debug.Log("Pertenece: ");
-                                Debug.Log(questions[i].toString());
-                                // if (int.TryParse(answersData[x]["content"], out scoreNum) || answersData[x]["content"] == null) {        
-                                //     questions[i].score = answersData[x]["content"];
-                                // }
-                                // else {
-                                //     questions[i].comment = answersData[x]["content"];
-                                // }
-                                if (questions[i].answerKind == "NUMERIC"){
-                                    questions[i].score = int.Parse(answersData[x]["content"]);
-                                } else {
-                                    questions[i].comment = answersData[x]["content"];
-                                }
-                            }
-                        }
-                    }
+                JSONNode answerData = SimpleJSON.JSON.Parse(web.downloadHandler.text);
+                if (questions[f].answerKind ==  "\"NUMERIC\"")
+                {
+                    questions[f].score = int.Parse(answerData["content"]);
                 }
-                for (int i = 0; i<questionData["questions"].Count; i++){
-                          Debug.Log(questions[i].toString());
+                else
+                {
+                    questions[f].comment = answerData["content"];
                 }
-
-                
-                // Debug.Log(questions[0].toString());
-                currentIndex = 0;
-                updateQuestion(currentIndex);
             }
         }
     }
@@ -198,10 +182,12 @@ public class BlockQuestionManager : MonoBehaviour
     public void loadNextQuestion(){
         if (currentIndex < totalQuestions-1) {
             // Aqui va el send answer a la base de datos
+            StartCoroutine(postAnswers(currentIndex));
             currentIndex++;
             updateQuestion(currentIndex);
         } else {
             // Aquí va el send answer a la base de datos 
+            StartCoroutine(postAnswers(currentIndex));
             SceneManager.LoadScene("subject_menu");
         }
     }
@@ -237,6 +223,40 @@ public class BlockQuestionManager : MonoBehaviour
     {   questions[currentIndex].score = 10;  Debug.Log(questions[currentIndex].score);}
     public void scoreNull() 
     {   questions[currentIndex].score = null;  Debug.Log(questions[currentIndex].score);}
+
+    public IEnumerator postAnswers(int index) {
+        JSONurl = "http://localhost:8080/api/answers/" + studentID + "/surveyQuestions/" + questions[index].surveyQuestionId.ToString();
+
+        // AnswerData<string> answer = new AnswerData<string>("TEACHER_REGISTRATION", teacherID, null, questions[index].score.ToString());
+        AnswerData answer = new AnswerData();
+        answer.targetKind = "CRN";
+        answer.crn = courseCRN.ToString();
+        answer.teacherRegistration = "-1";
+        answer.content = questions[index].score.ToString();
+
+
+        string json = JsonUtility.ToJson(answer);
+
+        var req = new UnityWebRequest(JSONurl,"POST");
+
+        byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(json);
+        req.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
+        req.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        req.SetRequestHeader("Content-Type", "application/json");
+
+        Debug.Log(json);
+
+        yield return req.SendWebRequest();
+
+        if (req.isNetworkError)
+        {
+            Debug.Log("Error While Sending: " + req.error);
+        }
+        else
+        {
+            Debug.Log("Received: " + req.downloadHandler.text);
+        }
+    }
 
 }
 

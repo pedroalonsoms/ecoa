@@ -718,7 +718,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\xA1Algo sali\xF3 mal! \n\nRevisa que:\n- Tengas una conexi\xF3ne estable
+  m_text: "\xA1Algo sali\xF3 mal! \n\nRevisa que:\n- Tengas una conexi\xF3n estable
     a internet\n- Estes dentro de la fecha de la ECOA\n- Hayas dado click a alguno
     de los botones que guardan tu progreso (NEXT, END, HOMEBUTTON)\n- Que ya hayas
     terminado la ECOA\n"

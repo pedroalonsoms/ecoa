@@ -13,9 +13,11 @@ public class Question
     public string evaluatedObject;
     public string CRN;
     public string teacherRegistration;
+    public int surveyQuestionId;
 
     public Question(){
         id = "N/A";
+        surveyQuestionId = 0;
         title = "N/A";
         section = "N/A";
         answerKind = "N/A";
@@ -26,8 +28,9 @@ public class Question
         teacherRegistration = "N/A";
     }
 
-    public Question(string _id, string _title, string _section, string _answerKind, string _evaluatedObject){
+    public Question(string _id, int _surveyQuestionId,  string _title, string _section, string _answerKind, string _evaluatedObject){
         id = _id;
+        surveyQuestionId = _surveyQuestionId;
         title = _title;
         section = _section;
         answerKind = _answerKind;
@@ -48,7 +51,7 @@ public class Question
 
     public string toString(){
         string res;
-        res = "ID: " + id + "Title: " + title + "Section: " + section + "Answer Kind: " + answerKind + "Score: " + score.ToString() +  "Comment: " + comment + "Name: " + evaluatedObject + CRN +  teacherRegistration;
+        res = "ID: " + id + "SQID: " + surveyQuestionId + "Title: " + title + "Section: " + section + "Answer Kind: " + answerKind + "Score: " + score.ToString() +  "Comment: " + comment + "Name: " + evaluatedObject + CRN +  teacherRegistration;
         return res;
     }
 }

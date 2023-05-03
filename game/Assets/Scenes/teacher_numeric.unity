@@ -5456,9 +5456,9 @@ MonoBehaviour:
           m_StringArgument: Normal
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1918855351}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 1918855352}
+        m_TargetAssemblyTypeName: TeacherQuestionManager, Assembly-CSharp
+        m_MethodName: loadPrevQuestion
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5547,6 +5547,7 @@ MonoBehaviour:
   qTitle: 
   qSection: 
   qAnswerKind: 
+  qSurveyQuestionID: 0
   pregunta: {fileID: 0}
   profesorNombre: {fileID: 0}
   totalQuestions: 0
