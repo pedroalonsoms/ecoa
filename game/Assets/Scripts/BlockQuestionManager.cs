@@ -24,7 +24,7 @@ public class BlockQuestionManager : MonoBehaviour
     public string qID = "";
     public string qTitle = "";
     public string qSection = "";
-    public string qAnswerKind = ""; 
+    public string qAnswerKind = "";
     public int qSurveyQuestionID;
     public TextMeshProUGUI pregunta;
     public TextMeshProUGUI profesorNombre;
@@ -46,7 +46,21 @@ public class BlockQuestionManager : MonoBehaviour
     public Button backButtonB;
     public Button nextButtonB;
 
-    IEnumerator Start() 
+    // Score Buttons
+    public Button buttonScore0;
+    public Button buttonScore1;
+    public Button buttonScore2;
+    public Button buttonScore3;
+    public Button buttonScore4;
+    public Button buttonScore5;
+    public Button buttonScore6;
+    public Button buttonScore7;
+    public Button buttonScore8;
+    public Button buttonScore9;
+    public Button buttonScore10;
+    public Button buttonScoreNA;
+
+    IEnumerator Start()
     {
         courseObject = GameObject.Find("Course");
 
@@ -93,7 +107,8 @@ public class BlockQuestionManager : MonoBehaviour
             JSONNode questionData = SimpleJSON.JSON.Parse(web.downloadHandler.text);
             totalQuestions = questionData["questions"].Count;
 
-            for(int c = 0; c<totalQuestions; c++){
+            for (int c = 0; c < totalQuestions; c++)
+            {
 
                 Debug.Log("ID: " + questionData["questions"][c]["id"].ToString());
                 qID = questionData["questions"][c]["id"].ToString();
@@ -110,9 +125,12 @@ public class BlockQuestionManager : MonoBehaviour
                 Debug.Log("Answer Kind: " + questionData["questions"][c]["answerKind"].ToString());
                 qAnswerKind = questionData["questions"][c]["answerKind"].ToString();
 
-                if (qSection == "\"COURSE\""){
+                if (qSection == "\"COURSE\"")
+                {
                     qSection = "CRN";
-                } else {
+                }
+                else
+                {
                     qSection = "TEACHER_REGISTRATION";
                 }
 
@@ -127,11 +145,12 @@ public class BlockQuestionManager : MonoBehaviour
             // updateQuestion(currentIndex);
             // Debug.Log(questions[0].toString());
             currentIndex = 0;
-            updateQuestion(currentIndex);  
+            updateQuestion(currentIndex);
         }
 
-        for (int f = 0; f < totalQuestions; f++) {
-            JSONurl = "http://localhost:8080/api/answers/" + studentID+ "/surveyQuestions/" + questions[f].surveyQuestionId.ToString();
+        for (int f = 0; f < totalQuestions; f++)
+        {
+            JSONurl = "http://localhost:8080/api/answers/" + studentID + "/surveyQuestions/" + questions[f].surveyQuestionId.ToString();
 
             web = UnityWebRequest.Get(JSONurl);
             web.useHttpContinue = false;
@@ -148,7 +167,7 @@ public class BlockQuestionManager : MonoBehaviour
             {
                 Debug.Log(web.downloadHandler.text);
                 JSONNode answerData = SimpleJSON.JSON.Parse(web.downloadHandler.text);
-                if (questions[f].answerKind ==  "\"NUMERIC\"")
+                if (questions[f].answerKind == "\"NUMERIC\"")
                 {
                     questions[f].score = int.Parse(answerData["content"]);
                 }
@@ -159,47 +178,103 @@ public class BlockQuestionManager : MonoBehaviour
             }
         }
     }
-    void Update() {
-        if (currentIndex == 0) {
+    void Update()
+    {
+        if (currentIndex == 0)
+        {
             backButtonI.sprite = bButtonOff;
             nextButtonI.sprite = nButtonOn;
-        } else if (currentIndex < totalQuestions-1) {
+        }
+        else if (currentIndex < totalQuestions - 1)
+        {
             backButtonI.sprite = bButtonOn;
             nextButtonI.sprite = nButtonOn;
-        } else{
+        }
+        else
+        {
             nextButtonI.sprite = eButton;
         }
     }
 
-    void updateQuestion(int qIndex) 
-    {   
-        if (questions[qIndex].answerKind ==  "\"TEXT\"")
+    void updateQuestion(int qIndex)
+    {
+        if (questions[qIndex].answerKind == "\"TEXT\"")
         {
             toCommentSection();
-        } 
-        else 
+        }
+        else
         {
-            pregunta.text = questions[qIndex].title;  
-            profesorNombre.text = courseTitle; 
+            pregunta.text = questions[qIndex].title;
+            profesorNombre.text = courseTitle;
             Debug.Log(questions[qIndex].score);
+
+            // TODO. Switch para resaltar el boton dependiendo del score asignado
+            switch (questions[qIndex].score)
+            {
+                case 0:
+                    buttonScore0.Select();
+                    break;
+                case 1:
+                    buttonScore1.Select();
+                    break;
+                case 2:
+                    buttonScore2.Select();
+                    break;
+                case 3:
+                    buttonScore3.Select();
+                    break;
+                case 4:
+                    buttonScore4.Select();
+                    break;
+                case 5:
+                    buttonScore5.Select();
+                    break;
+                case 6:
+                    buttonScore6.Select();
+                    break;
+                case 7:
+                    buttonScore7.Select();
+                    break;
+                case 8:
+                    buttonScore8.Select();
+                    break;
+                case 9:
+                    buttonScore9.Select();
+                    break;
+                case 10:
+                    buttonScore10.Select();
+                    break;
+                case null:
+                    buttonScoreNA.Select();
+                    break;
+                default:
+                    buttonScore0.Select();
+                    break;
+            }
         }
     }
 
-    public void loadNextQuestion(){
-        if (currentIndex < totalQuestions) {
+    public void loadNextQuestion()
+    {
+        if (currentIndex < totalQuestions)
+        {
             // Aqui va el send answer a la base de datos
             StartCoroutine(postAnswers(currentIndex));
             currentIndex++;
             updateQuestion(currentIndex);
-        } else {
+        }
+        else
+        {
             // Aquí va el send answer a la base de datos 
             StartCoroutine(postAnswers(currentIndex));
             SceneManager.LoadScene("subject_menu");
         }
     }
 
-    public void loadPrevQuestion(){
-        if  (currentIndex > 0) {
+    public void loadPrevQuestion()
+    {
+        if (currentIndex > 0)
+        {
             currentIndex--;
             updateQuestion(currentIndex);
         }
@@ -209,32 +284,33 @@ public class BlockQuestionManager : MonoBehaviour
     {
         SceneManager.LoadScene("comment");
     }
-    public void score0() 
-    {   questions[currentIndex].score = 0;  Debug.Log(questions[currentIndex].score);}
-    public void score1() 
-    {   questions[currentIndex].score = 1;  Debug.Log(questions[currentIndex].score);}
-    public void score2() 
-    {   questions[currentIndex].score = 2;  Debug.Log(questions[currentIndex].score);}
-    public void score3() 
-    {   questions[currentIndex].score = 3;  Debug.Log(questions[currentIndex].score);}
-    public void score4() 
-    {   questions[currentIndex].score = 4;  Debug.Log(questions[currentIndex].score);}
-    public void score5() 
-    {   questions[currentIndex].score = 5;  Debug.Log(questions[currentIndex].score);}
-    public void score6() 
-    {   questions[currentIndex].score = 6;  Debug.Log(questions[currentIndex].score);}
-    public void score7() 
-    {   questions[currentIndex].score = 7;  Debug.Log(questions[currentIndex].score);}
-    public void score8() 
-    {   questions[currentIndex].score = 8;  Debug.Log(questions[currentIndex].score);}
-    public void score9() 
-    {   questions[currentIndex].score = 9;  Debug.Log(questions[currentIndex].score);}
-    public void score10() 
-    {   questions[currentIndex].score = 10;  Debug.Log(questions[currentIndex].score);}
-    public void scoreNull() 
-    {   questions[currentIndex].score = null;  Debug.Log(questions[currentIndex].score);}
+    public void score0()
+    { questions[currentIndex].score = 0; Debug.Log(questions[currentIndex].score); }
+    public void score1()
+    { questions[currentIndex].score = 1; Debug.Log(questions[currentIndex].score); }
+    public void score2()
+    { questions[currentIndex].score = 2; Debug.Log(questions[currentIndex].score); }
+    public void score3()
+    { questions[currentIndex].score = 3; Debug.Log(questions[currentIndex].score); }
+    public void score4()
+    { questions[currentIndex].score = 4; Debug.Log(questions[currentIndex].score); }
+    public void score5()
+    { questions[currentIndex].score = 5; Debug.Log(questions[currentIndex].score); }
+    public void score6()
+    { questions[currentIndex].score = 6; Debug.Log(questions[currentIndex].score); }
+    public void score7()
+    { questions[currentIndex].score = 7; Debug.Log(questions[currentIndex].score); }
+    public void score8()
+    { questions[currentIndex].score = 8; Debug.Log(questions[currentIndex].score); }
+    public void score9()
+    { questions[currentIndex].score = 9; Debug.Log(questions[currentIndex].score); }
+    public void score10()
+    { questions[currentIndex].score = 10; Debug.Log(questions[currentIndex].score); }
+    public void scoreNull()
+    { questions[currentIndex].score = null; Debug.Log(questions[currentIndex].score); }
 
-    public IEnumerator postAnswers(int index) {
+    public IEnumerator postAnswers(int index)
+    {
         JSONurl = "http://localhost:8080/api/answers/" + studentID + "/surveyQuestions/" + questions[index].surveyQuestionId.ToString();
 
         // AnswerData<string> answer = new AnswerData<string>("TEACHER_REGISTRATION", teacherID, null, questions[index].score.ToString());
@@ -247,7 +323,7 @@ public class BlockQuestionManager : MonoBehaviour
 
         string json = JsonUtility.ToJson(answer);
 
-        var req = new UnityWebRequest(JSONurl,"POST");
+        var req = new UnityWebRequest(JSONurl, "POST");
 
         byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(json);
         req.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);

@@ -2308,7 +2308,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1918855352}
         m_TargetAssemblyTypeName: TeacherQuestionManager, Assembly-CSharp
-        m_MethodName: score7
+        m_MethodName: score10
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2551,7 +2551,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1918855352}
         m_TargetAssemblyTypeName: TeacherQuestionManager, Assembly-CSharp
-        m_MethodName: score7
+        m_MethodName: score8
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2756,7 +2756,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1918855352}
         m_TargetAssemblyTypeName: TeacherQuestionManager, Assembly-CSharp
-        m_MethodName: score4
+        m_MethodName: score3
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3412,7 +3412,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1918855352}
         m_TargetAssemblyTypeName: TeacherQuestionManager, Assembly-CSharp
-        m_MethodName: score4
+        m_MethodName: score1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4587,7 +4587,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1918855352}
         m_TargetAssemblyTypeName: TeacherQuestionManager, Assembly-CSharp
-        m_MethodName: score4
+        m_MethodName: score0
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4874,7 +4874,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1918855352}
         m_TargetAssemblyTypeName: TeacherQuestionManager, Assembly-CSharp
-        m_MethodName: score7
+        m_MethodName: score6
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5700,7 +5700,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1918855352}
         m_TargetAssemblyTypeName: TeacherQuestionManager, Assembly-CSharp
-        m_MethodName: score4
+        m_MethodName: score2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6023,7 +6023,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1918855352}
         m_TargetAssemblyTypeName: TeacherQuestionManager, Assembly-CSharp
-        m_MethodName: score7
+        m_MethodName: score9
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
