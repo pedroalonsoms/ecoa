@@ -46,7 +46,6 @@ public class TeacherQuestionManager : MonoBehaviour
     public Button backButtonB;
     public Button nextButtonB;
 
-
     IEnumerator Start()
     {
         teacherObject = GameObject.Find("TeacherObject");
@@ -121,7 +120,8 @@ public class TeacherQuestionManager : MonoBehaviour
             // Debug.Log(questions[0].toString());
         }
 
-        for (int f = 0; f < totalQuestions; f++) {
+        for (int f = 0; f < totalQuestions; f++)
+        {
             JSONurl = "http://localhost:8080/api/answers/" + studentID + "/surveyQuestions/" + questions[f].surveyQuestionId.ToString();
 
             web = UnityWebRequest.Get(JSONurl);
@@ -140,7 +140,7 @@ public class TeacherQuestionManager : MonoBehaviour
                 JSONNode answerData = SimpleJSON.JSON.Parse(web.downloadHandler.text);
                 Debug.Log(questions[f].answerKind);
                 Debug.Log(answerData["content"]);
-                if (questions[f].answerKind ==  "\"NUMERIC\"")
+                if (questions[f].answerKind == "\"NUMERIC\"")
                 {
                     questions[f].score = int.Parse(answerData["content"]);
                     Debug.Log(questions[f].ToString());
@@ -184,7 +184,7 @@ public class TeacherQuestionManager : MonoBehaviour
     void updateQuestion(int qIndex)
     {
         pregunta.text = questions[qIndex].title;
-        profesorNombre.text = teacherName; 
+        profesorNombre.text = teacherName;
         Debug.Log(questions[qIndex].score);
     }
 
@@ -246,7 +246,8 @@ public class TeacherQuestionManager : MonoBehaviour
 
 
 
-    public IEnumerator postAnswers(int index) {
+    public IEnumerator postAnswers(int index)
+    {
         JSONurl = "http://localhost:8080/api/answers/" + studentID + "/surveyQuestions/" + questions[index].surveyQuestionId.ToString();
 
         // AnswerData<string> answer = new AnswerData<string>("TEACHER_REGISTRATION", teacherID, null, questions[index].score.ToString());
@@ -259,7 +260,7 @@ public class TeacherQuestionManager : MonoBehaviour
 
         string json = JsonUtility.ToJson(answer);
 
-        var req = new UnityWebRequest(JSONurl,"POST");
+        var req = new UnityWebRequest(JSONurl, "POST");
 
         byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(json);
         req.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
