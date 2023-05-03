@@ -110,10 +110,15 @@ public class TeacherQuestionManager : MonoBehaviour
 
                 Debug.Log("Answer Kind: " + questionData["questions"][c]["answerKind"].ToString());
                 qAnswerKind = questionData["questions"][c]["answerKind"].ToString();
+                
+                if (qSection == "\"COURSE\""){
+                    qSection = "CRN";
+                } else {
+                    qSection = "TEACHER_REGISTRATION";
+                }
 
                 Question questionReceived = new Question(qID, qSurveyQuestionID, qTitle, qSection, qAnswerKind, teacherName);
                 Debug.Log(questionReceived.toString());
-
                 questions[c] = questionReceived;
             }
             // Debug.Log(questions);
@@ -183,14 +188,21 @@ public class TeacherQuestionManager : MonoBehaviour
 
     void updateQuestion(int qIndex)
     {
-        pregunta.text = questions[qIndex].title;
-        profesorNombre.text = teacherName;
-        Debug.Log(questions[qIndex].score);
+        if (questions[qIndex].answerKind ==  "\"TEXT\"")
+        {
+            toCommentSection();
+        } 
+        else 
+        {
+            pregunta.text = questions[qIndex].title;  
+            profesorNombre.text = teacherName; 
+            Debug.Log(questions[qIndex].score);
+        }
     }
 
     public void loadNextQuestion()
     {
-        if (currentIndex < totalQuestions - 1)
+        if (currentIndex < totalQuestions)
         {
             // Aqui va el send answer a la base de datos
             StartCoroutine(postAnswers(currentIndex));
@@ -208,6 +220,11 @@ public class TeacherQuestionManager : MonoBehaviour
     public void toTeacherMenu()
     {
         SceneManager.LoadScene("teacher_menu");
+    }
+
+    public void toCommentSection()
+    {
+        SceneManager.LoadScene("commentTeachers");
     }
 
     public void loadPrevQuestion()
@@ -253,7 +270,7 @@ public class TeacherQuestionManager : MonoBehaviour
         // AnswerData<string> answer = new AnswerData<string>("TEACHER_REGISTRATION", teacherID, null, questions[index].score.ToString());
         AnswerData answer = new AnswerData();
         answer.targetKind = "TEACHER_REGISTRATION";
-        answer.crn = "-1";
+        answer.crn = -1;
         answer.teacherRegistration = teacherID;
         answer.content = questions[index].score.ToString();
 

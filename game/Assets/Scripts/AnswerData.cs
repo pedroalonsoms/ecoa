@@ -6,7 +6,7 @@ public class AnswerData
 {
     public string targetKind;
     public string teacherRegistration;
-    public string crn;
+    public int crn;
     public string content;
 
     // public AnswerData() {

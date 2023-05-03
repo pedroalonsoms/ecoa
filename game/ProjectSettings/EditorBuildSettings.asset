@@ -41,4 +41,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/subject_menu.unity
     guid: ae6d9caec66784774a2a7e8f1fbbe52f
+  - enabled: 1
+    path: Assets/Scenes/commentTeachers.unity
+    guid: 480302d9cfc9a487d83dc0572fad1154
   m_configObjects: {}

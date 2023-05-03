@@ -11,7 +11,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 
 
-public class BlockQuestionManager : MonoBehaviour
+public class SubjectCommentDBManager : MonoBehaviour
 {
     public GameObject courseObject;
     public GameObject userObject;
@@ -53,7 +53,6 @@ public class BlockQuestionManager : MonoBehaviour
         studentID = userObject.GetComponent<User>().ID;
         courseCRN = courseObject.GetComponent<Course>().CRN;
         courseTitle = courseObject.GetComponent<Course>().title;
-
         pregunta = GameObject.Find("Question").GetComponent<TextMeshProUGUI>();
         profesorNombre = GameObject.Find("Profesor").GetComponent<TextMeshProUGUI>();
 
@@ -75,7 +74,7 @@ public class BlockQuestionManager : MonoBehaviour
             ID = jsonReceived["id"].ToString();
         }
 
-        JSONurl = "http://localhost:8080/api/surveys/" + ID + "?section=BLOCK&isActive=true";
+        JSONurl = "http://localhost:8080/api/surveys/" + ID + "?section=COURSE&isActive=true";
 
         web = UnityWebRequest.Get(JSONurl);
         web.useHttpContinue = false;
@@ -116,22 +115,26 @@ public class BlockQuestionManager : MonoBehaviour
                     qSection = "TEACHER_REGISTRATION";
                 }
 
+               
                 Question questionReceived = new Question(qID, qSurveyQuestionID, qTitle, qSection, qAnswerKind, courseTitle);
                 Debug.Log(questionReceived.toString());
                 questions[c] = questionReceived;
             }
 
-            // Debug.Log(questions);
-            // Debug.Log(questions[0].toString());
-            // currentIndex = 0;
-            // updateQuestion(currentIndex);
-            // Debug.Log(questions[0].toString());
-            currentIndex = 0;
-            updateQuestion(currentIndex);  
-        }
+                /* Debug.Log(questions);
+                Debug.Log(questions[0].toString());
+                currentIndex = 0;
+                updateQuestion(currentIndex); */
+            
 
+                // Debug.Log(questions);
+                // Debug.Log(questions[0].toString());
+            currentIndex = 0;
+            updateQuestion(currentIndex);
+        }
+        
         for (int f = 0; f < totalQuestions; f++) {
-            JSONurl = "http://localhost:8080/api/answers/" + studentID+ "/surveyQuestions/" + questions[f].surveyQuestionId.ToString();
+            JSONurl = "http://localhost:8080/api/answers/" + studentID + "/surveyQuestions/" + questions[f].surveyQuestionId.ToString();
 
             web = UnityWebRequest.Get(JSONurl);
             web.useHttpContinue = false;
@@ -141,7 +144,6 @@ public class BlockQuestionManager : MonoBehaviour
             if (web.isNetworkError || web.isHttpError)
             {
                 // SceneManager.LoadScene("Error");
-                Debug.Log(JSONurl);
                 Debug.Log("Error API: " + web.error);
             }
             else
@@ -159,6 +161,7 @@ public class BlockQuestionManager : MonoBehaviour
             }
         }
     }
+
     void Update() {
         if (currentIndex == 0) {
             backButtonI.sprite = bButtonOff;
@@ -167,15 +170,16 @@ public class BlockQuestionManager : MonoBehaviour
             backButtonI.sprite = bButtonOn;
             nextButtonI.sprite = nButtonOn;
         } else{
+            backButtonI.sprite = bButtonOn;
             nextButtonI.sprite = eButton;
         }
     }
 
     void updateQuestion(int qIndex) 
     {   
-        if (questions[qIndex].answerKind ==  "\"TEXT\"")
+        if (questions[qIndex].answerKind ==  "\"NUMERIC\"")
         {
-            toCommentSection();
+            loadNextQuestion();
         } 
         else 
         {
@@ -209,6 +213,7 @@ public class BlockQuestionManager : MonoBehaviour
     {
         SceneManager.LoadScene("comment");
     }
+
     public void score0() 
     {   questions[currentIndex].score = 0;  Debug.Log(questions[currentIndex].score);}
     public void score1() 
@@ -242,7 +247,7 @@ public class BlockQuestionManager : MonoBehaviour
         answer.targetKind = "CRN";
         answer.crn = courseCRN;
         answer.teacherRegistration = "-1";
-        answer.content = questions[index].score.ToString();
+        answer.content = questions[index].comment;
 
 
         string json = JsonUtility.ToJson(answer);
@@ -267,6 +272,5 @@ public class BlockQuestionManager : MonoBehaviour
             Debug.Log("Received: " + req.downloadHandler.text);
         }
     }
-
 }
 
