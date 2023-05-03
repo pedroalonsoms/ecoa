@@ -16,7 +16,7 @@ teacherRouter.get("/teachers/:teacherRegistration/info", async (req, res) => {
 
     res.status(200).send(teacherInfo);
   } catch (error) {
-    res.status(500).send({ error: error.message || "Unknown error" });
+    res.status(400).send({ error: error.message || "Unknown error" });
   }
 });
 
