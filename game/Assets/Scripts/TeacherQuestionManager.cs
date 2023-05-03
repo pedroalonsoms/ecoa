@@ -45,6 +45,20 @@ public class TeacherQuestionManager : MonoBehaviour
     public Button backButtonB;
     public Button nextButtonB;
 
+    // Score Buttons
+    public Button buttonScore0;
+    public Button buttonScore1;
+    public Button buttonScore2;
+    public Button buttonScore3;
+    public Button buttonScore4;
+    public Button buttonScore5;
+    public Button buttonScore6;
+    public Button buttonScore7;
+    public Button buttonScore8;
+    public Button buttonScore9;
+    public Button buttonScore10;
+    public Button buttonScoreNA;
+
     IEnumerator Start()
     {
         teacherObject = GameObject.Find("TeacherObject");
@@ -191,6 +205,51 @@ public class TeacherQuestionManager : MonoBehaviour
         pregunta.text = questions[qIndex].title;
         profesorNombre.text = teacherName; 
         Debug.Log(questions[qIndex].score);
+        
+        
+        // TODO. Switch para resaltar el boton dependiendo del score asignado
+        switch(questions[qIndex].score) {
+            case 0:
+                buttonScore0.Select();
+                break;
+            case 1:
+                buttonScore1.Select();
+                break;
+            case 2:
+                buttonScore2.Select();
+                break;
+            case 3:
+                buttonScore3.Select();
+                break;
+            case 4:
+                buttonScore4.Select();
+                break;
+            case 5:
+                buttonScore5.Select();
+                break;
+            case 6:
+                buttonScore6.Select();
+                break;
+            case 7:
+                buttonScore7.Select();
+                break;
+            case 8:
+                buttonScore8.Select();
+                break;
+            case 9:
+                buttonScore9.Select();
+                break;
+            case 10:
+                buttonScore10.Select();
+                break;
+            case null:
+                buttonScore0.Select();
+                break;
+            default:
+                buttonScore0.Select();
+                break;
+        }
+
     }
 
     public void loadNextQuestion()

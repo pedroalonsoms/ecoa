@@ -1,6 +1,7 @@
 import Styles from "./UpdateSurveyPage.module.css";
 import { useState, useEffect } from "react";
 import ActiveQuestion from "../components/ActiveQuestion";
+import axios from "axios";
 
 const UpdateSurveyPage = (props) => {
   const [error, setError] = useState();
@@ -9,11 +10,13 @@ const UpdateSurveyPage = (props) => {
 
   useEffect(() => {
     const fetchSurveys = async () => {
-      const res = await fetch(`http://localhost:8080/api/surveys/${props.id}`);
-      const data = await res.json();
-      setSurvey(data);
+      const res = await axios.get(
+        `http://localhost:8080/api/surveys/${props.id}`
+      );
+
+      setSurvey(res.data);
       setQuestionIds(() =>
-        data.questions
+        res.data.questions
           .filter((question) => question.isActive)
           .map((question) => question.id)
       );
@@ -21,28 +24,6 @@ const UpdateSurveyPage = (props) => {
 
     fetchSurveys();
   }, []);
-
-  const updateSurveys = async () => {
-    const res = await fetch(`http://localhost:8080/api/surveys/${props.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title: survey.title,
-        questionIds: questionIds,
-        startDate: survey.startDate,
-        endDate: survey.endDate,
-      }),
-    });
-
-    if (!res.ok) {
-      const data = await res.json();
-      setError(data.error);
-    } else {
-      setError(null);
-    }
-  };
 
   const toggleActive = (questionId) => {
     const newQuestions = survey.questions.map((question) => {
@@ -76,7 +57,7 @@ const UpdateSurveyPage = (props) => {
 
   const handleError = (err) => {
     if (!err) return;
-
+    console.log(err);
     if (err.includes("must contain at least 1 element")) {
       return (
         <p className={Styles.error}>Selecciona por lo menos una pregunta</p>
@@ -99,6 +80,27 @@ const UpdateSurveyPage = (props) => {
       );
     } else {
       return <p className={Styles.error}>{error}</p>;
+    }
+  };
+
+  const saveButton = async (e) => {
+    e.preventDefault();
+    try {
+      const surveyData = {
+        title: survey.title,
+        questionIds: questionIds,
+        startDate: survey.startDate,
+        endDate: survey.endDate,
+      };
+      const res = await axios.put(
+        `http://localhost:8080/api/surveys/${props.id}`,
+        surveyData
+      );
+      console.log(res);
+      props.hideUpdateSurvey();
+    } catch (err) {
+      console.log(err);
+      setError(err.response.data.error);
     }
   };
 
@@ -207,15 +209,7 @@ const UpdateSurveyPage = (props) => {
             >
               Cancelar
             </button>
-            <button
-              className={Styles.save}
-              type="submit"
-              onClick={(e) => {
-                e.preventDefault();
-                updateSurveys();
-                props.hideUpdateSurvey();
-              }}
-            >
+            <button className={Styles.save} type="submit" onClick={saveButton}>
               Guardar
             </button>
           </div>
