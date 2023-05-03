@@ -5914,8 +5914,8 @@ MonoBehaviour:
   qSection: 
   qAnswerKind: 
   qSurveyQuestionID: 0
-  pregunta: {fileID: 0}
-  profesorNombre: {fileID: 0}
+  pregunta: {fileID: 1238794333}
+  profesorNombre: {fileID: 2134612359}
   totalQuestions: 0
   totalAnswers: 0
   currentIndex: 0

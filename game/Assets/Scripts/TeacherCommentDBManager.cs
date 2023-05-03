@@ -11,20 +11,20 @@ using UnityEngine.SceneManagement;
 using TMPro;
 
 
-public class BlockQuestionManager : MonoBehaviour
+public class TeacherCommentDBManager : MonoBehaviour
 {
-    public GameObject courseObject;
+    public GameObject teacherObject;
     public GameObject userObject;
     public string studentID;
-    public int courseCRN;
-    public string courseTitle;
+    public string teacherID;
+    public string teacherName;
     public string JSONurl = "";
     public string JSONIDurl = "";
     public string ID = "";
     public string qID = "";
     public string qTitle = "";
     public string qSection = "";
-    public string qAnswerKind = ""; 
+    public string qAnswerKind = "";
     public int qSurveyQuestionID;
     public TextMeshProUGUI pregunta;
     public TextMeshProUGUI profesorNombre;
@@ -46,13 +46,14 @@ public class BlockQuestionManager : MonoBehaviour
     public Button backButtonB;
     public Button nextButtonB;
 
-    IEnumerator Start() 
+
+    IEnumerator Start()
     {
-        courseObject = GameObject.Find("Course");
+        teacherObject = GameObject.Find("TeacherObject");
 
         studentID = userObject.GetComponent<User>().ID;
-        courseCRN = courseObject.GetComponent<Course>().CRN;
-        courseTitle = courseObject.GetComponent<Course>().title;
+        teacherID = teacherObject.GetComponent<TeacherObj>().ID;
+        teacherName = teacherObject.GetComponent<TeacherObj>().name;
 
         pregunta = GameObject.Find("Question").GetComponent<TextMeshProUGUI>();
         profesorNombre = GameObject.Find("Profesor").GetComponent<TextMeshProUGUI>();
@@ -75,7 +76,7 @@ public class BlockQuestionManager : MonoBehaviour
             ID = jsonReceived["id"].ToString();
         }
 
-        JSONurl = "http://localhost:8080/api/surveys/" + ID + "?section=BLOCK&isActive=true";
+        JSONurl = "http://localhost:8080/api/surveys/" + ID + "?section=TEACHER&isActive=true";
 
         web = UnityWebRequest.Get(JSONurl);
         web.useHttpContinue = false;
@@ -93,7 +94,8 @@ public class BlockQuestionManager : MonoBehaviour
             JSONNode questionData = SimpleJSON.JSON.Parse(web.downloadHandler.text);
             totalQuestions = questionData["questions"].Count;
 
-            for(int c = 0; c<totalQuestions; c++){
+            for (int c = 0; c < totalQuestions; c++)
+            {
 
                 Debug.Log("ID: " + questionData["questions"][c]["id"].ToString());
                 qID = questionData["questions"][c]["id"].ToString();
@@ -116,22 +118,16 @@ public class BlockQuestionManager : MonoBehaviour
                     qSection = "TEACHER_REGISTRATION";
                 }
 
-                Question questionReceived = new Question(qID, qSurveyQuestionID, qTitle, qSection, qAnswerKind, courseTitle);
+                Question questionReceived = new Question(qID, qSurveyQuestionID, qTitle, qSection, qAnswerKind, teacherName);
                 Debug.Log(questionReceived.toString());
                 questions[c] = questionReceived;
             }
-
             // Debug.Log(questions);
             // Debug.Log(questions[0].toString());
-            // currentIndex = 0;
-            // updateQuestion(currentIndex);
-            // Debug.Log(questions[0].toString());
-            currentIndex = 0;
-            updateQuestion(currentIndex);  
         }
 
         for (int f = 0; f < totalQuestions; f++) {
-            JSONurl = "http://localhost:8080/api/answers/" + studentID+ "/surveyQuestions/" + questions[f].surveyQuestionId.ToString();
+            JSONurl = "http://localhost:8080/api/answers/" + studentID + "/surveyQuestions/" + questions[f].surveyQuestionId.ToString();
 
             web = UnityWebRequest.Get(JSONurl);
             web.useHttpContinue = false;
@@ -141,108 +137,141 @@ public class BlockQuestionManager : MonoBehaviour
             if (web.isNetworkError || web.isHttpError)
             {
                 // SceneManager.LoadScene("Error");
-                Debug.Log(JSONurl);
                 Debug.Log("Error API: " + web.error);
             }
             else
             {
                 Debug.Log(web.downloadHandler.text);
                 JSONNode answerData = SimpleJSON.JSON.Parse(web.downloadHandler.text);
+                Debug.Log(questions[f].answerKind);
+                Debug.Log(answerData["content"]);
                 if (questions[f].answerKind ==  "\"NUMERIC\"")
                 {
                     questions[f].score = int.Parse(answerData["content"]);
+                    Debug.Log(questions[f].ToString());
                 }
                 else
                 {
                     questions[f].comment = answerData["content"];
                 }
+                Debug.Log(questions[f].toString());
             }
         }
+
+        currentIndex = 0;
+
+        backButtonI.sprite = bButtonOff;
+        nextButtonI.sprite = nButtonOn;
+        nextButtonB.onClick.AddListener(loadNextQuestion);
+
+        updateQuestion(currentIndex);
     }
-    void Update() {
-        if (currentIndex == 0) {
+
+    void Update()
+    {
+        if (currentIndex == 0)
+        {
             backButtonI.sprite = bButtonOff;
             nextButtonI.sprite = nButtonOn;
-        } else if (currentIndex < totalQuestions-1) {
+        }
+        else if (currentIndex < totalQuestions - 1)
+        {
             backButtonI.sprite = bButtonOn;
             nextButtonI.sprite = nButtonOn;
-        } else{
+        }
+        else
+        {
+            nextButtonI.sprite = eButton;
             nextButtonI.sprite = eButton;
         }
     }
 
-    void updateQuestion(int qIndex) 
-    {   
-        if (questions[qIndex].answerKind ==  "\"TEXT\"")
+    void updateQuestion(int qIndex)
+    {
+        if (questions[qIndex].answerKind ==  "\"NUMERIC\"")
         {
-            toCommentSection();
+            updateQuestion(qIndex++);
         } 
         else 
         {
             pregunta.text = questions[qIndex].title;  
-            profesorNombre.text = courseTitle; 
+            profesorNombre.text = teacherName; 
             Debug.Log(questions[qIndex].score);
         }
     }
 
-    public void loadNextQuestion(){
-        if (currentIndex < totalQuestions) {
+    public void loadNextQuestion()
+    {
+        if (currentIndex < totalQuestions)
+        {
             // Aqui va el send answer a la base de datos
             StartCoroutine(postAnswers(currentIndex));
             currentIndex++;
             updateQuestion(currentIndex);
-        } else {
-            // Aquí va el send answer a la base de datos 
+            // Función para la animación
+        }
+        else
+        {
             StartCoroutine(postAnswers(currentIndex));
-            SceneManager.LoadScene("subject_menu");
+            toTeacherMenu();
         }
     }
 
-    public void loadPrevQuestion(){
-        if  (currentIndex > 0) {
-            currentIndex--;
-            updateQuestion(currentIndex);
-        }
+    public void toTeacherMenu()
+    {
+        SceneManager.LoadScene("teacher_menu");
     }
 
     public void toCommentSection()
     {
         SceneManager.LoadScene("comment");
     }
-    public void score0() 
-    {   questions[currentIndex].score = 0;  Debug.Log(questions[currentIndex].score);}
-    public void score1() 
-    {   questions[currentIndex].score = 1;  Debug.Log(questions[currentIndex].score);}
-    public void score2() 
-    {   questions[currentIndex].score = 2;  Debug.Log(questions[currentIndex].score);}
-    public void score3() 
-    {   questions[currentIndex].score = 3;  Debug.Log(questions[currentIndex].score);}
-    public void score4() 
-    {   questions[currentIndex].score = 4;  Debug.Log(questions[currentIndex].score);}
-    public void score5() 
-    {   questions[currentIndex].score = 5;  Debug.Log(questions[currentIndex].score);}
-    public void score6() 
-    {   questions[currentIndex].score = 6;  Debug.Log(questions[currentIndex].score);}
-    public void score7() 
-    {   questions[currentIndex].score = 7;  Debug.Log(questions[currentIndex].score);}
-    public void score8() 
-    {   questions[currentIndex].score = 8;  Debug.Log(questions[currentIndex].score);}
-    public void score9() 
-    {   questions[currentIndex].score = 9;  Debug.Log(questions[currentIndex].score);}
-    public void score10() 
-    {   questions[currentIndex].score = 10;  Debug.Log(questions[currentIndex].score);}
-    public void scoreNull() 
-    {   questions[currentIndex].score = null;  Debug.Log(questions[currentIndex].score);}
+
+    public void loadPrevQuestion()
+    {
+        if (currentIndex > 0)
+        {
+            currentIndex--;
+            updateQuestion(currentIndex);
+        }
+    }
+
+    public void score0()
+    { questions[currentIndex].score = 0; Debug.Log(questions[currentIndex].score); }
+    public void score1()
+    { questions[currentIndex].score = 1; Debug.Log(questions[currentIndex].score); }
+    public void score2()
+    { questions[currentIndex].score = 2; Debug.Log(questions[currentIndex].score); }
+    public void score3()
+    { questions[currentIndex].score = 3; Debug.Log(questions[currentIndex].score); }
+    public void score4()
+    { questions[currentIndex].score = 4; Debug.Log(questions[currentIndex].score); }
+    public void score5()
+    { questions[currentIndex].score = 5; Debug.Log(questions[currentIndex].score); }
+    public void score6()
+    { questions[currentIndex].score = 6; Debug.Log(questions[currentIndex].score); }
+    public void score7()
+    { questions[currentIndex].score = 7; Debug.Log(questions[currentIndex].score); }
+    public void score8()
+    { questions[currentIndex].score = 8; Debug.Log(questions[currentIndex].score); }
+    public void score9()
+    { questions[currentIndex].score = 9; Debug.Log(questions[currentIndex].score); }
+    public void score10()
+    { questions[currentIndex].score = 10; Debug.Log(questions[currentIndex].score); }
+    public void scoreNull()
+    { questions[currentIndex].score = null; Debug.Log(questions[currentIndex].score); }
+
+
 
     public IEnumerator postAnswers(int index) {
         JSONurl = "http://localhost:8080/api/answers/" + studentID + "/surveyQuestions/" + questions[index].surveyQuestionId.ToString();
 
         // AnswerData<string> answer = new AnswerData<string>("TEACHER_REGISTRATION", teacherID, null, questions[index].score.ToString());
         AnswerData answer = new AnswerData();
-        answer.targetKind = "CRN";
-        answer.crn = courseCRN;
-        answer.teacherRegistration = "-1";
-        answer.content = questions[index].score.ToString();
+        answer.targetKind = "TEACHER_REGISTRATION";
+        answer.crn = -1;
+        answer.teacherRegistration = teacherID;
+        answer.content = questions[index].comment;
 
 
         string json = JsonUtility.ToJson(answer);
@@ -267,6 +296,5 @@ public class BlockQuestionManager : MonoBehaviour
             Debug.Log("Received: " + req.downloadHandler.text);
         }
     }
-
 }
 
