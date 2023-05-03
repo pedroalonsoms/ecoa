@@ -51,9 +51,11 @@ answersRouter.post(
       const { targetKind, teacherRegistration, crn, content } = z
         .object({
           targetKind: z.enum(TARGET_KIND),
-          teacherRegistration: z.string().length(9).nullable(),
-          crn: z.number().nullable(),
-          content: z.string().nullable(),
+          teacherRegistration: z
+            .string()
+            .transform((s) => (s === "-1" ? null : s)),
+          crn: z.number().transform((n) => (n === -1 ? null : n)),
+          content: z.string().transform((s) => (s === "-1" ? null : s)),
         })
         .parse(req.body);
 
