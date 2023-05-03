@@ -1,0 +1,72 @@
+.noAnswers {
+  text-align: center;
+  color: red;
+  margin: 20px;
+  font-weight: 500;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+.container {
+  border: 2px solid #d9d9d9;
+  border-radius: 20px;
+  margin: 20px;
+  padding: 10px;
+}
+
+.courseTitle {
+  text-align: center;
+  margin: 10px;
+  font-weight: 600;
+}
+
+.ammountAnswers {
+  text-align: center;
+  margin: 10px;
+  font-weight: 500;
+}
+
+.tableContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+table,
+th,
+td {
+  border: 2px solid #d9d9d9;
+  border-collapse: collapse;
+  padding: 10px;
+}
+
+.table {
+  margin: 20px;
+  text-align: left;
+  gap: 20px;
+  align-items: center;
+}
+
+.tableHead {
+  font-weight: 600;
+  /* text-align: center; */
+}
+
+.tableBody {
+  text-align: left;
+  align-items: center;
+  margin: auto;
+}
+
+.tableHead tr td:nth-child(2) {
+  text-align: center;
+}
+
+.tableBody tr td:nth-child(2) {
+  text-align: center;
+}
