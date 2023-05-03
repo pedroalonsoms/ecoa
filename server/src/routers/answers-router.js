@@ -67,13 +67,9 @@ answersRouter.post(
       }
 
       if (question.answerKind === "NUMERIC") {
-        const numericContent = parseFloat(content);
+        const numericContent = parseInt(content);
 
-        if (
-          isNaN(numericContent) ||
-          numericContent < 0 ||
-          numericContent > 10
-        ) {
+        if (content !== null && (numericContent < 0 || numericContent > 10)) {
           throw new Error(
             "Content must be a number between 0 and 10 or null when answer is numeric"
           );
