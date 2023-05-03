@@ -204,52 +204,59 @@ public class TeacherQuestionManager : MonoBehaviour
 
     void updateQuestion(int qIndex)
     {
-        pregunta.text = questions[qIndex].title;
-        profesorNombre.text = teacherName;
-        Debug.Log(questions[qIndex].score);
-
-        // TODO. Switch para resaltar el boton dependiendo del score asignado
-        switch (questions[qIndex].score)
+        if (questions[qIndex].answerKind == "\"TEXT\"")
         {
-            case 0:
-                buttonScore0.Select();
-                break;
-            case 1:
-                buttonScore1.Select();
-                break;
-            case 2:
-                buttonScore2.Select();
-                break;
-            case 3:
-                buttonScore3.Select();
-                break;
-            case 4:
-                buttonScore4.Select();
-                break;
-            case 5:
-                buttonScore5.Select();
-                break;
-            case 6:
-                buttonScore6.Select();
-                break;
-            case 7:
-                buttonScore7.Select();
-                break;
-            case 8:
-                buttonScore8.Select();
-                break;
-            case 9:
-                buttonScore9.Select();
-                break;
-            case 10:
-                buttonScore10.Select();
-                break;
-            case null:
-                buttonScoreNA.Select();
-                break;
-            default:
-                buttonScore0.Select();
-                break;
+            toCommentSection();
+        }
+        else 
+        {
+            pregunta.text = questions[qIndex].title;
+            profesorNombre.text = teacherName;
+            Debug.Log(questions[qIndex].score);
+
+            // TODO. Switch para resaltar el boton dependiendo del score asignado
+            switch (questions[qIndex].score)
+            {
+                case 0:
+                    buttonScore0.Select();
+                    break;
+                case 1:
+                    buttonScore1.Select();
+                    break;
+                case 2:
+                    buttonScore2.Select();
+                    break;
+                case 3:
+                    buttonScore3.Select();
+                    break;
+                case 4:
+                    buttonScore4.Select();
+                    break;
+                case 5:
+                    buttonScore5.Select();
+                    break;
+                case 6:
+                    buttonScore6.Select();
+                    break;
+                case 7:
+                    buttonScore7.Select();
+                    break;
+                case 8:
+                    buttonScore8.Select();
+                    break;
+                case 9:
+                    buttonScore9.Select();
+                    break;
+                case 10:
+                    buttonScore10.Select();
+                    break;
+                case null:
+                    buttonScoreNA.Select();
+                    break;
+                default:
+                    buttonScore0.Select();
+                    break;
+            }
         }
     }
 

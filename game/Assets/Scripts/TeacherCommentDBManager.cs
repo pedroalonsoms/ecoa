@@ -55,8 +55,8 @@ public class TeacherCommentDBManager : MonoBehaviour
         teacherID = teacherObject.GetComponent<TeacherObj>().ID;
         teacherName = teacherObject.GetComponent<TeacherObj>().name;
 
-        pregunta = GameObject.Find("Question").GetComponent<TextMeshProUGUI>();
-        profesorNombre = GameObject.Find("Profesor").GetComponent<TextMeshProUGUI>();
+        // pregunta = GameObject.Find("Question").GetComponent<TextMeshProUGUI>();
+        // profesorNombre = GameObject.Find("Profesor").GetComponent<TextMeshProUGUI>();
 
         UnityWebRequest web = UnityWebRequest.Get(JSONIDurl);
         web.useHttpContinue = false;
@@ -192,6 +192,9 @@ public class TeacherCommentDBManager : MonoBehaviour
             nextButtonI.sprite = eButton;
             nextButtonI.sprite = eButton;
         }
+
+        pregunta.text = qTitle;
+        profesorNombre.text = teacherName;
     }
 
     void updateQuestion(int qIndex)
