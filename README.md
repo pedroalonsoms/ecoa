@@ -65,7 +65,7 @@ Now if you open http://localhost:8080, it should be working
 
 - 📦 [Google Drive Folder (Internal-Only)](https://drive.google.com/drive/folders/1D2RHVyTfaO_m26Hka9A1EXCZ5MDTx3B7?usp=sharing)
 - 📌 [Rubric (Internal-Only)](https://docs.google.com/spreadsheets/d/1_pA1fRWtzcggmU9Bw4S-WutvSK5uTGxi/edit?usp=share_link&ouid=112199480319751895298&rtpof=true&sd=true)
-- 📦 [References](https://docs.google.com/document/d/1b2WmbTR-I2CKzESaP6EjdE4DjvG1zKKlzB-w04W2M2Q/edit?usp=sharing)
+- 🥁 [Images & Music References/Credits](https://docs.google.com/document/d/1b2WmbTR-I2CKzESaP6EjdE4DjvG1zKKlzB-w04W2M2Q/edit?usp=sharing)
 
 # 💿 SQL Diagram
 
