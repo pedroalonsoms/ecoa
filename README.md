@@ -95,7 +95,3 @@ Team **2**
 - StackExchange: https://stackexchange.com/
 - StackOverflow: https://stackoverflow.com/
 - MySQLTutorial: https://www.mysqltutorial.org/
-
-```
-
-```
