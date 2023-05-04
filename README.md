@@ -14,11 +14,57 @@
 
 ![](demo.jpeg)
 
+# 📚 Usage
+
+First, `mysql` is required.
+
+For installing on Mac, run
+
+```console
+brew install mysql
+```
+
+For installing on Windows, check: https://dev.mysql.com/doc/refman/8.0/en/windows-installation.html
+
+Then create a database named `ecoa`:
+
+```sql
+CREATE DATABASE ecoa;
+```
+
+After that, you must add a `.env` file at the root of the repo with your database configuration. For example:
+
+```
+DB_HOST="127.0.0.1"
+DB_USER="root"
+DB_NAME="ecoa"
+```
+
+> Note: if you've set a password, then add `DB_PASSWORD="<your password>"`
+
+Make sure you have `node` and `npm` in your machine
+
+In order to reset and seed the database with data you should use:
+
+```console
+npm run db:reset
+```
+
+Then for being able to start the server:
+
+```console
+npm start
+```
+
+Now if you open http://localhost:8080, it should be working
+
 # 📑 Documents
 
-- 📦 [Google Drive Folder](https://drive.google.com/drive/folders/1D2RHVyTfaO_m26Hka9A1EXCZ5MDTx3B7?usp=sharing)
-- 📷 [Final Presentation Slides](https://docs.google.com/presentation/d/1TRKWlhR-xqQ-0jJPjkVibcd9BG79nbhD4SOIlAJXn4g/edit#slide=id.gaed0d09453_0_47)
-- 📌 [Rubric](https://docs.google.com/spreadsheets/d/1_pA1fRWtzcggmU9Bw4S-WutvSK5uTGxi/edit?usp=share_link&ouid=112199480319751895298&rtpof=true&sd=true)
+- 📦 [Google Drive Folder](https://drive.google.com/drive/folders/18pnYM_UuBCcxaX-H8bqIiA9n4d28qxLd?usp=sharing)
+- 📷 [Final Presentation Slides](https://drive.google.com/file/d/14o_AVzkfNEDO347Sl9mUJQ7ily8cvVNC/view?usp=share_link)
+
+- 📦 [Google Drive Folder (Internal-Only)](https://drive.google.com/drive/folders/1D2RHVyTfaO_m26Hka9A1EXCZ5MDTx3B7?usp=sharing)
+- 📌 [Rubric (Internal-Only)](https://docs.google.com/spreadsheets/d/1_pA1fRWtzcggmU9Bw4S-WutvSK5uTGxi/edit?usp=share_link&ouid=112199480319751895298&rtpof=true&sd=true)
 
 # 💿 SQL Diagram
 
@@ -49,3 +95,7 @@ Team **2**
 - StackExchange: https://stackexchange.com/
 - StackOverflow: https://stackoverflow.com/
 - MySQLTutorial: https://www.mysqltutorial.org/
+
+```
+
+```
