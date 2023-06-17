@@ -143,9 +143,7 @@ public class BlockQuestionManager : MonoBehaviour
             // Debug.Log(questions[0].toString());
             // currentIndex = 0;
             // updateQuestion(currentIndex);
-            // Debug.Log(questions[0].toString());
-            currentIndex = 0;
-            updateQuestion(currentIndex);
+            // Debug.Log(questions[0].toString()); 
         }
 
         for (int f = 0; f < totalQuestions; f++)
@@ -177,6 +175,8 @@ public class BlockQuestionManager : MonoBehaviour
                 }
             }
         }
+        currentIndex = 0;
+        updateQuestion(currentIndex);
     }
     void Update()
     {
@@ -195,9 +195,9 @@ public class BlockQuestionManager : MonoBehaviour
             nextButtonI.sprite = eButton;
         }
 
-        pregunta.text = questions[currentIndex].title;  
-        profesorNombre.text = courseTitle; 
-        Debug.Log(questions[currentIndex].score);
+        // pregunta.text = questions[currentIndex].title;  
+        // profesorNombre.text = courseTitle; 
+        // Debug.Log(questions[currentIndex].score);
     }
 
     void updateQuestion(int qIndex)
@@ -260,7 +260,7 @@ public class BlockQuestionManager : MonoBehaviour
 
     public void loadNextQuestion()
     {
-        if (currentIndex < totalQuestions)
+        if (currentIndex < totalQuestions-1)
         {
             // Aqui va el send answer a la base de datos
             StartCoroutine(postAnswers(currentIndex));
